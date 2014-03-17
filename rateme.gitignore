@@ -21,7 +21,16 @@ gen/\
 .settings/\
 \
 # metadata\
-.metadata\
+.metadata/\
+\
+# .gitignore.rtf\
+..gitignore.rtf\
+\
+# RateMe/bin\
+RateMe/bin/\
+\
+# RateMe/gen\
+RateMe/ge/\
 \
 # the Google Play keystore\
 keystore-android\
