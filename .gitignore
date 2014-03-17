@@ -16,5 +16,8 @@ gen/
 # metadata
 .metadata
 
+# rtf
+.gitignore.rtf
+
 # the Google Play keystore
 keystore-android
