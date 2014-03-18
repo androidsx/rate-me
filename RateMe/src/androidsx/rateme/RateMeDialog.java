@@ -17,16 +17,16 @@ public class RateMeDialog extends DialogFragment{
         
         AlertDialog.Builder builder  = new AlertDialog.Builder(getActivity());
         
-        builder.setMessage("Would you mind rating our app in the Play Store?")
-        .setTitle("Rate US")       
-        .setPositiveButton("Rate us", new DialogInterface.OnClickListener()  {
+        builder.setMessage(R.string.message)
+        .setTitle(R.string.title)       
+        .setPositiveButton(R.string.rateme, new DialogInterface.OnClickListener()  {
                public void onClick(DialogInterface dialog, int id) {
                     Log.i("Dialogos", "Confirmacion Aceptada.");
                     rateApp();
                         
                    }
                })
-        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                public void onClick(DialogInterface dialog, int id) {
                         Log.i("Dialogos", "Confirmacion Cancelada.");
                         dialog.cancel();
@@ -37,10 +37,14 @@ public class RateMeDialog extends DialogFragment{
     }
     
     private void rateApp (){
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("market://details?id=com.androidsx.smileys"));
-        startActivity(intent);
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.androidsx.smileys")));
+        } catch (android.content.ActivityNotFoundException anfe) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=com.androidsx.smileys")));
+        }
     }
+    
+
     
     
 
