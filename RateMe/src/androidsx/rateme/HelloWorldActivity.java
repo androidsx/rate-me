@@ -45,7 +45,7 @@ public class HelloWorldActivity extends Activity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-        case R.id.RateMe:
+        case R.id.RateMeOption:
             alertMenu();
             break;
 

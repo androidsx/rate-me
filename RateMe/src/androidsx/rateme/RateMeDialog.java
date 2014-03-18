@@ -12,7 +12,7 @@ import android.util.Log;
 
 public class RateMeDialog extends DialogFragment{
     
-    //take the name of the package 
+    //take the name of the package
     //final String appPackageName = getPackageName();
     private final String appPackageName = "com.androidsx.smileys";
 
