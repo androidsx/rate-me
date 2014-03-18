@@ -11,6 +11,10 @@ import android.util.Log;
 
 
 public class RateMeDialog extends DialogFragment{
+    
+    //take the name of the package 
+    //final String appPackageName = getPackageName();
+    private final String appPackageName = "com.androidsx.smileys";
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -38,9 +42,9 @@ public class RateMeDialog extends DialogFragment{
     
     private void rateApp (){
         try {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.androidsx.smileys")));
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id="+ appPackageName)));
         } catch (android.content.ActivityNotFoundException anfe) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=com.androidsx.smileys")));
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id="+ appPackageName)));
         }
     }
     
