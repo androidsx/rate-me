@@ -3,4 +3,5 @@
     <issue id="NewApi">
         <ignore path="src/com/androidsx/libraryrateme/libraryRateMe.java" />
     </issue>
+    <issue id="ValidFragment" severity="ignore" />
 </lint>

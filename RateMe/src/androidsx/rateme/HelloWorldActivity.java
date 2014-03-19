@@ -1,9 +1,7 @@
 package androidsx.rateme;
 
-import com.androidsx.libraryrateme.libraryRateMe;
-
 import android.app.Activity;
-import android.app.FragmentManager;
+import android.app.DialogFragment;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,9 +10,15 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+import com.androidsx.libraryrateme.libraryRateMe;
+
 public class HelloWorldActivity extends Activity {
     
+    
     private Button btnRateme;
+    private libraryRateMe dialogo;
+    private String appName = getPackageName();
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,9 @@ public class HelloWorldActivity extends Activity {
         });
         
     }
+    
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -58,10 +65,16 @@ public class HelloWorldActivity extends Activity {
     }
     
     public void alertMenu (){
-        FragmentManager fragmentManager = getFragmentManager();
-        libraryRateMe dialogo = new libraryRateMe();
-        //RateMeDialog dialogo = new RateMeDialog();
-        dialogo.show(fragmentManager, "Rate Us");
+        
+       
+//        FragmentManager fragmentManager = getFragmentManager();
+//        dialogo = new libraryRateMe()
+//        dialogo.show(fragmentManager, "Rate Us");
+        
+        
+        DialogFragment dialogo = libraryRateMe.newInstance(
+                appName);
+        dialogo.show(getFragmentManager(), "dialog");
     }
     
     

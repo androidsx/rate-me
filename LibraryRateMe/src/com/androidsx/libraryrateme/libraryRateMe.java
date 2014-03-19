@@ -11,12 +11,24 @@ import android.util.Log;
 
 public class libraryRateMe extends DialogFragment{
     
-  //take the name of the package
-    //final String appPackageName = getPackageName();
-    private final String appPackageName = "com.androidsx.smileys";
+    private String appPackageName;
+    
+    public static libraryRateMe newInstance(String appName) {
+        
+        libraryRateMe dialogo = new libraryRateMe();
+        Bundle args = new Bundle();
+        args.putString("name", appName);
+        dialogo.setArguments(args);
 
+        return dialogo;
+    }
+
+     
+    
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        
+        appPackageName = getArguments().getString("name");
         
         AlertDialog.Builder builder  = new AlertDialog.Builder(getActivity());
         
@@ -25,7 +37,7 @@ public class libraryRateMe extends DialogFragment{
         .setPositiveButton(R.string.rateme, new DialogInterface.OnClickListener()  {
                public void onClick(DialogInterface dialog, int id) {
                     Log.i("Dialogos", "Confirmacion Aceptada.");
-                    rateApp();
+                    rateApp(appPackageName);
                         
                    }
                })
@@ -39,11 +51,11 @@ public class libraryRateMe extends DialogFragment{
         return builder.create();
     }
     
-    private void rateApp (){
+    private void rateApp (String name){
         try {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id="+ appPackageName)));
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id="+ name)));
         } catch (android.content.ActivityNotFoundException anfe) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id="+ appPackageName)));
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id="+ name)));
         }
     }
 
