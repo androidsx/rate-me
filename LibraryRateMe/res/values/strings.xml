@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">LibraryRateMe</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="rateme">Rate Me</string>
+    <string name="message">Would you mind rating our app in the Play Store?</string>
+    <string name="title">Rate Us</string>
+    <string name="cancel">Cancel</string>
+
+</resources>

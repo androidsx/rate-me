@@ -1,5 +1,7 @@
 package androidsx.rateme;
 
+import com.androidsx.libraryrateme.libraryRateMe;
+
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.os.Bundle;
@@ -57,7 +59,8 @@ public class HelloWorldActivity extends Activity {
     
     public void alertMenu (){
         FragmentManager fragmentManager = getFragmentManager();
-        RateMeDialog dialogo = new RateMeDialog();
+        libraryRateMe dialogo = new libraryRateMe();
+        //RateMeDialog dialogo = new RateMeDialog();
         dialogo.show(fragmentManager, "Rate Us");
     }
     
