@@ -148,6 +148,8 @@ public class ContactsActivity extends ListActivity {
 	}
 	
 	private void alertMenu (){
+	    
+	    
 //	    DialogFragment dialogo = libraryRateMe.newInstance(
 //                getPackageName());
 	    DialogFragment dialogo = libraryRateMe.newInstance(
