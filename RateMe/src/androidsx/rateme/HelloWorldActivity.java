@@ -15,10 +15,7 @@ import com.androidsx.libraryrateme.libraryRateMe;
 public class HelloWorldActivity extends Activity {
     
     
-    private Button btnRateme;
-    private libraryRateMe dialogo;
-    private String appName = getPackageName();
-    
+    private Button btnRateme; 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,14 +63,8 @@ public class HelloWorldActivity extends Activity {
     
     public void alertMenu (){
         
-       
-//        FragmentManager fragmentManager = getFragmentManager();
-//        dialogo = new libraryRateMe()
-//        dialogo.show(fragmentManager, "Rate Us");
-        
-        
         DialogFragment dialogo = libraryRateMe.newInstance(
-                appName);
+                getPackageName());
         dialogo.show(getFragmentManager(), "dialog");
     }
     
