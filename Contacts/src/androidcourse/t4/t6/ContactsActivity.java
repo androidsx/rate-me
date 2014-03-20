@@ -2,6 +2,9 @@ package androidcourse.t4.t6;
 
 import java.util.ArrayList;
 
+import com.androidsx.libraryrateme.libraryRateMe;
+
+import android.app.DialogFragment;
 import android.app.ListActivity;
 import android.content.ContentResolver;
 import android.database.Cursor;
@@ -116,6 +119,8 @@ public class ContactsActivity extends ListActivity {
 			eliminar(pos);
 
 			return true;
+		case R.id.RateMe:
+		    alertMenu();
 
 		default:
 			return super.onOptionsItemSelected(item);
@@ -140,6 +145,15 @@ public class ContactsActivity extends ListActivity {
 		toast.setGravity(Gravity.CENTER | Gravity.BOTTOM, 0, 50);
 		toast.show();
 
+	}
+	
+	private void alertMenu (){
+//	    DialogFragment dialogo = libraryRateMe.newInstance(
+//                getPackageName());
+	    DialogFragment dialogo = libraryRateMe.newInstance(
+                "com.androidsx.smileys");
+        dialogo.show(getFragmentManager(), "dialog");
+	    
 	}
 
 }
