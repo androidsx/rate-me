@@ -17,7 +17,6 @@ public class HelloWorldActivity extends Activity {
     
     private Button btnRateme;
     private libraryRateMe dialogo;
-    private String appName = getPackageName();
     
 
     @Override
@@ -72,8 +71,7 @@ public class HelloWorldActivity extends Activity {
 //        dialogo.show(fragmentManager, "Rate Us");
         
         
-        DialogFragment dialogo = libraryRateMe.newInstance(
-                appName);
+        DialogFragment dialogo = libraryRateMe.newInstance(getPackageName());
         dialogo.show(getFragmentManager(), "dialog");
     }
     
