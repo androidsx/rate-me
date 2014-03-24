@@ -7,11 +7,19 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.SyncStateContract.Constants;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.RatingBar;
 
 public class libraryRateMe extends DialogFragment{
     
+   
     private String appPackageName;
+    private RatingBar ratingBar;
+    private static final String KEY_SAVE_RATING_BAR_VALUE = "KEY_SAVE_RATING_BAR_VALUE";
+   
     
     public static libraryRateMe newInstance(String appName) {
         
@@ -32,13 +40,25 @@ public class libraryRateMe extends DialogFragment{
         
         AlertDialog.Builder builder  = new AlertDialog.Builder(getActivity());
         
+        View mView = getActivity().getLayoutInflater().inflate(R.layout.library, null);
+        
+        ratingBar = (RatingBar) mView.findViewById(R.id.ratingBar1);
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey(KEY_SAVE_RATING_BAR_VALUE)) {
+                ratingBar.setRating(savedInstanceState.getFloat(KEY_SAVE_RATING_BAR_VALUE));
+            }
+        }
+        
         builder.setMessage(R.string.message)
-        .setTitle(R.string.title)       
+        .setCancelable(true)
+        .setView(mView)
+        .setTitle(R.string.title).setIcon(R.drawable.icono)
+        
         .setPositiveButton(R.string.rateme, new DialogInterface.OnClickListener()  {
                public void onClick(DialogInterface dialog, int id) {
                     Log.i("Dialogos", "Confirmacion Aceptada.");
-                    rateApp(appPackageName);
-                        
+                    //rateApp(appPackageName);
+                     
                    }
                })
         .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
