@@ -61,8 +61,10 @@ public class libraryRateMe extends DialogFragment{
             }
         });
         
-        builder   
+        builder
+        .setView(mView)
         .setCustomTitle(tView);
+        
         
         
         

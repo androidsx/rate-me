@@ -10,7 +10,7 @@
         android:background="@drawable/aspa"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_alignRight="@+id/title"/>
+        android:layout_marginRight="5dp"/>
     
     <TextView
         android:id="@+id/title"
