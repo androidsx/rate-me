@@ -1,5 +1,7 @@
 package com.androidsx.rateme.demo1;
 
+import com.androidsx.rateme.DialogRateMe;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DialogFragment;
@@ -11,11 +13,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import androidcourse.t4.t6.R;
 
-import com.androidsx.libraryrateme.libraryRateMe;
-
-@SuppressLint("NewApi")
 public class SampleProject extends Activity {
-
     private Button buttonRateMe;
     
 	@Override
@@ -53,14 +51,10 @@ public class SampleProject extends Activity {
 	
 	@SuppressLint("NewApi")
     private void AlertMenu (){
-	    
-	    
 //	    DialogFragment dialogo = libraryRateMe.newInstance(
 //                getPackageName());
-	    DialogFragment dialogo = libraryRateMe.newInstance(
+	    DialogFragment dialogo = DialogRateMe.newInstance(
                 "com.androidsx.smileys");
         dialogo.show(getFragmentManager(), "dialog");
-	    
 	}
-
 }
