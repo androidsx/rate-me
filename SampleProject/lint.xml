@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="NewApi">
+        <ignore path="src/androidcourse/t4/t6/ContactsActivity.java" />
+    </issue>
+    <issue id="ShowToast" severity="ignore" />
+</lint>

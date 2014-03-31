@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-import com.androidsx.libraryrateme.libraryRateMe;
+import com.androidsx.libraryrateme.DialogRateMe;
 
 public class HelloWorldActivity extends Activity {
     
@@ -44,9 +44,6 @@ public class HelloWorldActivity extends Activity {
         });
         
     }
-    
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -61,9 +58,10 @@ public class HelloWorldActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
     
+    
     public void alertMenu (){
         
-        DialogFragment dialogo = libraryRateMe.newInstance(
+        DialogFragment dialogo = DialogRateMe.newInstance(
                 getPackageName());
         dialogo.show(getFragmentManager(), "dialog");
     }

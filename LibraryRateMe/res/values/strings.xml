@@ -8,6 +8,6 @@
     <string name="message">How would you rate it ?</string>
     <string name="title">Rate You Experience</string>
     <string name="title2">Like our App ?</string>
-    <string name="cancel">Cancel</string>
+    <string name="title_activity_dialog">Dialog</string>
 
 </resources>
