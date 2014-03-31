@@ -1,6 +1,6 @@
 package com.androidsx.rateme.demo1;
 
-import com.androidsx.libraryrateme.DialogRateMe;
+import com.androidsx.rateme.DialogRateMe;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

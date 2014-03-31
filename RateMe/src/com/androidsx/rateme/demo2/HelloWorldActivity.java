@@ -11,7 +11,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import androidsx.rateme.R;
 
-import com.androidsx.libraryrateme.DialogRateMe;
+import com.androidsx.rateme.DialogRateMe;
 
 public class HelloWorldActivity extends Activity {
     private Button btnRateme; 

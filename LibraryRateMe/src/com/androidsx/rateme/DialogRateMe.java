@@ -1,4 +1,6 @@
-package com.androidsx.libraryrateme;
+package com.androidsx.rateme;
+
+import com.androidsx.libraryrateme.R;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
