@@ -58,12 +58,12 @@ public class DialogRateMe extends DialogFragment {
 						if (rating >= 4.0) {
 							RateMe.setVisibility(View.VISIBLE);
 							NoThanks.setVisibility(View.GONE);
-							clickButton(true);
+							goToPlayStore();
 
 						} else {
 							NoThanks.setVisibility(View.VISIBLE);
 							RateMe.setVisibility(View.GONE);
-							clickButton(false);
+							goToEmail();
 						}
 					}
 				});
@@ -104,36 +104,32 @@ public class DialogRateMe extends DialogFragment {
 		}
 	}
 
-	private void clickButton(boolean flag) {
+	private void goToPlayStore() {
 
-		if (flag) {
 			RateMe.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					rateApp();
 				}
 			});
-
-		} else {
-			NoThanks.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Intent intent = new Intent(Intent.ACTION_SEND);
-					intent.setType("plain/text");
-					intent.putExtra(Intent.EXTRA_EMAIL,
-							new String[] { "some@email.com" });
-					intent.putExtra(Intent.EXTRA_SUBJECT, "subject");
-					intent.putExtra(Intent.EXTRA_TEXT, "mail body");
-					try {
-						startActivity(Intent.createChooser(intent, ""));
-					} catch (android.content.ActivityNotFoundException ex) {
-						Toast.makeText(getActivity(),
-								"No email client installed.", Toast.LENGTH_LONG)
-								.show();
-					}
-				}
-			});
-		}
 	}
-
+	
+	private void goToEmail(){
+		NoThanks.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(Intent.ACTION_SEND);
+				intent.setType("plain/text");
+				intent.putExtra(Intent.EXTRA_EMAIL,
+						new String[] { "some@email.com" });
+				intent.putExtra(Intent.EXTRA_SUBJECT, "subject");
+				intent.putExtra(Intent.EXTRA_TEXT, "mail body");
+				try {
+					startActivity(Intent.createChooser(intent, ""));
+				} catch (android.content.ActivityNotFoundException ex) {
+					rateApp();
+				}
+			}
+		});
+	}
 }
