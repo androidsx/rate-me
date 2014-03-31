@@ -44,8 +44,8 @@ public class DialogRateMe extends DialogFragment {
 				null);
 		tView = getActivity().getLayoutInflater().inflate(R.layout.title, null);
 		close = (Button) tView.findViewById(R.id.cerrar);
-		RateMe = (Button) tView.findViewById(R.id.buttonRateMe);
-		NoThanks = (Button) tView.findViewById(R.id.buttonThanks);
+		RateMe = (Button) mView.findViewById(R.id.buttonRateMe);
+		NoThanks = (Button) mView.findViewById(R.id.buttonThanks);
 		
 
 		ratingBar = (RatingBar) mView.findViewById(R.id.ratingBar);
@@ -63,8 +63,10 @@ public class DialogRateMe extends DialogFragment {
 								Toast.LENGTH_SHORT).show();
 						if (rating >= 4.0) {
 							RateMe.setVisibility(View.VISIBLE);
+							NoThanks.setVisibility(View.GONE);
 						}else{
 							NoThanks.setVisibility(View.VISIBLE);
+							RateMe.setVisibility(View.GONE);
 						}
 					}
 				});
