@@ -48,8 +48,8 @@
                     android:isIndicator="false"
                     android:numStars="5"
                     android:rotationX="0.3"
-                    android:scaleX="0.7"
-                    android:scaleY="0.7"
+                    android:scaleX="1.0"
+                    android:scaleY="1.0"
                     android:stepSize="0.5" />
             </LinearLayout>
         </LinearLayout>
