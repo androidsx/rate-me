@@ -1,5 +1,7 @@
 package com.androidsx.rateme.demo1;
 
+import com.androidsx.libraryrateme.DialogRateMe;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DialogFragment;
@@ -10,8 +12,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import androidcourse.t4.t6.R;
-
-import com.androidsx.libraryrateme.libraryRateMe;
 
 @SuppressLint("NewApi")
 public class SampleProject extends Activity {
@@ -57,7 +57,7 @@ public class SampleProject extends Activity {
 	    
 //	    DialogFragment dialogo = libraryRateMe.newInstance(
 //                getPackageName());
-	    DialogFragment dialogo = libraryRateMe.newInstance(
+	    DialogFragment dialogo = DialogRateMe.newInstance(
                 "com.androidsx.smileys");
         dialogo.show(getFragmentManager(), "dialog");
 	    
