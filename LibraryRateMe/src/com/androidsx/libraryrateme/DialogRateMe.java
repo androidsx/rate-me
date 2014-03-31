@@ -23,18 +23,15 @@ public class DialogRateMe extends DialogFragment {
     private LayerDrawable stars;
 	
     public static DialogRateMe newInstance(String appName) {
-        
     	DialogRateMe dialogo = new DialogRateMe();      
         Bundle args = new Bundle();
         args.putString("name", appName);
         dialogo.setArguments(args);
         return dialogo;
     }
-	
     
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		
 		appPackageName = getArguments().getString("name");
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -55,7 +52,6 @@ public class DialogRateMe extends DialogFragment {
         });
         
         close.setOnClickListener(new OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 dismiss();
@@ -63,11 +59,10 @@ public class DialogRateMe extends DialogFragment {
             }
         });
 		
-		builder.setView(mView).setCustomTitle(tView)
-		
-		.setCancelable(false);
-
-		return builder.create();
+		return builder
+				.setView(mView)
+				.setCustomTitle(tView)
+				.setCancelable(false)
+				.create();
 	}
-
 }

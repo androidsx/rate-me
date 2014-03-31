@@ -13,8 +13,6 @@ import android.widget.Button;
 import com.androidsx.libraryrateme.DialogRateMe;
 
 public class HelloWorldActivity extends Activity {
-    
-    
     private Button btnRateme; 
 
     @Override
@@ -26,7 +24,6 @@ public class HelloWorldActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.hello_world, menu);
         return super.onCreateOptionsMenu(menu);
@@ -42,7 +39,6 @@ public class HelloWorldActivity extends Activity {
                 
             }
         });
-        
     }
 
     @Override
@@ -51,7 +47,6 @@ public class HelloWorldActivity extends Activity {
         case R.id.RateMeOption:
             alertMenu();
             break;
-
         default:
             break;
         }
@@ -65,8 +60,4 @@ public class HelloWorldActivity extends Activity {
                 getPackageName());
         dialogo.show(getFragmentManager(), "dialog");
     }
-    
-    
-
-    
 }
