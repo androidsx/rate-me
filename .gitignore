@@ -21,3 +21,6 @@ gen/
 
 # the Google Play keystore
 keystore-android
+
+# some file created by Mac
+.DS_Store
