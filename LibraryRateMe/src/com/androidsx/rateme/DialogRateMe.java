@@ -3,9 +3,11 @@ package com.androidsx.rateme;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -56,7 +58,15 @@ public class DialogRateMe extends DialogFragment {
 						if (rating >= 4.0) {
 							RateMe.setVisibility(View.VISIBLE);
 							NoThanks.setVisibility(View.GONE);
-						}else{
+							RateMe.setOnClickListener(new OnClickListener() {
+								
+								@Override
+								public void onClick(View v) {
+									rateApp();
+								}
+							});
+							
+						} else {
 							NoThanks.setVisibility(View.VISIBLE);
 							RateMe.setVisibility(View.GONE);
 						}
@@ -69,24 +79,33 @@ public class DialogRateMe extends DialogFragment {
 
 			}
 		});
-		return builder
-				.setView(mView)
-				.setCustomTitle(tView)
-				.setCancelable(false)
-				.create();
+		return builder.setView(mView).setCustomTitle(tView)
+				.setCancelable(false).create();
 
 	}
-	private void setupUI (){
+
+	private void setupUI() {
 		mView = getActivity().getLayoutInflater().inflate(R.layout.library,
 				null);
 		tView = getActivity().getLayoutInflater().inflate(R.layout.title, null);
 		close = (Button) tView.findViewById(R.id.cerrar);
 		RateMe = (Button) mView.findViewById(R.id.buttonRateMe);
 		NoThanks = (Button) mView.findViewById(R.id.buttonThanks);
-		
 
 		ratingBar = (RatingBar) mView.findViewById(R.id.ratingBar);
 		stars = (LayerDrawable) ratingBar.getProgressDrawable();
-		
+
 	}
+
+	private void rateApp() {
+		try {
+			startActivity(new Intent(Intent.ACTION_VIEW,
+					Uri.parse("market://details?id=" + appPackageName)));
+		} catch (android.content.ActivityNotFoundException anfe) {
+			startActivity(new Intent(Intent.ACTION_VIEW,
+					Uri.parse("http://play.google.com/store/apps/details?id="
+							+ appPackageName)));
+		}
+	}
+
 }
