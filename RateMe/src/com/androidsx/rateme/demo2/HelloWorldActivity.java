@@ -1,4 +1,4 @@
-package androidsx.rateme;
+package com.androidsx.rateme.demo2;
 
 import android.app.Activity;
 import android.app.DialogFragment;
@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import androidsx.rateme.R;
 
 import com.androidsx.libraryrateme.DialogRateMe;
 
