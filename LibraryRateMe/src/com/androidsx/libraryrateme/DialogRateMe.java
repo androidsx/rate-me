@@ -15,18 +15,27 @@ import android.widget.Toast;
 
 public class DialogRateMe extends DialogFragment {
 	
+	private String appPackageName;
 	private View mView;
     private View tView;
     private Button close;
     private RatingBar ratingBar;
     private LayerDrawable stars;
 	
-    public DialogRateMe() {
+    public static DialogRateMe newInstance(String appName) {
         
+    	DialogRateMe dialogo = new DialogRateMe();      
+        Bundle args = new Bundle();
+        args.putString("name", appName);
+        dialogo.setArguments(args);
+        return dialogo;
     }
 	
+    
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
+		
+		appPackageName = getArguments().getString("name");
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		mView = getActivity().getLayoutInflater().inflate(R.layout.library, null);
@@ -55,7 +64,7 @@ public class DialogRateMe extends DialogFragment {
         });
 		
 		builder.setView(mView).setCustomTitle(tView)
-       // builder.setMessage("prueba").setTitle("titulo")	
+		
 		.setCancelable(false);
 
 		return builder.create();
