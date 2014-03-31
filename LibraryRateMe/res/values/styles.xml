@@ -17,8 +17,6 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
-    <color name="blue">#00c0ff</color>
-
     <style name="shadowText">
         <item name="android:shadowColor">#000000</item>
         <item name="android:shadowDx">1</item>
