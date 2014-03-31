@@ -67,7 +67,7 @@
             android:text="@string/rateme"
             android:textColor="@color/white"
             android:visibility="gone"
-            android:background="@android:color/holo_orange_dark"/>
+            android:background="@drawable/selector"/>
         
         <Button 
             android:id="@+id/buttonThanks"
@@ -76,7 +76,7 @@
             android:text="@string/nothanks"
             android:textColor="@color/white"
             android:visibility="gone"
-            android:background="@android:color/holo_orange_dark"/>
+            android:background="@drawable/selector"/>
         
     </LinearLayout>
 
