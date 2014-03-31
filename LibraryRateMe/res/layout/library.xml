@@ -1,40 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@drawable/redondeado"
-    android:layout_height="match_parent" >
-    
+    android:layout_height="match_parent"
+    android:background="@color/blue"
+    android:orientation="horizontal"
+    android:padding="10dp" >
+
     <ImageView
         android:id="@+id/picture"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_margin="5dp"
         android:background="@drawable/icono"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="10dp"
-        android:layout_margin="10dp" />
-    
-    <TextView
-        android:id="@+id/title1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:text="@string/title2"
-        />
-    
-    <TextView
-        android:id="@+id/phraseCenter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/title1"
-        android:text="@string/message"
-        />
-    
-    <RatingBar
-        android:id="@+id/ratingBar1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="?android:attr/ratingBarStyle"
-        android:stepSize="0.5"
-        android:layout_below="@+id/phraseCenter" />
-    
+        android:scaleType="centerInside" />
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/phraseCenter"
+            style="@style/shadowText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/message"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                style="?android:attr/ratingBarStyleIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:isIndicator="false"
+                android:numStars="5"
+                android:rotationX="0.3"
+                android:scaleX="0.7"
+                android:scaleY="0.7"
+                android:stepSize="0.5" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
