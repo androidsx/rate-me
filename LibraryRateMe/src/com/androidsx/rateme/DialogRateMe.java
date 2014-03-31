@@ -38,18 +38,10 @@ public class DialogRateMe extends DialogFragment {
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 
 		appPackageName = getArguments().getString("name");
+		setupUI();
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-		mView = getActivity().getLayoutInflater().inflate(R.layout.library,
-				null);
-		tView = getActivity().getLayoutInflater().inflate(R.layout.title, null);
-		close = (Button) tView.findViewById(R.id.cerrar);
-		RateMe = (Button) mView.findViewById(R.id.buttonRateMe);
-		NoThanks = (Button) mView.findViewById(R.id.buttonThanks);
-		
 
-		ratingBar = (RatingBar) mView.findViewById(R.id.ratingBar);
-		stars = (LayerDrawable) ratingBar.getProgressDrawable();
 		stars.getDrawable(2).setColorFilter(Color.YELLOW,
 				PorterDuff.Mode.SRC_ATOP);
 		ratingBar
@@ -77,12 +69,24 @@ public class DialogRateMe extends DialogFragment {
 
 			}
 		});
-
 		return builder
 				.setView(mView)
 				.setCustomTitle(tView)
 				.setCancelable(false)
 				.create();
 
+	}
+	private void setupUI (){
+		mView = getActivity().getLayoutInflater().inflate(R.layout.library,
+				null);
+		tView = getActivity().getLayoutInflater().inflate(R.layout.title, null);
+		close = (Button) tView.findViewById(R.id.cerrar);
+		RateMe = (Button) mView.findViewById(R.id.buttonRateMe);
+		NoThanks = (Button) mView.findViewById(R.id.buttonThanks);
+		
+
+		ratingBar = (RatingBar) mView.findViewById(R.id.ratingBar);
+		stars = (LayerDrawable) ratingBar.getProgressDrawable();
+		
 	}
 }
