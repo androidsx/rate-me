@@ -39,7 +39,7 @@ public class DialogRateMe extends DialogFragment {
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 
 		appPackageName = getArguments().getString("name");
-		setupUI();
+		initializeUiFields();
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
@@ -54,16 +54,13 @@ public class DialogRateMe extends DialogFragment {
 						if (rating >= 4.0) {
 							rateMe.setVisibility(View.VISIBLE);
 							noThanks.setVisibility(View.GONE);
-							goToPlayStore();
-
 						} else {
 							noThanks.setVisibility(View.VISIBLE);
 							rateMe.setVisibility(View.GONE);
-							goToEmail();
 						}
 					}
 				});
-
+		configureButtons();
 		close.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -76,17 +73,14 @@ public class DialogRateMe extends DialogFragment {
 
 	}
 
-	private void setupUI() {
-		mView = getActivity().getLayoutInflater().inflate(R.layout.library,
-				null);
+	private void initializeUiFields() {
+		mView = getActivity().getLayoutInflater().inflate(R.layout.library, null);
 		tView = getActivity().getLayoutInflater().inflate(R.layout.title, null);
 		close = (Button) tView.findViewById(R.id.cerrar);
 		rateMe = (Button) mView.findViewById(R.id.buttonRateMe);
 		noThanks = (Button) mView.findViewById(R.id.buttonThanks);
-
 		ratingBar = (RatingBar) mView.findViewById(R.id.ratingBar);
 		stars = (LayerDrawable) ratingBar.getProgressDrawable();
-
 	}
 
 	private void rateApp() {
@@ -99,18 +93,15 @@ public class DialogRateMe extends DialogFragment {
 							+ appPackageName)));
 		}
 	}
-
-	private void goToPlayStore() {
-
-			rateMe.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					rateApp();
-				}
-			});
-	}
 	
-	private void goToEmail(){
+	private void configureButtons() {
+		rateMe.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				rateApp();
+			}
+		});
+		
 		noThanks.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
