@@ -25,8 +25,8 @@ public class DialogRateMe extends DialogFragment {
 	private Button close;
 	private RatingBar ratingBar;
 	private LayerDrawable stars;
-	private Button RateMe;
-	private Button NoThanks;
+	private Button rateMe;
+	private Button noThanks;
 
 	public static DialogRateMe newInstance(String appName) {
 		DialogRateMe dialogo = new DialogRateMe();
@@ -56,13 +56,13 @@ public class DialogRateMe extends DialogFragment {
 								"Puntuacion: " + String.valueOf(rating),
 								Toast.LENGTH_SHORT).show();
 						if (rating >= 4.0) {
-							RateMe.setVisibility(View.VISIBLE);
-							NoThanks.setVisibility(View.GONE);
+							rateMe.setVisibility(View.VISIBLE);
+							noThanks.setVisibility(View.GONE);
 							goToPlayStore();
 
 						} else {
-							NoThanks.setVisibility(View.VISIBLE);
-							RateMe.setVisibility(View.GONE);
+							noThanks.setVisibility(View.VISIBLE);
+							rateMe.setVisibility(View.GONE);
 							goToEmail();
 						}
 					}
@@ -85,8 +85,8 @@ public class DialogRateMe extends DialogFragment {
 				null);
 		tView = getActivity().getLayoutInflater().inflate(R.layout.title, null);
 		close = (Button) tView.findViewById(R.id.cerrar);
-		RateMe = (Button) mView.findViewById(R.id.buttonRateMe);
-		NoThanks = (Button) mView.findViewById(R.id.buttonThanks);
+		rateMe = (Button) mView.findViewById(R.id.buttonRateMe);
+		noThanks = (Button) mView.findViewById(R.id.buttonThanks);
 
 		ratingBar = (RatingBar) mView.findViewById(R.id.ratingBar);
 		stars = (LayerDrawable) ratingBar.getProgressDrawable();
@@ -106,7 +106,7 @@ public class DialogRateMe extends DialogFragment {
 
 	private void goToPlayStore() {
 
-			RateMe.setOnClickListener(new OnClickListener() {
+			rateMe.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					rateApp();
@@ -115,9 +115,10 @@ public class DialogRateMe extends DialogFragment {
 	}
 	
 	private void goToEmail(){
-		NoThanks.setOnClickListener(new OnClickListener() {
+		noThanks.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				// TODO: fill with real strings
 				Intent intent = new Intent(Intent.ACTION_SEND);
 				intent.setType("plain/text");
 				intent.putExtra(Intent.EXTRA_EMAIL,
