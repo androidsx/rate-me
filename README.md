@@ -12,5 +12,5 @@ Using the library is really simple, [that example](SampleProject / src / com / a
 
 On the button click event, you have add this code.
 	<code>DialogFragment dialogo = DialogRateMe.newInstance(
-            "com.androidsx.smileys");\n
+            "com.androidsx.smileys");
     dialogo.show(getFragmentManager(), "dialog");</code>
