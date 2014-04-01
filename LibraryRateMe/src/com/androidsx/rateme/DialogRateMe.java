@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.RatingBar;
-import android.widget.Toast;
 
 import com.androidsx.libraryrateme.R;
 
@@ -52,9 +51,6 @@ public class DialogRateMe extends DialogFragment {
 					@Override
 					public void onRatingChanged(RatingBar ratingBar,
 							float rating, boolean fromUser) {
-						Toast.makeText(getActivity(),
-								"Puntuacion: " + String.valueOf(rating),
-								Toast.LENGTH_SHORT).show();
 						if (rating >= 4.0) {
 							rateMe.setVisibility(View.VISIBLE);
 							noThanks.setVisibility(View.GONE);
