@@ -15,6 +15,7 @@ import androidcourse.t4.t6.R;
 
 public class SampleProject extends Activity {
     private Button buttonRateMe;
+    private String myPackageName = "com.androidsx.smileys";
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,7 @@ public class SampleProject extends Activity {
 //	    DialogFragment dialogo = libraryRateMe.newInstance(
 //                getPackageName());
 	    DialogFragment dialogo = DialogRateMe.newInstance(
-                "com.androidsx.smileys");
+	    		myPackageName);
         dialogo.show(getFragmentManager(), "dialog");
 	}
 }

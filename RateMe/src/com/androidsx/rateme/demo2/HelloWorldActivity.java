@@ -14,7 +14,8 @@ import androidsx.rateme.R;
 import com.androidsx.rateme.DialogRateMe;
 
 public class HelloWorldActivity extends Activity {
-    private Button btnRateme; 
+    private Button btnRateme;
+    private String myPackageName = "com.androidsx.smileys";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +58,11 @@ public class HelloWorldActivity extends Activity {
     
     public void alertMenu (){
         
-        DialogFragment dialogo = DialogRateMe.newInstance(
-                getPackageName());
+//        DialogFragment dialogo = DialogRateMe.newInstance(
+//                getPackageName());
+//        dialogo.show(getFragmentManager(), "dialog");
+	    DialogFragment dialogo = DialogRateMe.newInstance(
+	    		myPackageName);
         dialogo.show(getFragmentManager(), "dialog");
     }
 }
