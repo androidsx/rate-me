@@ -17,6 +17,7 @@ import android.widget.RatingBar;
 import com.androidsx.libraryrateme.R;
 
 public class DialogRateMe extends DialogFragment {
+	private static final String EXTRA_PACKAGE_NAME = "package-name";
 
 	private String appPackageName;
 	private View mView;
@@ -30,15 +31,14 @@ public class DialogRateMe extends DialogFragment {
 	public static DialogRateMe newInstance(String appName) {
 		DialogRateMe dialogo = new DialogRateMe();
 		Bundle args = new Bundle();
-		args.putString("name", appName);
+		args.putString(EXTRA_PACKAGE_NAME, appName);
 		dialogo.setArguments(args);
 		return dialogo;
 	}
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-
-		appPackageName = getArguments().getString("name");
+		appPackageName = getArguments().getString(EXTRA_PACKAGE_NAME);
 		initializeUiFields();
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -70,7 +70,6 @@ public class DialogRateMe extends DialogFragment {
 		});
 		return builder.setView(mView).setCustomTitle(tView)
 				.setCancelable(false).create();
-
 	}
 
 	private void initializeUiFields() {
