@@ -28,10 +28,10 @@ public class DialogRateMe extends DialogFragment {
 	private Button rateMe;
 	private Button noThanks;
 
-	public static DialogRateMe newInstance(String appName) {
+	public static DialogRateMe newInstance(String packageName) {
 		DialogRateMe dialogo = new DialogRateMe();
 		Bundle args = new Bundle();
-		args.putString(EXTRA_PACKAGE_NAME, appName);
+		args.putString(EXTRA_PACKAGE_NAME, packageName);
 		dialogo.setArguments(args);
 		return dialogo;
 	}
