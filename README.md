@@ -5,12 +5,17 @@ Rate Me es una librería para Android 2.3+ que proporciona una pantalla para sug
 
 You can see the [source code]() and an application example 
 
+[![img1](https://raw.githubusercontent.com/androidsx/our-other-apps/master/images-readme/readmephoto.png)]()
+
 Usage
 =======
 
 Using the library is really simple, [that example](SampleProject / src / com / androidsx / rateme / demo1 / SampleProject.java) allows you to know how to link the activity apps through a button.
 
 On the button click event, you have add this code.
-	<code>DialogFragment dialogo = DialogRateMe.newInstance(
+
+DialogFragment dialogo = DialogRateMe.newInstance(
             "com.androidsx.smileys");
-    dialogo.show(getFragmentManager(), "dialog");</code>
+    dialogo.show(getFragmentManager(), "dialog");
+
+normally your currency this line of code: "com.androidsx.smileys" by getPackageName() in your app
