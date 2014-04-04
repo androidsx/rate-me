@@ -14,8 +14,10 @@ Using the library is really simple, [that example](SampleProject / src / com / a
 
 On the button click event, you have add this code.
 
-DialogFragment dialogo = DialogRateMe.newInstance(
-            "com.androidsx.smileys");
-    dialogo.show(getFragmentManager(), "dialog");
+            DialogFragment dialogo = DialogRateMe.newInstance(
+                        "com.androidsx.smileys");
+            dialogo.show(getFragmentManager(), "dialog");
+    
+    
 
 normally your currency this line of code: "com.androidsx.smileys" by getPackageName() in your app
