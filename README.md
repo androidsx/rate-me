@@ -5,7 +5,7 @@ Rate Me es una librería para Android 2.3+ que proporciona una pantalla para sug
 
 You can see the [source code]() and an application example 
 
-[![img1](https://raw.githubusercontent.com/androidsx/our-other-apps/master/images-readme/readmephoto.png)]()
+[![img1](https://raw.githubusercontent.com/androidsx/rate-me/readme/images-readme/placeit.png)]()
 
 Usage
 =======
