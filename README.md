@@ -3,7 +3,7 @@ rate-me
 
 Rate Me es una librería para Android 2.3+ que proporciona una pantalla para sugerir al usuario que proporciona una puntuación (rating) positiva de la aplicación en el Play Store.
 
-You can see the [source code]() and an application example 
+You can see the [source code](https://github.com/androidsx/rate-me/blob/readme/LibraryRateMe/src/com/androidsx/rateme/DialogRateMe.java) and an application example 
 
 [![img1](https://raw.githubusercontent.com/androidsx/rate-me/readme/images-readme/placeit.png)]()
 
