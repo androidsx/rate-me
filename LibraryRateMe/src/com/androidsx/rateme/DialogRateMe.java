@@ -73,7 +73,8 @@ public class DialogRateMe extends DialogFragment {
 	}
 
 	private void initializeUiFields() {
-		mView = getActivity().getLayoutInflater().inflate(R.layout.library, null);
+		mView = getActivity().getLayoutInflater().inflate(R.layout.library,
+				null);
 		tView = getActivity().getLayoutInflater().inflate(R.layout.title, null);
 		close = (Button) tView.findViewById(R.id.cerrar);
 		rateMe = (Button) mView.findViewById(R.id.buttonRateMe);
@@ -93,6 +94,19 @@ public class DialogRateMe extends DialogFragment {
 		}
 	}
 	
+	private void goToMail() {
+		Intent intent = new Intent(Intent.ACTION_SEND);
+		intent.setType("plain/text");
+		intent.putExtra(Intent.EXTRA_EMAIL, new String[] { "some@email.com" });
+		intent.putExtra(Intent.EXTRA_SUBJECT, "subject");
+		intent.putExtra(Intent.EXTRA_TEXT, "mail body");
+		try {
+			startActivity(Intent.createChooser(intent, ""));
+		} catch (android.content.ActivityNotFoundException ex) {
+			rateApp();
+		}
+	}
+
 	private void configureButtons() {
 		rateMe.setOnClickListener(new OnClickListener() {
 			@Override
@@ -100,22 +114,11 @@ public class DialogRateMe extends DialogFragment {
 				rateApp();
 			}
 		});
-		
+
 		noThanks.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// TODO: fill with real strings
-				Intent intent = new Intent(Intent.ACTION_SEND);
-				intent.setType("plain/text");
-				intent.putExtra(Intent.EXTRA_EMAIL,
-						new String[] { "some@email.com" });
-				intent.putExtra(Intent.EXTRA_SUBJECT, "subject");
-				intent.putExtra(Intent.EXTRA_TEXT, "mail body");
-				try {
-					startActivity(Intent.createChooser(intent, ""));
-				} catch (android.content.ActivityNotFoundException ex) {
-					rateApp();
-				}
+				goToMail();
 			}
 		});
 	}
