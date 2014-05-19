@@ -4,20 +4,28 @@
     android:background="@color/black"
     android:padding="10dp"
     android:layout_height="match_parent" >
-
+    
     <Button
-        android:id="@+id/cerrar"
+        android:id="@+id/buttonClose"
         android:layout_width="30dp"
         android:layout_height="30dp"
        	android:layout_alignParentRight="true"
-        android:background="@drawable/aspa" />
+        android:background="@drawable/ic_action_cancel" />
+    
+    <Button 
+        android:id="@+id/buttonShare"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+		android:layout_toLeftOf="@id/buttonClose"
+		android:layout_marginRight="10dp"       
+        android:background="@drawable/ic_action_share"/>
 
     <TextView
         android:id="@+id/title"
         style="@style/shadowText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/cerrar"
+        android:layout_alignBottom="@+id/buttonClose"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="5dp"
         android:text="@string/title"
