@@ -9,6 +9,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -17,6 +18,8 @@ import android.widget.RatingBar;
 import com.androidsx.libraryrateme.R;
 
 public class DialogRateMe extends DialogFragment {
+    private static final String TAG = DialogRateMe.class.getSimpleName();
+    
     private static final String EXTRA_PACKAGE_NAME = "package-name";
 
     private String appPackageName;
@@ -41,6 +44,7 @@ public class DialogRateMe extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         appPackageName = getArguments().getString(EXTRA_PACKAGE_NAME);
         initializeUiFields();
+        Log.d(TAG, "initialize correctly all the components");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
@@ -70,6 +74,7 @@ public class DialogRateMe extends DialogFragment {
             @Override
             public void onClick(View v) {
                 startActivity(shareApp(appPackageName));
+                Log.d(TAG, "share App");
             }
         });
         return builder.setView(mView).setCustomTitle(tView).setCancelable(false).create();
@@ -91,6 +96,7 @@ public class DialogRateMe extends DialogFragment {
             @Override
             public void onClick(View v) {
                 rateApp();
+                Log.d(TAG, "go to Google Play Store for Rate-Me");
             }
         });
 
@@ -98,6 +104,7 @@ public class DialogRateMe extends DialogFragment {
             @Override
             public void onClick(View v) {
                 goToMail();
+                Log.d(TAG, "got to Mail for explain what is the problem");
             }
         });
     }
