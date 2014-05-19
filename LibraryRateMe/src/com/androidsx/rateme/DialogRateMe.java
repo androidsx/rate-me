@@ -66,6 +66,13 @@ public class DialogRateMe extends DialogFragment {
 
             }
         });
+        share.setOnClickListener(new OnClickListener() {
+            
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
         return builder.setView(mView).setCustomTitle(tView).setCancelable(false).create();
     }
 
