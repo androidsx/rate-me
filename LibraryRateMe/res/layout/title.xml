@@ -4,13 +4,21 @@
     android:background="@color/black"
     android:padding="10dp"
     android:layout_height="match_parent" >
-
+    
     <Button
         android:id="@+id/cerrar"
         android:layout_width="30dp"
         android:layout_height="30dp"
        	android:layout_alignParentRight="true"
         android:background="@drawable/aspa" />
+    
+    <Button 
+        android:id="@+id/buttonShare"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+		android:layout_toLeftOf="@id/cerrar"
+		android:layout_marginRight="10dp"       
+        android:background="@drawable/ic_action_share"/>
 
     <TextView
         android:id="@+id/title"
