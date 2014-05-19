@@ -72,7 +72,7 @@ public class DialogRateMe extends DialogFragment {
     private void initializeUiFields() {
         mView = getActivity().getLayoutInflater().inflate(R.layout.library, null);
         tView = getActivity().getLayoutInflater().inflate(R.layout.title, null);
-        close = (Button) tView.findViewById(R.id.cerrar);
+        close = (Button) tView.findViewById(R.id.buttonClose);
         share = (Button) tView.findViewById(R.id.buttonShare);
         rateMe = (Button) mView.findViewById(R.id.buttonRateMe);
         noThanks = (Button) mView.findViewById(R.id.buttonThanks);
