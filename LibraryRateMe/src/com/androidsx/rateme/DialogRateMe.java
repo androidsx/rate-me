@@ -27,6 +27,7 @@ public class DialogRateMe extends DialogFragment {
     private LayerDrawable stars;
     private Button rateMe;
     private Button noThanks;
+    private Button share;
 
     public static DialogRateMe newInstance(String packageName) {
         DialogRateMe dialogo = new DialogRateMe();
@@ -72,10 +73,27 @@ public class DialogRateMe extends DialogFragment {
         mView = getActivity().getLayoutInflater().inflate(R.layout.library, null);
         tView = getActivity().getLayoutInflater().inflate(R.layout.title, null);
         close = (Button) tView.findViewById(R.id.cerrar);
+        share = (Button) tView.findViewById(R.id.buttonShare);
         rateMe = (Button) mView.findViewById(R.id.buttonRateMe);
         noThanks = (Button) mView.findViewById(R.id.buttonThanks);
         ratingBar = (RatingBar) mView.findViewById(R.id.ratingBar);
         stars = (LayerDrawable) ratingBar.getProgressDrawable();
+    }
+
+    private void configureButtons() {
+        rateMe.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rateApp();
+            }
+        });
+
+        noThanks.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToMail();
+            }
+        });
     }
 
     private void rateApp() {
@@ -100,19 +118,4 @@ public class DialogRateMe extends DialogFragment {
         }
     }
 
-    private void configureButtons() {
-        rateMe.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                rateApp();
-            }
-        });
-
-        noThanks.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToMail();
-            }
-        });
-    }
 }
