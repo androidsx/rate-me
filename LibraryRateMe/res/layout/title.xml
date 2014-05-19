@@ -10,7 +10,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
        	android:layout_alignParentRight="true"
-        android:background="@drawable/aspa" />
+        android:background="@drawable/ic_action_cancel" />
     
     <Button 
         android:id="@+id/buttonShare"
