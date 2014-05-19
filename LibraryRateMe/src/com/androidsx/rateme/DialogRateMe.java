@@ -67,10 +67,9 @@ public class DialogRateMe extends DialogFragment {
             }
         });
         share.setOnClickListener(new OnClickListener() {
-            
             @Override
             public void onClick(View v) {
-                
+                startActivity(shareApp(appPackageName));
             }
         });
         return builder.setView(mView).setCustomTitle(tView).setCancelable(false).create();
@@ -123,6 +122,14 @@ public class DialogRateMe extends DialogFragment {
         } catch (android.content.ActivityNotFoundException ex) {
             rateApp();
         }
+    }
+
+    private Intent shareApp(String appPackageName) {
+        Intent shareApp = new Intent();
+        shareApp.setAction(Intent.ACTION_SEND);
+        shareApp.putExtra(Intent.EXTRA_TEXT, "http://play.google.com/store/apps/details?id=" + appPackageName);
+        shareApp.setType("text/plain");
+        return shareApp;
     }
 
 }
