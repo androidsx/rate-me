@@ -19,8 +19,10 @@ import com.androidsx.libraryrateme.R;
 
 public class DialogRateMe extends DialogFragment {
     private static final String TAG = DialogRateMe.class.getSimpleName();
-    
+
     private static final String EXTRA_PACKAGE_NAME = "package-name";
+    private static final String MARKET_CONSTANT = "market://details?id=";
+    private static final String GOOGLE_PLAY_CONSTANT = "http://play.google.com/store/apps/details?id=";
 
     private String appPackageName;
     private View mView;
@@ -111,10 +113,9 @@ public class DialogRateMe extends DialogFragment {
 
     private void rateApp() {
         try {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(MARKET_CONSTANT + appPackageName)));
         } catch (android.content.ActivityNotFoundException anfe) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id="
-                    + appPackageName)));
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(GOOGLE_PLAY_CONSTANT + appPackageName)));
         }
     }
 
@@ -134,7 +135,11 @@ public class DialogRateMe extends DialogFragment {
     private Intent shareApp(String appPackageName) {
         Intent shareApp = new Intent();
         shareApp.setAction(Intent.ACTION_SEND);
-        shareApp.putExtra(Intent.EXTRA_TEXT, "http://play.google.com/store/apps/details?id=" + appPackageName);
+        try {
+            shareApp.putExtra(Intent.EXTRA_TEXT, MARKET_CONSTANT + appPackageName);
+        } catch (android.content.ActivityNotFoundException anfe) {
+            shareApp.putExtra(Intent.EXTRA_TEXT, GOOGLE_PLAY_CONSTANT + appPackageName);
+        }
         shareApp.setType("text/plain");
         return shareApp;
     }
