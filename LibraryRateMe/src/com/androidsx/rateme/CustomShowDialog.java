@@ -1,5 +1,12 @@
 package com.androidsx.rateme;
 
+import java.util.Date;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.util.Log;
+
 public class CustomShowDialog {
     
 private static final String TAG = CustomShowDialog.class.getSimpleName();
@@ -26,5 +33,34 @@ private static final String TAG = CustomShowDialog.class.getSimpleName();
      * If true, print LogCat
      */
     public static final boolean DEBUG = false;
+    
+    /**
+     * Call this API when the launcher activity is launched.<br>
+     * It is better to call this API in onStart() of the launcher activity.
+     */
+    public static void onStart(Context context) {
+        
+        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        Editor editor = pref.edit();
+        // If it is the first launch, save the date in shared preference.
+        if (pref.getLong(KEY_INSTALL_DATE, 0) == 0L) {
+            Date now = new Date();
+            editor.putLong(KEY_INSTALL_DATE, now.getTime());
+            Log.d(TAG, "First install: " + now.toString());
+        }
+        // Increment launch times
+        int launchTimes = pref.getInt(KEY_LAUNCH_TIMES, 0);
+        launchTimes++;
+        editor.putInt(KEY_LAUNCH_TIMES, launchTimes);
+        Log.d(TAG, "Launch times; " + launchTimes);
+        
+        editor.commit();
+        
+        mInstallDate = new Date(pref.getLong(KEY_INSTALL_DATE, 0));
+        mLaunchTimes = pref.getInt(KEY_LAUNCH_TIMES, 0);
+        mOptOut = pref.getBoolean(KEY_OPT_OUT, false);
+        
+        printStatus(context);
+    }
 
 }
