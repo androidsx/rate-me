@@ -106,5 +106,17 @@ private static final String TAG = CustomShowDialog.class.getSimpleName();
         editor.putBoolean(KEY_OPT_OUT, optOut);
         editor.commit();
     }
+    
+    /**
+     * Print values in SharedPreferences (used for debug)
+     * @param context
+     */
+    private static void printStatus(final Context context) {
+        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        Log.d(TAG, "*** RateThisApp Status ***");
+        Log.d(TAG, "Install Date: " + new Date(pref.getLong(KEY_INSTALL_DATE, 0)));
+        Log.d(TAG, "Launch Times: " + pref.getInt(KEY_LAUNCH_TIMES, 0));
+        Log.d(TAG, "Opt out: " + pref.getBoolean(KEY_OPT_OUT, false));
+    }
 
 }
