@@ -62,5 +62,24 @@ private static final String TAG = CustomShowDialog.class.getSimpleName();
         
         printStatus(context);
     }
+    
+    /**
+     * Check whether the rate dialog shoule be shown or not
+     * @return
+     */
+    public static boolean shouldShowRateDialog(final Context context) {
+        if (mOptOut) {
+            return false;
+        } else {
+            if (mLaunchTimes >= LAUNCH_TIMES) {
+                return true;
+            }
+            long threshold = INSTALL_DAYS * 24 * 60 * 60 * 1000L;   // msec
+            if (new Date().getTime() - mInstallDate.getTime() >= threshold) {
+                return true;
+            }
+            return false;
+        }
+    }
 
 }
