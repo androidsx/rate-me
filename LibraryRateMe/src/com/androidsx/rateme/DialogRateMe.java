@@ -69,6 +69,8 @@ public class DialogRateMe extends DialogFragment {
             @Override
             public void onClick(View v) {
                 dismiss();
+                CustomShowDialog.clearSharedPreferences(getActivity());
+                Log.d(TAG, "clear preferences");
 
             }
         });
