@@ -81,5 +81,18 @@ private static final String TAG = CustomShowDialog.class.getSimpleName();
             return false;
         }
     }
+    
+    /**
+     * Clear data in shared preferences.<br>
+     * This API is called when the rate dialog is approved or canceled.
+     * @param context
+     */
+    public static void clearSharedPreferences(Context context) {
+        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        Editor editor = pref.edit();
+        editor.remove(KEY_INSTALL_DATE);
+        editor.remove(KEY_LAUNCH_TIMES);
+        editor.commit();
+    }
 
 }
