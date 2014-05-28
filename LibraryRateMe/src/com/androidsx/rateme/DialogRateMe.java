@@ -114,9 +114,6 @@ public class DialogRateMe extends DialogFragment {
         });
     }
     
-    /**
-     *Go to Play Store for Rate the App
-     */
     private void rateApp() {
         try {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(MARKET_CONSTANT + appPackageName)));
@@ -125,9 +122,6 @@ public class DialogRateMe extends DialogFragment {
         }
     }
     
-    /**
-     *Go to mail to discuss the reasons why it has not been rated
-     */
     private void goToMail() {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("plain/text");
@@ -141,10 +135,6 @@ public class DialogRateMe extends DialogFragment {
         }
     }
     
-    /**
-     *Go to share the App
-     * @param String appPackageName
-     */
     private Intent shareApp(String appPackageName) {
         Intent shareApp = new Intent();
         shareApp.setAction(Intent.ACTION_SEND);
