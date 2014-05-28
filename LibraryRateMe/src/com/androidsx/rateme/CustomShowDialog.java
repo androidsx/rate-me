@@ -94,5 +94,17 @@ private static final String TAG = CustomShowDialog.class.getSimpleName();
         editor.remove(KEY_LAUNCH_TIMES);
         editor.commit();
     }
+    
+    /**
+     * Set opt out flag. If it is true, the rate dialog will never shown unless app data is cleared.
+     * @param context
+     * @param optOut
+     */
+    public static void setOptOut(final Context context, boolean optOut) {
+        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        Editor editor = pref.edit();
+        editor.putBoolean(KEY_OPT_OUT, optOut);
+        editor.commit();
+    }
 
 }
