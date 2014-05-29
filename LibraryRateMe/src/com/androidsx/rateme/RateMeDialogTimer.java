@@ -7,9 +7,9 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.util.Log;
 
-public class CustomShowDialog {
+public class RateMeDialogTimer {
 
-    private static final String TAG = CustomShowDialog.class.getSimpleName();
+    private static final String TAG = RateMeDialogTimer.class.getSimpleName();
 
     private static final String PREF_NAME = "RateThisApp";
     private static final String KEY_INSTALL_DATE = "rta_install_date";

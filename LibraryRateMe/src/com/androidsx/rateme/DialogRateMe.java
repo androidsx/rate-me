@@ -69,7 +69,7 @@ public class DialogRateMe extends DialogFragment {
             @Override
             public void onClick(View v) {
                 dismiss();
-                CustomShowDialog.clearSharedPreferences(getActivity());
+                RateMeDialogTimer.clearSharedPreferences(getActivity());
                 Log.d(TAG, "clear preferences");
 
             }
@@ -101,7 +101,7 @@ public class DialogRateMe extends DialogFragment {
             public void onClick(View v) {
                 rateApp();
                 Log.d(TAG, "go to Google Play Store for Rate-Me");
-                CustomShowDialog.setOptOut(getActivity(), true);
+                RateMeDialogTimer.setOptOut(getActivity(), true);
             }
         });
 
