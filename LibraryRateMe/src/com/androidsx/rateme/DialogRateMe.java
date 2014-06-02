@@ -150,7 +150,6 @@ public class DialogRateMe extends DialogFragment {
                        dismiss();
                    }
                });
-        // Create the AlertDialog object and return it
         return builder.create();
     }
 
