@@ -11,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import androidsx.rateme.R;
 
+import com.androidsx.rateme.RateMeDialogTimer;
 import com.androidsx.rateme.DialogRateMe;
 
 public class HelloWorldActivity extends Activity {
@@ -56,6 +57,18 @@ public class HelloWorldActivity extends Activity {
     }
     
     
+    @Override
+    protected void onStart() {
+        super.onStart();
+        RateMeDialogTimer.onStart(this);
+        if (RateMeDialogTimer.shouldShowRateDialog(this)) {
+            DialogFragment dialogo = DialogRateMe.newInstance(
+                    myPackageName);
+            dialogo.show(getFragmentManager(), "dialog");
+        }
+        
+    }
+
     public void alertMenu (){
         
 //        DialogFragment dialogo = DialogRateMe.newInstance(

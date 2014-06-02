@@ -69,6 +69,8 @@ public class DialogRateMe extends DialogFragment {
             @Override
             public void onClick(View v) {
                 dismiss();
+                RateMeDialogTimer.clearSharedPreferences(getActivity());
+                Log.d(TAG, "clear preferences");
 
             }
         });
@@ -99,6 +101,7 @@ public class DialogRateMe extends DialogFragment {
             public void onClick(View v) {
                 rateApp();
                 Log.d(TAG, "go to Google Play Store for Rate-Me");
+                RateMeDialogTimer.setOptOut(getActivity(), true);
             }
         });
 
@@ -110,7 +113,7 @@ public class DialogRateMe extends DialogFragment {
             }
         });
     }
-
+    
     private void rateApp() {
         try {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(MARKET_CONSTANT + appPackageName)));
@@ -118,7 +121,7 @@ public class DialogRateMe extends DialogFragment {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(GOOGLE_PLAY_CONSTANT + appPackageName)));
         }
     }
-
+    
     private void goToMail() {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("plain/text");
@@ -131,7 +134,7 @@ public class DialogRateMe extends DialogFragment {
             rateApp();
         }
     }
-
+    
     private Intent shareApp(String appPackageName) {
         Intent shareApp = new Intent();
         shareApp.setAction(Intent.ACTION_SEND);
