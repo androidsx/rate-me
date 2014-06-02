@@ -3,6 +3,7 @@ package com.androidsx.rateme;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -108,7 +109,8 @@ public class DialogRateMe extends DialogFragment {
         noThanks.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToMail();
+                //goToMail();
+                confirmGoToMailDialog(getArguments()).show();
                 Log.d(TAG, "got to Mail for explain what is the problem");
             }
         });
@@ -134,6 +136,24 @@ public class DialogRateMe extends DialogFragment {
             rateApp();
         }
     }
+    
+    private Dialog confirmGoToMailDialog(Bundle savedInstanceState) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage("mensaje")
+               .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                   public void onClick(DialogInterface dialog, int id) {
+                       goToMail();
+                       }
+               })
+               .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                   public void onClick(DialogInterface dialog, int id) {
+                       dismiss();
+                   }
+               });
+        // Create the AlertDialog object and return it
+        return builder.create();
+    }
+
     
     private Intent shareApp(String appPackageName) {
         Intent shareApp = new Intent();
