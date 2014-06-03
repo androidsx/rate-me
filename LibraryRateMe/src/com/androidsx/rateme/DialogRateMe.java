@@ -28,15 +28,13 @@ public class DialogRateMe extends DialogFragment {
     private String appPackageName;
     private View mView;
     private View tView;
-    private View conTiView;
+    private View confirDialogView;
     private Button close;
     private RatingBar ratingBar;
     private LayerDrawable stars;
     private Button rateMe;
     private Button noThanks;
     private Button share;
-    private Button yes;
-    private Button no;
 
     public static DialogRateMe newInstance(String packageName) {
         DialogRateMe dialogo = new DialogRateMe();
@@ -85,13 +83,14 @@ public class DialogRateMe extends DialogFragment {
                 Log.d(TAG, "share App");
             }
         });
-        return builder.setView(mView).setCustomTitle(tView).setCancelable(false).create();
+        builder.setView(mView).setCustomTitle(tView).setCancelable(false);
+        return builder.create();
     }
 
     private void initializeUiFields() {
         mView = getActivity().getLayoutInflater().inflate(R.layout.library, null);
         tView = getActivity().getLayoutInflater().inflate(R.layout.title, null);
-        conTiView = getActivity().getLayoutInflater().inflate(R.layout.confirmationtitledialog, null);
+        confirDialogView = getActivity().getLayoutInflater().inflate(R.layout.confirmationtitledialog, null);
         close = (Button) tView.findViewById(R.id.buttonClose);
         share = (Button) tView.findViewById(R.id.buttonShare);
         rateMe = (Button) mView.findViewById(R.id.buttonRateMe);
@@ -113,14 +112,12 @@ public class DialogRateMe extends DialogFragment {
         noThanks.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                //goToMail();
                 confirmGoToMailDialog(getArguments()).show();
-                //confir2(getArguments()).show();
                 Log.d(TAG, "got to Mail for explain what is the problem");
             }
         });
     }
-    
+
     private void rateApp() {
         try {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(MARKET_CONSTANT + appPackageName)));
@@ -128,7 +125,7 @@ public class DialogRateMe extends DialogFragment {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(GOOGLE_PLAY_CONSTANT + appPackageName)));
         }
     }
-    
+
     private void goToMail() {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("plain/text");
@@ -140,27 +137,23 @@ public class DialogRateMe extends DialogFragment {
             rateApp();
         }
     }
-    
+
     private Dialog confirmGoToMailDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        builder.setCustomTitle(conTiView)
-               .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                   public void onClick(DialogInterface dialog, int id) {
-                       goToMail();
-                       }
-               })
-               .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-                   public void onClick(DialogInterface dialog, int id) {
-                       dismiss();
-                   }
-               });
+        builder.setCustomTitle(confirDialogView).setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                goToMail();
+            }
+        }).setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dismiss();
+            }
+        });
         return builder.create();
-        
-    }
-    
 
-    
+    }
+
     private Intent shareApp(String appPackageName) {
         Intent shareApp = new Intent();
         shareApp.setAction(Intent.ACTION_SEND);
