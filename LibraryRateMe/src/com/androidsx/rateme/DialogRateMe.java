@@ -22,6 +22,7 @@ public class DialogRateMe extends DialogFragment {
     private static final String TAG = DialogRateMe.class.getSimpleName();
 
     private static final String EXTRA_PACKAGE_NAME = "package-name";
+    private static final String EXTRA_EMAIL = "email-name";
     private static final String MARKET_CONSTANT = "market://details?id=";
     private static final String GOOGLE_PLAY_CONSTANT = "http://play.google.com/store/apps/details?id=";
 
@@ -36,10 +37,11 @@ public class DialogRateMe extends DialogFragment {
     private Button noThanks;
     private Button share;
 
-    public static DialogRateMe newInstance(String packageName) {
+    public static DialogRateMe newInstance(String packageName, String email) {
         DialogRateMe dialogo = new DialogRateMe();
         Bundle args = new Bundle();
         args.putString(EXTRA_PACKAGE_NAME, packageName);
+        args.putString(EXTRA_EMAIL, email);
         dialogo.setArguments(args);
         return dialogo;
     }
@@ -83,7 +85,7 @@ public class DialogRateMe extends DialogFragment {
                 Log.d(TAG, "share App");
             }
         });
-        
+
         return builder.setView(mView).setCustomTitle(tView).setCancelable(false).create();
     }
 
@@ -127,11 +129,12 @@ public class DialogRateMe extends DialogFragment {
     }
 
     private void goToMail() {
-       final String subject = getResources().getString(R.string.subject_email);
-        
+        final String email = getArguments().getString(EXTRA_EMAIL);
+        final String subject = getResources().getString(R.string.subject_email);
+
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("plain/text");
-        intent.putExtra(Intent.EXTRA_EMAIL, new String[] { "yourmail@mail.com" });
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[] { email });
         intent.putExtra(Intent.EXTRA_SUBJECT, subject);
         try {
             startActivity(Intent.createChooser(intent, ""));
