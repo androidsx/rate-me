@@ -13,7 +13,7 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="messageconfirmdialog">Because you rated the app with less than 4 ?</string>
-    <string name="email">prueba@gmail.com</string>
+    <string name="gottoemail">prueba@gmail.com</string>
     <string name="subjectmail">Explain your reasons</string>
 
 </resources>
