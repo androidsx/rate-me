@@ -1,38 +1,23 @@
 Rate-Me
 =======
 
-Rate-Me is a library for Android 2.3+ that provides a dialog that suggests the user to rate the app.
+Rate-Me is a Librery for Android2.3+ that provides a Dialog for suggesting to the user a Rate the App. If the Rate is 4 or more stars, the Dialog goes to PlayStore
+You can see the [source code](https://github.com/androidsx/rate-me/blob/readme/LibraryRateMe/src/com/androidsx/rateme/DialogRateMe.java) and an application example 
 
 If the rating is 4 or more stars, the dialog just takes the user to the Google Play store. Otherwise, it prompts them to give feedback to the developer.
-
 You can see the [main class here](https://github.com/androidsx/rate-me/blob/readme/LibraryRateMe/src/com/androidsx/rateme/DialogRateMe.java) and an integration example in this image:
-
 [![img1](https://raw.githubusercontent.com/androidsx/rate-me/master/images-readme/image.png)]()
 
+## How to use
 
-##How to use
-
-###Download
-
-			git clone git@github.com:androidsx/rate-me.git
-			
-
-### Eclipse
-
-Import `rate-me` in Eclipse and then link your app project with this library.
-
-### Use the Library
-
-Using the library is really simple, [that example] RateMe / src / com / androidsx / rateme / demo2 / HelloWorldActivity.java allows you to know how to link the activity apps through a button.
-
+Using the library is really simple, [that example](RateMe / src / com / androidsx / rateme / demo2 / HelloWorldActivity.java)  allows you to know how to link the activity apps through a button.
 On the button click event, you have add this code.
 
             DialogFragment dialogo = DialogRateMe.newInstance(
                         "com.androidsx.smileys");
             dialogo.show(getFragmentManager(), "dialog");
-    
-
-Normally your currency this line of code: "com.androidsx.smileys" by getPackageName() in your app
+     
+normally use getPackageName() instead of "com.androidsx.smileys".
 
 This Library can be opened automatically by calling the method onStart in our project:
 
@@ -47,7 +32,8 @@ This Library can be opened automatically by calling the method onStart in our pr
 		        }
         
 		    }
-Yo can see this in [that example](RateMe / src / com / androidsx / rateme / demo2 / HelloWorldActivity.java)
+			
+Yo can see this in [that example] RateMe / src / com / androidsx / rateme / demo2 / HelloWorldActivity.java
 
 ###CustomCriteria
 
