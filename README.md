@@ -5,11 +5,10 @@ Rate-Me is a Librery for Android2.3+ that provides a Dialog for suggesting to th
 
 You can see the [source code](https://github.com/androidsx/rate-me/blob/readme/LibraryRateMe/src/com/androidsx/rateme/DialogRateMe.java) and an application example 
 
-[![img1](https://raw.githubusercontent.com/androidsx/rate-me/master/images-readme/image.jpg)]()
+[![img1](https://raw.githubusercontent.com/androidsx/rate-me/master/images-readme/image.png)]()
 
 
 ##How to Usage
-=======
 
 ###Download
 			git clone git@github.com:androidsx/rate-me.git
