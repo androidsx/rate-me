@@ -47,7 +47,7 @@ This Library can be opened automatically by calling the method onStart in our pr
 		        }
         
 		    }
-Yo can see this in [that example] RateMe / src / com / androidsx / rateme / demo2 / HelloWorldActivity.java
+Yo can see this in [that example](RateMe / src / com / androidsx / rateme / demo2 / HelloWorldActivity.java)
 
 ###CustomCriteria
 
