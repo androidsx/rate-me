@@ -73,7 +73,7 @@
             android:id="@+id/buttonThanks"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/nothanks"
+            android:text="@string/no_thanks"
             android:textColor="@color/white"
             android:visibility="gone"
             android:background="@drawable/selector"/>

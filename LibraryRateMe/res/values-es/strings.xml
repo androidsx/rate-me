@@ -8,11 +8,11 @@
     <string name="message">Como Valorarias la App</string>
     <string name="title">Valora tu Experiencia</string>
     <string name="title_activity_dialog">Dialog</string>
-    <string name="nothanks">Gracias por Valorarme</string>
-    <string name="yes"><u>SI</u></string>
-    <string name="no"><u>NO</u></string>
-    <string name="messageconfirmdialog"><u> ¿Quieres decirnos porque no te ha gustado ?</u></string>
-    <string name="gottoemail">prueba@gmail.com</string>
-    <string name="subjectmail">Explicanos que es lo que no te ha gustado</string>
+    <string name="no_thanks">Gracias por Valorarme</string>
+    <string name="yes">SI</string>
+    <string name="no">NO</string>
+    <string name="message_confirm_dialog">¿Quieres decirnos porque no te ha gustado ?</string>
+    <string name="go_to_email">prueba@gmail.com</string>
+    <string name="subject_email">Explicanos que es lo que no te ha gustado</string>
 
 </resources>
