@@ -28,12 +28,15 @@ public class DialogRateMe extends DialogFragment {
     private String appPackageName;
     private View mView;
     private View tView;
+    private View conTiView;
     private Button close;
     private RatingBar ratingBar;
     private LayerDrawable stars;
     private Button rateMe;
     private Button noThanks;
     private Button share;
+    private Button yes;
+    private Button no;
 
     public static DialogRateMe newInstance(String packageName) {
         DialogRateMe dialogo = new DialogRateMe();
@@ -88,6 +91,7 @@ public class DialogRateMe extends DialogFragment {
     private void initializeUiFields() {
         mView = getActivity().getLayoutInflater().inflate(R.layout.library, null);
         tView = getActivity().getLayoutInflater().inflate(R.layout.title, null);
+        conTiView = getActivity().getLayoutInflater().inflate(R.layout.confirmationtitledialog, null);
         close = (Button) tView.findViewById(R.id.buttonClose);
         share = (Button) tView.findViewById(R.id.buttonShare);
         rateMe = (Button) mView.findViewById(R.id.buttonRateMe);
@@ -111,6 +115,7 @@ public class DialogRateMe extends DialogFragment {
             public void onClick(View v) {
                 //goToMail();
                 confirmGoToMailDialog(getArguments()).show();
+                //confir2(getArguments()).show();
                 Log.d(TAG, "got to Mail for explain what is the problem");
             }
         });
@@ -128,8 +133,7 @@ public class DialogRateMe extends DialogFragment {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("plain/text");
         intent.putExtra(Intent.EXTRA_EMAIL, new String[] { "some@email.com" });
-        intent.putExtra(Intent.EXTRA_SUBJECT, "subject");
-        intent.putExtra(Intent.EXTRA_TEXT, "mail body");
+        intent.putExtra(Intent.EXTRA_SUBJECT, R.string.subjectmail);
         try {
             startActivity(Intent.createChooser(intent, ""));
         } catch (android.content.ActivityNotFoundException ex) {
@@ -139,19 +143,22 @@ public class DialogRateMe extends DialogFragment {
     
     private Dialog confirmGoToMailDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("mensaje")
-               .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
+        builder.setCustomTitle(conTiView)
+               .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int id) {
                        goToMail();
                        }
                })
-               .setNegativeButton("No", new DialogInterface.OnClickListener() {
+               .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                    public void onClick(DialogInterface dialog, int id) {
                        dismiss();
                    }
                });
         return builder.create();
+        
     }
+    
 
     
     private Intent shareApp(String appPackageName) {
