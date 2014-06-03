@@ -83,8 +83,8 @@ public class DialogRateMe extends DialogFragment {
                 Log.d(TAG, "share App");
             }
         });
-        builder.setView(mView).setCustomTitle(tView).setCancelable(false);
-        return builder.create();
+        
+        return builder.setView(mView).setCustomTitle(tView).setCancelable(false).create();
     }
 
     private void initializeUiFields() {
