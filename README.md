@@ -17,7 +17,7 @@ On the button click event, you have add this code.
                         "com.androidsx.smileys");
             dialogo.show(getFragmentManager(), "dialog");
      
-normally use getPackageName() instead of "com.androidsx.smileys".
+normally use `getPackageName()` instead of `"com.androidsx.smileys".`
 
 This Library can be opened automatically by calling the method onStart in our project:
 
@@ -31,9 +31,7 @@ This Library can be opened automatically by calling the method onStart in our pr
 		            dialogo.show(getFragmentManager(), "dialog");
 		        }
         
-		    }
-			
-Yo can see this in [that example] RateMe / src / com / androidsx / rateme / demo2 / HelloWorldActivity.java
+		    }			
 
 ###CustomCriteria
 
