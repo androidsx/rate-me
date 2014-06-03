@@ -7,8 +7,11 @@
     <string name="rateme">Rate Me</string>
     <string name="message">How would you rate it ?</string>
     <string name="title">Rate You Experience</string>
-    <string name="title2">Like our App ?</string>
     <string name="title_activity_dialog">Dialog</string>
-    <string name="nothanks">Thanks for Rame Me</string>
+    <string name="no_thanks">Thanks for the rating!</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="message_confirm_dialog">Because you rated the app with less than 4 ?</string>
+    <string name="subject_email">Explain your reasons</string>
 
 </resources>

@@ -3,6 +3,7 @@ package com.androidsx.rateme;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -27,6 +28,7 @@ public class DialogRateMe extends DialogFragment {
     private String appPackageName;
     private View mView;
     private View tView;
+    private View confirDialogView;
     private Button close;
     private RatingBar ratingBar;
     private LayerDrawable stars;
@@ -81,12 +83,14 @@ public class DialogRateMe extends DialogFragment {
                 Log.d(TAG, "share App");
             }
         });
+        
         return builder.setView(mView).setCustomTitle(tView).setCancelable(false).create();
     }
 
     private void initializeUiFields() {
         mView = getActivity().getLayoutInflater().inflate(R.layout.library, null);
         tView = getActivity().getLayoutInflater().inflate(R.layout.title, null);
+        confirDialogView = getActivity().getLayoutInflater().inflate(R.layout.confirmationtitledialog, null);
         close = (Button) tView.findViewById(R.id.buttonClose);
         share = (Button) tView.findViewById(R.id.buttonShare);
         rateMe = (Button) mView.findViewById(R.id.buttonRateMe);
@@ -108,12 +112,12 @@ public class DialogRateMe extends DialogFragment {
         noThanks.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToMail();
+                confirmGoToMailDialog(getArguments()).show();
                 Log.d(TAG, "got to Mail for explain what is the problem");
             }
         });
     }
-    
+
     private void rateApp() {
         try {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(MARKET_CONSTANT + appPackageName)));
@@ -121,20 +125,37 @@ public class DialogRateMe extends DialogFragment {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(GOOGLE_PLAY_CONSTANT + appPackageName)));
         }
     }
-    
+
     private void goToMail() {
+       final String subject = getResources().getString(R.string.subject_email);
+        
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("plain/text");
-        intent.putExtra(Intent.EXTRA_EMAIL, new String[] { "some@email.com" });
-        intent.putExtra(Intent.EXTRA_SUBJECT, "subject");
-        intent.putExtra(Intent.EXTRA_TEXT, "mail body");
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[] { "yourmail@mail.com" });
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
         try {
             startActivity(Intent.createChooser(intent, ""));
         } catch (android.content.ActivityNotFoundException ex) {
             rateApp();
         }
     }
-    
+
+    private Dialog confirmGoToMailDialog(Bundle savedInstanceState) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        builder.setCustomTitle(confirDialogView).setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                goToMail();
+            }
+        }).setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dismiss();
+            }
+        });
+        return builder.create();
+
+    }
+
     private Intent shareApp(String appPackageName) {
         Intent shareApp = new Intent();
         shareApp.setAction(Intent.ACTION_SEND);
