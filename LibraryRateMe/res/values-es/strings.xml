@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+
     <string name="app_name">LibraryRateMe</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hola Mundo</string>
-    <string name="rateme">Puntuar</string>
-    <string name="message">How would you rate it ?</string>
-    <string name="title">Rate You Experience</string>
-    <string name="title2">Like our App ?</string>
-    
-    
+    <string name="hello_world">Hello world!</string>
+    <string name="rateme">Valorar en la PlayStore</string>
+    <string name="message">Como Valorarias la App</string>
+    <string name="title">Valora tu Experiencia</string>
+    <string name="title_activity_dialog">Dialog</string>
+    <string name="nothanks">Gracias por Valorarme</string>
+    <string name="yes"><u>SI</u></string>
+    <string name="no"><u>NO</u></string>
+    <string name="messageconfirmdialog"><u> ¿Quieres decirnos proque no te ha gustado ?</u></string>
+    <string name="gottoemail">prueba@gmail.com</string>
+    <string name="subjectmail">Explica porque no te ha gustado</string>
+
 </resources>
