@@ -15,8 +15,8 @@ import com.androidsx.rateme.DialogRateMe;
 
 public class SampleProject extends Activity {
     private Button buttonRateMe;
-    private String MY_PACKAGE_NAME = "com.androidsx.smileys";
-    private String EMAIL = "yourmail@mail.com";
+    private static final String MY_PACKAGE_NAME = "com.androidsx.smileys";
+    private static final String EMAIL = "yourmail@mail.com";
     private static final int INSTALL_DAYS = 20;
     private static final int LAUNCH_TIMES = 5;
     
