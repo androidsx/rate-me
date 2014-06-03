@@ -10,5 +10,10 @@
     <string name="title2">Like our App ?</string>
     <string name="title_activity_dialog">Dialog</string>
     <string name="nothanks">Thanks for Rame Me</string>
+    <string name="yes">Yes</string>
+    <string name="no">no</string>
+    <string name="messageconfirmdialog">because you rated the app with less than 4</string>
+    <string name="email">prueba@gmail.com</string>
+    <string name="subjectmail">Explain your reasons</string>
 
 </resources>
