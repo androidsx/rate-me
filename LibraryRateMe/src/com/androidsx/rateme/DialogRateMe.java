@@ -127,10 +127,13 @@ public class DialogRateMe extends DialogFragment {
     }
 
     private void goToMail() {
+       final String email = getResources().getString(R.string.gottoemail);
+       final String subject = getResources().getString(R.string.subjectmail);
+        
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("plain/text");
-        intent.putExtra(Intent.EXTRA_EMAIL, new String[] { "some@email.com" });
-        intent.putExtra(Intent.EXTRA_SUBJECT, R.string.subjectmail);
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[] { email });
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
         try {
             startActivity(Intent.createChooser(intent, ""));
         } catch (android.content.ActivityNotFoundException ex) {
