@@ -127,12 +127,11 @@ public class DialogRateMe extends DialogFragment {
     }
 
     private void goToMail() {
-       final String email = getResources().getString(R.string.go_to_email);
        final String subject = getResources().getString(R.string.subject_email);
         
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("plain/text");
-        intent.putExtra(Intent.EXTRA_EMAIL, new String[] { email });
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[] { "yourmail@mail.com" });
         intent.putExtra(Intent.EXTRA_SUBJECT, subject);
         try {
             startActivity(Intent.createChooser(intent, ""));
