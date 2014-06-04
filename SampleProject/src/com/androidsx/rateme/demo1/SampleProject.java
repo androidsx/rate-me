@@ -58,16 +58,16 @@ public class SampleProject extends Activity {
         RateMeDialogTimer rateDialog = new RateMeDialogTimer(INSTALL_DAYS,LAUNCH_TIMES);
         RateMeDialogTimer.onStart(this);
         if (RateMeDialogTimer.shouldShowRateDialog(this)) {
-            DialogFragment dialogo = DialogRateMe.newInstance(
+            DialogFragment dialog = DialogRateMe.newInstance(
                     MY_PACKAGE_NAME,EMAIL);
-            dialogo.show(getFragmentManager(), "dialog");
+            dialog.show(getFragmentManager(), "dialog");
         }
         
     }
 	
     private void AlertMenu (){
-	    DialogFragment dialogo = DialogRateMe.newInstance(
+	    DialogFragment dialog = DialogRateMe.newInstance(
 	            MY_PACKAGE_NAME,EMAIL);
-        dialogo.show(getFragmentManager(), "dialog");
+	    dialog.show(getFragmentManager(), "dialog");
 	}
 }
