@@ -15,22 +15,22 @@ public class RateMeDialogTimer {
     private static final String KEY_INSTALL_DATE = "rta_install_date";
     private static final String KEY_LAUNCH_TIMES = "rta_launch_times";
     private static final String KEY_OPT_OUT = "rta_opt_out";
-    private static  int installDays;
-    private static  int launchTimes;
+    private static int installDays;
+    private static int launchTimes;
 
     private static Date mInstallDate = new Date();
     private static int mLaunchTimes = 0;
     private static boolean mOptOut = false;
-    
+
     /**
      * class constructor
      * 
      * @param installDate, launchTimes
      */
-    public RateMeDialogTimer (int installDate,int launchTimes){
+    public RateMeDialogTimer(int installDate, int launchTimes) {
         this.installDays = installDate;
         this.launchTimes = launchTimes;
-        
+
     }
 
     public static void onStart(Context context) {
