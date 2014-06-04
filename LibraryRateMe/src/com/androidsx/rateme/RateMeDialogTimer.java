@@ -15,16 +15,21 @@ public class RateMeDialogTimer {
     private static final String KEY_INSTALL_DATE = "rta_install_date";
     private static final String KEY_LAUNCH_TIMES = "rta_launch_times";
     private static final String KEY_OPT_OUT = "rta_opt_out";
-    private static int INSTALL_DAYS;
-    private static int LAUNCH_TIMES;
+    private static  int installDays;
+    private static  int launchTimes;
 
     private static Date mInstallDate = new Date();
     private static int mLaunchTimes = 0;
     private static boolean mOptOut = false;
     
+    /**
+     * class constructor
+     * 
+     * @param installDate, launchTimes
+     */
     public RateMeDialogTimer (int installDate,int launchTimes){
-        this.INSTALL_DAYS = installDate;
-        this.LAUNCH_TIMES = launchTimes;
+        this.installDays = installDate;
+        this.launchTimes = launchTimes;
         
     }
 
@@ -60,10 +65,10 @@ public class RateMeDialogTimer {
         if (mOptOut) {
             return false;
         } else {
-            if (mLaunchTimes >= LAUNCH_TIMES) {
+            if (mLaunchTimes >= launchTimes) {
                 return true;
             }
-            long threshold = INSTALL_DAYS * 24 * 60 * 60 * 1000L; // msec
+            long threshold = installDays * 24 * 60 * 60 * 1000L; // msec
             if (new Date().getTime() - mInstallDate.getTime() >= threshold) {
                 return true;
             }
