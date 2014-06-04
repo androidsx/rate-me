@@ -11,7 +11,9 @@ You can see the [main class here](https://github.com/androidsx/rate-me/blob/chan
 ## How to use
 
 Using the library is really simple, [that example](https://github.com/androidsx/rate-me/blob/change-Readme/RateMe/src/com/androidsx/rateme/demo2/HelloWorldActivity.java)  allows you to know how to link the activity apps through a button.
-When you want to use this Library you need three constant in you proyect:
+When you want to use this library you need three constants in you project.
+
+Sample configuration definition in my example
 
 				private static final String EMAIL = "yourmail@mail.com";
 			    private static final int INSTALL_DAYS = 20;
@@ -49,6 +51,6 @@ This Library can be opened automatically by calling the method onStart in our pr
 The default criteria to show the dialog is as below:
 
 * App is launched more than 20 days later than installation.
-* App is launched more than 10 times
+* App is launched more than 5 times
 
 you can change this settings [here](https://github.com/androidsx/rate-me/blob/change-Readme/RateMe/src/com/androidsx/rateme/demo2/HelloWorldActivity.java) in the variable `INSTALL_DAYS` and `LAUNCH_TIMES`
