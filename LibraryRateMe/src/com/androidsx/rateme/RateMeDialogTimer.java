@@ -66,10 +66,12 @@ public class RateMeDialogTimer {
             return false;
         } else {
             if (mLaunchTimes >= launchTimes) {
+                clearSharedPreferences(context);
                 return true;
             }
             long threshold = installDays * 24 * 60 * 60 * 1000L; // msec
             if (new Date().getTime() - mInstallDate.getTime() >= threshold) {
+                clearSharedPreferences(context);
                 return true;
             }
             return false;
