@@ -15,6 +15,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.RatingBar;
+import android.widget.RemoteViews;
+import android.widget.RemoteViews.RemoteView;
 
 import com.androidsx.libraryrateme.R;
 
@@ -149,6 +151,7 @@ public class DialogRateMe extends DialogFragment {
         builder.setCustomTitle(confirDialogView).setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 goToMail();
+                dismiss();
             }
         }).setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
