@@ -15,23 +15,10 @@ public class RateMeDialogTimer {
     private static final String KEY_INSTALL_DATE = "rta_install_date";
     private static final String KEY_LAUNCH_TIMES = "rta_launch_times";
     private static final String KEY_OPT_OUT = "rta_opt_out";
-    private static int installDays;
-    private static int launchTimes;
 
     private static Date mInstallDate = new Date();
     private static int mLaunchTimes = 0;
-    private static boolean mOptOut = false;
-
-    /**
-     * class constructor
-     * 
-     * @param installDate, launchTimes
-     */
-    public RateMeDialogTimer(int installDate, int launchTimes) {
-        this.installDays = installDate;
-        this.launchTimes = launchTimes;
-
-    }
+    private static boolean mOptOut = false;    
 
     public static void onStart(Context context) {
         SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
@@ -65,11 +52,11 @@ public class RateMeDialogTimer {
         if (mOptOut) {
             return false;
         } else {
-            if (mLaunchTimes >= launchTimes) {
+            if (mLaunchTimes >= Constants.LAUNCH_TIMES) {
                 clearSharedPreferences(context);
                 return true;
             }
-            long threshold = installDays * 24 * 60 * 60 * 1000L; // msec
+            long threshold = Constants.INSTALL_DAYS * 24 * 60 * 60 * 1000L; // msec
             if (new Date().getTime() - mInstallDate.getTime() >= threshold) {
                 clearSharedPreferences(context);
                 return true;

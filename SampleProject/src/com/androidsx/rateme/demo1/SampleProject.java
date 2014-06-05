@@ -10,15 +10,14 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import androidcourse.t4.t6.R;
 
+import com.androidsx.rateme.Constants;
 import com.androidsx.rateme.RateMeDialogTimer;
 import com.androidsx.rateme.DialogRateMe;
 
 public class SampleProject extends Activity {
     private Button buttonRateMe;
     private static final String MY_PACKAGE_NAME = "com.androidsx.smileys";
-    private static final String EMAIL = "yourmail@mail.com";
-    private static final int INSTALL_DAYS = 20;
-    private static final int LAUNCH_TIMES = 5;
+    
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +54,10 @@ public class SampleProject extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
-        RateMeDialogTimer rateDialog = new RateMeDialogTimer(INSTALL_DAYS,LAUNCH_TIMES);
         RateMeDialogTimer.onStart(this);
         if (RateMeDialogTimer.shouldShowRateDialog(this)) {
             DialogFragment dialog = DialogRateMe.newInstance(
-                    MY_PACKAGE_NAME,EMAIL);
+                    MY_PACKAGE_NAME,Constants.EMAIL);
             dialog.show(getFragmentManager(), "dialog");
         }
         
@@ -67,7 +65,7 @@ public class SampleProject extends Activity {
 	
     private void AlertMenu (){
 	    DialogFragment dialog = DialogRateMe.newInstance(
-	            MY_PACKAGE_NAME,EMAIL);
+	            MY_PACKAGE_NAME,Constants.EMAIL);
 	    dialog.show(getFragmentManager(), "dialog");
 	}
 }
