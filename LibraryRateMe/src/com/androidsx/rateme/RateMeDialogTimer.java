@@ -52,11 +52,11 @@ public class RateMeDialogTimer {
         if (mOptOut) {
             return false;
         } else {
-            if (mLaunchTimes >= Constants.LAUNCH_TIMES) {
+            if (mLaunchTimes >= LibraryConstants.LAUNCH_TIMES) {
                 clearSharedPreferences(context);
                 return true;
             }
-            long threshold = Constants.INSTALL_DAYS * 24 * 60 * 60 * 1000L; // msec
+            long threshold = LibraryConstants.INSTALL_DAYS * 24 * 60 * 60 * 1000L; // msec
             if (new Date().getTime() - mInstallDate.getTime() >= threshold) {
                 clearSharedPreferences(context);
                 return true;
