@@ -16,7 +16,10 @@ import com.androidsx.rateme.DialogRateMe;
 
 public class HelloWorldActivity extends Activity {
     private Button btnRateme;
-    private String myPackageName = "com.androidsx.smileys";
+    private static final String MY_PACKAGE_NAME = "com.androidsx.smileys";
+    private static final String EMAIL = "yourmail@mail.com";
+    private static final int INSTALL_DAYS = 20;
+    private static final int LAUNCH_TIMES = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,11 +63,12 @@ public class HelloWorldActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
+        RateMeDialogTimer rateDialog = new RateMeDialogTimer(INSTALL_DAYS,LAUNCH_TIMES);
         RateMeDialogTimer.onStart(this);
         if (RateMeDialogTimer.shouldShowRateDialog(this)) {
-            DialogFragment dialogo = DialogRateMe.newInstance(
-                    myPackageName);
-            dialogo.show(getFragmentManager(), "dialog");
+            DialogFragment dialog = DialogRateMe.newInstance(
+                    MY_PACKAGE_NAME,EMAIL);
+            dialog.show(getFragmentManager(), "dialog");
         }
         
     }
@@ -74,8 +78,8 @@ public class HelloWorldActivity extends Activity {
 //        DialogFragment dialogo = DialogRateMe.newInstance(
 //                getPackageName());
 //        dialogo.show(getFragmentManager(), "dialog");
-	    DialogFragment dialogo = DialogRateMe.newInstance(
-	    		myPackageName);
-        dialogo.show(getFragmentManager(), "dialog");
+        DialogFragment dialog = DialogRateMe.newInstance(
+                MY_PACKAGE_NAME,EMAIL);
+        dialog.show(getFragmentManager(), "dialog");
     }
 }

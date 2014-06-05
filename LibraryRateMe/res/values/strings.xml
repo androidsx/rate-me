@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    
     <string name="app_name">LibraryRateMe</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
@@ -11,7 +11,7 @@
     <string name="no_thanks">Thanks for the rating!</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="message_confirm_dialog">Because you rated the app with less than 4 ?</string>
+    <string name="message_confirm_dialog">explains the reasons why you rated the app with less than 4 ?</string>
     <string name="subject_email">Explain your reasons</string>
-
+    
 </resources>
