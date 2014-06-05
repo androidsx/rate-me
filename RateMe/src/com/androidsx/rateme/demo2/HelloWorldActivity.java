@@ -12,7 +12,6 @@ import android.widget.Button;
 import androidsx.rateme.R;
 
 import com.androidsx.rateme.DialogRateMe;
-import com.androidsx.rateme.LibraryConstants;
 import com.androidsx.rateme.RateMeDialogTimer;
 
 public class HelloWorldActivity extends Activity {
@@ -64,7 +63,7 @@ public class HelloWorldActivity extends Activity {
         RateMeDialogTimer.onStart(this);
         if (RateMeDialogTimer.shouldShowRateDialog(this)) {
             DialogFragment dialog = DialogRateMe.newInstance(
-                    MY_PACKAGE_NAME,LibraryConstants.EMAIL);
+                    MY_PACKAGE_NAME);
             dialog.show(getFragmentManager(), "dialog");
         }
         
@@ -76,7 +75,7 @@ public class HelloWorldActivity extends Activity {
 //                getPackageName());
 //        dialogo.show(getFragmentManager(), "dialog");
         DialogFragment dialog = DialogRateMe.newInstance(
-                MY_PACKAGE_NAME,LibraryConstants.EMAIL);
+                MY_PACKAGE_NAME);
         dialog.show(getFragmentManager(), "dialog");
     }
 }
