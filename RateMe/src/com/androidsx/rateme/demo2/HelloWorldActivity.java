@@ -12,12 +12,12 @@ import android.widget.Button;
 import androidsx.rateme.R;
 
 import com.androidsx.rateme.DialogRateMe;
-import com.androidsx.rateme.LibraryConstants;
 import com.androidsx.rateme.RateMeDialogTimer;
 
 public class HelloWorldActivity extends Activity {
     private Button btnRateme;
     private static final String MY_PACKAGE_NAME = "com.androidsx.smileys";
+    private static final String EMAIL_ADDRESS = "hello@world.com";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +64,7 @@ public class HelloWorldActivity extends Activity {
         RateMeDialogTimer.onStart(this);
         if (RateMeDialogTimer.shouldShowRateDialog(this)) {
             DialogFragment dialog = DialogRateMe.newInstance(
-                    MY_PACKAGE_NAME,LibraryConstants.EMAIL);
+                    MY_PACKAGE_NAME, EMAIL_ADDRESS);
             dialog.show(getFragmentManager(), "dialog");
         }
         
@@ -75,8 +75,8 @@ public class HelloWorldActivity extends Activity {
 //        DialogFragment dialogo = DialogRateMe.newInstance(
 //                getPackageName());
 //        dialogo.show(getFragmentManager(), "dialog");
-        DialogFragment dialog = DialogRateMe.newInstance(
-                MY_PACKAGE_NAME,LibraryConstants.EMAIL);
+		DialogFragment dialog = DialogRateMe.newInstance(
+                MY_PACKAGE_NAME, EMAIL_ADDRESS);
         dialog.show(getFragmentManager(), "dialog");
     }
 }

@@ -11,7 +11,6 @@ import android.widget.Button;
 import androidcourse.t4.t6.R;
 
 import com.androidsx.rateme.DialogRateMe;
-import com.androidsx.rateme.LibraryConstants;
 import com.androidsx.rateme.RateMeDialogTimer;
 
 public class SampleProject extends Activity {
@@ -57,7 +56,7 @@ public class SampleProject extends Activity {
         RateMeDialogTimer.onStart(this);
         if (RateMeDialogTimer.shouldShowRateDialog(this)) {
             DialogFragment dialog = DialogRateMe.newInstance(
-                    MY_PACKAGE_NAME,LibraryConstants.EMAIL);
+                    MY_PACKAGE_NAME, getString(R.string.email_address));
             dialog.show(getFragmentManager(), "dialog");
         }
         
@@ -65,7 +64,7 @@ public class SampleProject extends Activity {
 	
     private void AlertMenu (){
 	    DialogFragment dialog = DialogRateMe.newInstance(
-	            MY_PACKAGE_NAME,LibraryConstants.EMAIL);
+	            MY_PACKAGE_NAME, getString(R.string.email_address));
 	    dialog.show(getFragmentManager(), "dialog");
 	}
 }
