@@ -5,7 +5,7 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="rateme">Valorar en la PlayStore</string>
-    <string name="message">Como Valorarias la App</string>
+    <string name="message">Qué puntuación nos das?</string>
     <string name="title">Valora tu Experiencia</string>
     <string name="title_activity_dialog">Dialog</string>
     <string name="no_thanks">Gracias por Valorarme</string>
