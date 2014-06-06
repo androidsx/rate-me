@@ -11,61 +11,58 @@ import android.widget.Button;
 import androidcourse.t4.t6.R;
 
 import com.androidsx.rateme.DialogRateMe;
-import com.androidsx.rateme.LibraryConstants;
 import com.androidsx.rateme.RateMeDialogTimer;
 
 public class SampleProject extends Activity {
     private Button buttonRateMe;
     private static final String MY_PACKAGE_NAME = "com.androidsx.smileys";
-    
-    
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_contacts); 
-		buttonRateMe = (Button)findViewById(R.id.buttonrateme);		
-		buttonRateMe.setOnClickListener(new OnClickListener() {          
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_contacts);
+        buttonRateMe = (Button) findViewById(R.id.buttonrateme);
+        buttonRateMe.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertMenu();            
+                AlertMenu();
             }
         });
-	}
+    }
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.delete, menu);
-		return true;
-	}
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Take appropriate action for each action item click
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.delete, menu);
+        return true;
+    }
 
-		switch (item.getItemId()) {
-		case R.id.RateMe:
-		    AlertMenu();
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Take appropriate action for each action item click
 
-		default:
-			return super.onOptionsItemSelected(item);
-		}
-	}
-	
+        switch (item.getItemId()) {
+        case R.id.RateMe:
+            AlertMenu();
+
+        default:
+            return super.onOptionsItemSelected(item);
+        }
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
         RateMeDialogTimer.onStart(this);
         if (RateMeDialogTimer.shouldShowRateDialog(this)) {
-            DialogFragment dialog = DialogRateMe.newInstance(
-                    MY_PACKAGE_NAME,LibraryConstants.EMAIL);
+            DialogFragment dialog = DialogRateMe.newInstance(MY_PACKAGE_NAME);
             dialog.show(getFragmentManager(), "dialog");
         }
-        
+
     }
-	
-    private void AlertMenu (){
-	    DialogFragment dialog = DialogRateMe.newInstance(
-	            MY_PACKAGE_NAME,LibraryConstants.EMAIL);
-	    dialog.show(getFragmentManager(), "dialog");
-	}
+
+    private void AlertMenu() {
+        DialogFragment dialog = DialogRateMe.newInstance(MY_PACKAGE_NAME);
+        dialog.show(getFragmentManager(), "dialog");
+    }
 }

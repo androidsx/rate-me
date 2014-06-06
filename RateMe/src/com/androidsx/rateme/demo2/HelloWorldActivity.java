@@ -12,7 +12,6 @@ import android.widget.Button;
 import androidsx.rateme.R;
 
 import com.androidsx.rateme.DialogRateMe;
-import com.androidsx.rateme.LibraryConstants;
 import com.androidsx.rateme.RateMeDialogTimer;
 
 public class HelloWorldActivity extends Activity {
@@ -22,8 +21,8 @@ public class HelloWorldActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hello_world);       
-        setupUI();            
+        setContentView(R.layout.activity_hello_world);
+        setupUI();
     }
 
     @Override
@@ -32,15 +31,15 @@ public class HelloWorldActivity extends Activity {
         inflater.inflate(R.menu.hello_world, menu);
         return super.onCreateOptionsMenu(menu);
     }
-    
-    public void setupUI (){
-        btnRateme = (Button) findViewById(R.id.buttonRateMe);      
+
+    public void setupUI() {
+        btnRateme = (Button) findViewById(R.id.buttonRateMe);
         btnRateme.setOnClickListener(new OnClickListener() {
-            
+
             @Override
             public void onClick(View v) {
-               alertMenu();
-                
+                alertMenu();
+
             }
         });
     }
@@ -56,27 +55,24 @@ public class HelloWorldActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
-    
-    
+
     @Override
     protected void onStart() {
         super.onStart();
         RateMeDialogTimer.onStart(this);
         if (RateMeDialogTimer.shouldShowRateDialog(this)) {
-            DialogFragment dialog = DialogRateMe.newInstance(
-                    MY_PACKAGE_NAME,LibraryConstants.EMAIL);
+            DialogFragment dialog = DialogRateMe.newInstance(MY_PACKAGE_NAME);
             dialog.show(getFragmentManager(), "dialog");
         }
-        
+
     }
 
-    public void alertMenu (){
-        
-//        DialogFragment dialogo = DialogRateMe.newInstance(
-//                getPackageName());
-//        dialogo.show(getFragmentManager(), "dialog");
-        DialogFragment dialog = DialogRateMe.newInstance(
-                MY_PACKAGE_NAME,LibraryConstants.EMAIL);
+    public void alertMenu() {
+
+        // DialogFragment dialogo = DialogRateMe.newInstance(
+        // getPackageName());
+        // dialogo.show(getFragmentManager(), "dialog");
+        DialogFragment dialog = DialogRateMe.newInstance(MY_PACKAGE_NAME);
         dialog.show(getFragmentManager(), "dialog");
     }
 }
