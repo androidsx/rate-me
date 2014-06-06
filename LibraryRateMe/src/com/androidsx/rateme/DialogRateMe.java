@@ -126,7 +126,6 @@ public class DialogRateMe extends DialogFragment {
         ratingBar = (RatingBar) mView.findViewById(R.id.ratingBar);
         stars = (LayerDrawable) ratingBar.getProgressDrawable();
         
-        
     }
 
     private void configureButtons() {

@@ -64,8 +64,8 @@ public class SampleProject extends Activity {
 	
     private void AlertMenu (){
     	boolean showShareButton = false;
-    	int titleColor = Color.RED;
-    	int dialogColor = Color.BLUE;
+    	int titleColor = Color.BLACK;
+    	int dialogColor = Color.GRAY;
 	    DialogFragment dialog = DialogRateMe.newInstance(
 	            MY_PACKAGE_NAME, getString(R.string.email_address),showShareButton,titleColor,dialogColor);
 	    dialog.show(getFragmentManager(), "dialog");
