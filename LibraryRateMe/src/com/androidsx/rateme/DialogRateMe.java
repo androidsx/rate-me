@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -24,6 +25,8 @@ public class DialogRateMe extends DialogFragment {
     private static final String EXTRA_PACKAGE_NAME = "package-name";
     private static final String EXTRA_EMAIL = "email-name";
     private static final String EXTRA_SHOW_SHARE = "show-share-button";
+    private static final String EXTRA_COLOR_TITLE = "show-color-title";
+    private static final String EXTRA_COLOR_DIALOG = "show-color-dialog";
     private static final boolean SHOW_SHARE_DEFAULT = true;
     private static final String MARKET_CONSTANT = "market://details?id=";
     private static final String GOOGLE_PLAY_CONSTANT = "http://play.google.com/store/apps/details?id=";
@@ -40,23 +43,26 @@ public class DialogRateMe extends DialogFragment {
     private Button share;
 
     /**
-	 * @param showShareButton configures whether the dialog will show a share button in the top bar
-	 */
-    public static DialogRateMe newInstance(String packageName, String email, boolean showShareButton) {
+     * @param showShareButton configures whether the dialog will show a share button in the top bar
+     */
+    public static DialogRateMe newInstance(String packageName, String email, boolean showShareButton, int titleColor,
+            int dialogColor) {
         DialogRateMe dialogo = new DialogRateMe();
         Bundle args = new Bundle();
         args.putString(EXTRA_PACKAGE_NAME, packageName);
         args.putString(EXTRA_EMAIL, email);
         args.putBoolean(EXTRA_SHOW_SHARE, showShareButton);
+        args.putInt(EXTRA_COLOR_TITLE, titleColor);
+        args.putInt(EXTRA_COLOR_DIALOG, dialogColor);
         dialogo.setArguments(args);
         return dialogo;
     }
-    
+
     /**
      * @see #newInstance(String, String, boolean)
      */
-    public static DialogRateMe newInstance(String packageName, String email) {
-    	return newInstance(packageName, email, SHOW_SHARE_DEFAULT);
+    public static DialogRateMe newInstance(String packageName, String email, int titleColor, int dialogColor) {
+        return newInstance(packageName, email, SHOW_SHARE_DEFAULT, titleColor, dialogColor);
     }
 
     @Override
@@ -105,7 +111,11 @@ public class DialogRateMe extends DialogFragment {
 
     private void initializeUiFields() {
         mView = getActivity().getLayoutInflater().inflate(R.layout.library, null);
+        int colorDialog = getArguments().getInt(EXTRA_COLOR_DIALOG);
+        mView.setBackgroundColor(colorDialog);
         tView = getActivity().getLayoutInflater().inflate(R.layout.title, null);
+        int colorTitle = getArguments().getInt(EXTRA_COLOR_TITLE);
+        tView.setBackgroundColor(colorTitle);
         confirDialogView = getActivity().getLayoutInflater().inflate(R.layout.confirmationtitledialog, null);
         close = (Button) tView.findViewById(R.id.buttonClose);
         share = (Button) tView.findViewById(R.id.buttonShare);
