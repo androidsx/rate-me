@@ -2,6 +2,7 @@ package com.androidsx.rateme.demo2;
 
 import android.app.Activity;
 import android.app.DialogFragment;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -61,22 +62,22 @@ public class HelloWorldActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
+        final int launchTimes = 5;
+        final int installDate = 20;
+        new RateMeDialogTimer(installDate, launchTimes);
         RateMeDialogTimer.onStart(this);
         if (RateMeDialogTimer.shouldShowRateDialog(this)) {
-            DialogFragment dialog = DialogRateMe.newInstance(
-                    MY_PACKAGE_NAME, EMAIL_ADDRESS);
-            dialog.show(getFragmentManager(), "dialog");
+            alertMenu();
         }
-        
+
     }
 
-    public void alertMenu (){
-        
-//        DialogFragment dialogo = DialogRateMe.newInstance(
-//                getPackageName());
-//        dialogo.show(getFragmentManager(), "dialog");
-		DialogFragment dialog = DialogRateMe.newInstance(
-                MY_PACKAGE_NAME, EMAIL_ADDRESS);
+    private void alertMenu() {
+        boolean showShareButton = true;
+        int titleColor = Color.BLACK;
+        int dialogColor = Color.GRAY;
+        DialogFragment dialog = DialogRateMe.newInstance(MY_PACKAGE_NAME, getString(R.string.email_address),
+                showShareButton, titleColor, dialogColor);
         dialog.show(getFragmentManager(), "dialog");
     }
 }
