@@ -2,6 +2,8 @@ package com.androidsx.rateme.demo1;
 
 import android.app.Activity;
 import android.app.DialogFragment;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -55,17 +57,17 @@ public class SampleProject extends Activity {
         super.onStart();
         RateMeDialogTimer.onStart(this);
         if (RateMeDialogTimer.shouldShowRateDialog(this)) {
-            DialogFragment dialog = DialogRateMe.newInstance(
-                    MY_PACKAGE_NAME, getString(R.string.email_address));
-            dialog.show(getFragmentManager(), "dialog");
+            AlertMenu();
         }
         
     }
 	
     private void AlertMenu (){
     	boolean showShareButton = false;
+    	int titleColor = Color.BLACK;
+    	int dialogColor = Color.GRAY;
 	    DialogFragment dialog = DialogRateMe.newInstance(
-	            MY_PACKAGE_NAME, getString(R.string.email_address),showShareButton);
+	            MY_PACKAGE_NAME, getString(R.string.email_address),showShareButton,titleColor,dialogColor);
 	    dialog.show(getFragmentManager(), "dialog");
 	}
 }
