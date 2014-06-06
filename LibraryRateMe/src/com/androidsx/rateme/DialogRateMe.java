@@ -23,6 +23,8 @@ public class DialogRateMe extends DialogFragment {
 
     private static final String EXTRA_PACKAGE_NAME = "package-name";
     private static final String EXTRA_EMAIL = "email-name";
+    private static final String EXTRA_SHOW_SHARE = "show-share-button";
+    private static final boolean SHOW_SHARE_DEFAULT = true;
     private static final String MARKET_CONSTANT = "market://details?id=";
     private static final String GOOGLE_PLAY_CONSTANT = "http://play.google.com/store/apps/details?id=";
 
@@ -37,13 +39,24 @@ public class DialogRateMe extends DialogFragment {
     private Button noThanks;
     private Button share;
 
-    public static DialogRateMe newInstance(String packageName, String email) {
+    /**
+	 * @param showShareButton configures whether the dialog will show a share button in the top bar
+	 */
+    public static DialogRateMe newInstance(String packageName, String email, boolean showShareButton) {
         DialogRateMe dialogo = new DialogRateMe();
         Bundle args = new Bundle();
         args.putString(EXTRA_PACKAGE_NAME, packageName);
         args.putString(EXTRA_EMAIL, email);
+        args.putBoolean(EXTRA_SHOW_SHARE, showShareButton);
         dialogo.setArguments(args);
         return dialogo;
+    }
+    
+    /**
+     * @see #newInstance(String, String, boolean)
+     */
+    public static DialogRateMe newInstance(String packageName, String email) {
+    	return newInstance(packageName, email, SHOW_SHARE_DEFAULT);
     }
 
     @Override
@@ -78,6 +91,7 @@ public class DialogRateMe extends DialogFragment {
 
             }
         });
+        share.setVisibility(getArguments().getBoolean(EXTRA_SHOW_SHARE) ? View.VISIBLE : View.GONE);
         share.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

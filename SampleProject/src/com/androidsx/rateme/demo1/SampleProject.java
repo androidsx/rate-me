@@ -63,8 +63,9 @@ public class SampleProject extends Activity {
     }
 	
     private void AlertMenu (){
+    	boolean showShareButton = false;
 	    DialogFragment dialog = DialogRateMe.newInstance(
-	            MY_PACKAGE_NAME, getString(R.string.email_address));
+	            MY_PACKAGE_NAME, getString(R.string.email_address),showShareButton);
 	    dialog.show(getFragmentManager(), "dialog");
 	}
 }
