@@ -18,7 +18,7 @@
         android:textColor="@android:color/white"
         android:textSize="15sp" />
 
-    <Button
+    <ImageView
         android:id="@id/iconConfirmDialog"
         android:layout_width="50dp"
         android:layout_height="50dp"
