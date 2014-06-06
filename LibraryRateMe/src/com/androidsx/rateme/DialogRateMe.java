@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -116,12 +118,15 @@ public class DialogRateMe extends DialogFragment {
         int colorTitle = getArguments().getInt(EXTRA_COLOR_TITLE);
         tView.setBackgroundColor(colorTitle);
         confirDialogView = getActivity().getLayoutInflater().inflate(R.layout.confirmationtitledialog, null);
+        confirDialogView.setBackgroundColor(colorTitle);
         close = (Button) tView.findViewById(R.id.buttonClose);
         share = (Button) tView.findViewById(R.id.buttonShare);
         rateMe = (Button) mView.findViewById(R.id.buttonRateMe);
         noThanks = (Button) mView.findViewById(R.id.buttonThanks);
         ratingBar = (RatingBar) mView.findViewById(R.id.ratingBar);
         stars = (LayerDrawable) ratingBar.getProgressDrawable();
+        
+        
     }
 
     private void configureButtons() {
