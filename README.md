@@ -30,7 +30,7 @@ and then you send this variables to the Dialog in the method `alertMenu()`
 			                showShareButton, titleColor, dialogColor);
 			        dialog.show(getFragmentManager(), "dialog");
 			    }
-normally use `getPackageName()` instead of variable MY_PACKAGE_NAME = `"com.androidsx.smileys".`
+normally use `getPackageName()` instead of constant MY_PACKAGE_NAME = `"com.androidsx.smileys".`
 
 This Library can be opened automatically by calling the method onStart in our project.
 
