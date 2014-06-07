@@ -2,7 +2,7 @@ Rate-Me
 =======
 
 Rate-Me is a Librery for Android2.3+ that provides a Dialog for suggesting to the user a Rate the App. If the Rate is 4 or more stars, the Dialog goes to PlayStore
-You can see the ([source code](https://github.com/androidsx/rate-me/blob/master/LibraryRateMe/src/com/androidsx/rateme/DialogRateMe.java)) and an application example 
+You can see the [source code](https://github.com/androidsx/rate-me/blob/master/LibraryRateMe/src/com/androidsx/rateme/DialogRateMe.java) and an application example 
 
 If the rating is 4 or more stars, the dialog just takes the user to the Google Play store. Otherwise, it prompts them to give feedback to the developer.
 You can see the [main class here](https://github.com/androidsx/rate-me/blob/master/LibraryRateMe/src/com/androidsx/rateme/DialogRateMe.java) and an integration example in this image:
@@ -10,7 +10,7 @@ You can see the [main class here](https://github.com/androidsx/rate-me/blob/mast
 
 ## How to use
 
-Using the library is really simple, ()[that example](https://github.com/androidsx/rate-me/blob/master/SampleProject/src/com/androidsx/rateme/demo1/SampleProject.java))  allows you to know how to link the activity apps through a button.
+Using the library is really simple, [that example](https://github.com/androidsx/rate-me/blob/master/SampleProject/src/com/androidsx/rateme/demo1/SampleProject.java))  allows you to know how to link the activity apps through a button.
 When you want to use this library you need choose the color of the title and the coor of body of the Dialog, and if you want a button to share the App
 
 			boolean showShareButton = true;
@@ -54,4 +54,4 @@ The default criteria to show the dialog is as below:
 * App is launched more than 20 days later than installation.
 * App is launched more than 5 times
 
-you can change this settings ([here](https://github.com/androidsx/rate-me/blob/master/SampleProject/src/com/androidsx/rateme/demo1/SampleProject.java))
+you can change this settings [here](https://github.com/androidsx/rate-me/blob/master/SampleProject/src/com/androidsx/rateme/demo1/SampleProject.java)
