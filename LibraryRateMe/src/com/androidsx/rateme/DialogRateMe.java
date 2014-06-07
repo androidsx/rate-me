@@ -127,7 +127,7 @@ public class DialogRateMe extends DialogFragment {
         noThanks = (Button) mView.findViewById(R.id.buttonThanks);
         ratingBar = (RatingBar) mView.findViewById(R.id.ratingBar);
         stars = (LayerDrawable) ratingBar.getProgressDrawable();
-        goToMail = getArguments().getBoolean(EXTRA_GO_TO_MAIL);
+        
 
     }
 
@@ -144,6 +144,7 @@ public class DialogRateMe extends DialogFragment {
         noThanks.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                goToMail = getArguments().getBoolean(EXTRA_GO_TO_MAIL);
                 if (goToMail) {
                     confirmGoToMailDialog(getArguments()).show();
                     Log.d(TAG, "got to Mail for explain what is the problem");
