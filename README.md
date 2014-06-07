@@ -17,7 +17,7 @@ When you want to use this library you need choose the color of the title and the
 			int titleColor = Color.BLACK;
 			int dialogColor = Color.GRAY;
 			
-Yo need a string in Values for configure the email data in your App
+Yo need a string in Values for configure the email data in your App, the custom email is : 
 			<string name="email_address" translatable="false">sample-project@mycompany.com</string>
 			
 and then you send this variables to the Dialog in the method `alertMenu()`
