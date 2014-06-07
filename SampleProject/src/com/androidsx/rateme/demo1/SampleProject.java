@@ -66,10 +66,11 @@ public class SampleProject extends Activity {
 
     private void AlertMenu() {
         boolean showShareButton = true;
+        boolean goToMail = false;
         int titleColor = Color.BLACK;
         int dialogColor = Color.GRAY;
         DialogFragment dialog = DialogRateMe.newInstance(MY_PACKAGE_NAME, getString(R.string.email_address),
-                showShareButton, titleColor, dialogColor);
+                showShareButton,goToMail, titleColor, dialogColor);
         dialog.show(getFragmentManager(), "dialog");
     }
 }

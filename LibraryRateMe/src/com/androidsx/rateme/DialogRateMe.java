@@ -24,6 +24,7 @@ public class DialogRateMe extends DialogFragment {
     private static final String EXTRA_PACKAGE_NAME = "package-name";
     private static final String EXTRA_EMAIL = "email-name";
     private static final String EXTRA_SHOW_SHARE = "show-share-button";
+    private static final String EXTRA_GO_TO_MAIL = "show-go-to-mail";
     private static final String EXTRA_COLOR_TITLE = "show-color-title";
     private static final String EXTRA_COLOR_DIALOG = "show-color-dialog";
     private static final boolean SHOW_SHARE_DEFAULT = true;
@@ -40,17 +41,19 @@ public class DialogRateMe extends DialogFragment {
     private Button rateMe;
     private Button noThanks;
     private Button share;
+    private boolean goToMail;
 
     /**
      * @param showShareButton configures whether the dialog will show a share button in the top bar
      */
-    public static DialogRateMe newInstance(String packageName, String email, boolean showShareButton, int titleColor,
-            int dialogColor) {
+    public static DialogRateMe newInstance(String packageName, String email, boolean showShareButton, boolean goToMail,
+            int titleColor, int dialogColor) {
         DialogRateMe dialogo = new DialogRateMe();
         Bundle args = new Bundle();
         args.putString(EXTRA_PACKAGE_NAME, packageName);
         args.putString(EXTRA_EMAIL, email);
         args.putBoolean(EXTRA_SHOW_SHARE, showShareButton);
+        args.putBoolean(EXTRA_GO_TO_MAIL, goToMail);
         args.putInt(EXTRA_COLOR_TITLE, titleColor);
         args.putInt(EXTRA_COLOR_DIALOG, dialogColor);
         dialogo.setArguments(args);
@@ -60,8 +63,9 @@ public class DialogRateMe extends DialogFragment {
     /**
      * @see #newInstance(String, String, boolean)
      */
-    public static DialogRateMe newInstance(String packageName, String email, int titleColor, int dialogColor) {
-        return newInstance(packageName, email, SHOW_SHARE_DEFAULT, titleColor, dialogColor);
+    public static DialogRateMe newInstance(String packageName, String email, boolean goToMail, int titleColor,
+            int dialogColor) {
+        return newInstance(packageName, email, SHOW_SHARE_DEFAULT, goToMail, titleColor, dialogColor);
     }
 
     @Override
@@ -123,7 +127,8 @@ public class DialogRateMe extends DialogFragment {
         noThanks = (Button) mView.findViewById(R.id.buttonThanks);
         ratingBar = (RatingBar) mView.findViewById(R.id.ratingBar);
         stars = (LayerDrawable) ratingBar.getProgressDrawable();
-        
+        goToMail = getArguments().getBoolean(EXTRA_GO_TO_MAIL);
+
     }
 
     private void configureButtons() {
@@ -139,8 +144,12 @@ public class DialogRateMe extends DialogFragment {
         noThanks.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                confirmGoToMailDialog(getArguments()).show();
-                Log.d(TAG, "got to Mail for explain what is the problem");
+                if (goToMail) {
+                    confirmGoToMailDialog(getArguments()).show();
+                    Log.d(TAG, "got to Mail for explain what is the problem");
+                }else{
+                    dismiss();
+                }
             }
         });
     }
