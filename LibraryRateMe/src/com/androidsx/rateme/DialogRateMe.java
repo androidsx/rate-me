@@ -114,13 +114,11 @@ public class DialogRateMe extends DialogFragment {
 
     private void initializeUiFields() {
         mView = getActivity().getLayoutInflater().inflate(R.layout.library, null);
-        int colorDialog = getArguments().getInt(EXTRA_COLOR_DIALOG);
-        mView.setBackgroundColor(colorDialog);
+        mView.setBackgroundColor(getArguments().getInt(EXTRA_COLOR_DIALOG));
         tView = getActivity().getLayoutInflater().inflate(R.layout.title, null);
-        int colorTitle = getArguments().getInt(EXTRA_COLOR_TITLE);
-        tView.setBackgroundColor(colorTitle);
+        tView.setBackgroundColor(getArguments().getInt(EXTRA_COLOR_TITLE));
         confirDialogView = getActivity().getLayoutInflater().inflate(R.layout.confirmationtitledialog, null);
-        confirDialogView.setBackgroundColor(colorTitle);
+        confirDialogView.setBackgroundColor(getArguments().getInt(EXTRA_COLOR_TITLE));
         close = (Button) tView.findViewById(R.id.buttonClose);
         share = (Button) tView.findViewById(R.id.buttonShare);
         rateMe = (Button) mView.findViewById(R.id.buttonRateMe);
