@@ -21,7 +21,7 @@ import com.androidsx.libraryrateme.R;
 
 public class DialogRateMe extends DialogFragment {
     private static final String TAG = DialogRateMe.class.getSimpleName();
-
+    
     private static final String EXTRA_PACKAGE_NAME = "package-name";
     private static final String EXTRA_EMAIL = "email-name";
     private static final String EXTRA_SHOW_SHARE = "show-share-button";
@@ -32,7 +32,12 @@ public class DialogRateMe extends DialogFragment {
     private static final boolean SHOW_SHARE_DEFAULT = true;
     private static final String MARKET_CONSTANT = "market://details?id=";
     private static final String GOOGLE_PLAY_CONSTANT = "http://play.google.com/store/apps/details?id=";
-
+    
+    //Indentify TitleDivider
+    private String RESOURCE_NAME = "titleDivider";
+    private String DEFAULT_TYPE_RESOURCE = "id";
+    private String DEFAULT_PACKAGE = "android";
+    
     private String appPackageName;
     private View mView;
     private View tView;
@@ -119,7 +124,7 @@ public class DialogRateMe extends DialogFragment {
     public void onStart() {
         super.onStart();
         final Resources res = getResources();
-        final int titleDividerId = res.getIdentifier("titleDivider", "id", "android");
+        final int titleDividerId = res.getIdentifier(RESOURCE_NAME,DEFAULT_TYPE_RESOURCE , DEFAULT_PACKAGE);
         final View titleDivider = getDialog().findViewById(titleDividerId);
         if (titleDivider != null) {
             titleDivider.setBackgroundColor(getArguments().getInt(EXTRA_LINE_DIVIDER));
