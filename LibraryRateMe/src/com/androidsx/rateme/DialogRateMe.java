@@ -123,8 +123,7 @@ public class DialogRateMe extends DialogFragment {
     @Override
     public void onStart() {
         super.onStart();
-        final Resources res = getResources();
-        final int titleDividerId = res.getIdentifier(RESOURCE_NAME,DEFAULT_TYPE_RESOURCE , DEFAULT_PACKAGE);
+        final int titleDividerId = getResources().getIdentifier(RESOURCE_NAME,DEFAULT_TYPE_RESOURCE , DEFAULT_PACKAGE);
         final View titleDivider = getDialog().findViewById(titleDividerId);
         if (titleDivider != null) {
             titleDivider.setBackgroundColor(getArguments().getInt(EXTRA_LINE_DIVIDER));
