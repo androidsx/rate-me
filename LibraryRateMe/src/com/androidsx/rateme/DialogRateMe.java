@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
@@ -20,17 +21,23 @@ import com.androidsx.libraryrateme.R;
 
 public class DialogRateMe extends DialogFragment {
     private static final String TAG = DialogRateMe.class.getSimpleName();
-
+    
     private static final String EXTRA_PACKAGE_NAME = "package-name";
     private static final String EXTRA_EMAIL = "email-name";
     private static final String EXTRA_SHOW_SHARE = "show-share-button";
     private static final String EXTRA_GO_TO_MAIL = "show-go-to-mail";
     private static final String EXTRA_COLOR_TITLE = "show-color-title";
     private static final String EXTRA_COLOR_DIALOG = "show-color-dialog";
+    private static final String EXTRA_LINE_DIVIDER = "show-divider-dialog";
     private static final boolean SHOW_SHARE_DEFAULT = true;
     private static final String MARKET_CONSTANT = "market://details?id=";
     private static final String GOOGLE_PLAY_CONSTANT = "http://play.google.com/store/apps/details?id=";
-
+    
+    //Indentify TitleDivider
+    private String RESOURCE_NAME = "titleDivider";
+    private String DEFAULT_TYPE_RESOURCE = "id";
+    private String DEFAULT_PACKAGE = "android";
+    
     private String appPackageName;
     private View mView;
     private View tView;
@@ -47,7 +54,7 @@ public class DialogRateMe extends DialogFragment {
      * @param showShareButton configures whether the dialog will show a share button in the top bar
      */
     public static DialogRateMe newInstance(String packageName, String email, boolean showShareButton, boolean goToMail,
-            int titleColor, int dialogColor) {
+            int titleColor, int dialogColor, int lineDivider) {
         DialogRateMe dialogo = new DialogRateMe();
         Bundle args = new Bundle();
         args.putString(EXTRA_PACKAGE_NAME, packageName);
@@ -56,6 +63,7 @@ public class DialogRateMe extends DialogFragment {
         args.putBoolean(EXTRA_GO_TO_MAIL, goToMail);
         args.putInt(EXTRA_COLOR_TITLE, titleColor);
         args.putInt(EXTRA_COLOR_DIALOG, dialogColor);
+        args.putInt(EXTRA_LINE_DIVIDER, lineDivider);
         dialogo.setArguments(args);
         return dialogo;
     }
@@ -64,8 +72,8 @@ public class DialogRateMe extends DialogFragment {
      * @see #newInstance(String, String, boolean)
      */
     public static DialogRateMe newInstance(String packageName, String email, boolean goToMail, int titleColor,
-            int dialogColor) {
-        return newInstance(packageName, email, SHOW_SHARE_DEFAULT, goToMail, titleColor, dialogColor);
+            int dialogColor,int lineDivider) {
+        return newInstance(packageName, email, SHOW_SHARE_DEFAULT, goToMail, titleColor, dialogColor, lineDivider);
     }
 
     @Override
@@ -110,6 +118,16 @@ public class DialogRateMe extends DialogFragment {
         });
 
         return builder.setView(mView).setCustomTitle(tView).setCancelable(false).create();
+    }
+    
+    @Override
+    public void onStart() {
+        super.onStart();
+        final int titleDividerId = getResources().getIdentifier(RESOURCE_NAME,DEFAULT_TYPE_RESOURCE , DEFAULT_PACKAGE);
+        final View titleDivider = getDialog().findViewById(titleDividerId);
+        if (titleDivider != null) {
+            titleDivider.setBackgroundColor(getArguments().getInt(EXTRA_LINE_DIVIDER));
+        }
     }
 
     private void initializeUiFields() {
