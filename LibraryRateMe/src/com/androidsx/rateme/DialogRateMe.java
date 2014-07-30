@@ -21,15 +21,7 @@ import com.androidsx.libraryrateme.R;
 
 public class DialogRateMe extends DialogFragment {
     private static final String TAG = DialogRateMe.class.getSimpleName();
-    
-    private static final String EXTRA_PACKAGE_NAME = "package-name";
-    private static final String EXTRA_EMAIL = "email-name";
-    private static final String EXTRA_SHOW_SHARE = "show-share-button";
-    private static final String EXTRA_GO_TO_MAIL = "show-go-to-mail";
-    private static final String EXTRA_COLOR_TITLE = "show-color-title";
-    private static final String EXTRA_COLOR_DIALOG = "show-color-dialog";
-    private static final String EXTRA_LINE_DIVIDER = "show-divider-dialog";
-    private static final boolean SHOW_SHARE_DEFAULT = true;
+
     private static final String MARKET_CONSTANT = "market://details?id=";
     private static final String GOOGLE_PLAY_CONSTANT = "http://play.google.com/store/apps/details?id=";
     
@@ -49,36 +41,59 @@ public class DialogRateMe extends DialogFragment {
     private Button noThanks;
     private Button share;
     private boolean goToMail;
+    private String email;
+    private boolean showShareButton;
+    private int titleColor;
+    private int dialogColor;
+    private int lineDividerColor;
 
     /**
-     * @param showShareButton configures whether the dialog will show a share button in the top bar
+     * Public empty constructor
      */
-    public static DialogRateMe newInstance(String packageName, String email, boolean showShareButton, boolean goToMail,
-            int titleColor, int dialogColor, int lineDivider) {
-        DialogRateMe dialogo = new DialogRateMe();
-        Bundle args = new Bundle();
-        args.putString(EXTRA_PACKAGE_NAME, packageName);
-        args.putString(EXTRA_EMAIL, email);
-        args.putBoolean(EXTRA_SHOW_SHARE, showShareButton);
-        args.putBoolean(EXTRA_GO_TO_MAIL, goToMail);
-        args.putInt(EXTRA_COLOR_TITLE, titleColor);
-        args.putInt(EXTRA_COLOR_DIALOG, dialogColor);
-        args.putInt(EXTRA_LINE_DIVIDER, lineDivider);
-        dialogo.setArguments(args);
-        return dialogo;
+    public DialogRateMe() {
+        
     }
-
+    
     /**
-     * @see #newInstance(String, String, boolean)
+     * Set the package name to rate
      */
-    public static DialogRateMe newInstance(String packageName, String email, boolean goToMail, int titleColor,
-            int dialogColor,int lineDivider) {
-        return newInstance(packageName, email, SHOW_SHARE_DEFAULT, goToMail, titleColor, dialogColor, lineDivider);
+    public DialogRateMe setPackageName(String packageName) {
+        this.appPackageName = packageName;
+        return this;
+    }
+    
+    public DialogRateMe setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+    
+    public DialogRateMe setShowShareButton(boolean showShareButton) {
+        this.showShareButton = showShareButton;
+        return this;
+    }
+    
+    public DialogRateMe setGoToMail(boolean goToMail) {
+        this.goToMail = goToMail;
+        return this;
+    }
+    
+    public DialogRateMe setTitleColor(int titleColor) {
+        this.titleColor = titleColor;
+        return this;
+    }
+    
+    public DialogRateMe setDialogColor(int dialogColor) {
+        this.dialogColor = dialogColor;
+        return this;
+    }
+    
+    public DialogRateMe setLineDividerColor(int lineDividerColor) {
+        this.lineDividerColor = lineDividerColor;
+        return this;
     }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        appPackageName = getArguments().getString(EXTRA_PACKAGE_NAME);
         initializeUiFields();
         Log.d(TAG, "initialize correctly all the components");
 
@@ -108,7 +123,7 @@ public class DialogRateMe extends DialogFragment {
 
             }
         });
-        share.setVisibility(getArguments().getBoolean(EXTRA_SHOW_SHARE) ? View.VISIBLE : View.GONE);
+        share.setVisibility(showShareButton ? View.VISIBLE : View.GONE);
         share.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,17 +141,17 @@ public class DialogRateMe extends DialogFragment {
         final int titleDividerId = getResources().getIdentifier(RESOURCE_NAME,DEFAULT_TYPE_RESOURCE , DEFAULT_PACKAGE);
         final View titleDivider = getDialog().findViewById(titleDividerId);
         if (titleDivider != null) {
-            titleDivider.setBackgroundColor(getArguments().getInt(EXTRA_LINE_DIVIDER));
+            titleDivider.setBackgroundColor(lineDividerColor);
         }
     }
 
     private void initializeUiFields() {
         mView = getActivity().getLayoutInflater().inflate(R.layout.library, null);
-        mView.setBackgroundColor(getArguments().getInt(EXTRA_COLOR_DIALOG));
+        mView.setBackgroundColor(dialogColor);
         tView = getActivity().getLayoutInflater().inflate(R.layout.title, null);
-        tView.setBackgroundColor(getArguments().getInt(EXTRA_COLOR_TITLE));
+        tView.setBackgroundColor(titleColor);
         confirDialogView = getActivity().getLayoutInflater().inflate(R.layout.confirmationtitledialog, null);
-        confirDialogView.setBackgroundColor(getArguments().getInt(EXTRA_COLOR_TITLE));
+        confirDialogView.setBackgroundColor(titleColor);
         close = (Button) tView.findViewById(R.id.buttonClose);
         share = (Button) tView.findViewById(R.id.buttonShare);
         rateMe = (Button) mView.findViewById(R.id.buttonRateMe);
@@ -160,7 +175,6 @@ public class DialogRateMe extends DialogFragment {
         noThanks.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToMail = getArguments().getBoolean(EXTRA_GO_TO_MAIL);
                 if (goToMail) {
                     confirmGoToMailDialog(getArguments()).show();
                     Log.d(TAG, "got to Mail for explain what is the problem");
@@ -180,7 +194,6 @@ public class DialogRateMe extends DialogFragment {
     }
 
     private void goToMail() {
-        final String email = getArguments().getString(EXTRA_EMAIL);
         final String subject = getResources().getString(R.string.subject_email);
 
         Intent intent = new Intent(Intent.ACTION_SEND);
