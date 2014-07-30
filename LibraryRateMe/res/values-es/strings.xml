@@ -11,7 +11,7 @@
     <string name="no_thanks">Gracias por Valorarme</string>
     <string name="yes">SI</string>
     <string name="no">NO</string>
-    <string name="message_confirm_dialog">¿Quieres decirnos porque no te ha gustado ?</string>
+    <string name="message_confirm_dialog">¿Quieres decirnos porque no te ha gustado?</string>
     <string name="subject_email">Explicanos que es lo que no te ha gustado</string>
 
 </resources>
