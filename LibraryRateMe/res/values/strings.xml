@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
-    <string name="app_name">LibraryRateMe</string>
+    <string name="app_name">Rate Me library</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="rateme">Rate Me</string>
+    <string name="rateme">Rate our app in the Play Store</string>
     <string name="message">How would you rate our app?</string>
-    <string name="title">Rate You Experience</string>
-    <string name="title_activity_dialog">Dialog</string>
+    <string name="title">Rate your experience</string>
+    <string name="title_activity_dialog">Rate Me</string>
     <string name="no_thanks">Thanks for the rating!</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="message_confirm_dialog">Explains the reasons why you rated the app with less than 4 ?</string>
-    <string name="subject_email">Explain your reasons</string>
-    
+    <string name="message_confirm_dialog">Would you mind sharing your feedback?</string>
+    <string name="subject_email">Feedback for your app</string>
 </resources>
