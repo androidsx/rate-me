@@ -3,9 +3,9 @@ package com.androidsx.rateme;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
@@ -15,7 +15,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.androidsx.libraryrateme.R;
 
@@ -43,23 +45,19 @@ public class DialogRateMe extends DialogFragment {
     private boolean goToMail;
     private String email;
     private boolean showShareButton;
-    private int titleColor;
-    private int dialogColor;
-    private int lineDividerColor;
-
+    private int titleColor = Color.WHITE;
+    private int titleBackgroundColor = Color.BLACK;
+    private int dialogColor = Color.WHITE;
+    private int lineDividerColor = Color.GRAY;
+    private int textColor = Color.WHITE;
+    private int logoResId = R.drawable.icono;
+    private int rateButtonBackgroundColor = Color.BLACK;
+    private int rateButtonTextColor = Color.WHITE;
     /**
      * Public empty constructor
      */
-    public DialogRateMe() {
-        
-    }
-    
-    /**
-     * Set the package name to rate
-     */
-    public DialogRateMe setPackageName(String packageName) {
-        this.appPackageName = packageName;
-        return this;
+    public DialogRateMe(Context ctx) {
+        appPackageName = ctx.getApplicationContext().getPackageName();
     }
     
     public DialogRateMe setEmail(String email) {
@@ -82,6 +80,11 @@ public class DialogRateMe extends DialogFragment {
         return this;
     }
     
+    public DialogRateMe setTitleBackgroundColor(int titleBackgroundColor) {
+        this.titleBackgroundColor = titleBackgroundColor;
+        return this;
+    }
+    
     public DialogRateMe setDialogColor(int dialogColor) {
         this.dialogColor = dialogColor;
         return this;
@@ -89,6 +92,26 @@ public class DialogRateMe extends DialogFragment {
     
     public DialogRateMe setLineDividerColor(int lineDividerColor) {
         this.lineDividerColor = lineDividerColor;
+        return this;
+    }
+    
+    public DialogRateMe setLogoResourceId(int logoResId) {
+        this.logoResId = logoResId;
+        return this;
+    }
+    
+    public DialogRateMe setTextColor(int textColor) {
+        this.textColor = textColor;
+        return this;
+    }
+    
+    public DialogRateMe setRateButtonBackgroundColor(int rateButtonBackgroundColor) {
+        this.rateButtonBackgroundColor = rateButtonBackgroundColor;
+        return this;
+    }
+    
+    public DialogRateMe setRateButtonTextColor(int rateButtonTextColor) {
+        this.rateButtonTextColor = rateButtonTextColor;
         return this;
     }
 
@@ -146,20 +169,30 @@ public class DialogRateMe extends DialogFragment {
     }
 
     private void initializeUiFields() {
+        //Main Dialog
         mView = getActivity().getLayoutInflater().inflate(R.layout.library, null);
-        mView.setBackgroundColor(dialogColor);
         tView = getActivity().getLayoutInflater().inflate(R.layout.title, null);
-        tView.setBackgroundColor(titleColor);
-        confirDialogView = getActivity().getLayoutInflater().inflate(R.layout.confirmationtitledialog, null);
-        confirDialogView.setBackgroundColor(titleColor);
         close = (Button) tView.findViewById(R.id.buttonClose);
         share = (Button) tView.findViewById(R.id.buttonShare);
         rateMe = (Button) mView.findViewById(R.id.buttonRateMe);
         noThanks = (Button) mView.findViewById(R.id.buttonThanks);
         ratingBar = (RatingBar) mView.findViewById(R.id.ratingBar);
         stars = (LayerDrawable) ratingBar.getProgressDrawable();
+        mView.setBackgroundColor(dialogColor);
+        tView.setBackgroundColor(titleBackgroundColor);
+        ((TextView) tView.findViewById(R.id.title)).setTextColor(titleColor);
+        ((ImageView) mView.findViewById(R.id.picture)).setImageResource(logoResId);
+        ((TextView) mView.findViewById(R.id.phraseCenter)).setTextColor(textColor);
+        rateMe.setBackgroundColor(rateButtonBackgroundColor);
+        rateMe.setTextColor(rateButtonTextColor);
+        noThanks.setBackgroundColor(rateButtonBackgroundColor);
+        noThanks.setTextColor(rateButtonTextColor);
         
-
+        //Confirmation Dialog
+        confirDialogView = getActivity().getLayoutInflater().inflate(R.layout.confirmationtitledialog, null);
+        confirDialogView.setBackgroundColor(dialogColor);
+        ((TextView) confirDialogView.findViewById(R.id.confirmDialogTitle)).setTextColor(textColor);
+        ((ImageView) confirDialogView.findViewById(R.id.iconConfirmDialog)).setImageResource(logoResId);
     }
 
     private void configureButtons() {
