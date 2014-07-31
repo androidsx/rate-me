@@ -32,7 +32,7 @@ public class DialogRateMe extends DialogFragment {
     private String DEFAULT_TYPE_RESOURCE = "id";
     private String DEFAULT_PACKAGE = "android";
     
-    private String appPackageName;
+    //Views
     private View mView;
     private View tView;
     private View confirDialogView;
@@ -42,78 +42,36 @@ public class DialogRateMe extends DialogFragment {
     private Button rateMe;
     private Button noThanks;
     private Button share;
-    private boolean goToMail;
-    private String email;
-    private boolean showShareButton;
-    private int titleColor = Color.WHITE;
-    private int titleBackgroundColor = Color.BLACK;
-    private int dialogColor = Color.WHITE;
-    private int lineDividerColor = Color.GRAY;
-    private int textColor = Color.WHITE;
-    private int logoResId = R.drawable.icono;
-    private int rateButtonBackgroundColor = Color.BLACK;
-    private int rateButtonTextColor = Color.WHITE;
-    /**
-     * Public empty constructor
-     */
-    public DialogRateMe(Context ctx) {
-        appPackageName = ctx.getApplicationContext().getPackageName();
-    }
     
-    public DialogRateMe setEmail(String email) {
-        this.email = email;
-        return this;
+    //configuration
+    private final String appPackageName;
+    private final boolean goToMail;
+    private final String email;
+    private final boolean showShareButton;
+    private final int titleColor;
+    private final int titleBackgroundColor;
+    private final int dialogColor;
+    private final int lineDividerColor;
+    private final int textColor;
+    private final int logoResId;
+    private final int rateButtonBackgroundColor;
+    private final int rateButtonTextColor;
+
+    private DialogRateMe(Builder builder) {
+        this.appPackageName = builder.appPackageName;
+        this.goToMail = builder.goToMail;
+        this.email = builder.email;
+        this.showShareButton = builder.showShareButton;
+        this.titleColor = builder.titleColor;
+        this.titleBackgroundColor = builder.titleBackgroundColor;
+        this.dialogColor = builder.dialogColor;
+        this.lineDividerColor = builder.lineDividerColor;
+        this.textColor = builder.textColor;
+        this.logoResId = builder.logoResId;
+        this.rateButtonBackgroundColor = builder.rateButtonBackgroundColor;
+        this.rateButtonTextColor = builder.rateButtonTextColor;
     }
-    
-    public DialogRateMe setShowShareButton(boolean showShareButton) {
-        this.showShareButton = showShareButton;
-        return this;
-    }
-    
-    public DialogRateMe setGoToMail(boolean goToMail) {
-        this.goToMail = goToMail;
-        return this;
-    }
-    
-    public DialogRateMe setTitleColor(int titleColor) {
-        this.titleColor = titleColor;
-        return this;
-    }
-    
-    public DialogRateMe setTitleBackgroundColor(int titleBackgroundColor) {
-        this.titleBackgroundColor = titleBackgroundColor;
-        return this;
-    }
-    
-    public DialogRateMe setDialogColor(int dialogColor) {
-        this.dialogColor = dialogColor;
-        return this;
-    }
-    
-    public DialogRateMe setLineDividerColor(int lineDividerColor) {
-        this.lineDividerColor = lineDividerColor;
-        return this;
-    }
-    
-    public DialogRateMe setLogoResourceId(int logoResId) {
-        this.logoResId = logoResId;
-        return this;
-    }
-    
-    public DialogRateMe setTextColor(int textColor) {
-        this.textColor = textColor;
-        return this;
-    }
-    
-    public DialogRateMe setRateButtonBackgroundColor(int rateButtonBackgroundColor) {
-        this.rateButtonBackgroundColor = rateButtonBackgroundColor;
-        return this;
-    }
-    
-    public DialogRateMe setRateButtonTextColor(int rateButtonTextColor) {
-        this.rateButtonTextColor = rateButtonTextColor;
-        return this;
-    }
+
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -267,6 +225,85 @@ public class DialogRateMe extends DialogFragment {
         }
         shareApp.setType("text/plain");
         return shareApp;
+    }
+    
+    public static class Builder {
+        private String appPackageName;
+        private boolean goToMail;
+        private String email;
+        private boolean showShareButton;
+        private int titleColor = Color.WHITE;
+        private int titleBackgroundColor = Color.BLACK;
+        private int dialogColor = Color.WHITE;
+        private int lineDividerColor = Color.GRAY;
+        private int textColor = Color.WHITE;
+        private int logoResId = R.drawable.icono;
+        private int rateButtonBackgroundColor = Color.BLACK;
+        private int rateButtonTextColor = Color.WHITE;
+        
+        public Builder(Context ctx) {
+            this.appPackageName = ctx.getApplicationContext().getPackageName();
+        }
+        
+        public Builder setEmail(String email) {
+            this.email = email;
+            return this;
+        }
+        
+        public Builder setShowShareButton(boolean showShareButton) {
+            this.showShareButton = showShareButton;
+            return this;
+        }
+        
+        public Builder setGoToMail(boolean goToMail) {
+            this.goToMail = goToMail;
+            return this;
+        }
+        
+        public Builder setTitleColor(int titleColor) {
+            this.titleColor = titleColor;
+            return this;
+        }
+        
+        public Builder setTitleBackgroundColor(int titleBackgroundColor) {
+            this.titleBackgroundColor = titleBackgroundColor;
+            return this;
+        }
+        
+        public Builder setDialogColor(int dialogColor) {
+            this.dialogColor = dialogColor;
+            return this;
+        }
+        
+        public Builder setLineDividerColor(int lineDividerColor) {
+            this.lineDividerColor = lineDividerColor;
+            return this;
+        }
+        
+        public Builder setLogoResourceId(int logoResId) {
+            this.logoResId = logoResId;
+            return this;
+        }
+        
+        public Builder setTextColor(int textColor) {
+            this.textColor = textColor;
+            return this;
+        }
+        
+        public Builder setRateButtonBackgroundColor(int rateButtonBackgroundColor) {
+            this.rateButtonBackgroundColor = rateButtonBackgroundColor;
+            return this;
+        }
+        
+        public Builder setRateButtonTextColor(int rateButtonTextColor) {
+            this.rateButtonTextColor = rateButtonTextColor;
+            return this;
+        }
+        
+        public DialogRateMe build() {
+            return new DialogRateMe(this);
+        }
+
     }
 
 }

@@ -73,11 +73,12 @@ public class HelloWorldActivity extends Activity {
     }
 
     private void alertMenu() {
-        boolean showShareButton = true;
-        int titleColor = Color.BLACK;
-        int dialogColor = Color.GRAY;
-        DialogFragment dialog = DialogRateMe.newInstance(MY_PACKAGE_NAME, getString(R.string.email_address),
-                showShareButton, titleColor, dialogColor);
-        dialog.show(getFragmentManager(), "dialog");
+        new DialogRateMe.Builder(this)
+        .setEmail(getString(R.string.email_address))
+        .setShowShareButton(true)
+        .setTitleBackgroundColor(Color.BLACK)
+        .setDialogColor(Color.GRAY)
+        .build()
+        .show(getFragmentManager(), "dialog");
     }
 }

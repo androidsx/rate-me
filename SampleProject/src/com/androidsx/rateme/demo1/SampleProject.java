@@ -64,14 +64,15 @@ public class SampleProject extends Activity {
 
     }
 
-    private void AlertMenu() {
-        boolean showShareButton = true;
-        boolean goToMail = false;
-        int titleColor = Color.BLUE;
-        int dialogColor = Color.GRAY;
-        int titleLineDivider = Color.WHITE;
-        DialogFragment dialog = DialogRateMe.newInstance(MY_PACKAGE_NAME, getString(R.string.email_address),
-                showShareButton,goToMail, titleColor, dialogColor,titleLineDivider);
-        dialog.show(getFragmentManager(), "dialog");
+    private void AlertMenu() {        
+        new DialogRateMe.Builder(this)
+        .setEmail(getString(R.string.email_address))
+        .setShowShareButton(true)
+        .setGoToMail(false)
+        .setTitleBackgroundColor(Color.BLACK)
+        .setDialogColor(Color.GRAY)
+        .setLineDividerColor(Color.WHITE)
+        .build()
+        .show(getFragmentManager(), "dialog");
     }
 }
