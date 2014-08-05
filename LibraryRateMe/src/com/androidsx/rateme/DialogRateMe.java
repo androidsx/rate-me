@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -48,7 +49,7 @@ public class DialogRateMe extends DialogFragment {
     private final boolean goToMail;
     private final String email;
     private final boolean showShareButton;
-    private final int titleColor;
+    private final int titleTextColor;
     private final int titleBackgroundColor;
     private final int dialogColor;
     private final int lineDividerColor;
@@ -56,13 +57,14 @@ public class DialogRateMe extends DialogFragment {
     private final int logoResId;
     private final int rateButtonBackgroundColor;
     private final int rateButtonTextColor;
+    private final int rateButtonPressedBackgroundColor;
 
     private DialogRateMe(Builder builder) {
         this.appPackageName = builder.appPackageName;
         this.goToMail = builder.goToMail;
         this.email = builder.email;
         this.showShareButton = builder.showShareButton;
-        this.titleColor = builder.titleColor;
+        this.titleTextColor = builder.titleTextColor;
         this.titleBackgroundColor = builder.titleBackgroundColor;
         this.dialogColor = builder.dialogColor;
         this.lineDividerColor = builder.lineDividerColor;
@@ -70,6 +72,7 @@ public class DialogRateMe extends DialogFragment {
         this.logoResId = builder.logoResId;
         this.rateButtonBackgroundColor = builder.rateButtonBackgroundColor;
         this.rateButtonTextColor = builder.rateButtonTextColor;
+        this.rateButtonPressedBackgroundColor = builder.rateButtonPressedBackgroundColor;
     }
 
 
@@ -138,12 +141,14 @@ public class DialogRateMe extends DialogFragment {
         stars = (LayerDrawable) ratingBar.getProgressDrawable();
         mView.setBackgroundColor(dialogColor);
         tView.setBackgroundColor(titleBackgroundColor);
-        ((TextView) tView.findViewById(R.id.title)).setTextColor(titleColor);
+        ((TextView) tView.findViewById(R.id.title)).setTextColor(titleTextColor);
         ((ImageView) mView.findViewById(R.id.picture)).setImageResource(logoResId);
         ((TextView) mView.findViewById(R.id.phraseCenter)).setTextColor(textColor);
-        rateMe.setBackgroundColor(rateButtonBackgroundColor);
+        GradientDrawable rateMeButtonItemSelected = (GradientDrawable) getResources().getDrawable(R.drawable.itemselected);
+        GradientDrawable rateMeButton = (GradientDrawable) getResources().getDrawable(R.drawable.customshape);
         rateMe.setTextColor(rateButtonTextColor);
-        noThanks.setBackgroundColor(rateButtonBackgroundColor);
+        rateMeButtonItemSelected.setColor(rateButtonPressedBackgroundColor);
+        rateMeButton.setColor(rateButtonBackgroundColor);
         noThanks.setTextColor(rateButtonTextColor);
         
         //Confirmation Dialog
@@ -232,7 +237,7 @@ public class DialogRateMe extends DialogFragment {
         private boolean goToMail;
         private String email;
         private boolean showShareButton;
-        private int titleColor = Color.WHITE;
+        private int titleTextColor = Color.WHITE;
         private int titleBackgroundColor = Color.BLACK;
         private int dialogColor = Color.WHITE;
         private int lineDividerColor = Color.GRAY;
@@ -240,6 +245,7 @@ public class DialogRateMe extends DialogFragment {
         private int logoResId = R.drawable.icono;
         private int rateButtonBackgroundColor = Color.BLACK;
         private int rateButtonTextColor = Color.WHITE;
+        private int rateButtonPressedBackgroundColor = Color.GRAY;
         
         public Builder(Context ctx) {
             this.appPackageName = ctx.getApplicationContext().getPackageName();
@@ -260,8 +266,8 @@ public class DialogRateMe extends DialogFragment {
             return this;
         }
         
-        public Builder setTitleColor(int titleColor) {
-            this.titleColor = titleColor;
+        public Builder setTitleColor(int titleTextColor) {
+            this.titleTextColor = titleTextColor;
             return this;
         }
         
@@ -299,6 +305,12 @@ public class DialogRateMe extends DialogFragment {
             this.rateButtonTextColor = rateButtonTextColor;
             return this;
         }
+        
+        public Builder setRateButtonPressedBackgroundColor(
+				int rateButtonPressedBackgroundColor) {
+			this.rateButtonPressedBackgroundColor = rateButtonPressedBackgroundColor;
+			return this;
+		}
         
         public DialogRateMe build() {
             return new DialogRateMe(this);
