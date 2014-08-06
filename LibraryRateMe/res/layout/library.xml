@@ -62,12 +62,13 @@
         <Button 
             android:id="@+id/buttonRateMe"
             style="@style/buttonRate"
-            android:text="@string/rateme"
+            android:text="@string/rateme"></Button>
         
         <Button 
             android:id="@+id/buttonThanks"
+            
             style="@style/buttonRate"
-            android:text="@string/no_thanks"
+            android:text="@string/no_thanks"></Button>
         
     </LinearLayout>
 
