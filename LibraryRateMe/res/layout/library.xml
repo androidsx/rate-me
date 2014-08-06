@@ -61,19 +61,15 @@
 		
         <Button 
             android:id="@+id/buttonRateMe"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            style="@style/buttonRate"
             android:text="@string/rateme"
-            android:textColor="@color/white"
             android:visibility="gone"
             android:background="@drawable/selector"/>
         
         <Button 
             android:id="@+id/buttonThanks"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            style="@style/buttonRate"
             android:text="@string/no_thanks"
-            android:textColor="@color/white"
             android:visibility="gone"
             android:background="@drawable/selector"/>
         
