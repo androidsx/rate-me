@@ -3,10 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle"   >
 
-    <solid
-        android:color="@android:color/primary_text_light" >
-    </solid>
-
     <padding
         android:left="5dp"
         android:top="5dp"
