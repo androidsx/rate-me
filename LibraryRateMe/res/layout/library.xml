@@ -63,15 +63,11 @@
             android:id="@+id/buttonRateMe"
             style="@style/buttonRate"
             android:text="@string/rateme"
-            android:visibility="gone"
-            android:background="@drawable/selector"/>
         
         <Button 
             android:id="@+id/buttonThanks"
             style="@style/buttonRate"
             android:text="@string/no_thanks"
-            android:visibility="gone"
-            android:background="@drawable/selector"/>
         
     </LinearLayout>
 

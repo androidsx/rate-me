@@ -27,6 +27,8 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:textSize">20sp</item>
+        <item name="android:visibility">gone</item>
+        <item name="android:background">@drawable/selector</item>
         <item name="android:textStyle">bold</item>
     </style>
 
