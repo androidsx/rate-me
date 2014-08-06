@@ -1,7 +1,6 @@
 package com.androidsx.rateme.demo1;
 
 import android.app.Activity;
-import android.app.DialogFragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,7 +15,6 @@ import com.androidsx.rateme.RateMeDialogTimer;
 
 public class SampleProject extends Activity {
     private Button buttonRateMe;
-    private static final String MY_PACKAGE_NAME = "com.androidsx.smileys";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,9 +67,11 @@ public class SampleProject extends Activity {
         .setEmail(getString(R.string.email_address))
         .setShowShareButton(true)
         .setGoToMail(false)
-        .setTitleBackgroundColor(Color.BLACK)
+        .setTitleBackgroundColor(Color.GRAY)
         .setDialogColor(Color.GRAY)
         .setLineDividerColor(Color.WHITE)
+        .setRateButtonBackgroundColor(Color.YELLOW)
+        .setRateButtonPressedBackgroundColor(Color.CYAN)
         .build()
         .show(getFragmentManager(), "dialog");
     }

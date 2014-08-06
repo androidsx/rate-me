@@ -131,6 +131,10 @@ public class DialogRateMe extends DialogFragment {
 
     private void initializeUiFields() {
         //Main Dialog
+    	GradientDrawable rateMeButton = (GradientDrawable) getResources().getDrawable(R.drawable.customshape);
+        GradientDrawable rateMeButtonItemSelected = (GradientDrawable) getResources().getDrawable(R.drawable.itemselected);
+        rateMeButton.setColor(rateButtonBackgroundColor);
+        rateMeButtonItemSelected.setColor(rateButtonPressedBackgroundColor);
         mView = getActivity().getLayoutInflater().inflate(R.layout.library, null);
         tView = getActivity().getLayoutInflater().inflate(R.layout.title, null);
         close = (Button) tView.findViewById(R.id.buttonClose);
@@ -144,11 +148,7 @@ public class DialogRateMe extends DialogFragment {
         ((TextView) tView.findViewById(R.id.title)).setTextColor(titleTextColor);
         ((ImageView) mView.findViewById(R.id.picture)).setImageResource(logoResId);
         ((TextView) mView.findViewById(R.id.phraseCenter)).setTextColor(textColor);
-        GradientDrawable rateMeButtonItemSelected = (GradientDrawable) getResources().getDrawable(R.drawable.itemselected);
-        GradientDrawable rateMeButton = (GradientDrawable) getResources().getDrawable(R.drawable.customshape);
         rateMe.setTextColor(rateButtonTextColor);
-        rateMeButtonItemSelected.setColor(rateButtonPressedBackgroundColor);
-        rateMeButton.setColor(rateButtonBackgroundColor);
         noThanks.setTextColor(rateButtonTextColor);
         
         //Confirmation Dialog
