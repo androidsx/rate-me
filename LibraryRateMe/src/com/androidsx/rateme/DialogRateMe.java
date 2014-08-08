@@ -58,6 +58,8 @@ public class DialogRateMe extends DialogFragment {
     private final int rateButtonBackgroundColor;
     private final int rateButtonTextColor;
     private final int rateButtonPressedBackgroundColor;
+    private final int defaultStarsSelected;
+    private final boolean showOKButtonByDefault;
 
     private DialogRateMe(Builder builder) {
         this.appPackageName = builder.appPackageName;
@@ -73,6 +75,8 @@ public class DialogRateMe extends DialogFragment {
         this.rateButtonBackgroundColor = builder.rateButtonBackgroundColor;
         this.rateButtonTextColor = builder.rateButtonTextColor;
         this.rateButtonPressedBackgroundColor = builder.rateButtonPressedBackgroundColor;
+        this.defaultStarsSelected = builder.defaultStarsSelected;
+        this.showOKButtonByDefault = builder.showOKButtonByDefault;
     }
 
 
@@ -84,6 +88,9 @@ public class DialogRateMe extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         stars.getDrawable(2).setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP);
+        if(showOKButtonByDefault) {
+            ratingBar.setRating((float) defaultStarsSelected);            
+        }
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
 
             @Override
@@ -97,6 +104,7 @@ public class DialogRateMe extends DialogFragment {
                 }
             }
         });
+        ratingBar.setRating((float) defaultStarsSelected);
         configureButtons();
         close.setOnClickListener(new OnClickListener() {
             @Override
@@ -246,6 +254,8 @@ public class DialogRateMe extends DialogFragment {
         private int rateButtonBackgroundColor = Color.BLACK;
         private int rateButtonTextColor = Color.WHITE;
         private int rateButtonPressedBackgroundColor = Color.GRAY;
+        private int defaultStarsSelected = 0;
+        private boolean showOKButtonByDefault = false;
         
         public Builder(Context ctx) {
             this.appPackageName = ctx.getApplicationContext().getPackageName();
@@ -311,6 +321,18 @@ public class DialogRateMe extends DialogFragment {
 			this.rateButtonPressedBackgroundColor = rateButtonPressedBackgroundColor;
 			return this;
 		}
+        
+        public Builder setDefaultStartSelected(
+                int numStars) {
+            this.defaultStarsSelected = numStars;
+            return this;
+        }
+        
+        public Builder setShowOKButtonByDefault(
+                boolean visible) {
+            this.showOKButtonByDefault = visible;
+            return this;
+        }
         
         public DialogRateMe build() {
             return new DialogRateMe(this);
