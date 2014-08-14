@@ -28,7 +28,7 @@ public class DialogRateMe extends DialogFragment {
     private static final String MARKET_CONSTANT = "market://details?id=";
     private static final String GOOGLE_PLAY_CONSTANT = "http://play.google.com/store/apps/details?id=";
     
-    //Indentify TitleDivider
+    //Identify TitleDivider
     private String RESOURCE_NAME = "titleDivider";
     private String DEFAULT_TYPE_RESOURCE = "id";
     private String DEFAULT_PACKAGE = "android";
