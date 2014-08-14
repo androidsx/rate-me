@@ -62,8 +62,8 @@ public class DialogRateMe extends DialogFragment {
     private final int rateButtonTextColor;
     private final int rateButtonPressedBackgroundColor;
     private final int defaultStarsSelected;
-    private final int iconColor;
-    private final boolean changeIconTitleColor;
+    private final int iconCloseColor;
+    private final int iconShareColor;
     private final boolean showOKButtonByDefault;
 
     private DialogRateMe(Builder builder) {
@@ -81,8 +81,8 @@ public class DialogRateMe extends DialogFragment {
         this.rateButtonTextColor = builder.rateButtonTextColor;
         this.rateButtonPressedBackgroundColor = builder.rateButtonPressedBackgroundColor;
         this.defaultStarsSelected = builder.defaultStarsSelected;
-        this.iconColor = builder.iconColor;
-        this.changeIconTitleColor = builder.changeIconColor;
+        this.iconCloseColor = builder.iconCloseColor;
+        this.iconShareColor = builder.iconShareColor;
         this.showOKButtonByDefault = builder.showOKButtonByDefault;
     }
 
@@ -94,9 +94,7 @@ public class DialogRateMe extends DialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         
-        if(changeIconTitleColor){
-        	setIconsColor(iconColor);
-        }
+        setIconsTitleColor(iconCloseColor,iconShareColor);
 
         stars.getDrawable(2).setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP);
         if(showOKButtonByDefault) {
@@ -251,12 +249,13 @@ public class DialogRateMe extends DialogFragment {
         return shareApp;
     }
     
-    private void setIconsColor(int buttonColor){
+    private void setIconsTitleColor(int colorClose, int colorShare){
     	Drawable iconClose = getResources().getDrawable( R.drawable.ic_action_cancel );
     	Drawable iconShare = getResources().getDrawable( R.drawable.ic_action_share );
-    	ColorFilter filter = new LightingColorFilter( buttonColor, buttonColor);
-    	iconClose.setColorFilter(filter);
-    	iconShare.setColorFilter(filter);
+    	ColorFilter filterIconClose = new LightingColorFilter( colorClose, colorClose);
+    	ColorFilter filterIconShare = new LightingColorFilter( colorShare, colorShare);
+    	iconClose.setColorFilter(filterIconClose);
+    	iconShare.setColorFilter(filterIconShare);
     }
     
     public static class Builder {
@@ -274,8 +273,8 @@ public class DialogRateMe extends DialogFragment {
         private int rateButtonTextColor = Color.WHITE;
         private int rateButtonPressedBackgroundColor = Color.GRAY;
         private int defaultStarsSelected = 0;
-        private int iconColor = Color.WHITE;
-        private boolean changeIconColor;
+        private int iconCloseColor = Color.WHITE;
+        private int iconShareColor = Color.WHITE;
         private boolean showOKButtonByDefault = false;
         
         public Builder(Context ctx) {
@@ -349,15 +348,15 @@ public class DialogRateMe extends DialogFragment {
             return this;
         }
         
-        public Builder setIconColor(int iconColor) {
-			this.iconColor = iconColor;
+        public Builder setIconCloseColorFilter(int iconColor) {
+			this.iconCloseColor = iconColor;
 			return this;
 		}
         
-        public Builder setChangeIconColor (boolean changeIconColor) {
-        	this.changeIconColor = changeIconColor;
-        	return this;
-        }
+        public Builder setIconShareColorFilter(int iconColor) {
+			this.iconShareColor = iconColor;
+			return this;
+		}
         
         public Builder setShowOKButtonByDefault(
                 boolean visible) {
