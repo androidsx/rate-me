@@ -30,13 +30,13 @@ public class DialogRateMe extends DialogFragment {
 
     private static final String MARKET_CONSTANT = "market://details?id=";
     private static final String GOOGLE_PLAY_CONSTANT = "http://play.google.com/store/apps/details?id=";
-    
-    //Identify TitleDivider
+
+    // Identify TitleDivider
     private String RESOURCE_NAME = "titleDivider";
     private String DEFAULT_TYPE_RESOURCE = "id";
     private String DEFAULT_PACKAGE = "android";
-    
-    //Views
+
+    // Views
     private View mView;
     private View tView;
     private View confirDialogView;
@@ -46,8 +46,8 @@ public class DialogRateMe extends DialogFragment {
     private Button rateMe;
     private Button noThanks;
     private Button share;
-    
-    //configuration
+
+    // configuration
     private final String appPackageName;
     private final boolean goToMail;
     private final String email;
@@ -86,19 +86,18 @@ public class DialogRateMe extends DialogFragment {
         this.showOKButtonByDefault = builder.showOKButtonByDefault;
     }
 
-
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         initializeUiFields();
         Log.d(TAG, "initialize correctly all the components");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        
-        setIconsTitleColor(iconCloseColor,iconShareColor);
+
+        setIconsTitleColor(iconCloseColor, iconShareColor);
 
         stars.getDrawable(2).setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP);
-        if(showOKButtonByDefault) {
-            ratingBar.setRating((float) defaultStarsSelected);            
+        if (showOKButtonByDefault) {
+            ratingBar.setRating((float) defaultStarsSelected);
         }
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
 
@@ -135,11 +134,11 @@ public class DialogRateMe extends DialogFragment {
 
         return builder.setView(mView).setCustomTitle(tView).setCancelable(false).create();
     }
-    
+
     @Override
     public void onStart() {
         super.onStart();
-        final int titleDividerId = getResources().getIdentifier(RESOURCE_NAME,DEFAULT_TYPE_RESOURCE , DEFAULT_PACKAGE);
+        final int titleDividerId = getResources().getIdentifier(RESOURCE_NAME, DEFAULT_TYPE_RESOURCE, DEFAULT_PACKAGE);
         final View titleDivider = getDialog().findViewById(titleDividerId);
         if (titleDivider != null) {
             titleDivider.setBackgroundColor(lineDividerColor);
@@ -147,9 +146,10 @@ public class DialogRateMe extends DialogFragment {
     }
 
     private void initializeUiFields() {
-        //Main Dialog
-    	GradientDrawable rateMeButton = (GradientDrawable) getResources().getDrawable(R.drawable.customshape);
-        GradientDrawable rateMeButtonItemSelected = (GradientDrawable) getResources().getDrawable(R.drawable.itemselected);
+        // Main Dialog
+        GradientDrawable rateMeButton = (GradientDrawable) getResources().getDrawable(R.drawable.customshape);
+        GradientDrawable rateMeButtonItemSelected = (GradientDrawable) getResources().getDrawable(
+                R.drawable.itemselected);
         rateMeButton.setColor(rateButtonBackgroundColor);
         rateMeButtonItemSelected.setColor(rateButtonPressedBackgroundColor);
         mView = getActivity().getLayoutInflater().inflate(R.layout.library, null);
@@ -167,8 +167,8 @@ public class DialogRateMe extends DialogFragment {
         ((TextView) mView.findViewById(R.id.phraseCenter)).setTextColor(textColor);
         rateMe.setTextColor(rateButtonTextColor);
         noThanks.setTextColor(rateButtonTextColor);
-        
-        //Confirmation Dialog
+
+        // Confirmation Dialog
         confirDialogView = getActivity().getLayoutInflater().inflate(R.layout.confirmationtitledialog, null);
         confirDialogView.setBackgroundColor(dialogColor);
         ((TextView) confirDialogView.findViewById(R.id.confirmDialogTitle)).setTextColor(textColor);
@@ -191,7 +191,7 @@ public class DialogRateMe extends DialogFragment {
                 if (goToMail) {
                     confirmGoToMailDialog(getArguments()).show();
                     Log.d(TAG, "got to Mail for explain what is the problem");
-                }else{
+                } else {
                     dismiss();
                 }
             }
@@ -248,16 +248,16 @@ public class DialogRateMe extends DialogFragment {
         shareApp.setType("text/plain");
         return shareApp;
     }
-    
-    private void setIconsTitleColor(int colorClose, int colorShare){
-    	Drawable iconClose = getResources().getDrawable( R.drawable.ic_action_cancel );
-    	Drawable iconShare = getResources().getDrawable( R.drawable.ic_action_share );
-    	ColorFilter filterIconClose = new LightingColorFilter( colorClose, colorClose);
-    	ColorFilter filterIconShare = new LightingColorFilter( colorShare, colorShare);
-    	iconClose.setColorFilter(filterIconClose);
-    	iconShare.setColorFilter(filterIconShare);
+
+    private void setIconsTitleColor(int colorClose, int colorShare) {
+        Drawable iconClose = getResources().getDrawable(R.drawable.ic_action_cancel);
+        Drawable iconShare = getResources().getDrawable(R.drawable.ic_action_share);
+        ColorFilter filterIconClose = new LightingColorFilter(colorClose, colorClose);
+        ColorFilter filterIconShare = new LightingColorFilter(colorShare, colorShare);
+        iconClose.setColorFilter(filterIconClose);
+        iconShare.setColorFilter(filterIconShare);
     }
-    
+
     public static class Builder {
         private String appPackageName;
         private boolean goToMail;
@@ -276,94 +276,91 @@ public class DialogRateMe extends DialogFragment {
         private int iconCloseColor = Color.WHITE;
         private int iconShareColor = Color.WHITE;
         private boolean showOKButtonByDefault = false;
-        
+
         public Builder(Context ctx) {
             this.appPackageName = ctx.getApplicationContext().getPackageName();
         }
-        
+
         public Builder setEmail(String email) {
             this.email = email;
             return this;
         }
-        
+
         public Builder setShowShareButton(boolean showShareButton) {
             this.showShareButton = showShareButton;
             return this;
         }
-        
+
         public Builder setGoToMail(boolean goToMail) {
             this.goToMail = goToMail;
             return this;
         }
-        
+
         public Builder setTitleColor(int titleTextColor) {
             this.titleTextColor = titleTextColor;
             return this;
         }
-        
+
         public Builder setTitleBackgroundColor(int titleBackgroundColor) {
             this.titleBackgroundColor = titleBackgroundColor;
             return this;
         }
-        
+
         public Builder setDialogColor(int dialogColor) {
             this.dialogColor = dialogColor;
             return this;
         }
-        
+
         public Builder setLineDividerColor(int lineDividerColor) {
             this.lineDividerColor = lineDividerColor;
             return this;
         }
-        
+
         public Builder setLogoResourceId(int logoResId) {
             this.logoResId = logoResId;
             return this;
         }
-        
+
         public Builder setTextColor(int textColor) {
             this.textColor = textColor;
             return this;
         }
-        
+
         public Builder setRateButtonBackgroundColor(int rateButtonBackgroundColor) {
             this.rateButtonBackgroundColor = rateButtonBackgroundColor;
             return this;
         }
-        
+
         public Builder setRateButtonTextColor(int rateButtonTextColor) {
             this.rateButtonTextColor = rateButtonTextColor;
             return this;
         }
-        
-        public Builder setRateButtonPressedBackgroundColor(
-				int rateButtonPressedBackgroundColor) {
-			this.rateButtonPressedBackgroundColor = rateButtonPressedBackgroundColor;
-			return this;
-		}
-        
-        public Builder setDefaultStartSelected(
-                int numStars) {
+
+        public Builder setRateButtonPressedBackgroundColor(int rateButtonPressedBackgroundColor) {
+            this.rateButtonPressedBackgroundColor = rateButtonPressedBackgroundColor;
+            return this;
+        }
+
+        public Builder setDefaultStartSelected(int numStars) {
             this.defaultStarsSelected = numStars;
             return this;
         }
-        
+
         public Builder setIconCloseColorFilter(int iconColor) {
-			this.iconCloseColor = iconColor;
-			return this;
-		}
-        
+            this.iconCloseColor = iconColor;
+            return this;
+        }
+
         public Builder setIconShareColorFilter(int iconColor) {
-			this.iconShareColor = iconColor;
-			return this;
-		}
-        
-        public Builder setShowOKButtonByDefault(
-                boolean visible) {
+            this.iconShareColor = iconColor;
+            return this;
+        }
+
+        public Builder setShowOKButtonByDefault(boolean visible) {
             this.showOKButtonByDefault = visible;
             return this;
         }
-        
+
         public DialogRateMe build() {
             return new DialogRateMe(this);
         }
