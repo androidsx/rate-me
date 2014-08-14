@@ -276,7 +276,7 @@ public class DialogRateMe extends DialogFragment {
             return this;
         }
         
-        public Builder setTitleColor(int titleTextColor) {
+        public Builder setTitleTextColor(int titleTextColor) {
             this.titleTextColor = titleTextColor;
             return this;
         }
