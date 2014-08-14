@@ -7,7 +7,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.LightingColorFilter;
 import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
@@ -59,6 +62,7 @@ public class DialogRateMe extends DialogFragment {
     private final int rateButtonTextColor;
     private final int rateButtonPressedBackgroundColor;
     private final int defaultStarsSelected;
+    private final boolean iconInBlack;
     private final boolean showOKButtonByDefault;
 
     private DialogRateMe(Builder builder) {
@@ -76,6 +80,7 @@ public class DialogRateMe extends DialogFragment {
         this.rateButtonTextColor = builder.rateButtonTextColor;
         this.rateButtonPressedBackgroundColor = builder.rateButtonPressedBackgroundColor;
         this.defaultStarsSelected = builder.defaultStarsSelected;
+        this.iconInBlack = builder.iconInBlack;
         this.showOKButtonByDefault = builder.showOKButtonByDefault;
     }
 
@@ -86,6 +91,9 @@ public class DialogRateMe extends DialogFragment {
         Log.d(TAG, "initialize correctly all the components");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        if(iconInBlack){
+        	setIconsInBlack();
+        }
 
         stars.getDrawable(2).setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP);
         if(showOKButtonByDefault) {
@@ -240,6 +248,14 @@ public class DialogRateMe extends DialogFragment {
         return shareApp;
     }
     
+    private void setIconsInBlack(){
+    	Drawable iconClose = getResources().getDrawable( R.drawable.ic_action_cancel );
+    	Drawable iconShare = getResources().getDrawable( R.drawable.ic_action_share );
+    	ColorFilter filter = new LightingColorFilter( Color.BLACK, Color.BLACK);
+    	iconClose.setColorFilter(filter);
+    	iconShare.setColorFilter(filter);
+    }
+    
     public static class Builder {
         private String appPackageName;
         private boolean goToMail;
@@ -255,6 +271,7 @@ public class DialogRateMe extends DialogFragment {
         private int rateButtonTextColor = Color.WHITE;
         private int rateButtonPressedBackgroundColor = Color.GRAY;
         private int defaultStarsSelected = 0;
+        private boolean iconInBlack;
         private boolean showOKButtonByDefault = false;
         
         public Builder(Context ctx) {
@@ -326,6 +343,11 @@ public class DialogRateMe extends DialogFragment {
                 int numStars) {
             this.defaultStarsSelected = numStars;
             return this;
+        }
+        
+        public Builder setIConInBlack (boolean iconInBlack) {
+        	this.iconInBlack = iconInBlack;
+        	return this;
         }
         
         public Builder setShowOKButtonByDefault(
