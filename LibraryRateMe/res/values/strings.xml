@@ -5,8 +5,6 @@
     <string name="title">Rate your experience</string>
     <string name="title_activity_dialog">Rate Me</string>
     <string name="no_thanks">Thanks for the rating!</string>
-    <string name="yes">Yes</string>
-    <string name="no">No</string>
     <string name="message_confirm_dialog">Would you mind sharing your feedback?</string>
     <string name="subject_email">Feedback for your app</string>
 </resources>

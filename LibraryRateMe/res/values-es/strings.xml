@@ -5,8 +5,6 @@
     <string name="title">Valora tu experiencia</string>
     <string name="title_activity_dialog">Puntúanos</string>
     <string name="no_thanks">Gracias por la puntuación!</string>
-    <string name="yes">Sí</string>
-    <string name="no">No</string>
     <string name="message_confirm_dialog">Alguna sugerencia de mejora para nosotros?</string>
     <string name="subject_email">Sugerencias para tu app</string>
 </resources>
