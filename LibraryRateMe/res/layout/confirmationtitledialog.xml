@@ -21,7 +21,6 @@
         android:id="@id/iconConfirmDialog"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_alignParentRight="true"
-        android:src="@drawable/icono" />
+        android:layout_alignParentRight="true" />
 
 </RelativeLayout>

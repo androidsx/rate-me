@@ -268,7 +268,7 @@ public class DialogRateMe extends DialogFragment {
         private int dialogColor = Color.WHITE;
         private int lineDividerColor = Color.GRAY;
         private int textColor = Color.WHITE;
-        private int logoResId = R.drawable.icono;
+        private int logoResId = R.drawable.ic_launcher;
         private int rateButtonBackgroundColor = Color.BLACK;
         private int rateButtonTextColor = Color.WHITE;
         private int rateButtonPressedBackgroundColor = Color.GRAY;
