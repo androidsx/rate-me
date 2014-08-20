@@ -27,3 +27,12 @@ keystore-android
 
 # images-Readme
 images-readme/
+
+# Android studio
+.idea
+*.iml
+local.properties
+build/
+
+# Gradle
+.gradle
