@@ -293,9 +293,6 @@ public class DialogRateMe extends DialogFragment {
 
         public Builder setGoToMail(boolean goToMail) {
             this.goToMail = goToMail;
-            if(goToMail && email == null){
-                throw new IllegalArgumentException("You Have to configure the email for the dialog goToMail");
-            }
             return this;
         }
         
@@ -365,6 +362,9 @@ public class DialogRateMe extends DialogFragment {
         }
 
         public DialogRateMe build() {
+            if(goToMail && email == null){
+                throw new IllegalArgumentException("You Have to configure the email for the dialog goToMail");
+            }
             return new DialogRateMe(this);
         }
 
