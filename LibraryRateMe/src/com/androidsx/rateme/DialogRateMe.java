@@ -223,7 +223,7 @@ public class DialogRateMe extends DialogFragment {
     private Dialog confirmGoToMailDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        builder.setCustomTitle(confirDialogView).setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+        builder.setCustomTitle(confirDialogView).setCancelable(false).setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 goToMail();
                 dismiss();
