@@ -223,17 +223,16 @@ public class DialogRateMe extends DialogFragment {
     private Dialog confirmGoToMailDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        builder.setCustomTitle(confirDialogView).setCancelable(false)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        goToMail();
-                        dismiss();
-                    }
-                }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dismiss();
-                    }
-                });
+        builder.setCustomTitle(confirDialogView).setCancelable(false).setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                goToMail();
+                dismiss();
+            }
+        }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dismiss();
+            }
+        });
         return builder.create();
 
     }
@@ -294,9 +293,12 @@ public class DialogRateMe extends DialogFragment {
 
         public Builder setGoToMail(boolean goToMail) {
             this.goToMail = goToMail;
+            if(goToMail && email == null){
+                throw new IllegalArgumentException("You Have to configure the email for the dialog goToMail");
+            }
             return this;
         }
-
+        
         public Builder setTitleTextColor(int titleTextColor) {
             this.titleTextColor = titleTextColor;
             return this;
@@ -363,9 +365,6 @@ public class DialogRateMe extends DialogFragment {
         }
 
         public DialogRateMe build() {
-            if (goToMail && email == null) {
-                throw new IllegalArgumentException("You Have to configure the email for the dialog goToMail");
-            }
             return new DialogRateMe(this);
         }
 
