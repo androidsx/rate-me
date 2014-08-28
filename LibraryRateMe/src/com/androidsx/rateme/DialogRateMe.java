@@ -234,7 +234,14 @@ public class DialogRateMe extends DialogFragment {
                         dismiss();
                     }
                 });
-        return builder.create();
+        
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        Button cancel = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);  
+        cancel.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector));
+        Button yes = dialog.getButton(DialogInterface.BUTTON_POSITIVE);  
+        yes.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector));
+        return dialog;
 
     }
 
