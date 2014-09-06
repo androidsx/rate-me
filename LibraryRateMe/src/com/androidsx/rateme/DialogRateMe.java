@@ -120,7 +120,8 @@ public class DialogRateMe extends DialogFragment {
                 dismiss();
                 RateMeDialogTimer.clearSharedPreferences(getActivity());
                 Log.d(TAG, "clear preferences");
-
+                
+                RateMeDialogTimer.setOptOut(getActivity(), true);
             }
         });
         share.setVisibility(showShareButton ? View.VISIBLE : View.GONE);
@@ -194,6 +195,8 @@ public class DialogRateMe extends DialogFragment {
                 } else {
                     dismiss();
                 }
+                
+                RateMeDialogTimer.setOptOut(getActivity(), true);
             }
         });
     }
