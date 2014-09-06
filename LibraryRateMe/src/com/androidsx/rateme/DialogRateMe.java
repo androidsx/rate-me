@@ -190,7 +190,7 @@ public class DialogRateMe extends DialogFragment {
             @Override
             public void onClick(View v) {
                 if (goToMail) {
-                    confirmGoToMailDialog(getArguments()).show();
+                    confirmGoToMailDialog(getArguments());
                     Log.d(TAG, "got to Mail for explain what is the problem");
                 } else {
                     dismiss();
@@ -237,7 +237,14 @@ public class DialogRateMe extends DialogFragment {
                         dismiss();
                     }
                 });
-        return builder.create();
+        
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        Button cancel = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);  
+        cancel.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector));
+        Button yes = dialog.getButton(DialogInterface.BUTTON_POSITIVE);  
+        yes.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector));
+        return dialog;
 
     }
 
