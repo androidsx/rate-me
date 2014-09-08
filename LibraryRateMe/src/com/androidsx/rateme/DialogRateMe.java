@@ -187,6 +187,7 @@ public class DialogRateMe extends DialogFragment {
                 Log.d(TAG, "go to Google Play Store for Rate-Me");
                 RateMeDialogTimer.setOptOut(getActivity(), true);
                 onActionListener.onActionPerformed(RateMeAction.HIGH_RATING_WENT_TO_GOOGLE_PLAY, ratingBar.getRating());
+                dismiss();
             }
         });
 
