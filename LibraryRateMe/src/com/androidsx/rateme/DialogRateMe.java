@@ -112,7 +112,13 @@ public class DialogRateMe extends DialogFragment {
                 }
             }
         });
-        ratingBar.setRating((float) defaultStarsSelected);
+
+        // If any star is pre-selected, force the display of the buttons
+        if (defaultStarsSelected != 0) {
+            ratingBar.setRating((float) defaultStarsSelected);
+            rateMe.setVisibility(View.VISIBLE);
+            noThanks.setVisibility(View.GONE);
+        }
         configureButtons();
         close.setOnClickListener(new OnClickListener() {
             @Override
