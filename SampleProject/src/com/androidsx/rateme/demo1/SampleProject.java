@@ -66,7 +66,7 @@ public class SampleProject extends Activity {
         new DialogRateMe.Builder(this)
         .setEmail(getString(R.string.email_address))
         .setShowShareButton(true)
-        .setGoToMail(false)
+        .setGoToMail(true)
         .setTitleBackgroundColor(Color.GRAY)
         .setDialogColor(Color.GRAY)
         .setLineDividerColor(Color.WHITE)

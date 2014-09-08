@@ -122,6 +122,7 @@ public class DialogRateMe extends DialogFragment {
                 dismiss();
                 RateMeDialogTimer.clearSharedPreferences(getActivity());
                 Log.d(TAG, "clear preferences");
+                RateMeDialogTimer.setOptOut(getActivity(), true);
                 onActionListener.onActionPerformed(RateMeAction.DISMISSED_WITH_CROSS, ratingBar.getRating());
             }
         });
@@ -193,12 +194,13 @@ public class DialogRateMe extends DialogFragment {
             @Override
             public void onClick(View v) {
                 if (goToMail) {
-                    confirmGoToMailDialog(getArguments()).show();
+                    confirmGoToMailDialog(getArguments());
                     Log.d(TAG, "got to Mail for explain what is the problem");
                 } else {
                     dismiss();
                     onActionListener.onActionPerformed(RateMeAction.LOW_RATING, ratingBar.getRating());
                 }
+                RateMeDialogTimer.setOptOut(getActivity(), true);
             }
         });
     }
@@ -241,8 +243,14 @@ public class DialogRateMe extends DialogFragment {
                         dismiss();
                     }
                 });
-        return builder.create();
 
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        Button cancel = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);  
+        cancel.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector));
+        Button yes = dialog.getButton(DialogInterface.BUTTON_POSITIVE);  
+        yes.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector));
+        return dialog;
     }
 
     private Intent shareApp(String appPackageName) {
