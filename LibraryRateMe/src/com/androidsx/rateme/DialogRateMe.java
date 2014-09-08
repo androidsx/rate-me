@@ -65,6 +65,7 @@ public class DialogRateMe extends DialogFragment {
     private final int iconCloseColor;
     private final int iconShareColor;
     private final boolean showOKButtonByDefault;
+    private final RateMeOnActionListener onActionListener;
 
     private DialogRateMe(Builder builder) {
         this.appPackageName = builder.appPackageName;
@@ -84,6 +85,7 @@ public class DialogRateMe extends DialogFragment {
         this.iconCloseColor = builder.iconCloseColor;
         this.iconShareColor = builder.iconShareColor;
         this.showOKButtonByDefault = builder.showOKButtonByDefault;
+        this.onActionListener = builder.onActionListener;
     }
 
     @Override
@@ -120,7 +122,7 @@ public class DialogRateMe extends DialogFragment {
                 dismiss();
                 RateMeDialogTimer.clearSharedPreferences(getActivity());
                 Log.d(TAG, "clear preferences");
-
+                onActionListener.onActionPerformed(RateMeAction.DISMISSED_WITH_CROSS, ratingBar.getRating());
             }
         });
         share.setVisibility(showShareButton ? View.VISIBLE : View.GONE);
@@ -129,6 +131,7 @@ public class DialogRateMe extends DialogFragment {
             public void onClick(View v) {
                 startActivity(shareApp(appPackageName));
                 Log.d(TAG, "share App");
+                onActionListener.onActionPerformed(RateMeAction.SHARED_APP, ratingBar.getRating());
             }
         });
 
@@ -182,6 +185,7 @@ public class DialogRateMe extends DialogFragment {
                 rateApp();
                 Log.d(TAG, "go to Google Play Store for Rate-Me");
                 RateMeDialogTimer.setOptOut(getActivity(), true);
+                onActionListener.onActionPerformed(RateMeAction.HIGH_RATING_WENT_TO_GOOGLE_PLAY, ratingBar.getRating());
             }
         });
 
@@ -193,6 +197,7 @@ public class DialogRateMe extends DialogFragment {
                     Log.d(TAG, "got to Mail for explain what is the problem");
                 } else {
                     dismiss();
+                    onActionListener.onActionPerformed(RateMeAction.LOW_RATING, ratingBar.getRating());
                 }
             }
         });
@@ -227,10 +232,12 @@ public class DialogRateMe extends DialogFragment {
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         goToMail();
+                        onActionListener.onActionPerformed(RateMeAction.LOW_RATING_GAVE_FEEDBACK, ratingBar.getRating());
                         dismiss();
                     }
                 }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        onActionListener.onActionPerformed(RateMeAction.LOW_RATING_REFUSED_TO_GIVE_FEEDBACK, ratingBar.getRating());
                         dismiss();
                     }
                 });
@@ -259,6 +266,42 @@ public class DialogRateMe extends DialogFragment {
         iconShare.setColorFilter(filterIconShare);
     }
 
+    /**
+     * Listener for the final action that the user takes.
+     */
+    public interface RateMeOnActionListener {
+        void onActionPerformed(RateMeAction action, float rating);
+    }
+
+    /**
+     * Different actions that the user can take.
+     */
+    public enum RateMeAction {
+        /** We took them to Google Play. Typically after a good rating. */
+        HIGH_RATING_WENT_TO_GOOGLE_PLAY,
+
+        /** After a negative rating, he accepted to give us some feedback. */
+        LOW_RATING_GAVE_FEEDBACK,
+
+        /** After a negative rating, he didn't give us some feedback. */
+        LOW_RATING_REFUSED_TO_GIVE_FEEDBACK,
+
+        /**
+         * Gave a negative rating. Providing feedback is not configured, so the user gave the rating
+         * and left.
+         */
+        LOW_RATING,
+
+        /**
+         * Dismissed the dialog with the cross in the upper-right corner. Note that we do NOT track
+         * if the user dismisses the dialog through the back button.
+         */
+        DISMISSED_WITH_CROSS,
+
+        /** Shared the link to the app through the button in the top-right corner. */
+        SHARED_APP;
+    }
+
     public static class Builder {
         private String appPackageName;
         private boolean goToMail;
@@ -277,6 +320,16 @@ public class DialogRateMe extends DialogFragment {
         private int iconCloseColor = Color.WHITE;
         private int iconShareColor = Color.WHITE;
         private boolean showOKButtonByDefault = false;
+
+        /**
+         * Default implementation for the action listener, that just logs every action.
+         */
+        private RateMeOnActionListener onActionListener = new RateMeOnActionListener() {
+            @Override
+            public void onActionPerformed(RateMeAction action, float rating) {
+                Log.d(TAG, "Action " + action + " (rating: " + rating + ")");
+            }
+        };
 
         public Builder(Context ctx) {
             this.appPackageName = ctx.getApplicationContext().getPackageName();
@@ -359,6 +412,19 @@ public class DialogRateMe extends DialogFragment {
 
         public Builder setShowOKButtonByDefault(boolean visible) {
             this.showOKButtonByDefault = visible;
+            return this;
+        }
+
+        /**
+         * Sets a listener that will get notified after the action executes the final action in the
+         * dialog, such as rating the app or deciding to leave some feedback. Typically you want to
+         * track this to have some usage statistics.
+         *
+         * @param onActionListener listener for the final user action
+         * @return this builder
+         */
+        public Builder setOnActionListener(RateMeOnActionListener onActionListener) {
+            this.onActionListener = onActionListener;
             return this;
         }
 
