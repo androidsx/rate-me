@@ -96,7 +96,7 @@ public class DialogRateMe extends DialogFragment {
         setIconsTitleColor(iconCloseColor, iconShareColor);
 
         stars.getDrawable(2).setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP);
-        if (showOKButtonByDefault) {
+        if (!showOKButtonByDefault) {
             ratingBar.setRating((float) defaultStarsSelected);
         }
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
@@ -286,7 +286,7 @@ public class DialogRateMe extends DialogFragment {
         private int defaultStarsSelected = 0;
         private int iconCloseColor = Color.WHITE;
         private int iconShareColor = Color.WHITE;
-        private boolean showOKButtonByDefault = false;
+        private boolean showOKButtonByDefault = true;
 
         public Builder(Context ctx) {
             this.appPackageName = ctx.getApplicationContext().getPackageName();
