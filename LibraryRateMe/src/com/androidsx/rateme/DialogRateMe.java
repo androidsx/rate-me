@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
@@ -39,6 +38,7 @@ public class DialogRateMe extends DialogFragment {
     // Views
     private View mView;
     private View tView;
+    private View confirDialogTitleView;
     private View confirDialogView;
     private Button close;
     private RatingBar ratingBar;
@@ -46,6 +46,8 @@ public class DialogRateMe extends DialogFragment {
     private Button rateMe;
     private Button noThanks;
     private Button share;
+    private Button cancel;
+    private Button yes;
 
     // configuration
     private final String appPackageName;
@@ -173,10 +175,17 @@ public class DialogRateMe extends DialogFragment {
         noThanks.setTextColor(rateButtonTextColor);
 
         // Confirmation Dialog
-        confirDialogView = getActivity().getLayoutInflater().inflate(R.layout.confirmationtitledialog, null);
+        confirDialogTitleView = getActivity().getLayoutInflater().inflate(R.layout.confirmationtitledialog, null);
+        confirDialogView = getActivity().getLayoutInflater().inflate(R.layout.gotomail_dialog_body, null);
+        confirDialogTitleView.setBackgroundColor(dialogColor);
         confirDialogView.setBackgroundColor(dialogColor);
-        ((TextView) confirDialogView.findViewById(R.id.confirmDialogTitle)).setTextColor(textColor);
-        ((ImageView) confirDialogView.findViewById(R.id.iconConfirmDialog)).setImageResource(logoResId);
+        cancel = (Button) confirDialogView.findViewById(R.id.buttonCancel);
+        yes = (Button) confirDialogView.findViewById(R.id.buttonYes);
+        ((TextView) confirDialogTitleView.findViewById(R.id.confirmDialogTitle)).setTextColor(textColor);
+        ((ImageView) confirDialogTitleView.findViewById(R.id.iconConfirmDialog)).setImageResource(logoResId);
+        cancel.setTextColor(rateButtonTextColor);
+        yes.setTextColor(rateButtonTextColor);
+        
     }
 
     private void configureButtons() {
@@ -195,7 +204,7 @@ public class DialogRateMe extends DialogFragment {
             @Override
             public void onClick(View v) {
                 if (goToMail) {
-                    confirmGoToMailDialog(getArguments());
+                    confirmGoToMailDialog(getArguments()).show();
                     Log.d(TAG, "got to Mail for explain what is the problem");
                 } else {
                     dismiss();
@@ -230,28 +239,24 @@ public class DialogRateMe extends DialogFragment {
 
     private Dialog confirmGoToMailDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
-        builder.setCustomTitle(confirDialogView).setCancelable(false)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        goToMail();
-                        onActionListener.onActionPerformed(RateMeAction.LOW_RATING_GAVE_FEEDBACK, ratingBar.getRating());
-                        dismiss();
-                    }
-                }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        onActionListener.onActionPerformed(RateMeAction.LOW_RATING_REFUSED_TO_GIVE_FEEDBACK, ratingBar.getRating());
-                        dismiss();
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
-        Button cancel = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);  
-        cancel.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector));
-        Button yes = dialog.getButton(DialogInterface.BUTTON_POSITIVE);  
-        yes.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector));
-        return dialog;
+        
+        cancel.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onActionListener.onActionPerformed(RateMeAction.LOW_RATING_REFUSED_TO_GIVE_FEEDBACK, ratingBar.getRating());
+            }
+        });
+        
+        yes.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToMail();
+                onActionListener.onActionPerformed(RateMeAction.LOW_RATING_GAVE_FEEDBACK, ratingBar.getRating());
+            }
+        });
+        
+        return builder.setCustomTitle(confirDialogTitleView).setView(confirDialogView).create();
+        
     }
 
     private Intent shareApp(String appPackageName) {
