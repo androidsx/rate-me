@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.LightingColorFilter;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
@@ -39,7 +40,7 @@ public class DialogRateMe extends DialogFragment {
     // Views
     private View mView;
     private View tView;
-    private View confirDialogView;
+    private View confirDialogTitleView;
     private Button close;
     private RatingBar ratingBar;
     private LayerDrawable stars;
@@ -173,10 +174,10 @@ public class DialogRateMe extends DialogFragment {
         noThanks.setTextColor(rateButtonTextColor);
 
         // Confirmation Dialog
-        confirDialogView = getActivity().getLayoutInflater().inflate(R.layout.confirmationtitledialog, null);
-        confirDialogView.setBackgroundColor(dialogColor);
-        ((TextView) confirDialogView.findViewById(R.id.confirmDialogTitle)).setTextColor(textColor);
-        ((ImageView) confirDialogView.findViewById(R.id.iconConfirmDialog)).setImageResource(logoResId);
+        confirDialogTitleView = getActivity().getLayoutInflater().inflate(R.layout.confirmationtitledialog, null);
+        confirDialogTitleView.setBackgroundColor(dialogColor);
+        ((TextView) confirDialogTitleView.findViewById(R.id.confirmDialogTitle)).setTextColor(textColor);
+        ((ImageView) confirDialogTitleView.findViewById(R.id.iconConfirmDialog)).setImageResource(logoResId);
     }
 
     private void configureButtons() {
@@ -195,7 +196,7 @@ public class DialogRateMe extends DialogFragment {
             @Override
             public void onClick(View v) {
                 if (goToMail) {
-                    confirmGoToMailDialog(getArguments());
+                    confirmGoToMailDialog(getArguments()).show();
                     Log.d(TAG, "got to Mail for explain what is the problem");
                 } else {
                     dismiss();
@@ -231,7 +232,7 @@ public class DialogRateMe extends DialogFragment {
     private Dialog confirmGoToMailDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        builder.setCustomTitle(confirDialogView).setCancelable(false)
+        builder.setCustomTitle(confirDialogTitleView).setCancelable(false)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         goToMail();
@@ -240,16 +241,24 @@ public class DialogRateMe extends DialogFragment {
                     }
                 }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        onActionListener.onActionPerformed(RateMeAction.LOW_RATING_REFUSED_TO_GIVE_FEEDBACK, ratingBar.getRating());
+                        onActionListener.onActionPerformed(RateMeAction.LOW_RATING_REFUSED_TO_GIVE_FEEDBACK,
+                                ratingBar.getRating());
                         dismiss();
                     }
                 });
 
         AlertDialog dialog = builder.create();
         dialog.show();
-        Button cancel = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);  
+        Button cancel = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+        cancel.setTextColor(textColor);
+        float size = getResources().getDimension(R.dimen.text_size) / 2;
+        cancel.setTextSize(size);
+        cancel.setTypeface(null, Typeface.BOLD);
         cancel.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector));
-        Button yes = dialog.getButton(DialogInterface.BUTTON_POSITIVE);  
+        Button yes = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        yes.setTextColor(textColor);
+        yes.setTextSize(size);
+        yes.setTypeface(null, Typeface.BOLD);
         yes.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector));
         return dialog;
     }
@@ -296,14 +305,13 @@ public class DialogRateMe extends DialogFragment {
         LOW_RATING_REFUSED_TO_GIVE_FEEDBACK,
 
         /**
-         * Gave a negative rating. Providing feedback is not configured, so the user gave the rating
-         * and left.
+         * Gave a negative rating. Providing feedback is not configured, so the user gave the rating and left.
          */
         LOW_RATING,
 
         /**
-         * Dismissed the dialog with the cross in the upper-right corner. Note that we do NOT track
-         * if the user dismisses the dialog through the back button.
+         * Dismissed the dialog with the cross in the upper-right corner. Note that we do NOT track if the user
+         * dismisses the dialog through the back button.
          */
         DISMISSED_WITH_CROSS,
 
@@ -425,10 +433,10 @@ public class DialogRateMe extends DialogFragment {
         }
 
         /**
-         * Sets a listener that will get notified after the action executes the final action in the
-         * dialog, such as rating the app or deciding to leave some feedback. Typically you want to
-         * track this to have some usage statistics.
-         *
+         * Sets a listener that will get notified after the action executes the final action in the dialog, such as
+         * rating the app or deciding to leave some feedback. Typically you want to track this to have some usage
+         * statistics.
+         * 
          * @param onActionListener listener for the final user action
          * @return this builder
          */
