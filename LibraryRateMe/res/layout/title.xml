@@ -1,34 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:padding="10dp"
-    android:layout_height="match_parent" >
-    
+    android:layout_height="match_parent"
+    android:padding="10dp" >
+
     <Button
         android:id="@+id/buttonClose"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-       	android:layout_alignParentRight="true"
+        android:layout_width="@dimen/button_title_size"
+        android:layout_height="@dimen/button_title_size"
+        android:layout_alignParentRight="true"
         android:background="@drawable/ic_action_cancel" />
-    
-    <Button 
+
+    <Button
         android:id="@+id/buttonShare"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-		android:layout_toLeftOf="@id/buttonClose"
-		android:layout_marginRight="10dp"       
-        android:background="@drawable/ic_action_share"/>
+        android:layout_width="@dimen/button_title_size"
+        android:layout_height="@dimen/button_title_size"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@id/buttonClose"
+        android:background="@drawable/ic_action_share" />
 
     <TextView
         android:id="@+id/title"
         style="@style/shadowText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/buttonClose"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="5dp"
-        android:text="@string/title"
-        android:textColor="@android:color/white"
-        android:textSize="20sp" />
+        android:text="@string/title" />
 
 </RelativeLayout>

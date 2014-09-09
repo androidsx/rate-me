@@ -7,15 +7,8 @@
     <TextView
         android:id="@+id/confirmDialogTitle"
         style="@style/shadowText"
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_toLeftOf="@+id/iconConfirmDialog"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="5dp"
-        android:text="@string/message_confirm_dialog"
-        android:textColor="@android:color/white"
-        android:textSize="15sp" />
+        android:text="@string/message_confirm_dialog" />
 
     <ImageView
         android:id="@id/iconConfirmDialog"

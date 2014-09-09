@@ -5,14 +5,26 @@
         <item name="android:shadowDx">1</item>
         <item name="android:shadowDy">1</item>
         <item name="android:shadowRadius">1</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:textSize">@dimen/text_size</item>
+        <item name="android:layout_alignParentLeft">true</item>
     </style>
-    <style name="buttonRate">
+    <style name="buttonDialog">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:textSize">20sp</item>
-        <item name="android:visibility">gone</item>
+        <item name="android:textSize">@dimen/text_size</item>
         <item name="android:background">@drawable/selector</item>
         <item name="android:textStyle">bold</item>
+    </style>
+    <style name="buttonRateMe" parent="@style/buttonDialog">
+        <item name="android:visibility">gone</item>
+    </style>
+    <style name="buttonGoToMail" parent="@style/buttonDialog">
+        <item name="android:layout_weight">50</item>
+        <item name="android:layout_margin">4dp</item>
     </style>
 
 </resources>
