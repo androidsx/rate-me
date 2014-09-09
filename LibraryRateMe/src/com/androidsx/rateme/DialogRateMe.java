@@ -196,7 +196,7 @@ public class DialogRateMe extends DialogFragment {
             @Override
             public void onClick(View v) {
                 if (goToMail) {
-                    confirmGoToMailDialog(getArguments()).show();
+                    confirmGoToMailDialog(getArguments());
                     Log.d(TAG, "got to Mail for explain what is the problem");
                 } else {
                     dismiss();
