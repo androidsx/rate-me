@@ -6,15 +6,15 @@
     
     <Button
         android:id="@+id/buttonClose"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="@dimen/button_title_dialog_size"
+        android:layout_height="@dimen/button_title_dialog_size"
        	android:layout_alignParentRight="true"
         android:background="@drawable/ic_action_cancel" />
     
     <Button 
         android:id="@+id/buttonShare"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="@dimen/button_title_dialog_size"
+        android:layout_height="@dimen/button_title_dialog_size"
 		android:layout_toLeftOf="@id/buttonClose"
 		android:layout_marginRight="10dp"       
         android:background="@drawable/ic_action_share"/>
@@ -29,6 +29,6 @@
         android:layout_marginLeft="5dp"
         android:text="@string/title"
         android:textColor="@android:color/white"
-        android:textSize="20sp" />
+        android:textSize="@dimen/text_size" />
 
 </RelativeLayout>

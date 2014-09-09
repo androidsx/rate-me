@@ -65,7 +65,6 @@
         
         <Button 
             android:id="@+id/buttonThanks"
-            
             style="@style/buttonRate"
             android:text="@string/no_thanks"></Button>
         
