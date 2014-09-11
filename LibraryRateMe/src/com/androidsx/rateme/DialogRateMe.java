@@ -22,7 +22,6 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.androidsx.libraryrateme.R;
-import com.androidsx.rateme.DialogRateMe.Builder;
 
 public class DialogRateMe extends DialogFragment {
     private static final String TAG = DialogRateMe.class.getSimpleName();
@@ -299,7 +298,7 @@ public class DialogRateMe extends DialogFragment {
         }
 
         public Builder(DialogGoToMail dialogGoToMail) {
-
+            return;
         }
 
         public Builder setEmail(String email) {
