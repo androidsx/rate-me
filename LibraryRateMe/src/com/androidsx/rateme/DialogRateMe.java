@@ -464,10 +464,11 @@ class DialogGoToMail extends DialogFragment {
         confirDialogView = getActivity().getLayoutInflater().inflate(R.layout.gotomail_dialog_body, null);
         confirDialogTitleView.setBackgroundColor(getArguments().getInt(EXTRA_DIALOG_COLOR));
         confirDialogView.setBackgroundColor(getArguments().getInt(EXTRA_DIALOG_COLOR));
+        ((ImageView) confirDialogView.findViewById(R.id.icon)).setImageResource(getArguments().getInt(EXTRA_LOGO));
+        ((TextView) confirDialogTitleView.findViewById(R.id.confirmDialogTitle)).setTextColor(getArguments().getInt(EXTRA_TEXT_COLOR));
+        ((TextView) confirDialogView.findViewById(R.id.phraseMail)).setTextColor(getArguments().getInt(EXTRA_TEXT_COLOR));
         cancel = (Button) confirDialogView.findViewById(R.id.buttonCancel);
         yes = (Button) confirDialogView.findViewById(R.id.buttonYes);
-        ((TextView) confirDialogTitleView.findViewById(R.id.confirmDialogTitle)).setTextColor(getArguments().getInt(EXTRA_TEXT_COLOR));
-        ((ImageView) confirDialogTitleView.findViewById(R.id.iconConfirmDialog)).setImageResource(getArguments().getInt(EXTRA_LOGO));
         cancel.setTextColor(getArguments().getInt(EXTRA_RATE_BUTTON_TEXT_COLOR));
         yes.setTextColor(getArguments().getInt(EXTRA_RATE_BUTTON_TEXT_COLOR));
     }
