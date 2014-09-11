@@ -480,11 +480,13 @@ class DialogGoToMail extends DialogFragment {
         intent.putExtra(Intent.EXTRA_EMAIL, new String[] { getArguments().getString(EXTRA_EMAIL) });
         intent.putExtra(Intent.EXTRA_SUBJECT, subject);
         try {
+            intent.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
             startActivity(Intent.createChooser(intent, ""));
         } catch (android.content.ActivityNotFoundException ex) {
-            
+            startActivity(Intent.createChooser(intent, ""));
         }
     }
+    
     @Override
     public void onStart() {
         super.onStart();
