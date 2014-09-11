@@ -460,7 +460,7 @@ class DialogGoToMail extends DialogFragment {
     }
     
     private void initializeUiFieldsDialogGoToMail(){
-        confirDialogTitleView = getActivity().getLayoutInflater().inflate(R.layout.confirmationtitledialog, null);
+        confirDialogTitleView = getActivity().getLayoutInflater().inflate(R.layout.gotomail_dialog_title, null);
         confirDialogView = getActivity().getLayoutInflater().inflate(R.layout.gotomail_dialog_body, null);
         confirDialogTitleView.setBackgroundColor(getArguments().getInt(EXTRA_DIALOG_COLOR));
         confirDialogView.setBackgroundColor(getArguments().getInt(EXTRA_DIALOG_COLOR));
