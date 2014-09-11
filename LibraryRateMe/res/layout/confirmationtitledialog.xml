@@ -6,14 +6,7 @@
 
     <TextView
         android:id="@+id/confirmDialogTitle"
-        style="@style/shadowText"
-        android:layout_toLeftOf="@+id/iconConfirmDialog"
-        android:text="@string/message_confirm_dialog" />
-
-    <ImageView
-        android:id="@id/iconConfirmDialog"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentRight="true" />
+        style="@style/textStyle"
+        android:text="@string/title" />
 
 </RelativeLayout>

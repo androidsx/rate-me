@@ -13,10 +13,7 @@
 
         <ImageView
             android:id="@+id/picture"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:layout_margin="5dp"
-            android:scaleType="centerInside" />
+            style="@style/iconApp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -26,23 +23,19 @@
 
             <TextView
                 android:id="@+id/phraseCenter"
-                style="@style/shadowText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/message"
-                android:textColor="@android:color/white"
-                android:textSize="18sp" />
+                style="@style/textStyle"
+                android:text="@string/message" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp" >
 
                 <RatingBar
                     android:id="@+id/ratingBar"
                     style="?android:attr/ratingBarStyleIndicator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="15dp"
                     android:isIndicator="false"
                     android:numStars="5"
                     android:rotationX="0.3"
@@ -56,19 +49,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
-		
-        <Button 
+        android:orientation="horizontal" >
+
+        <Button
             android:id="@+id/buttonRateMe"
             style="@style/buttonRateMe"
-            android:text="@string/rateme"></Button>
-        
-        <Button 
+            android:text="@string/rateme" >
+        </Button>
+
+        <Button
             android:id="@+id/buttonThanks"
-            
             style="@style/buttonRateMe"
-            android:text="@string/no_thanks"></Button>
-        
+            android:text="@string/no_thanks" >
+        </Button>
     </LinearLayout>
 
 </LinearLayout>

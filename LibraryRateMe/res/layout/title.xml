@@ -21,7 +21,7 @@
 
     <TextView
         android:id="@+id/title"
-        style="@style/shadowText"
+        style="@style/textStyle"
         android:layout_alignBottom="@+id/buttonClose"
         android:text="@string/title" />
 

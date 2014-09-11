@@ -1,10 +1,6 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="shadowText">
-        <item name="android:shadowColor">#000000</item>
-        <item name="android:shadowDx">1</item>
-        <item name="android:shadowDy">1</item>
-        <item name="android:shadowRadius">1</item>
+    <style name="textStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textStyle">bold</item>
@@ -25,6 +21,12 @@
     <style name="buttonGoToMail" parent="@style/buttonDialog">
         <item name="android:layout_weight">50</item>
         <item name="android:layout_margin">4dp</item>
+    </style>
+    <style name="iconApp">
+        <item name="android:layout_width">65dp</item>
+        <item name="android:layout_height">65dp</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:scaleType">centerInside</item>
     </style>
 
 </resources>

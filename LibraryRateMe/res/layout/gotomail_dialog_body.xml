@@ -2,16 +2,50 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal" >
-    
-    <Button 
+    android:orientation="vertical"
+    android:padding="10dp" >
+
+    <LinearLayout
+        android:id="@+id/LinearMail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/icon"
+            android:paddingBottom="15dp"
+            style="@style/iconApp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/phraseMail"
+                style="@style/textStyle"
+                android:text="@string/message_confirm_dialog" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal" >
+
+        <Button
             android:id="@+id/buttonCancel"
             style="@style/buttonGoToMail"
-            android:text="@android:string/cancel"></Button>
-        
-        <Button 
+            android:text="@android:string/cancel" >
+        </Button>
+
+        <Button
             android:id="@+id/buttonYes"
             style="@style/buttonGoToMail"
-            android:text="@android:string/yes"></Button>
+            android:text="@android:string/yes" >
+        </Button>
+    </LinearLayout>
 
 </LinearLayout>
