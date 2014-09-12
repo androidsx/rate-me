@@ -1,7 +1,6 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <style name="textStyle" parent="@style/linearLayoutWrapContent">
-        <item name="android:textStyle">bold</item>
         <item name="android:layout_marginLeft">5dp</item>
         <item name="android:textSize">@dimen/text_size</item>
         <item name="android:layout_alignParentLeft">true</item>
@@ -11,7 +10,6 @@
     <style name="buttonDialog" parent="@style/linearLayoutMachtParent">
         <item name="android:textSize">@dimen/text_size</item>
         <item name="android:background">@drawable/selector</item>
-        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="buttonRateMe" parent="@style/buttonDialog">
