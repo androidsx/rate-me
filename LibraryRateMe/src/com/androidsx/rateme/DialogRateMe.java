@@ -3,6 +3,7 @@ package com.androidsx.rateme;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -414,6 +415,7 @@ class DialogGoToMail extends DialogFragment {
     private static final String EXTRA_LOGO = "icon";
     private static final String EXTRA_RATE_BUTTON_TEXT_COLOR = "button-text-color";
     private static final String EXTRA_TITLE_DIVIDER = "color-title-divider";
+    
     // Views
     private View confirDialogTitleView;
     private View confirDialogView;
@@ -475,16 +477,25 @@ class DialogGoToMail extends DialogFragment {
     
     private void goToMail() {
         final String subject = getResources().getString(R.string.subject_email);
-
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("plain/text");
-        intent.putExtra(Intent.EXTRA_EMAIL, new String[] { getArguments().getString(EXTRA_EMAIL) });
-        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
         try {
-            intent.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
-            startActivity(Intent.createChooser(intent, ""));
+            Intent sendMailtoGmail = new Intent(Intent.ACTION_SEND);
+            sendMailtoGmail.setType("plain/text");
+            sendMailtoGmail.putExtra(Intent.EXTRA_EMAIL, new String[] { getArguments().getString(EXTRA_EMAIL) });
+            sendMailtoGmail.putExtra(Intent.EXTRA_SUBJECT, subject);
+//            sendMailtoGmail.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
+            sendMailtoGmail.setClassName("com.android.email", "com.android.email.activity.Welcome");
+            if(2+2==4){
+                throw new ActivityNotFoundException("excepcion de prueba"); 
+            }
+            startActivity(Intent.createChooser(sendMailtoGmail, ""));
+            
         } catch (android.content.ActivityNotFoundException ex) {
-            startActivity(Intent.createChooser(intent, ""));
+            Log.w(TAG, "Cannot send email with Gmail, use the generic chooser");
+            Intent sendGeneric = new Intent(Intent.ACTION_SEND);
+            sendGeneric.setType("plain/text");
+            sendGeneric.putExtra(Intent.EXTRA_EMAIL, new String[] { getArguments().getString(EXTRA_EMAIL) });
+            sendGeneric.putExtra(Intent.EXTRA_SUBJECT, subject);
+            startActivity(Intent.createChooser(sendGeneric, ""));
         }
     }
     
