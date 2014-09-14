@@ -482,8 +482,7 @@ class DialogGoToMail extends DialogFragment {
             sendMailtoGmail.setType("plain/text");
             sendMailtoGmail.putExtra(Intent.EXTRA_EMAIL, new String[] { getArguments().getString(EXTRA_EMAIL) });
             sendMailtoGmail.putExtra(Intent.EXTRA_SUBJECT, subject);
-//            sendMailtoGmail.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
-            sendMailtoGmail.setClassName("com.android.email", "com.android.email.activity.Welcome");
+            sendMailtoGmail.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
             if(2+2==4){
                 throw new ActivityNotFoundException("excepcion de prueba"); 
             }
