@@ -429,7 +429,7 @@ class DialogGoToMail extends DialogFragment {
     private Button cancel;
     private Button yes;
     
-    Builder dialogMail = new DialogRateMe.Builder(this);
+    Builder rateMe = new DialogRateMe.Builder(this);
     
     public static DialogGoToMail newInstance (String email, int dialogColor, int textColor,int logoResId, int rateButtonTextColor,int lineDividerColor, float getRatingBar){
         DialogGoToMail dialogo = new DialogGoToMail();
@@ -455,7 +455,7 @@ class DialogGoToMail extends DialogFragment {
         cancel.setOnClickListener(new View.OnClickListener()  {
             public void onClick(View v) {
                 dismiss();
-                dialogMail.getOnActionListener().onActionPerformed(RateMeAction.LOW_RATING_REFUSED_TO_GIVE_FEEDBACK, getArguments().getFloat(EXTRA_RATING_BAR));
+                rateMe.getOnActionListener().onActionPerformed(RateMeAction.LOW_RATING_REFUSED_TO_GIVE_FEEDBACK, getArguments().getFloat(EXTRA_RATING_BAR));
                 Log.d(TAG, "Close dialog Mail");
             }
         });  
@@ -464,7 +464,7 @@ class DialogGoToMail extends DialogFragment {
             @Override
             public void onClick(View v) {
                 goToMail();
-                dialogMail.getOnActionListener().onActionPerformed(RateMeAction.LOW_RATING_GAVE_FEEDBACK, getArguments().getFloat(EXTRA_RATING_BAR));
+                rateMe.getOnActionListener().onActionPerformed(RateMeAction.LOW_RATING_GAVE_FEEDBACK, getArguments().getFloat(EXTRA_RATING_BAR));
                 Log.d(TAG, "Go to mail");
                 dismiss();
             }
