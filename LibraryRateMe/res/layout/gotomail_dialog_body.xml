@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/linearLayoutBodyDialog" >
+
+    <LinearLayout
+        android:id="@+id/LinearMail"
+		style="@style/linearLayoutBody" >
+		
+        <ImageView
+            android:id="@+id/icon"
+            style="@style/iconApp"
+            android:paddingBottom="15dp" />
+
+        <LinearLayout
+            style="@style/linearLayoutMessageDialog" >
+
+            <TextView
+                android:id="@+id/phraseMail"
+                style="@style/textStyle"
+                android:text="@string/message_confirm_dialog" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/linearLayoutConfirmActionButtons"
+        android:layout_marginTop="15dp" >
+
+        <Button
+            android:id="@+id/buttonCancel"
+            style="@style/buttonGoToMail"
+            android:text="@android:string/cancel" >
+        </Button>
+
+        <Button
+            android:id="@+id/buttonYes"
+            style="@style/buttonGoToMail"
+            android:text="@android:string/yes" >
+        </Button>
+    </LinearLayout>
+
+</LinearLayout>

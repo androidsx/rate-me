@@ -3,8 +3,8 @@ package com.androidsx.rateme;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
@@ -17,7 +17,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -39,7 +38,6 @@ public class DialogRateMe extends DialogFragment {
     // Views
     private View mView;
     private View tView;
-    private View confirDialogView;
     private Button close;
     private RatingBar ratingBar;
     private LayerDrawable stars;
@@ -116,7 +114,7 @@ public class DialogRateMe extends DialogFragment {
         });
         ratingBar.setRating((float) defaultStarsSelected);
         configureButtons();
-        close.setOnClickListener(new OnClickListener() {
+        close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dismiss();
@@ -127,7 +125,7 @@ public class DialogRateMe extends DialogFragment {
             }
         });
         share.setVisibility(showShareButton ? View.VISIBLE : View.GONE);
-        share.setOnClickListener(new OnClickListener() {
+        share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(shareApp(appPackageName));
@@ -172,15 +170,10 @@ public class DialogRateMe extends DialogFragment {
         rateMe.setTextColor(rateButtonTextColor);
         noThanks.setTextColor(rateButtonTextColor);
 
-        // Confirmation Dialog
-        confirDialogView = getActivity().getLayoutInflater().inflate(R.layout.confirmationtitledialog, null);
-        confirDialogView.setBackgroundColor(dialogColor);
-        ((TextView) confirDialogView.findViewById(R.id.confirmDialogTitle)).setTextColor(textColor);
-        ((ImageView) confirDialogView.findViewById(R.id.iconConfirmDialog)).setImageResource(logoResId);
     }
 
     private void configureButtons() {
-        rateMe.setOnClickListener(new OnClickListener() {
+        rateMe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 rateApp();
@@ -191,11 +184,12 @@ public class DialogRateMe extends DialogFragment {
             }
         });
 
-        noThanks.setOnClickListener(new OnClickListener() {
+        noThanks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (goToMail) {
-                    confirmGoToMailDialog(getArguments());
+                    DialogFragment dialogMail = DialogGoToMail.newInstance(email, dialogColor, textColor, logoResId, rateButtonTextColor, lineDividerColor );
+                    dialogMail.show(getFragmentManager(), "goToMail");
                     Log.d(TAG, "got to Mail for explain what is the problem");
                 } else {
                     dismiss();
@@ -212,46 +206,6 @@ public class DialogRateMe extends DialogFragment {
         } catch (android.content.ActivityNotFoundException anfe) {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(GOOGLE_PLAY_CONSTANT + appPackageName)));
         }
-    }
-
-    private void goToMail() {
-        final String subject = getResources().getString(R.string.subject_email);
-
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("plain/text");
-        intent.putExtra(Intent.EXTRA_EMAIL, new String[] { email });
-        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
-        try {
-            startActivity(Intent.createChooser(intent, ""));
-        } catch (android.content.ActivityNotFoundException ex) {
-            rateApp();
-        }
-    }
-
-    private Dialog confirmGoToMailDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
-        builder.setCustomTitle(confirDialogView).setCancelable(false)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        goToMail();
-                        onActionListener.onActionPerformed(RateMeAction.LOW_RATING_GAVE_FEEDBACK, ratingBar.getRating());
-                        dismiss();
-                    }
-                }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        onActionListener.onActionPerformed(RateMeAction.LOW_RATING_REFUSED_TO_GIVE_FEEDBACK, ratingBar.getRating());
-                        dismiss();
-                    }
-                });
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
-        Button cancel = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);  
-        cancel.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector));
-        Button yes = dialog.getButton(DialogInterface.BUTTON_POSITIVE);  
-        yes.setBackgroundDrawable(getResources().getDrawable(R.drawable.selector));
-        return dialog;
     }
 
     private Intent shareApp(String appPackageName) {
@@ -319,7 +273,7 @@ public class DialogRateMe extends DialogFragment {
         private int titleTextColor = Color.WHITE;
         private int titleBackgroundColor = Color.BLACK;
         private int dialogColor = Color.WHITE;
-        private int lineDividerColor = Color.GRAY;
+        private int lineDividerColor = dialogColor;
         private int textColor = Color.WHITE;
         private int logoResId = R.drawable.ic_launcher;
         private int rateButtonBackgroundColor = Color.BLACK;
@@ -342,6 +296,10 @@ public class DialogRateMe extends DialogFragment {
 
         public Builder(Context ctx) {
             this.appPackageName = ctx.getApplicationContext().getPackageName();
+        }
+
+        public Builder(DialogGoToMail dialogGoToMail) {
+            return;
         }
 
         public Builder setEmail(String email) {
@@ -443,7 +401,112 @@ public class DialogRateMe extends DialogFragment {
             }
             return new DialogRateMe(this);
         }
-
+        
     }
 
+}
+
+class DialogGoToMail extends DialogFragment {
+    private static final String TAG = DialogGoToMail.class.getSimpleName();
+    
+    private static final String EXTRA_EMAIL = "email";
+    private static final String EXTRA_DIALOG_COLOR = "dialog-color";
+    private static final String EXTRA_TEXT_COLOR = "text-color";
+    private static final String EXTRA_LOGO = "icon";
+    private static final String EXTRA_RATE_BUTTON_TEXT_COLOR = "button-text-color";
+    private static final String EXTRA_TITLE_DIVIDER = "color-title-divider";
+    
+    // Views
+    private View confirDialogTitleView;
+    private View confirDialogView;
+    private Button cancel;
+    private Button yes;
+    
+    public static DialogGoToMail newInstance (String email, int dialogColor, int textColor,int logoResId, int rateButtonTextColor,int lineDividerColor){
+        DialogGoToMail dialogo = new DialogGoToMail();
+        Bundle args = new Bundle();
+        args.putString(EXTRA_EMAIL, email);
+        args.putInt(EXTRA_DIALOG_COLOR, dialogColor);
+        args.putInt(EXTRA_TEXT_COLOR, textColor);        
+        args.putInt(EXTRA_LOGO, logoResId);
+        args.putInt(EXTRA_RATE_BUTTON_TEXT_COLOR, rateButtonTextColor);
+        args.putInt(EXTRA_TITLE_DIVIDER, lineDividerColor);
+        dialogo.setArguments(args);
+        return dialogo;
+        
+    }
+    
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        initializeUiFieldsDialogGoToMail();
+        Log.d(TAG, "initialize correctly all the components");
+        
+        cancel.setOnClickListener(new View.OnClickListener()  {
+            public void onClick(View v) {
+                dismiss();
+                Log.d(TAG, "Close dialog Mail");
+            }
+        });  
+        
+        yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToMail();
+                Log.d(TAG, "Go to mail");
+                dismiss();
+            }
+        });
+        
+        return builder.setCustomTitle(confirDialogTitleView).setView(confirDialogView).create();
+    }
+    
+    private void initializeUiFieldsDialogGoToMail(){
+        confirDialogTitleView = getActivity().getLayoutInflater().inflate(R.layout.gotomail_dialog_title, null);
+        confirDialogView = getActivity().getLayoutInflater().inflate(R.layout.gotomail_dialog_body, null);
+        confirDialogTitleView.setBackgroundColor(getArguments().getInt(EXTRA_DIALOG_COLOR));
+        confirDialogView.setBackgroundColor(getArguments().getInt(EXTRA_DIALOG_COLOR));
+        ((ImageView) confirDialogView.findViewById(R.id.icon)).setImageResource(getArguments().getInt(EXTRA_LOGO));
+        ((TextView) confirDialogTitleView.findViewById(R.id.confirmDialogTitle)).setTextColor(getArguments().getInt(EXTRA_TEXT_COLOR));
+        ((TextView) confirDialogView.findViewById(R.id.phraseMail)).setTextColor(getArguments().getInt(EXTRA_TEXT_COLOR));
+        cancel = (Button) confirDialogView.findViewById(R.id.buttonCancel);
+        yes = (Button) confirDialogView.findViewById(R.id.buttonYes);
+        cancel.setTextColor(getArguments().getInt(EXTRA_RATE_BUTTON_TEXT_COLOR));
+        yes.setTextColor(getArguments().getInt(EXTRA_RATE_BUTTON_TEXT_COLOR));
+    }
+    
+    private void goToMail() {
+        final String subject = getResources().getString(R.string.subject_email);
+        try {
+            Intent sendMailtoGmail = new Intent(Intent.ACTION_SEND);
+            sendMailtoGmail.setType("plain/text");
+            sendMailtoGmail.putExtra(Intent.EXTRA_EMAIL, new String[] { getArguments().getString(EXTRA_EMAIL) });
+            sendMailtoGmail.putExtra(Intent.EXTRA_SUBJECT, subject);
+            sendMailtoGmail.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
+            startActivity(Intent.createChooser(sendMailtoGmail, ""));
+            if(2+2==4){
+                throw new ActivityNotFoundException("excepcion de prueba"); 
+            }
+            
+            
+        } catch (android.content.ActivityNotFoundException ex) {
+            Log.w(TAG, "Cannot send email with Gmail, use the generic chooser");
+            Intent sendGeneric = new Intent(Intent.ACTION_SEND);
+            sendGeneric.setType("plain/text");
+            sendGeneric.putExtra(Intent.EXTRA_EMAIL, new String[] { getArguments().getString(EXTRA_EMAIL) });
+            sendGeneric.putExtra(Intent.EXTRA_SUBJECT, subject);
+            startActivity(Intent.createChooser(sendGeneric, ""));
+        }
+    }
+    
+    @Override
+    public void onStart() {
+        super.onStart();
+        final int titleDividerId = getResources().getIdentifier("titleDivider", "id", "android");
+        final View titleDivider = getDialog().findViewById(titleDividerId);
+        if (titleDivider != null) {
+            titleDivider.setBackgroundColor(getArguments().getInt(EXTRA_TITLE_DIVIDER));
+        }
+    }
+    
 }
