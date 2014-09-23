@@ -27,7 +27,6 @@ jar {
 // tag::dependencies[]
 dependencies {
     compile "joda-time:joda-time:2.2"
-    classpath 'com.android.tools.build:gradle:0.12.+'
 }
 // end::dependencies[]
 
@@ -36,4 +35,6 @@ task wrapper(type: Wrapper) {
     gradleVersion = '1.11'
 }
 // end::wrapper[]
+
+apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'
 
