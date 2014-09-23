@@ -27,6 +27,7 @@ jar {
 // tag::dependencies[]
 dependencies {
     compile "joda-time:joda-time:2.2"
+    classpath 'com.android.tools.build:gradle:0.12.+'
 }
 // end::dependencies[]
 
