@@ -7,34 +7,29 @@
  * user guide available at http://gradle.org/docs/2.1/userguide/tutorial_java_projects.html
  */
 apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'application'
+apply plugin: 'android-library'
+apply plugin: 'maven'
 
-// tag::repositories[]
 repositories {
     mavenLocal()
     mavenCentral()
 }
-// end::repositories[]
 
-// tag::jar[]
+defaultConfig {
+    minSdkVersion 14
+    targetSdkVersion 19
+}
+
 jar {
     baseName = 'gs-gradle'
     version =  '0.1.0'
 }
-// end::jar[]
 
-// tag::dependencies[]
 dependencies {
     compile "joda-time:joda-time:2.2"
+    classpath 'com.android.tools.build:gradle:0.9.+'
 }
-// end::dependencies[]
 
-// tag::wrapper[]
 task wrapper(type: Wrapper) {
     gradleVersion = '1.11'
 }
-// end::wrapper[]
-
-apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'
-
