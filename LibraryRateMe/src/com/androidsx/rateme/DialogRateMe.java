@@ -23,6 +23,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.androidsx.libraryrateme.R;
+import com.androidsx.rateme.DialogRateMe.Builder;
+import com.androidsx.rateme.DialogRateMe.RateMeAction;
 
 public class DialogRateMe extends DialogFragment {
     private static final String TAG = DialogRateMe.class.getSimpleName();
@@ -188,7 +190,7 @@ public class DialogRateMe extends DialogFragment {
             @Override
             public void onClick(View v) {
                 if (goToMail) {
-                    DialogFragment dialogMail = DialogGoToMail.newInstance(email, dialogColor, textColor, logoResId, rateButtonTextColor, lineDividerColor );
+                    DialogFragment dialogMail = DialogGoToMail.newInstance(email, dialogColor, textColor, logoResId, rateButtonTextColor, lineDividerColor, ratingBar.getRating() );
                     dialogMail.show(getFragmentManager(), "goToMail");
                     Log.d(TAG, "got to Mail for explain what is the problem");
                 } else {
@@ -395,6 +397,10 @@ public class DialogRateMe extends DialogFragment {
             return this;
         }
 
+        public RateMeOnActionListener getOnActionListener() {
+            return onActionListener;
+        }
+
         public DialogRateMe build() {
             if (goToMail && email == null) {
                 throw new IllegalArgumentException("You Have to configure the email for the dialog goToMail");
@@ -415,6 +421,7 @@ class DialogGoToMail extends DialogFragment {
     private static final String EXTRA_LOGO = "icon";
     private static final String EXTRA_RATE_BUTTON_TEXT_COLOR = "button-text-color";
     private static final String EXTRA_TITLE_DIVIDER = "color-title-divider";
+    private static final String EXTRA_RATING_BAR = "get-rating";
     
     // Views
     private View confirDialogTitleView;
@@ -422,7 +429,9 @@ class DialogGoToMail extends DialogFragment {
     private Button cancel;
     private Button yes;
     
-    public static DialogGoToMail newInstance (String email, int dialogColor, int textColor,int logoResId, int rateButtonTextColor,int lineDividerColor){
+    Builder rateMe = new DialogRateMe.Builder(this);
+    
+    public static DialogGoToMail newInstance (String email, int dialogColor, int textColor,int logoResId, int rateButtonTextColor,int lineDividerColor, float getRatingBar){
         DialogGoToMail dialogo = new DialogGoToMail();
         Bundle args = new Bundle();
         args.putString(EXTRA_EMAIL, email);
@@ -431,6 +440,7 @@ class DialogGoToMail extends DialogFragment {
         args.putInt(EXTRA_LOGO, logoResId);
         args.putInt(EXTRA_RATE_BUTTON_TEXT_COLOR, rateButtonTextColor);
         args.putInt(EXTRA_TITLE_DIVIDER, lineDividerColor);
+        args.putFloat(EXTRA_RATING_BAR, getRatingBar);
         dialogo.setArguments(args);
         return dialogo;
         
@@ -445,6 +455,7 @@ class DialogGoToMail extends DialogFragment {
         cancel.setOnClickListener(new View.OnClickListener()  {
             public void onClick(View v) {
                 dismiss();
+                rateMe.getOnActionListener().onActionPerformed(RateMeAction.LOW_RATING_REFUSED_TO_GIVE_FEEDBACK, getArguments().getFloat(EXTRA_RATING_BAR));
                 Log.d(TAG, "Close dialog Mail");
             }
         });  
@@ -453,6 +464,7 @@ class DialogGoToMail extends DialogFragment {
             @Override
             public void onClick(View v) {
                 goToMail();
+                rateMe.getOnActionListener().onActionPerformed(RateMeAction.LOW_RATING_GAVE_FEEDBACK, getArguments().getFloat(EXTRA_RATING_BAR));
                 Log.d(TAG, "Go to mail");
                 dismiss();
             }
