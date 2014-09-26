@@ -32,7 +32,7 @@ public class SampleProject extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.delete, menu);
+        getMenuInflater().inflate(R.menu.rateme, menu);
         return true;
     }
 
@@ -70,8 +70,8 @@ public class SampleProject extends Activity {
         .setTitleBackgroundColor(Color.GRAY)
         .setDialogColor(Color.GRAY)
         .setLineDividerColor(Color.WHITE)
-        .setRateButtonBackgroundColor(Color.YELLOW)
-        .setRateButtonPressedBackgroundColor(Color.CYAN)
+        .setRateButtonBackgroundColor(Color.BLACK)
+        .setRateButtonPressedBackgroundColor(Color.DKGRAY)
         .build()
         .show(getFragmentManager(), "dialog");
     }
