@@ -192,6 +192,7 @@ public class DialogRateMe extends DialogFragment {
                 if (goToMail) {
                     DialogFragment dialogMail = DialogGoToMail.newInstance(email, dialogColor, textColor, logoResId, rateButtonTextColor, lineDividerColor, ratingBar.getRating() );
                     dialogMail.show(getFragmentManager(), "goToMail");
+                    dismiss();
                     Log.d(TAG, "got to Mail for explain what is the problem");
                 } else {
                     dismiss();
