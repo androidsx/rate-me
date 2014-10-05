@@ -1,12 +1,22 @@
-apply plugin: 'android-library'
+apply plugin: 'android'
+
+buildscript{
+	repositories{
+		mavenCentral()
+	}
+	dependencies{
+        classpath 'com.android.tools.build:gradle:0.12.+'
+	}
+}
 
 repositories {
     mavenCentral()
+
 }
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion "20.0.0"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         minSdkVersion 14
@@ -32,5 +42,8 @@ android {
         abortOnError false
     }
 }
-// Used to push in maven
-apply from: '../maven_push.gradle'
+
+dependencies {
+    // ChangeLog Library
+    compile project(':LibraryRateMe')
+}
