@@ -314,7 +314,16 @@ public class DialogRateMe extends DialogFragment {
             this.showShareButton = showShareButton;
             return this;
         }
-
+        
+        /**
+         * Sets if you want to display a dialog when the user selects less than 4 star. On this new dialog
+         * the user may send feedback for your App
+         * If you select true you must set the mail with {@link #setEmail(String)}, if not the App will
+         * closed by exception : IllegalArgumentException
+         *
+         * @param goToMail boolean variable to see new dialog
+         * @return this builder
+         */
         public Builder setGoToMail(boolean goToMail) {
             this.goToMail = goToMail;
             return this;
