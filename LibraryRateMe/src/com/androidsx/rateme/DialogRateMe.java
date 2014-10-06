@@ -355,6 +355,12 @@ public class DialogRateMe extends DialogFragment {
             return this;
         }
 
+        /** Set a icon that will take the dialog. If not you set any icon, the icon that will
+         * put by default is {@code ic_launcher}
+         *
+         * @param logoResId App icon
+         * @return this builder
+         */
         public Builder setLogoResourceId(int logoResId) {
             this.logoResId = logoResId;
             return this;
