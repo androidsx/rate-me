@@ -27,6 +27,8 @@ dependencies {
 
 }
 ```
+You can see the last version in [Maven Central](http://search.maven.org/#search%7Cga%7C1%7Cratemelib)
+
 How to use
 ==============
 
