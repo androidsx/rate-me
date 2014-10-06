@@ -305,6 +305,12 @@ public class DialogRateMe extends DialogFragment {
             return;
         }
 
+        /**
+         * Set the company email when select {@code true} in {@link #setGoToMail(boolean)}
+         * if you select {@code false}, no need to configure
+         * @param email String variable is a email of company
+         * @return
+         */
         public Builder setEmail(String email) {
             this.email = email;
             return this;
@@ -314,7 +320,16 @@ public class DialogRateMe extends DialogFragment {
             this.showShareButton = showShareButton;
             return this;
         }
-
+        
+        /**
+         * Set if you want to display a new dialog when the user selects less than 4 star. On this
+         * dialog the user may send feedback for your App
+         * If you select {@code true} you must set the mail with {@link #setEmail(String)}, if not the App
+         * will closed by exception : IllegalArgumentException
+         *
+         * @param goToMail boolean variable to see new dialog for get feedback in your App
+         * @return this builder
+         */
         public Builder setGoToMail(boolean goToMail) {
             this.goToMail = goToMail;
             return this;
@@ -340,6 +355,12 @@ public class DialogRateMe extends DialogFragment {
             return this;
         }
 
+        /** Set a icon that will take the dialog. If not you set any icon, the icon that will
+         * put by default is {@code ic_launcher}
+         *
+         * @param logoResId App icon
+         * @return this builder
+         */
         public Builder setLogoResourceId(int logoResId) {
             this.logoResId = logoResId;
             return this;
