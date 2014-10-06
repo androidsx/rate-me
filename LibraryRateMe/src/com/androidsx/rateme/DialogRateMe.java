@@ -275,7 +275,7 @@ public class DialogRateMe extends DialogFragment {
         private boolean showShareButton;
         private int titleTextColor = Color.WHITE;
         private int titleBackgroundColor = Color.BLACK;
-        private int dialogColor = Color.WHITE;
+        private int dialogColor = Color.DKGRAY;
         private int lineDividerColor = dialogColor;
         private int textColor = Color.WHITE;
         private int logoResId = R.drawable.ic_launcher;
