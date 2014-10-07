@@ -1,38 +1,38 @@
 Rate-Me
 =======
 
-Rate-Me is a Librery for Android2.3+ that provides a Dialog for suggesting to the user a Rate the App. If the Rate is 4 or more stars, the Dialog goes to PlayStore
-You can see the [source code](https://github.com/androidsx/rate-me/blob/master/LibraryRateMe/src/com/androidsx/rateme/DialogRateMe.java) and an application example
+Rate Me is an Android 2.3+ library that shows dialog to suggest the user to rate the application in the Google Play Store.
 
-If the rating is 4 or more stars, the dialog just takes the user to the Google Play store. Otherwise, it prompts them to give feedback to the developer.
-You can see the [main class here](https://github.com/androidsx/rate-me/blob/master/LibraryRateMe/src/com/androidsx/rateme/DialogRateMe.java) and an integration example in this image:
-[![img1](https://raw.githubusercontent.com/androidsx/rate-me/master/images-readme/image.png)]()
+With a little twist: if the rating is positive, we take the user to the Play Store directly. Otherwise, we ask him for feedback via email. (This is all configurable.)
 
-Add RateMe in your project
-==========================
+[![Screenshot](https://raw.githubusercontent.com/androidsx/rate-me/master/images-readme/image.png)]()
 
-##Eclipse
-1) Download the ZIP file <br>
-2) Extract the RateMe project from the ZIP file <br>
-3) In Eclipse: File > Import > Existing projects into workspace > Select directory > add LibraryRateMe <br>
-4) Right click on your project <br>
-5) Android > Library: Add > LibraryRateMe <br>
+How to integrate
+================
 
-##Gradle
-Add this to your project's build.gradle file
+## Eclipse
+
+1. Download and extract the ZIP file
+2. Import the sources: File > Import > Existing projects into workspace > Select directory > add LibraryRateMe
+3. Add it as a library: Right click on your project > Android > Library: Add > LibraryRateMe
+
+## Gradle
+
+Add this to your project's build.gradle file:
+
 ```xml
 dependencies {
-
-	compile 'com.androidsx:ratemelib:X.Y.Z@aar'
-
+    compile 'com.androidsx:ratemelib:X.Y.Z@aar'
 }
 ```
+
 You can see the last version in [Maven Central](http://search.maven.org/#search%7Cga%7C1%7Cratemelib)
 
 How to use
-==============
+==========
 
-Using the library is really simple, [that example](https://github.com/androidsx/rate-me/blob/master/SampleProject/src/com/androidsx/rateme/demo1/SampleProject.java))  allows you to know how to link the activity apps through a button.
+The integration is very simple: mimic [this example](https://github.com/androidsx/rate-me/blob/master/SampleProject/src/com/androidsx/rateme/demo1/SampleProject.java) to link the dialog from your own button.
+
 When you want to use this library you need choose the icon for your dialg.
 
 ```java
