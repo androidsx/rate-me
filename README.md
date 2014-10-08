@@ -5,7 +5,9 @@ Rate Me is an Android 2.3+ library that shows dialog to suggest the user to rate
 
 With a little twist: if the rating is positive, we take the user to the Play Store directly. Otherwise, we ask him for feedback via email. (This is all configurable.)
 
-[![Screenshot](https://raw.githubusercontent.com/androidsx/rate-me/master/images-readme/image.png)]()
+[![Screenshot](https://raw.githubusercontent.com/androidsx/rate-me/master/images-readme/RateMeImage.png)]()
+
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Rate--Me-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/1032)
 
 How to integrate
 ================
@@ -33,65 +35,61 @@ How to use
 
 The integration is very simple: mimic [this example](https://github.com/androidsx/rate-me/blob/master/SampleProject/src/com/androidsx/rateme/demo1/SampleProject.java) to link the dialog from your own button.
 
-When you want to use this library you need choose the icon for your dialg.
+Have a look at [the sample code](https://github.com/androidsx/rate-me/blob/master/SampleProject/src/com/androidsx/rateme/demo1/SampleProject.java) or check out a simple integration:
 
 ```java
-
-			.setLogoResourceId(R.drawable.icon)
+	new DialogRateMe.Builder(context)
+				.setLogoResourceId(R.drawable.ic_launcher)
+				.setGoToMail(true)
+				.setEmail(getString(R.string.support_email))
+				.setShowShareButton(false)
+				.build()
+				.show(getFragmentManager(), "dialog");
 ```
 
-If you don´t pass the icon, the library will default the icon that has the name `ic_launcher`.
-
-If you use the goToMail Dialog in `true`, you need to configure the company email in `setEmail`
-
-You have different options to configure the library and this is a example :
+The full list of options is:
 
 ```java
-			new DialogRateMe.Builder(this)
-						.setDialogColor(Color.White)
-						.setIconCloseColorFilter(Color.DKGRAY)
-						.setLineDividerColor(Color.BLUE)
-						.setLogoResourceId(R.drawable.ic_launcher)
-						.setRateButtonBackgroundColor(Color.BLUE)
-						.setRateButtonPressedBackgroundColor(Color.RED)
-						.setRateButtonTextColor(Color.White)
-						.setGoToMail(true)
-						.setLogoResourceId(R.drawable.icon)
-						.setShowOKButtonByDefault(false)
-						.setEmail(getString(R.string.support_email))
-						.setShowShareButton(false)
-						.setTextColor(Color.BLUE)
-						.setTitleBackgroundColor(Color.White)
-						.setTitleTextColor(Color.BLUE)
-						.build()
-						.show(getFragmentManager(), "dialog");
+	new DialogRateMe.Builder(this)
+				.setDialogColor(Color.White)
+				.setIconCloseColorFilter(Color.DKGRAY)
+				.setLineDividerColor(Color.BLUE)
+				.setLogoResourceId(R.drawable.ic_launcher)
+				.setRateButtonBackgroundColor(Color.BLUE)
+				.setRateButtonPressedBackgroundColor(Color.RED)
+				.setRateButtonTextColor(Color.White)
+				.setGoToMail(true)
+				.setShowOKButtonByDefault(false)
+				.setEmail(getString(R.string.support_email))
+				.setShowShareButton(false)
+				.setTextColor(Color.BLUE)
+				.setTitleBackgroundColor(Color.White)
+				.setTitleTextColor(Color.BLUE)
+				.build()
+				.show(getFragmentManager(), "dialog");
 ```
 
-This Library can be opened automatically by calling the method onStart in our project.
+Dynamic opening of the dialog
+
+In case you want the dialog to appear based on the number of times the app has been opened or the install date, have a look at this example:
 
 ```java
-			@Override
-					protected void onStart() {
-							super.onStart();
-							final int launchTimes = 5;
-							final int installDate = 20;
-							new RateMeDialogTimer(installDate, launchTimes);
-							RateMeDialogTimer.onStart(this);
-							if (RateMeDialogTimer.shouldShowRateDialog(this)) {
-									AlertMenu();
-							}
+	@Override
+	protected void onStart() {
+		super.onStart();
 
-					}
+		final int launchTimes = 3;
+		final int installDate = 7;
+
+		new RateMeDialogTimer(installDate, launchTimes);
+
+		RateMeDialogTimer.onStart(this);
+		if (RateMeDialogTimer.shouldShowRateDialog(this)) {
+			// show the dialog with the code above
+		}
+
+	}
 ```
-
-##CustomCriteria
-
-The default criteria to show the dialog is as below:
-
-* App is launched more than 20 days later than installation.
-* App is launched more than 5 times
-
-you can change this settings [here](https://github.com/androidsx/rate-me/blob/master/SampleProject/src/com/androidsx/rateme/demo1/SampleProject.java)
 
 License
 =======
