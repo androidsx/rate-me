@@ -15,7 +15,7 @@ How to integrate
 ## Eclipse
 
 1. Download and extract the ZIP file
-2. Import the sources: File > Import > Existing projects into workspace > Select directory > add LibraryRateMe
+2. Import the sources: File > Import > Existing projects into workspace > Select directory > add `LibraryRateMe`
 3. Add it as a library: Right click on your project > Android > Library: Add > LibraryRateMe
 
 ## Gradle
@@ -32,8 +32,6 @@ You can see the last version in [Maven Central](http://search.maven.org/#search%
 
 How to use
 ==========
-
-The integration is very simple: mimic [this example](https://github.com/androidsx/rate-me/blob/master/SampleProject/src/com/androidsx/rateme/demo1/SampleProject.java) to link the dialog from your own button.
 
 Have a look at [the sample code](https://github.com/androidsx/rate-me/blob/master/SampleProject/src/com/androidsx/rateme/demo1/SampleProject.java) or check out a simple integration:
 
@@ -70,6 +68,7 @@ The full list of options is:
 ```
 
 Dynamic opening of the dialog
+-----
 
 In case you want the dialog to appear based on the number of times the app has been opened or the install date, have a look at this example:
 
