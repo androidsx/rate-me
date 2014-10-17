@@ -46,6 +46,7 @@ public class DialogRateMe extends DialogFragment {
     private Button rateMe;
     private Button noThanks;
     private Button share;
+    private float saveRatingRotation;
 
     // configuration
     private final String appPackageName;
@@ -90,6 +91,7 @@ public class DialogRateMe extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        setRetainInstance(true);
         initializeUiFields();
         Log.d(TAG, "initialize correctly all the components");
 
@@ -114,7 +116,12 @@ public class DialogRateMe extends DialogFragment {
                 }
             }
         });
-        ratingBar.setRating((float) defaultStarsSelected);
+        if (saveRatingRotation != 0){
+            ratingBar.setRating(saveRatingRotation);
+        }else{
+            ratingBar.setRating((float) defaultStarsSelected);
+        }
+
         configureButtons();
         close.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,6 +154,14 @@ public class DialogRateMe extends DialogFragment {
         if (titleDivider != null) {
             titleDivider.setBackgroundColor(lineDividerColor);
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        if (getDialog() != null && getRetainInstance())
+            saveRatingRotation = ratingBar.getRating();
+            getDialog().setDismissMessage(null);
+        super.onDestroyView();
     }
 
     private void initializeUiFields() {
@@ -470,6 +485,7 @@ class DialogGoToMail extends DialogFragment {
     
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+        setRetainInstance(true);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         initializeUiFieldsDialogGoToMail();
         Log.d(TAG, "initialize correctly all the components");
@@ -541,6 +557,13 @@ class DialogGoToMail extends DialogFragment {
         if (titleDivider != null) {
             titleDivider.setBackgroundColor(getArguments().getInt(EXTRA_TITLE_DIVIDER));
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        if (getDialog() != null && getRetainInstance())
+            getDialog().setDismissMessage(null);
+        super.onDestroyView();
     }
     
 }
