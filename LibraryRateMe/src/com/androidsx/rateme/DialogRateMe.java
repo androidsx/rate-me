@@ -91,7 +91,6 @@ public class DialogRateMe extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        setRetainInstance(true);
         initializeUiFields();
         Log.d(TAG, "initialize correctly all the components");
 
@@ -157,11 +156,18 @@ public class DialogRateMe extends DialogFragment {
     }
 
     @Override
-    public void onDestroyView() {
-        if (getDialog() != null && getRetainInstance())
+    public void onSaveInstanceState(Bundle outState) {
+        if (getDialog() != null && getRetainInstance()){
             saveRatingRotation = ratingBar.getRating();
             getDialog().setDismissMessage(null);
-        super.onDestroyView();
+        }
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        setRetainInstance(true);
+        super.onCreate(savedInstanceState);
     }
 
     private void initializeUiFields() {
@@ -485,7 +491,6 @@ class DialogGoToMail extends DialogFragment {
     
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        setRetainInstance(true);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         initializeUiFieldsDialogGoToMail();
         Log.d(TAG, "initialize correctly all the components");
@@ -560,10 +565,16 @@ class DialogGoToMail extends DialogFragment {
     }
 
     @Override
-    public void onDestroyView() {
-        if (getDialog() != null && getRetainInstance())
+    public void onSaveInstanceState(Bundle outState) {
+        if (getDialog() != null && getRetainInstance()){
             getDialog().setDismissMessage(null);
-        super.onDestroyView();
+        }
+        super.onSaveInstanceState(outState);
     }
-    
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        setRetainInstance(true);
+        super.onCreate(savedInstanceState);
+    }
 }
