@@ -156,8 +156,8 @@ public class DialogRateMe extends DialogFragment {
                 R.drawable.itemselected);
         rateMeButton.setColor(rateButtonBackgroundColor);
         rateMeButtonItemSelected.setColor(rateButtonPressedBackgroundColor);
-        mView = getActivity().getLayoutInflater().inflate(R.layout.library, null);
-        tView = getActivity().getLayoutInflater().inflate(R.layout.title, null);
+        mView = getActivity().getLayoutInflater().inflate(R.layout.rateme_dialog_message, null);
+        tView = getActivity().getLayoutInflater().inflate(R.layout.rateme_dialog_title, null);
         close = (Button) tView.findViewById(R.id.buttonClose);
         share = (Button) tView.findViewById(R.id.buttonShare);
         rateMe = (Button) mView.findViewById(R.id.buttonRateMe);
@@ -190,7 +190,7 @@ public class DialogRateMe extends DialogFragment {
             @Override
             public void onClick(View v) {
                 if (goToMail) {
-                    DialogFragment dialogMail = DialogGoToMail.newInstance(email, dialogColor, textColor, logoResId, rateButtonTextColor, lineDividerColor, ratingBar.getRating() );
+                    DialogFragment dialogMail = DialogFeedback.newInstance(email, dialogColor, textColor, logoResId, rateButtonTextColor, lineDividerColor, ratingBar.getRating());
                     dialogMail.show(getFragmentManager(), "goToMail");
                     dismiss();
                     Log.d(TAG, "got to Mail for explain what is the problem");
@@ -301,7 +301,7 @@ public class DialogRateMe extends DialogFragment {
             this.appPackageName = ctx.getApplicationContext().getPackageName();
         }
 
-        public Builder(DialogGoToMail dialogGoToMail) {
+        public Builder(DialogFeedback dialogFeedback) {
             return;
         }
 
@@ -434,8 +434,8 @@ public class DialogRateMe extends DialogFragment {
 
 }
 
-class DialogGoToMail extends DialogFragment {
-    private static final String TAG = DialogGoToMail.class.getSimpleName();
+class DialogFeedback extends DialogFragment {
+    private static final String TAG = DialogFeedback.class.getSimpleName();
     
     private static final String EXTRA_EMAIL = "email";
     private static final String EXTRA_DIALOG_COLOR = "dialog-color";
@@ -453,8 +453,8 @@ class DialogGoToMail extends DialogFragment {
     
     Builder rateMe = new DialogRateMe.Builder(this);
     
-    public static DialogGoToMail newInstance (String email, int dialogColor, int textColor,int logoResId, int rateButtonTextColor,int lineDividerColor, float getRatingBar){
-        DialogGoToMail dialogo = new DialogGoToMail();
+    public static DialogFeedback newInstance (String email, int dialogColor, int textColor,int logoResId, int rateButtonTextColor,int lineDividerColor, float getRatingBar){
+        DialogFeedback dialogo = new DialogFeedback();
         Bundle args = new Bundle();
         args.putString(EXTRA_EMAIL, email);
         args.putInt(EXTRA_DIALOG_COLOR, dialogColor);
@@ -496,8 +496,8 @@ class DialogGoToMail extends DialogFragment {
     }
     
     private void initializeUiFieldsDialogGoToMail(){
-        confirDialogTitleView = getActivity().getLayoutInflater().inflate(R.layout.gotomail_dialog_title, null);
-        confirDialogView = getActivity().getLayoutInflater().inflate(R.layout.gotomail_dialog_body, null);
+        confirDialogTitleView = getActivity().getLayoutInflater().inflate(R.layout.feedback_dialog_title, null);
+        confirDialogView = getActivity().getLayoutInflater().inflate(R.layout.feedback_dialog_message, null);
         confirDialogTitleView.setBackgroundColor(getArguments().getInt(EXTRA_DIALOG_COLOR));
         confirDialogView.setBackgroundColor(getArguments().getInt(EXTRA_DIALOG_COLOR));
         ((ImageView) confirDialogView.findViewById(R.id.icon)).setImageResource(getArguments().getInt(EXTRA_LOGO));
