@@ -46,6 +46,7 @@ public class DialogRateMe extends DialogFragment {
     private Button rateMe;
     private Button noThanks;
     private Button share;
+    private float saveRatingRotation;
 
     // configuration
     private final String appPackageName;
@@ -114,7 +115,12 @@ public class DialogRateMe extends DialogFragment {
                 }
             }
         });
-        ratingBar.setRating((float) defaultStarsSelected);
+        if (saveRatingRotation != 0){
+            ratingBar.setRating(saveRatingRotation);
+        }else{
+            ratingBar.setRating((float) defaultStarsSelected);
+        }
+
         configureButtons();
         close.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,6 +153,21 @@ public class DialogRateMe extends DialogFragment {
         if (titleDivider != null) {
             titleDivider.setBackgroundColor(lineDividerColor);
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        if (getDialog() != null && getRetainInstance()){
+            saveRatingRotation = ratingBar.getRating();
+            getDialog().setDismissMessage(null);
+        }
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        setRetainInstance(true);
+        super.onCreate(savedInstanceState);
     }
 
     private void initializeUiFields() {
@@ -542,5 +563,18 @@ class DialogFeedback extends DialogFragment {
             titleDivider.setBackgroundColor(getArguments().getInt(EXTRA_TITLE_DIVIDER));
         }
     }
-    
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        if (getDialog() != null && getRetainInstance()){
+            getDialog().setDismissMessage(null);
+        }
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        setRetainInstance(true);
+        super.onCreate(savedInstanceState);
+    }
 }
