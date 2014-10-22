@@ -36,8 +36,7 @@ public class DialogFeedback extends DialogFragment {
     private Button cancel;
     private Button yes;
     
-    private RateMeOnActionListener onActionListener = new RateMeOnActionListener()
-    {  
+    private RateMeOnActionListener onActionListener = new RateMeOnActionListener() {  
         @Override
         public void onHandleRateMeAction(RateMeAction action, float rating)
         {
@@ -72,12 +71,9 @@ public class DialogFeedback extends DialogFragment {
     {
         super.onAttach(activity);
         
-        try
-        {
+        try {
             onActionListener = (RateMeOnActionListener) activity;
-        }
-        catch (ClassCastException e)
-        {
+        } catch (ClassCastException e) {
             // throw new ClassCastException("An activity hosting a DialogGoToMail fragment must implement the necessary listener interface: " + RateMeOnActionListener.class.getName());
         }
         
@@ -115,7 +111,12 @@ public class DialogFeedback extends DialogFragment {
         confirDialogView = getActivity().getLayoutInflater().inflate(R.layout.feedback_dialog_message, null);
         confirDialogTitleView.setBackgroundColor(getArguments().getInt(EXTRA_DIALOG_TITLE_COLOR));
         confirDialogView.setBackgroundColor(getArguments().getInt(EXTRA_DIALOG_COLOR));
-        ((ImageView) confirDialogView.findViewById(R.id.icon)).setImageResource(getArguments().getInt(EXTRA_LOGO));
+        if (getArguments().getInt(EXTRA_LOGO) > 0) {
+            ((ImageView) confirDialogView.findViewById(R.id.icon)).setImageResource(getArguments().getInt(EXTRA_LOGO));
+        }
+        else {
+            ((ImageView) confirDialogView.findViewById(R.id.icon)).setVisibility(View.GONE);
+        }
         ((TextView) confirDialogTitleView.findViewById(R.id.confirmDialogTitle)).setTextColor(getArguments().getInt(EXTRA_TEXT_COLOR));
         ((TextView) confirDialogView.findViewById(R.id.phraseMail)).setTextColor(getArguments().getInt(EXTRA_TEXT_COLOR));
         cancel = (Button) confirDialogView.findViewById(R.id.buttonCancel);

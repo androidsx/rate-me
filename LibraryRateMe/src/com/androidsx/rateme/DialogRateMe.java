@@ -66,8 +66,7 @@ public class DialogRateMe extends DialogFragment {
     private int iconCloseColor;
     private int iconShareColor;
     private boolean showOKButtonByDefault;
-    private RateMeOnActionListener onActionListener = new RateMeOnActionListener()
-    {  
+    private RateMeOnActionListener onActionListener = new RateMeOnActionListener() {  
         @Override
         public void onHandleRateMeAction(RateMeAction action, float rating)
         {
@@ -109,9 +108,6 @@ public class DialogRateMe extends DialogFragment {
         setIconsTitleColor(iconCloseColor, iconShareColor);
 
         stars.getDrawable(2).setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP);
-        if (!showOKButtonByDefault) {
-            ratingBar.setRating((float) defaultStarsSelected);
-        }
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
 
             @Override
@@ -119,8 +115,11 @@ public class DialogRateMe extends DialogFragment {
                 if (rating >= 4.0) {
                     rateMe.setVisibility(View.VISIBLE);
                     noThanks.setVisibility(View.GONE);
-                } else {
+                } else if (rating > 0.0){
                     noThanks.setVisibility(View.VISIBLE);
+                    rateMe.setVisibility(View.GONE);
+                } else {
+                    noThanks.setVisibility(View.GONE);
                     rateMe.setVisibility(View.GONE);
                 }
                 defaultStarsSelected = (int) rating;
@@ -205,12 +204,9 @@ public class DialogRateMe extends DialogFragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         
-        try
-        {
+        try {
             onActionListener = (RateMeOnActionListener) activity;
-        }
-        catch (ClassCastException e)
-        {
+        } catch (ClassCastException e) {
             // throw new ClassCastException("An activity hosting a DialogRateMe fragment must implement the necessary listener interface: " + RateMeOnActionListener.class.getName());
         }
         
@@ -244,7 +240,12 @@ public class DialogRateMe extends DialogFragment {
         mView.setBackgroundColor(dialogColor);
         tView.setBackgroundColor(titleBackgroundColor);
         ((TextView) tView.findViewById(R.id.title)).setTextColor(titleTextColor);
-        ((ImageView) mView.findViewById(R.id.picture)).setImageResource(logoResId);
+        if (logoResId > 0) {
+            ((ImageView) mView.findViewById(R.id.picture)).setImageResource(logoResId);
+        }
+        else {
+            ((ImageView) mView.findViewById(R.id.picture)).setVisibility(View.GONE);   
+        }
         ((TextView) mView.findViewById(R.id.phraseCenter)).setTextColor(textColor);
         rateMe.setTextColor(rateButtonTextColor);
         noThanks.setTextColor(rateButtonTextColor);

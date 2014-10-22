@@ -11,7 +11,7 @@ import android.util.Log;
 public class RateMeDialogTimer {
 
     private static final String TAG = RateMeDialogTimer.class.getSimpleName();
-
+    
     private static final String PREF_NAME = "RateThisApp";
     private static final String KEY_INSTALL_DATE = "rta_install_date";
     private static final String KEY_LAUNCH_TIMES = "rta_launch_times";
@@ -95,6 +95,11 @@ public class RateMeDialogTimer {
         Editor editor = pref.edit();
         editor.putBoolean(KEY_OPT_OUT, optOut);
         editor.commit();
+    }
+
+    public static boolean wasRated(Context context) {
+        SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        return pref.getBoolean(KEY_OPT_OUT, false);
     }
 
 }
