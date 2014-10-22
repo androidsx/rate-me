@@ -134,12 +134,7 @@ public class DialogFeedback extends DialogFragment {
             sendMailtoGmail.putExtra(Intent.EXTRA_EMAIL, new String[] { getArguments().getString(EXTRA_EMAIL) });
             sendMailtoGmail.putExtra(Intent.EXTRA_SUBJECT, subject);
             sendMailtoGmail.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
-            startActivity(Intent.createChooser(sendMailtoGmail, ""));
-            if(2+2==4){
-                throw new ActivityNotFoundException("excepcion de prueba"); 
-            }
-            
-            
+            startActivity(Intent.createChooser(sendMailtoGmail, ""));            
         } catch (android.content.ActivityNotFoundException ex) {
             Log.w(TAG, "Cannot send email with Gmail, use the generic chooser");
             Intent sendGeneric = new Intent(Intent.ACTION_SEND);
