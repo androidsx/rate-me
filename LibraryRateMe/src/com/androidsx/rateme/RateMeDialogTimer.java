@@ -5,6 +5,7 @@ import java.util.Date;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.os.Bundle;
 import android.util.Log;
 
 public class RateMeDialogTimer {
@@ -19,17 +20,13 @@ public class RateMeDialogTimer {
     private static Date mInstallDate = new Date();
     private static int mLaunchTimes = 0;
     private static boolean mOptOut = false;
-    
-    private static int installDays;
-    private static int launchTimes;
 
-    public RateMeDialogTimer(int installDate, int launchTimes) {
-        RateMeDialogTimer.installDays = installDate;
-        RateMeDialogTimer.launchTimes = launchTimes;
-
-    }
-
-    public static void onStart(Context context) {
+    public static void onStart(Context context, Bundle savedInstanceState) {
+        
+        // Only use FIRST launch of the activity
+        if (savedInstanceState != null) {
+            return; }
+        
         SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         Editor editor = pref.edit();
         // If it is the first launch, save the date in shared preference.
@@ -57,7 +54,7 @@ public class RateMeDialogTimer {
      * 
      * @return
      */
-    public static boolean shouldShowRateDialog(final Context context) {
+    public static boolean shouldShowRateDialog(final Context context, int installDays, int launchTimes) {
         if (mOptOut) {
             return false;
         } else {
