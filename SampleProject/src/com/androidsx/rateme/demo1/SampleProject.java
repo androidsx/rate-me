@@ -52,11 +52,11 @@ public class SampleProject extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
-        final int launchTimes = 5;
-        final int installDate = 20;
-        new RateMeDialogTimer(installDate, launchTimes);
-        RateMeDialogTimer.onStart(this);
-        if (RateMeDialogTimer.shouldShowRateDialog(this)) {
+        final int launchTimes = 3;
+        final int installDate = 7;
+        new RateMeDialogTimer();
+        RateMeDialogTimer.onStart(this, null);
+        if (RateMeDialogTimer.shouldShowRateDialog(this, installDate, launchTimes)) {
             AlertMenu();
         }
 
