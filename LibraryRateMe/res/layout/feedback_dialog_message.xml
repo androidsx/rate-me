@@ -17,7 +17,7 @@
             <TextView
                 android:id="@+id/phraseMail"
                 style="@style/textStyle"
-                android:text="@string/message_confirm_dialog" />
+                android:text="@string/rateme_message_confirm_dialog" />
         </LinearLayout>
     </LinearLayout>
 

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="rateme">Valorar en la Play Store</string>
-    <string name="message">Qué puntuación nos darías?</string>
-    <string name="title">Valora tu experiencia</string>
-    <string name="title_activity_dialog">Puntúanos</string>
-    <string name="no_thanks">Gracias por la puntuación!</string>
-    <string name="message_confirm_dialog">Alguna sugerencia para mejorar nuestra App ?</string>
-    <string name="subject_email">Sugerencias para tu app</string>
+    <string name="rateme_message">Qué puntuación nos darías?</string>
+    <string name="rateme_title">Valora tu experiencia</string>
+    <string name="rateme_title_activity_dialog">Puntúanos</string>
+    <string name="rateme_no_thanks">Gracias por la puntuación!</string>
+    <string name="rateme_message_confirm_dialog">Alguna sugerencia para mejorar nuestra App ?</string>
+    <string name="rateme_subject_email">Sugerencias para %1$s</string>
 </resources>

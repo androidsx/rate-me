@@ -1,5 +1,6 @@
 package com.androidsx.rateme;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -48,24 +49,34 @@ public class DialogRateMe extends DialogFragment {
     private Button share;
 
     // configuration
-    private final String appPackageName;
-    private final boolean goToMail;
-    private final String email;
-    private final boolean showShareButton;
-    private final int titleTextColor;
-    private final int titleBackgroundColor;
-    private final int dialogColor;
-    private final int lineDividerColor;
-    private final int textColor;
-    private final int logoResId;
-    private final int rateButtonBackgroundColor;
-    private final int rateButtonTextColor;
-    private final int rateButtonPressedBackgroundColor;
-    private final int defaultStarsSelected;
-    private final int iconCloseColor;
-    private final int iconShareColor;
-    private final boolean showOKButtonByDefault;
-    private final RateMeOnActionListener onActionListener;
+    private String appPackageName;
+    private boolean goToMail;
+    private String email;
+    private boolean showShareButton;
+    private int titleTextColor;
+    private int titleBackgroundColor;
+    private int dialogColor;
+    private int lineDividerColor;
+    private int textColor;
+    private int logoResId;
+    private int rateButtonBackgroundColor;
+    private int rateButtonTextColor;
+    private int rateButtonPressedBackgroundColor;
+    private int defaultStarsSelected;
+    private int iconCloseColor;
+    private int iconShareColor;
+    private boolean showOKButtonByDefault;
+    private RateMeOnActionListener onActionListener = new RateMeOnActionListener() {  
+        @Override
+        public void onHandleRateMeAction(RateMeAction action, float rating)
+        {
+            Log.d(TAG, "Action " + action + " (rating: " + rating + ")");
+        }
+    };
+    
+    public DialogRateMe() {
+        super();
+    }
 
     private DialogRateMe(Builder builder) {
         this.appPackageName = builder.appPackageName;
@@ -85,7 +96,6 @@ public class DialogRateMe extends DialogFragment {
         this.iconCloseColor = builder.iconCloseColor;
         this.iconShareColor = builder.iconShareColor;
         this.showOKButtonByDefault = builder.showOKButtonByDefault;
-        this.onActionListener = builder.onActionListener;
     }
 
     @Override
@@ -98,9 +108,6 @@ public class DialogRateMe extends DialogFragment {
         setIconsTitleColor(iconCloseColor, iconShareColor);
 
         stars.getDrawable(2).setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_ATOP);
-        if (!showOKButtonByDefault) {
-            ratingBar.setRating((float) defaultStarsSelected);
-        }
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
 
             @Override
@@ -108,12 +115,17 @@ public class DialogRateMe extends DialogFragment {
                 if (rating >= 4.0) {
                     rateMe.setVisibility(View.VISIBLE);
                     noThanks.setVisibility(View.GONE);
-                } else {
+                } else if (rating > 0.0){
                     noThanks.setVisibility(View.VISIBLE);
                     rateMe.setVisibility(View.GONE);
+                } else {
+                    noThanks.setVisibility(View.GONE);
+                    rateMe.setVisibility(View.GONE);
                 }
+                defaultStarsSelected = (int) rating;
             }
         });
+        ratingBar.setStepSize(1.0f);
         ratingBar.setRating((float) defaultStarsSelected);
         configureButtons();
         close.setOnClickListener(new View.OnClickListener() {
@@ -123,7 +135,7 @@ public class DialogRateMe extends DialogFragment {
                 RateMeDialogTimer.clearSharedPreferences(getActivity());
                 Log.d(TAG, "clear preferences");
                 RateMeDialogTimer.setOptOut(getActivity(), true);
-                onActionListener.onActionPerformed(RateMeAction.DISMISSED_WITH_CROSS, ratingBar.getRating());
+                onActionListener.onHandleRateMeAction(RateMeAction.DISMISSED_WITH_CROSS, ratingBar.getRating());
             }
         });
         share.setVisibility(showShareButton ? View.VISIBLE : View.GONE);
@@ -132,11 +144,72 @@ public class DialogRateMe extends DialogFragment {
             public void onClick(View v) {
                 startActivity(shareApp(appPackageName));
                 Log.d(TAG, "share App");
-                onActionListener.onActionPerformed(RateMeAction.SHARED_APP, ratingBar.getRating());
+                onActionListener.onHandleRateMeAction(RateMeAction.SHARED_APP, ratingBar.getRating());
             }
         });
 
         return builder.setView(mView).setCustomTitle(tView).setCancelable(false).create();
+    }
+    
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        
+        if (savedInstanceState != null) {
+            
+            this.appPackageName = savedInstanceState.getString("appPackageName");
+            this.goToMail = savedInstanceState.getBoolean("goToMail");
+            this.email = savedInstanceState.getString("email");
+            this.showShareButton = savedInstanceState.getBoolean("showShareButton");
+            this.titleTextColor = savedInstanceState.getInt("titleTextColor");
+            this.titleBackgroundColor = savedInstanceState.getInt("titleBackgroundColor");
+            this.dialogColor = savedInstanceState.getInt("dialogColor");
+            this.lineDividerColor = savedInstanceState.getInt("lineDividerColor");
+            this.textColor = savedInstanceState.getInt("textColor");
+            this.logoResId = savedInstanceState.getInt("logoResId");
+            this.rateButtonBackgroundColor = savedInstanceState.getInt("rateButtonBackgroundColor");
+            this.rateButtonTextColor = savedInstanceState.getInt("rateButtonTextColor");
+            this.rateButtonPressedBackgroundColor = savedInstanceState.getInt("rateButtonPressedBackgroundColor");
+            this.defaultStarsSelected = savedInstanceState.getInt("defaultStarsSelected");
+            this.iconCloseColor = savedInstanceState.getInt("iconCloseColor");
+            this.iconShareColor = savedInstanceState.getInt("iconShareColor");
+            this.showOKButtonByDefault = savedInstanceState.getBoolean("showOKButtonByDefault");
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        
+        outState.putString("appPackageName", appPackageName);
+        outState.putBoolean("goToMail", goToMail);
+        outState.putString("email", email);
+        outState.putBoolean("showShareButton", showShareButton);
+        outState.putInt("titleTextColor", titleTextColor);
+        outState.putInt("titleBackgroundColor", titleBackgroundColor);
+        outState.putInt("dialogColor", dialogColor);
+        outState.putInt("lineDividerColor", lineDividerColor);
+        outState.putInt("textColor", textColor);
+        outState.putInt("logoResId", logoResId);
+        outState.putInt("rateButtonBackgroundColor", rateButtonBackgroundColor);
+        outState.putInt("rateButtonTextColor", rateButtonTextColor);
+        outState.putInt("rateButtonPressedBackgroundColor", rateButtonPressedBackgroundColor);
+        outState.putInt("defaultStarsSelected", defaultStarsSelected );
+        outState.putInt("iconCloseColor", iconCloseColor );
+        outState.putInt("iconShareColor", iconShareColor);
+        outState.putBoolean("showOKButtonByDefault", showOKButtonByDefault);
+    }
+    
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        
+        try {
+            onActionListener = (RateMeOnActionListener) activity;
+        } catch (ClassCastException e) {
+            // throw new ClassCastException("An activity hosting a DialogRateMe fragment must implement the necessary listener interface: " + RateMeOnActionListener.class.getName());
+        }
+        
     }
 
     @Override
@@ -167,7 +240,12 @@ public class DialogRateMe extends DialogFragment {
         mView.setBackgroundColor(dialogColor);
         tView.setBackgroundColor(titleBackgroundColor);
         ((TextView) tView.findViewById(R.id.title)).setTextColor(titleTextColor);
-        ((ImageView) mView.findViewById(R.id.picture)).setImageResource(logoResId);
+        if (logoResId > 0) {
+            ((ImageView) mView.findViewById(R.id.picture)).setImageResource(logoResId);
+        }
+        else {
+            ((ImageView) mView.findViewById(R.id.picture)).setVisibility(View.GONE);   
+        }
         ((TextView) mView.findViewById(R.id.phraseCenter)).setTextColor(textColor);
         rateMe.setTextColor(rateButtonTextColor);
         noThanks.setTextColor(rateButtonTextColor);
@@ -181,7 +259,7 @@ public class DialogRateMe extends DialogFragment {
                 rateApp();
                 Log.d(TAG, "go to Google Play Store for Rate-Me");
                 RateMeDialogTimer.setOptOut(getActivity(), true);
-                onActionListener.onActionPerformed(RateMeAction.HIGH_RATING_WENT_TO_GOOGLE_PLAY, ratingBar.getRating());
+                onActionListener.onHandleRateMeAction(RateMeAction.HIGH_RATING_WENT_TO_GOOGLE_PLAY, ratingBar.getRating());
                 dismiss();
             }
         });
@@ -190,13 +268,13 @@ public class DialogRateMe extends DialogFragment {
             @Override
             public void onClick(View v) {
                 if (goToMail) {
-                    DialogFragment dialogMail = DialogFeedback.newInstance(email, dialogColor, textColor, logoResId, rateButtonTextColor, lineDividerColor, ratingBar.getRating());
+                    DialogFragment dialogMail = DialogFeedback.newInstance(email, titleBackgroundColor, dialogColor, textColor, logoResId, rateButtonTextColor, rateButtonBackgroundColor, lineDividerColor, ratingBar.getRating() );
                     dialogMail.show(getFragmentManager(), "goToMail");
                     dismiss();
                     Log.d(TAG, "got to Mail for explain what is the problem");
                 } else {
                     dismiss();
-                    onActionListener.onActionPerformed(RateMeAction.LOW_RATING, ratingBar.getRating());
+                    onActionListener.onHandleRateMeAction(RateMeAction.LOW_RATING, ratingBar.getRating());
                 }
                 RateMeDialogTimer.setOptOut(getActivity(), true);
             }
@@ -236,7 +314,7 @@ public class DialogRateMe extends DialogFragment {
      * Listener for the final action that the user takes.
      */
     public interface RateMeOnActionListener {
-        void onActionPerformed(RateMeAction action, float rating);
+        void onHandleRateMeAction(RateMeAction action, float rating);
     }
 
     /**
@@ -286,16 +364,6 @@ public class DialogRateMe extends DialogFragment {
         private int iconCloseColor = Color.WHITE;
         private int iconShareColor = Color.WHITE;
         private boolean showOKButtonByDefault = true;
-
-        /**
-         * Default implementation for the action listener, that just logs every action.
-         */
-        private RateMeOnActionListener onActionListener = new RateMeOnActionListener() {
-            @Override
-            public void onActionPerformed(RateMeAction action, float rating) {
-                Log.d(TAG, "Action " + action + " (rating: " + rating + ")");
-            }
-        };
 
         public Builder(Context ctx) {
             this.appPackageName = ctx.getApplicationContext().getPackageName();
@@ -406,23 +474,6 @@ public class DialogRateMe extends DialogFragment {
             return this;
         }
 
-        /**
-         * Sets a listener that will get notified after the action executes the final action in the
-         * dialog, such as rating the app or deciding to leave some feedback. Typically you want to
-         * track this to have some usage statistics.
-         *
-         * @param onActionListener listener for the final user action
-         * @return this builder
-         */
-        public Builder setOnActionListener(RateMeOnActionListener onActionListener) {
-            this.onActionListener = onActionListener;
-            return this;
-        }
-
-        public RateMeOnActionListener getOnActionListener() {
-            return onActionListener;
-        }
-
         public DialogRateMe build() {
             if (goToMail && email == null) {
                 throw new IllegalArgumentException("You Have to configure the email for the dialog goToMail");
@@ -432,115 +483,4 @@ public class DialogRateMe extends DialogFragment {
         
     }
 
-}
-
-class DialogFeedback extends DialogFragment {
-    private static final String TAG = DialogFeedback.class.getSimpleName();
-    
-    private static final String EXTRA_EMAIL = "email";
-    private static final String EXTRA_DIALOG_COLOR = "dialog-color";
-    private static final String EXTRA_TEXT_COLOR = "text-color";
-    private static final String EXTRA_LOGO = "icon";
-    private static final String EXTRA_RATE_BUTTON_TEXT_COLOR = "button-text-color";
-    private static final String EXTRA_TITLE_DIVIDER = "color-title-divider";
-    private static final String EXTRA_RATING_BAR = "get-rating";
-    
-    // Views
-    private View confirDialogTitleView;
-    private View confirDialogView;
-    private Button cancel;
-    private Button yes;
-    
-    Builder rateMe = new DialogRateMe.Builder(this);
-    
-    public static DialogFeedback newInstance (String email, int dialogColor, int textColor,int logoResId, int rateButtonTextColor,int lineDividerColor, float getRatingBar){
-        DialogFeedback dialogo = new DialogFeedback();
-        Bundle args = new Bundle();
-        args.putString(EXTRA_EMAIL, email);
-        args.putInt(EXTRA_DIALOG_COLOR, dialogColor);
-        args.putInt(EXTRA_TEXT_COLOR, textColor);        
-        args.putInt(EXTRA_LOGO, logoResId);
-        args.putInt(EXTRA_RATE_BUTTON_TEXT_COLOR, rateButtonTextColor);
-        args.putInt(EXTRA_TITLE_DIVIDER, lineDividerColor);
-        args.putFloat(EXTRA_RATING_BAR, getRatingBar);
-        dialogo.setArguments(args);
-        return dialogo;
-        
-    }
-    
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        initializeUiFieldsDialogGoToMail();
-        Log.d(TAG, "initialize correctly all the components");
-        
-        cancel.setOnClickListener(new View.OnClickListener()  {
-            public void onClick(View v) {
-                dismiss();
-                rateMe.getOnActionListener().onActionPerformed(RateMeAction.LOW_RATING_REFUSED_TO_GIVE_FEEDBACK, getArguments().getFloat(EXTRA_RATING_BAR));
-                Log.d(TAG, "Close dialog Mail");
-            }
-        });  
-        
-        yes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToMail();
-                rateMe.getOnActionListener().onActionPerformed(RateMeAction.LOW_RATING_GAVE_FEEDBACK, getArguments().getFloat(EXTRA_RATING_BAR));
-                Log.d(TAG, "Go to mail");
-                dismiss();
-            }
-        });
-        
-        return builder.setCustomTitle(confirDialogTitleView).setView(confirDialogView).create();
-    }
-    
-    private void initializeUiFieldsDialogGoToMail(){
-        confirDialogTitleView = getActivity().getLayoutInflater().inflate(R.layout.feedback_dialog_title, null);
-        confirDialogView = getActivity().getLayoutInflater().inflate(R.layout.feedback_dialog_message, null);
-        confirDialogTitleView.setBackgroundColor(getArguments().getInt(EXTRA_DIALOG_COLOR));
-        confirDialogView.setBackgroundColor(getArguments().getInt(EXTRA_DIALOG_COLOR));
-        ((ImageView) confirDialogView.findViewById(R.id.icon)).setImageResource(getArguments().getInt(EXTRA_LOGO));
-        ((TextView) confirDialogTitleView.findViewById(R.id.confirmDialogTitle)).setTextColor(getArguments().getInt(EXTRA_TEXT_COLOR));
-        ((TextView) confirDialogView.findViewById(R.id.phraseMail)).setTextColor(getArguments().getInt(EXTRA_TEXT_COLOR));
-        cancel = (Button) confirDialogView.findViewById(R.id.buttonCancel);
-        yes = (Button) confirDialogView.findViewById(R.id.buttonYes);
-        cancel.setTextColor(getArguments().getInt(EXTRA_RATE_BUTTON_TEXT_COLOR));
-        yes.setTextColor(getArguments().getInt(EXTRA_RATE_BUTTON_TEXT_COLOR));
-    }
-    
-    private void goToMail() {
-        final String subject = getResources().getString(R.string.subject_email);
-        try {
-            Intent sendMailtoGmail = new Intent(Intent.ACTION_SEND);
-            sendMailtoGmail.setType("plain/text");
-            sendMailtoGmail.putExtra(Intent.EXTRA_EMAIL, new String[] { getArguments().getString(EXTRA_EMAIL) });
-            sendMailtoGmail.putExtra(Intent.EXTRA_SUBJECT, subject);
-            sendMailtoGmail.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
-            startActivity(Intent.createChooser(sendMailtoGmail, ""));
-            if(2+2==4){
-                throw new ActivityNotFoundException("excepcion de prueba"); 
-            }
-            
-            
-        } catch (android.content.ActivityNotFoundException ex) {
-            Log.w(TAG, "Cannot send email with Gmail, use the generic chooser");
-            Intent sendGeneric = new Intent(Intent.ACTION_SEND);
-            sendGeneric.setType("plain/text");
-            sendGeneric.putExtra(Intent.EXTRA_EMAIL, new String[] { getArguments().getString(EXTRA_EMAIL) });
-            sendGeneric.putExtra(Intent.EXTRA_SUBJECT, subject);
-            startActivity(Intent.createChooser(sendGeneric, ""));
-        }
-    }
-    
-    @Override
-    public void onStart() {
-        super.onStart();
-        final int titleDividerId = getResources().getIdentifier("titleDivider", "id", "android");
-        final View titleDivider = getDialog().findViewById(titleDividerId);
-        if (titleDivider != null) {
-            titleDivider.setBackgroundColor(getArguments().getInt(EXTRA_TITLE_DIVIDER));
-        }
-    }
-    
 }

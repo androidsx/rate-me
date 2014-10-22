@@ -7,6 +7,6 @@
     <TextView
         android:id="@+id/confirmDialogTitle"
         style="@style/textStyle"
-        android:text="@string/title" />
+        android:text="@string/rateme_title" />
 
 </RelativeLayout>

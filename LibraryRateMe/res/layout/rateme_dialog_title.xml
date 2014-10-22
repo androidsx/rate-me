@@ -23,6 +23,6 @@
         android:id="@+id/title"
         style="@style/textStyle"
         android:layout_alignBottom="@+id/buttonClose"
-        android:text="@string/title" />
+        android:text="@string/rateme_title" />
 
 </RelativeLayout>
