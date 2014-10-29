@@ -52,17 +52,17 @@ public class SampleProject extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
-        final int launchTimes = 5;
-        final int installDate = 20;
-        new RateMeDialogTimer(installDate, launchTimes);
-        RateMeDialogTimer.onStart(this);
-        if (RateMeDialogTimer.shouldShowRateDialog(this)) {
+        final int launchTimes = 3;
+        final int installDate = 7;
+        new RateMeDialogTimer();
+        RateMeDialogTimer.onStart(this, Bundle.EMPTY);
+        if (RateMeDialogTimer.shouldShowRateDialog(this, installDate, launchTimes)) {
             AlertMenu();
         }
 
     }
 
-    private void AlertMenu() {        
+    private void AlertMenu() {
         new DialogRateMe.Builder(this)
         .setEmail(getString(R.string.email_address))
         .setShowShareButton(true)
