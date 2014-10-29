@@ -25,7 +25,8 @@ public class RateMeDialogTimer {
         
         // Only use FIRST launch of the activity
         if (savedInstanceState != null) {
-            return; }
+            return;
+        }
         
         SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         Editor editor = pref.edit();
