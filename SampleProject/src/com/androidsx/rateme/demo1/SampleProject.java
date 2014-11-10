@@ -2,6 +2,7 @@ package com.androidsx.rateme.demo1;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -55,8 +56,6 @@ public class SampleProject extends Activity {
 
         final int launchTimes = 3;
         final int installDate = 7;
-
-        new RateMeDialogTimer();
 
         RateMeDialogTimer.onStart(this, null);
         if (RateMeDialogTimer.shouldShowRateDialog(this, installDate, launchTimes)) {
