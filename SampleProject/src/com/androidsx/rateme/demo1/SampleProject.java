@@ -64,7 +64,7 @@ public class SampleProject extends Activity {
 
     }
 
-    private void AlertMenu() {        
+    private void AlertMenu() {
         new DialogRateMe.Builder(this)
         .setEmail(getString(R.string.email_address))
         .setShowShareButton(true)

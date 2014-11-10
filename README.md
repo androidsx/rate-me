@@ -47,19 +47,19 @@ The full list of options is:
 
 ```java
 	new DialogRateMe.Builder(this)
-				.setDialogColor(Color.White)
+				.setDialogColor(Color.WHITE)
 				.setIconCloseColorFilter(Color.DKGRAY)
 				.setLineDividerColor(Color.BLUE)
 				.setLogoResourceId(R.drawable.ic_launcher)
 				.setRateButtonBackgroundColor(Color.BLUE)
 				.setRateButtonPressedBackgroundColor(Color.RED)
-				.setRateButtonTextColor(Color.White)
+				.setRateButtonTextColor(Color.WHITE)
 				.setGoToMail(true)
 				.setShowOKButtonByDefault(false)
-				.setEmail(getString(R.string.support_email))
+				.setEmail("support@yourdomain.com")
 				.setShowShareButton(false)
 				.setTextColor(Color.BLUE)
-				.setTitleBackgroundColor(Color.White)
+				.setTitleBackgroundColor(Color.WHITE)
 				.setTitleTextColor(Color.BLUE)
 				.build()
 				.show(getFragmentManager(), "dialog");
