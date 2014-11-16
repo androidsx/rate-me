@@ -78,7 +78,7 @@ In case you want the dialog to appear based on the number of times the app has b
 		final int launchTimes = 3;
 		final int installDate = 7;
 
-		RateMeDialogTimer.onStart(this, Bundle.EMPTY);
+		RateMeDialogTimer.onStart(this);
 		if (RateMeDialogTimer.shouldShowRateDialog(this, installDate, launchTimes)) {
 			// show the dialog with the code above
 		}
