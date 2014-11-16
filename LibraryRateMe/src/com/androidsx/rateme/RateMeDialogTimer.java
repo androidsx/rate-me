@@ -27,7 +27,14 @@ public class RateMeDialogTimer {
         if (savedInstanceState != null) {
             return;
         }
-        
+        saveInPreferences(context);
+    }
+
+    public static void onStart(Context context) {
+        saveInPreferences(context);
+    }
+
+    private static void saveInPreferences(Context context) {
         SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         Editor editor = pref.edit();
         // If it is the first launch, save the date in shared preference.
@@ -47,7 +54,6 @@ public class RateMeDialogTimer {
         mInstallDate = new Date(pref.getLong(KEY_INSTALL_DATE, 0));
         mLaunchTimes = pref.getInt(KEY_LAUNCH_TIMES, 0);
         mOptOut = pref.getBoolean(KEY_OPT_OUT, false);
-
     }
 
     /**

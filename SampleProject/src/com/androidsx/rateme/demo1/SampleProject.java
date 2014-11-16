@@ -57,7 +57,7 @@ public class SampleProject extends Activity {
         final int launchTimes = 3;
         final int installDate = 7;
 
-        RateMeDialogTimer.onStart(this, null);
+        RateMeDialogTimer.onStart(this);
         if (RateMeDialogTimer.shouldShowRateDialog(this, installDate, launchTimes)) {
             AlertMenu();
         }
