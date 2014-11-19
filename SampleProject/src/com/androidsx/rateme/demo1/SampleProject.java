@@ -2,6 +2,7 @@ package com.androidsx.rateme.demo1;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,7 +20,7 @@ public class SampleProject extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_contacts);
+        setContentView(R.layout.sample_project);
         buttonRateMe = (Button) findViewById(R.id.buttonrateme);
         buttonRateMe.setOnClickListener(new OnClickListener() {
             @Override
@@ -52,10 +53,11 @@ public class SampleProject extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
+
         final int launchTimes = 3;
         final int installDate = 7;
-        new RateMeDialogTimer();
-        RateMeDialogTimer.onStart(this, Bundle.EMPTY);
+
+        RateMeDialogTimer.onStart(this);
         if (RateMeDialogTimer.shouldShowRateDialog(this, installDate, launchTimes)) {
             AlertMenu();
         }

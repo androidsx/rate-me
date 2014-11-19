@@ -3,7 +3,7 @@
     
     <item
         android:id="@+id/RateMe"
-        android:icon="@drawable/estrella"
+        android:icon="@drawable/ic_launcher"
         android:showAsAction="ifRoom"
         android:title="@string/rateme"/>
     
