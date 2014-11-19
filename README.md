@@ -34,35 +34,35 @@ How to use
 Have a look at [the sample code](https://github.com/androidsx/rate-me/blob/master/SampleProject/src/com/androidsx/rateme/demo1/SampleProject.java) or check out a simple integration:
 
 ```java
-	new DialogRateMe.Builder(context)
-				.setLogoResourceId(R.drawable.ic_launcher)
-				.setGoToMail(true)
-				.setEmail(getString(R.string.support_email))
-				.setShowShareButton(false)
-				.build()
-				.show(getFragmentManager(), "dialog");
+new DialogRateMe.Builder(context)
+	.setLogoResourceId(R.drawable.ic_launcher)
+	.setGoToMail(true)
+	.setEmail(getString(R.string.support_email))
+	.setShowShareButton(false)
+	.build()
+	.show(getFragmentManager(), "dialog");
 ```
 
 The full list of options is:
 
 ```java
-	new DialogRateMe.Builder(this)
-				.setDialogColor(Color.WHITE)
-				.setIconCloseColorFilter(Color.DKGRAY)
-				.setLineDividerColor(Color.BLUE)
-				.setLogoResourceId(R.drawable.ic_launcher)
-				.setRateButtonBackgroundColor(Color.BLUE)
-				.setRateButtonPressedBackgroundColor(Color.RED)
-				.setRateButtonTextColor(Color.WHITE)
-				.setGoToMail(true)
-				.setShowOKButtonByDefault(false)
-				.setEmail("support@yourdomain.com")
-				.setShowShareButton(false)
-				.setTextColor(Color.BLUE)
-				.setTitleBackgroundColor(Color.WHITE)
-				.setTitleTextColor(Color.BLUE)
-				.build()
-				.show(getFragmentManager(), "dialog");
+new DialogRateMe.Builder(this)
+		.setDialogColor(Color.WHITE)
+		.setIconCloseColorFilter(Color.DKGRAY)
+		.setLineDividerColor(Color.BLUE)
+		.setLogoResourceId(R.drawable.ic_launcher)
+		.setRateButtonBackgroundColor(Color.BLUE)
+		.setRateButtonPressedBackgroundColor(Color.RED)
+		.setRateButtonTextColor(Color.WHITE)
+		.setGoToMail(true)
+		.setShowOKButtonByDefault(false)
+		.setEmail("support@yourdomain.com")
+		.setShowShareButton(false)
+		.setTextColor(Color.BLUE)
+		.setTitleBackgroundColor(Color.WHITE)
+		.setTitleTextColor(Color.BLUE)
+		.build()
+		.show(getFragmentManager(), "dialog");
 ```
 
 Dynamic opening of the dialog
@@ -71,33 +71,32 @@ Dynamic opening of the dialog
 In case you want the dialog to appear based on the number of times the app has been opened or the install date, have a look at this example:
 
 ```java
-	@Override
-	protected void onStart() {
-		super.onStart();
+@Override
+protected void onStart() {
+	super.onStart();
 
-		final int launchTimes = 3;
-		final int installDate = 7;
+	final int launchTimes = 3;
+	final int installDate = 7;
 
-		RateMeDialogTimer.onStart(this);
-		if (RateMeDialogTimer.shouldShowRateDialog(this, installDate, launchTimes)) {
-			// show the dialog with the code above
-		}
-
+	RateMeDialogTimer.onStart(this);
+	if (RateMeDialogTimer.shouldShowRateDialog(this, installDate, launchTimes)) {
+		// show the dialog with the code above
 	}
+}
 ```
 
 License
 =======
 
-		Copyright 2014 Lucas Ponzoda
+	Copyright 2014 Lucas Ponzoda
 
-		Licensed under the Apache License, Version 2.0 (the "License");
-		you may not use this file except in compliance with the License.
-		You may obtain a copy of the License at
+	Licensed under the Apache License, Version 2.0 (the "License");
+	you may not use this file except in compliance with the License.
+	You may obtain a copy of the License at
 
-			http://www.apache.org/licenses/LICENSE-2.0
+		http://www.apache.org/licenses/LICENSE-2.0
 
-		Unless required by applicable law or agreed to in writing, software
-		distributed under the License is distributed on an "AS IS" BASIS,
-		WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-		See the License for the specific
+	Unless required by applicable law or agreed to in writing, software
+	distributed under the License is distributed on an "AS IS" BASIS,
+	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	See the License for the specific
