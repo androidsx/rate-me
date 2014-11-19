@@ -35,12 +35,12 @@ Have a look at [the sample code](https://github.com/androidsx/rate-me/blob/maste
 
 ```java
 new DialogRateMe.Builder(context)
-	.setLogoResourceId(R.drawable.ic_launcher)
-	.setGoToMail(true)
-	.setEmail(getString(R.string.support_email))
-	.setShowShareButton(false)
-	.build()
-	.show(getFragmentManager(), "dialog");
+		.setLogoResourceId(R.drawable.ic_launcher)
+		.setGoToMail(true)
+		.setEmail(getString(R.string.support_email))
+		.setShowShareButton(false)
+		.build()
+		.show(getFragmentManager(), "dialog");
 ```
 
 The full list of options is:
