@@ -66,13 +66,7 @@ public class DialogRateMe extends DialogFragment {
     private int iconCloseColor;
     private int iconShareColor;
     private boolean showOKButtonByDefault;
-    private RateMeOnActionListener onActionListener = new RateMeOnActionListener() {  
-        @Override
-        public void onHandleRateMeAction(RateMeAction action, float rating)
-        {
-            Log.d(TAG, "Action " + action + " (rating: " + rating + ")");
-        }
-    };
+    private RateMeOnActionListener onActionListener;
     
     public DialogRateMe() {
         super();
@@ -96,6 +90,7 @@ public class DialogRateMe extends DialogFragment {
         this.iconCloseColor = builder.iconCloseColor;
         this.iconShareColor = builder.iconShareColor;
         this.showOKButtonByDefault = builder.showOKButtonByDefault;
+        this.onActionListener = builder.onActionListener;
     }
 
     @Override
@@ -365,6 +360,16 @@ public class DialogRateMe extends DialogFragment {
         private int iconShareColor = Color.WHITE;
         private boolean showOKButtonByDefault = true;
 
+        /**
+        * Default implementation for the action listener, that just logs every action.
+        */
+        private RateMeOnActionListener onActionListener = new RateMeOnActionListener() {
+            @Override
+            public void onHandleRateMeAction(RateMeAction action, float rating) {
+            Log.d(TAG, "Action " + action + " (rating: " + rating + ")");
+            }
+        };
+
         public Builder(Context ctx) {
             this.appPackageName = ctx.getApplicationContext().getPackageName();
         }
@@ -472,6 +477,23 @@ public class DialogRateMe extends DialogFragment {
         public Builder setShowOKButtonByDefault(boolean visible) {
             this.showOKButtonByDefault = visible;
             return this;
+        }
+
+        /**
+        * Sets a listener that will get notified after the action executes the final action in the
+        * dialog, such as rating the app or deciding to leave some feedback. Typically you want to
+        * track this to have some usage statistics.
+        *
+        * @param onActionListener listener for the final user action
+        * @return this builder
+        */
+        public Builder setOnActionListener(RateMeOnActionListener onActionListener) {
+            this.onActionListener = onActionListener;
+            return this;
+        }
+
+        public RateMeOnActionListener getOnActionListener() {
+            return onActionListener;
         }
 
         public DialogRateMe build() {
