@@ -7,7 +7,7 @@
     </style>
 
     <!-- Config Buttons -->
-    <style name="buttonDialog" parent="@style/linearLayoutMachtParent">
+    <style name="buttonDialog" parent="@style/linearLayoutTakeAllWidth">
         <item name="android:textSize">@dimen/text_size</item>
         <item name="android:background">@drawable/selector</item>
     </style>
@@ -29,9 +29,9 @@
     </style>
 
     <!-- LinearLayout -->
-    <style name="linearLayoutMachtParent">
+    <style name="linearLayoutTakeAllWidth">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
 
     <style name="linearLayoutWrapContent">
@@ -39,15 +39,13 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="linearLayoutBodyDialog" parent="@style/linearLayoutMachtParent">
+    <style name="linearLayoutBodyDialog">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">vertical</item>
         <item name="android:padding">10dp</item>
     </style>
 
-    <style name="linearLayoutConfirmActionButtons" parent="@style/linearLayoutMachtParent">
-        <item name="android:orientation">horizontal</item>
-    </style>
-    
     <style name="linearLayoutBody" parent="@style/linearLayoutWrapContent">
         <item name="android:orientation">horizontal</item>
     </style>

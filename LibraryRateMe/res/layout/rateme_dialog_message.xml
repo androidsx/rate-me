@@ -42,19 +42,16 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout style="@style/linearLayoutConfirmActionButtons" >
+    <Button
+        android:id="@+id/buttonRateMe"
+        style="@style/buttonRateMe"
+        android:text="@string/rateme"
+        tools:background="#444444"
+        tools:visibility="visible" />
 
-        <Button
-            android:id="@+id/buttonRateMe"
-            style="@style/buttonRateMe"
-            android:text="@string/rateme"
-            tools:background="#444444"
-            tools:visibility="visible" />
-
-        <Button
-            android:id="@+id/buttonThanks"
-            style="@style/buttonRateMe"
-            android:text="@string/rateme_no_thanks" />
-    </LinearLayout>
+    <Button
+        android:id="@+id/buttonThanks"
+        style="@style/buttonRateMe"
+        android:text="@string/rateme_no_thanks" />
 
 </LinearLayout>
