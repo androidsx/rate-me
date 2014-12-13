@@ -21,6 +21,14 @@ public class RateMeDialogTimer {
     private static int mLaunchTimes = 0;
     private static boolean mOptOut = false;
 
+    /**
+     * Note to pre-1.2 users: installDate and launchTimes are now parameters in
+     * {@link #shouldShowRateDialog}.
+     */
+    public RateMeDialogTimer() {
+        // Intentionally empty. See the javadoc comment
+    }
+
     public static void onStart(Context context, Bundle savedInstanceState) {
         
         // Only use FIRST launch of the activity
