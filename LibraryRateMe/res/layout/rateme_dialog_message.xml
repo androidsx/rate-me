@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/linearLayoutBodyDialog" >
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/linearLayoutBodyDialog"
+    tools:background="#212121">
 
     <LinearLayout
         android:id="@+id/Linear"
-        style="@style/linearLayoutBody" >
+        style="@style/linearLayoutBody"
+        tools:background="#43A047" >
 
         <ImageView
             android:id="@+id/picture"
             style="@style/iconApp" />
 
         <LinearLayout
+            tools:background="#795548"
             style="@style/linearLayoutMessageDialog" >
 
             <TextView
@@ -43,14 +47,14 @@
         <Button
             android:id="@+id/buttonRateMe"
             style="@style/buttonRateMe"
-            android:text="@string/rateme" >
-        </Button>
+            android:text="@string/rateme"
+            tools:background="#444444"
+            tools:visibility="visible" />
 
         <Button
             android:id="@+id/buttonThanks"
             style="@style/buttonRateMe"
-            android:text="@string/rateme_no_thanks" >
-        </Button>
+            android:text="@string/rateme_no_thanks" />
     </LinearLayout>
 
 </LinearLayout>
