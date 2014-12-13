@@ -219,10 +219,8 @@ public class DialogRateMe extends DialogFragment {
 
     private void initializeUiFields() {
         // Main Dialog
-        GradientDrawable rateMeButton = (GradientDrawable) getResources().getDrawable(R.drawable.customshape);
         GradientDrawable rateMeButtonItemSelected = (GradientDrawable) getResources().getDrawable(
                 R.drawable.itemselected);
-        rateMeButton.setColor(rateButtonBackgroundColor);
         rateMeButtonItemSelected.setColor(rateButtonPressedBackgroundColor);
         mView = getActivity().getLayoutInflater().inflate(R.layout.rateme_dialog_message, null);
         tView = getActivity().getLayoutInflater().inflate(R.layout.rateme_dialog_title, null);
@@ -242,6 +240,8 @@ public class DialogRateMe extends DialogFragment {
             ((ImageView) mView.findViewById(R.id.picture)).setVisibility(View.GONE);   
         }
         ((TextView) mView.findViewById(R.id.phraseCenter)).setTextColor(textColor);
+        rateMe.setBackgroundColor(rateButtonBackgroundColor);
+        noThanks.setBackgroundColor(rateButtonBackgroundColor);
         rateMe.setTextColor(rateButtonTextColor);
         noThanks.setTextColor(rateButtonTextColor);
 
