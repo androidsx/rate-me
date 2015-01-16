@@ -1,7 +1,7 @@
 Rate-Me [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Rate--Me-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/1032)
 =======
 
-Rate Me is an Android 2.3 library that shows dialog to suggest the user to rate the application in the Google Play Store.
+Rate Me is an Android 3.0 library that shows dialog to suggest the user to rate the application in the Google Play Store.
 
 With a little twist: if the rating is positive, we take the user to the Play Store directly. Otherwise, we ask him for feedback via email. (This is all configurable.)
 
