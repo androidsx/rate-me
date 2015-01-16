@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -24,8 +23,6 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.androidsx.libraryrateme.R;
-import com.androidsx.rateme.DialogRateMe.Builder;
-import com.androidsx.rateme.DialogRateMe.RateMeAction;
 
 public class DialogRateMe extends DialogFragment {
     private static final String TAG = DialogRateMe.class.getSimpleName();
