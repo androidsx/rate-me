@@ -342,7 +342,7 @@ public class DialogRateMe extends DialogFragment {
         private String appPackageName;
         private boolean goToMail;
         private String email;
-        private boolean showShareButton;
+        private boolean showShareButton = false;
         private int titleTextColor = Color.WHITE;
         private int titleBackgroundColor = Color.BLACK;
         private int dialogColor = Color.DKGRAY;
