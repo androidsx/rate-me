@@ -130,15 +130,20 @@ public class DialogRateMe extends DialogFragment {
                 onActionListener.onHandleRateMeAction(RateMeAction.DISMISSED_WITH_CROSS, ratingBar.getRating());
             }
         });
-        share.setVisibility(showShareButton ? View.VISIBLE : View.GONE);
-        share.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(shareApp(appPackageName));
-                Log.d(TAG, "share App");
-                onActionListener.onHandleRateMeAction(RateMeAction.SHARED_APP, ratingBar.getRating());
-            }
-        });
+        
+        try{
+            share.setVisibility(showShareButton ? View.VISIBLE : View.GONE);
+            share.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(shareApp(appPackageName));
+                    Log.d(TAG, "share App");
+                    onActionListener.onHandleRateMeAction(RateMeAction.SHARED_APP, ratingBar.getRating());
+                }
+            });
+        }catch (Exception e){
+            Log.d(TAG,"Error showing share button " + e);
+        }
 
         return builder.setView(mView).setCustomTitle(tView).setCancelable(false).create();
     }
