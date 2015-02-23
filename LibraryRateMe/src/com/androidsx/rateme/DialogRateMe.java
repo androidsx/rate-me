@@ -234,14 +234,15 @@ public class DialogRateMe extends DialogFragment {
         stars = (LayerDrawable) ratingBar.getProgressDrawable();
         mView.setBackgroundColor(dialogColor);
         tView.setBackgroundColor(titleBackgroundColor);
-        ((TextView) tView.findViewById(R.id.title)).setTextColor(titleTextColor);
+        ((TextView) tView.findViewById(R.id.dialog_tiitle)).setTextColor(titleTextColor);
         if (logoResId > 0) {
-            ((ImageView) mView.findViewById(R.id.picture)).setImageResource(logoResId);
+            ((ImageView) mView.findViewById(R.id.app_icon_dialog_rating)).setImageResource(logoResId);
         }
         else {
-            ((ImageView) mView.findViewById(R.id.picture)).setVisibility(View.GONE);   
+            ((ImageView) mView.findViewById(R.id.app_icon_dialog_rating)).setVisibility(View.GONE);
         }
-        ((TextView) mView.findViewById(R.id.phraseCenter)).setTextColor(textColor);
+        ((TextView) mView.findViewById(R.id.rating_dialog_message)).setTextColor(textColor);
+
         rateMe.setBackgroundColor(rateButtonBackgroundColor);
         noThanks.setBackgroundColor(rateButtonBackgroundColor);
         rateMe.setTextColor(rateButtonTextColor);

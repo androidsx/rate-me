@@ -7,15 +7,15 @@
 		style="@style/linearLayoutBody" >
 		
         <ImageView
-            android:id="@+id/icon"
             style="@style/iconApp"
             android:paddingBottom="15dp" />
+            android:id="@+id/app_icon_dialog_mail"
 
         <LinearLayout
             style="@style/linearLayoutMessageDialog" >
 
             <TextView
-                android:id="@+id/phraseMail"
+                android:id="@+id/mail_dialog_message"
                 style="@style/textStyle"
                 android:text="@string/rateme_message_confirm_dialog" />
         </LinearLayout>

@@ -10,16 +10,16 @@
         tools:background="#43A047" >
 
         <ImageView
-            android:id="@+id/picture"
             style="@style/iconApp" />
+            android:id="@+id/app_icon_dialog_rating"
 
         <LinearLayout
             tools:background="#795548"
             style="@style/linearLayoutMessageDialog" >
 
             <TextView
-                android:id="@+id/phraseCenter"
                 style="@style/textStyle"
+                android:id="@+id/rating_dialog_message"
                 android:text="@string/rateme_message" />
 
             <LinearLayout

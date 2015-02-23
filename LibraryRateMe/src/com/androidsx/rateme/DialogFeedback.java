@@ -30,8 +30,8 @@ public class DialogFeedback extends DialogFragment {
     private static final String EXTRA_RATING_BAR = "get-rating";
     
     // Views
-    private View confirDialogTitleView;
-    private View confirDialogView;
+    private View confirmDialogTitleView;
+    private View confirmDialogView;
     private Button cancel;
     private Button yes;
     
@@ -102,24 +102,24 @@ public class DialogFeedback extends DialogFragment {
             }
         });
         
-        return builder.setCustomTitle(confirDialogTitleView).setView(confirDialogView).create();
+        return builder.setCustomTitle(confirmDialogTitleView).setView(confirmDialogView).create();
     }
     
     private void initializeUiFieldsDialogGoToMail(){
-        confirDialogTitleView = getActivity().getLayoutInflater().inflate(R.layout.feedback_dialog_title, null);
-        confirDialogView = getActivity().getLayoutInflater().inflate(R.layout.feedback_dialog_message, null);
-        confirDialogTitleView.setBackgroundColor(getArguments().getInt(EXTRA_DIALOG_TITLE_COLOR));
-        confirDialogView.setBackgroundColor(getArguments().getInt(EXTRA_DIALOG_COLOR));
+        confirmDialogTitleView = getActivity().getLayoutInflater().inflate(R.layout.feedback_dialog_title, null);
+        confirmDialogView = getActivity().getLayoutInflater().inflate(R.layout.feedback_dialog_message, null);
+        confirmDialogTitleView.setBackgroundColor(getArguments().getInt(EXTRA_DIALOG_TITLE_COLOR));
+        confirmDialogView.setBackgroundColor(getArguments().getInt(EXTRA_DIALOG_COLOR));
         if (getArguments().getInt(EXTRA_LOGO) > 0) {
-            ((ImageView) confirDialogView.findViewById(R.id.icon)).setImageResource(getArguments().getInt(EXTRA_LOGO));
+            ((ImageView) confirmDialogView.findViewById(R.id.app_icon_dialog_mail)).setImageResource(getArguments().getInt(EXTRA_LOGO));
         }
         else {
-            ((ImageView) confirDialogView.findViewById(R.id.icon)).setVisibility(View.GONE);
+            ((ImageView) confirmDialogView.findViewById(R.id.app_icon_dialog_mail)).setVisibility(View.GONE);
         }
-        ((TextView) confirDialogTitleView.findViewById(R.id.confirmDialogTitle)).setTextColor(getArguments().getInt(EXTRA_TEXT_COLOR));
-        ((TextView) confirDialogView.findViewById(R.id.phraseMail)).setTextColor(getArguments().getInt(EXTRA_TEXT_COLOR));
-        cancel = (Button) confirDialogView.findViewById(R.id.buttonCancel);
-        yes = (Button) confirDialogView.findViewById(R.id.buttonYes);
+        ((TextView) confirmDialogTitleView.findViewById(R.id.confirmDialogTitle)).setTextColor(getArguments().getInt(EXTRA_TEXT_COLOR));
+        ((TextView) confirmDialogView.findViewById(R.id.mail_dialog_message)).setTextColor(getArguments().getInt(EXTRA_TEXT_COLOR));
+        cancel = (Button) confirmDialogView.findViewById(R.id.buttonCancel);
+        yes = (Button) confirmDialogView.findViewById(R.id.buttonYes);
         cancel.setTextColor(getArguments().getInt(EXTRA_RATE_BUTTON_TEXT_COLOR));
         yes.setTextColor(getArguments().getInt(EXTRA_RATE_BUTTON_TEXT_COLOR));
         cancel.setBackgroundColor(getArguments().getInt(EXTRA_RATE_BUTTON_BG_COLOR));
