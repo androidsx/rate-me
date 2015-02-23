@@ -11,7 +11,6 @@ import android.graphics.ColorFilter;
 import android.graphics.LightingColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -221,9 +220,6 @@ public class DialogRateMe extends DialogFragment {
 
     private void initializeUiFields() {
         // Main Dialog
-        GradientDrawable rateMeButtonItemSelected = (GradientDrawable) getResources().getDrawable(
-                R.drawable.itemselected);
-        rateMeButtonItemSelected.setColor(rateButtonPressedBackgroundColor);
         mView = getActivity().getLayoutInflater().inflate(R.layout.rateme_dialog_message, null);
         tView = getActivity().getLayoutInflater().inflate(R.layout.rateme_dialog_title, null);
         close = (Button) tView.findViewById(R.id.buttonClose);
