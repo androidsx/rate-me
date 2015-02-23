@@ -154,4 +154,17 @@ public class DialogFeedback extends DialogFragment {
             titleDivider.setBackgroundColor(getArguments().getInt(EXTRA_TITLE_DIVIDER));
         }
     }
+
+    private boolean isPackageInstalled(String packageName) {
+        PackageManager pm = getActivity().getPackageManager();
+        try {
+            pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
+            Log.d("TAG", "instalada");
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.d("TAG", "No instalada");
+            return false;
+        }
+    }
+    
 }
