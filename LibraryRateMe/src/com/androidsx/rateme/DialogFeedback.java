@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -128,20 +129,21 @@ public class DialogFeedback extends DialogFragment {
     
     private void goToMail() {
         final String subject = getResources().getString(R.string.rateme_subject_email, getResources().getString(R.string.app_name));
+        String packageNameGmail = "com.google.android.gm";
+        
         try {
-            Intent sendMailtoGmail = new Intent(Intent.ACTION_SEND);
-            sendMailtoGmail.setType("plain/text");
-            sendMailtoGmail.putExtra(Intent.EXTRA_EMAIL, new String[] { getArguments().getString(EXTRA_EMAIL) });
-            sendMailtoGmail.putExtra(Intent.EXTRA_SUBJECT, subject);
-            sendMailtoGmail.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
-            startActivity(Intent.createChooser(sendMailtoGmail, ""));            
+            if (isPackageInstalled(packageNameGmail)) {
+                Intent sendMailWithGmail = new Intent(Intent.ACTION_SEND);
+                sendMailWithGmail.setType("plain/text");
+                sendMailWithGmail.putExtra(Intent.EXTRA_EMAIL, new String[]{getArguments().getString(EXTRA_EMAIL)});
+                sendMailWithGmail.putExtra(Intent.EXTRA_SUBJECT, subject);
+                sendMailWithGmail.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
+                startActivity(Intent.createChooser(sendMailWithGmail, ""));
+            } else {
+                sendGenericMail(subject);
+            }
         } catch (android.content.ActivityNotFoundException ex) {
-            Log.w(TAG, "Cannot send email with Gmail, use the generic chooser");
-            Intent sendGeneric = new Intent(Intent.ACTION_SEND);
-            sendGeneric.setType("plain/text");
-            sendGeneric.putExtra(Intent.EXTRA_EMAIL, new String[] { getArguments().getString(EXTRA_EMAIL) });
-            sendGeneric.putExtra(Intent.EXTRA_SUBJECT, subject);
-            startActivity(Intent.createChooser(sendGeneric, ""));
+            sendGenericMail(subject);
         }
     }
     
@@ -167,4 +169,13 @@ public class DialogFeedback extends DialogFragment {
         }
     }
     
+    private void sendGenericMail(String subject) {
+        Log.w(TAG, "Cannot send email with Gmail, use the generic chooser");
+        Intent sendGeneric = new Intent(Intent.ACTION_SEND);
+        sendGeneric.setType("plain/text");
+        sendGeneric.putExtra(Intent.EXTRA_EMAIL, new String[] { getArguments().getString(EXTRA_EMAIL) });
+        sendGeneric.putExtra(Intent.EXTRA_SUBJECT, subject);
+        startActivity(Intent.createChooser(sendGeneric, ""));
+    } 
+
 }
