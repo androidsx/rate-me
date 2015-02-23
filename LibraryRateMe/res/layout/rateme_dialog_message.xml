@@ -1,31 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/linearLayoutBodyDialog"
-    tools:background="#212121">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/padding">
 
     <LinearLayout
-        android:id="@+id/Linear"
-        style="@style/linearLayoutBody"
-        tools:background="#43A047" >
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/picture"
-            style="@style/iconApp" />
+            android:id="@+id/app_icon_dialog_rating"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:layout_marginTop="@dimen/margin"
+            android:scaleType="centerInside" />
 
         <LinearLayout
-            tools:background="#795548"
-            style="@style/linearLayoutMessageDialog" >
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:background="#795548" >
 
             <TextView
-                android:id="@+id/phraseCenter"
-                style="@style/textStyle"
+                android:id="@+id/rating_dialog_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size"
                 android:text="@string/rateme_message" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp" >
+                android:layout_marginBottom="@dimen/margin_bottom" >
 
                 <RatingBar
                     android:id="@+id/ratingBar"
@@ -37,20 +46,23 @@
                     android:rotationX="0.3"
                     android:scaleX="1.0"
                     android:scaleY="1.0"
-                    android:stepSize="0.5" />
+                    android:stepSize="0.5"
+                    android:layout_gravity="center" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
     <Button
         android:id="@+id/buttonRateMe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         style="@style/buttonRateMe"
-        android:text="@string/rateme"
-        tools:background="#444444"
-        tools:visibility="visible" />
+        android:text="@string/rateme" />
 
     <Button
         android:id="@+id/buttonThanks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         style="@style/buttonRateMe"
         android:text="@string/rateme_no_thanks" />
 

@@ -1,21 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/linearLayoutBodyDialog" >
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:padding="@dimen/padding">
 
     <LinearLayout
-        android:id="@+id/LinearMail"
-		style="@style/linearLayoutBody" >
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
 		
         <ImageView
-            android:id="@+id/icon"
-            style="@style/iconApp"
-            android:paddingBottom="15dp" />
+            android:id="@+id/app_icon_dialog_mail"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:scaleType="centerInside"
+            android:layout_margin="@dimen/margin"
+            android:paddingBottom="@dimen/padding_bottom" />
 
         <LinearLayout
-            style="@style/linearLayoutMessageDialog" >
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/phraseMail"
+                android:id="@+id/mail_dialog_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 style="@style/textStyle"
                 android:text="@string/rateme_message_confirm_dialog" />
         </LinearLayout>
@@ -25,16 +36,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="15dp" >
+        android:layout_marginTop="@dimen/margin_top" >
 
         <Button
             android:id="@+id/buttonCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             style="@style/buttonGoToMail"
             android:text="@android:string/cancel" >
         </Button>
 
         <Button
             android:id="@+id/buttonYes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             style="@style/buttonGoToMail"
             android:text="@android:string/yes" >
         </Button>

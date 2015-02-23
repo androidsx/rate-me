@@ -1,58 +1,27 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="textStyle" parent="@style/linearLayoutWrapContent">
-        <item name="android:layout_marginLeft">5dp</item>
+    <style name="textStyle">
+        <item name="android:layout_marginLeft">@dimen/margin</item>
         <item name="android:textSize">@dimen/text_size</item>
         <item name="android:layout_alignParentLeft">true</item>
     </style>
 
-    <!-- Config Buttons -->
-    <style name="buttonDialog" parent="@style/linearLayoutTakeAllWidth">
+    <style name="buttonRateMe">
+        <item name="android:visibility">visible</item>
+        <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:textSize">@dimen/text_size</item>
-        <item name="android:background">@drawable/selector</item>
-    </style>
-
-    <style name="buttonRateMe" parent="@style/buttonDialog">
-        <item name="android:visibility">gone</item>
-    </style>
-
-    <style name="buttonGoToMail" parent="@style/buttonDialog">
-        <item name="android:layout_weight">50</item>
-        <item name="android:layout_margin">4dp</item>
     </style>
 
     <style name="iconApp">
         <item name="android:layout_width">@dimen/icon_size</item>
         <item name="android:layout_height">@dimen/icon_size</item>
-        <item name="android:layout_margin">5dp</item>
+        <item name="android:layout_margin">@dimen/margin</item>
         <item name="android:scaleType">centerInside</item>
     </style>
+    <style name="buttonGoToMail">
+        <item name="android:layout_weight">0.5</item>
+        <item name="android:layout_margin">@dimen/margin</item>
 
-    <!-- LinearLayout -->
-    <style name="linearLayoutTakeAllWidth">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-    </style>
-
-    <style name="linearLayoutWrapContent">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-    </style>
-
-    <style name="linearLayoutBodyDialog">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:orientation">vertical</item>
-        <item name="android:padding">10dp</item>
-    </style>
-
-    <style name="linearLayoutBody" parent="@style/linearLayoutWrapContent">
-        <item name="android:orientation">horizontal</item>
-    </style>
-    
-    <style name="linearLayoutMessageDialog" parent="@style/linearLayoutWrapContent">
-        <item name="android:orientation">vertical</item>
-        <item name="android:layout_marginLeft">5dp</item>
     </style>
 
 </resources>
