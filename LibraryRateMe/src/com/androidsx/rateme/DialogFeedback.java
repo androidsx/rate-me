@@ -161,10 +161,8 @@ public class DialogFeedback extends DialogFragment {
         PackageManager pm = getActivity().getPackageManager();
         try {
             pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
-            Log.d("TAG", "instalada");
             return true;
         } catch (PackageManager.NameNotFoundException e) {
-            Log.d("TAG", "No instalada");
             return false;
         }
     }
