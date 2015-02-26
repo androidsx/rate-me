@@ -119,16 +119,23 @@ public class DialogRateMe extends DialogFragment {
         ratingBar.setStepSize(1.0f);
         ratingBar.setRating((float) defaultStarsSelected);
         configureButtons();
-        close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-                RateMeDialogTimer.clearSharedPreferences(getActivity());
-                Log.d(TAG, "clear preferences");
-                RateMeDialogTimer.setOptOut(getActivity(), true);
-                onActionListener.onHandleRateMeAction(RateMeAction.DISMISSED_WITH_CROSS, ratingBar.getRating());
-            }
-        });
+        
+        try{
+            close.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dismiss();
+                    RateMeDialogTimer.clearSharedPreferences(getActivity());
+                    Log.d(TAG, "clear preferences");
+                    RateMeDialogTimer.setOptOut(getActivity(), true);
+                    onActionListener.onHandleRateMeAction(RateMeAction.DISMISSED_WITH_CROSS, ratingBar.getRating());
+                }
+            });
+
+        } catch (Exception e) {
+            Log.d(TAG,"Error closing the dialog" + e);
+            dismiss();
+        }
         
         try{
             share.setVisibility(showShareButton ? View.VISIBLE : View.GONE);
@@ -142,6 +149,7 @@ public class DialogRateMe extends DialogFragment {
             });
         }catch (Exception e){
             Log.d(TAG,"Error showing share button " + e);
+            dismiss();
         }
 
         return builder.setView(mView).setCustomTitle(tView).setCancelable(false).create();
