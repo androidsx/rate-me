@@ -128,7 +128,9 @@ public class DialogRateMe extends DialogFragment {
                     RateMeDialogTimer.clearSharedPreferences(getActivity());
                     Log.d(TAG, "clear preferences");
                     RateMeDialogTimer.setOptOut(getActivity(), true);
-                    onActionListener.onHandleRateMeAction(RateMeAction.DISMISSED_WITH_CROSS, ratingBar.getRating());
+                    if (onActionListener != null) {
+                        onActionListener.onHandleRateMeAction(RateMeAction.DISMISSED_WITH_CROSS, ratingBar.getRating());
+                    }
                 }
             });
 
@@ -144,7 +146,10 @@ public class DialogRateMe extends DialogFragment {
                 public void onClick(View v) {
                     startActivity(shareApp(appPackageName));
                     Log.d(TAG, "share App");
-                    onActionListener.onHandleRateMeAction(RateMeAction.SHARED_APP, ratingBar.getRating());
+                    if (onActionListener != null) {
+                        onActionListener.onHandleRateMeAction(RateMeAction.SHARED_APP, ratingBar.getRating());
+                    }
+
                 }
             });
         }catch (Exception e){
@@ -261,7 +266,9 @@ public class DialogRateMe extends DialogFragment {
                 rateApp();
                 Log.d(TAG, "go to Google Play Store for Rate-Me");
                 RateMeDialogTimer.setOptOut(getActivity(), true);
-                onActionListener.onHandleRateMeAction(RateMeAction.HIGH_RATING_WENT_TO_GOOGLE_PLAY, ratingBar.getRating());
+                if (onActionListener != null) {
+                    onActionListener.onHandleRateMeAction(RateMeAction.HIGH_RATING_WENT_TO_GOOGLE_PLAY, ratingBar.getRating());
+                }
                 dismiss();
             }
         });
@@ -276,7 +283,9 @@ public class DialogRateMe extends DialogFragment {
                     Log.d(TAG, "got to Mail for explain what is the problem");
                 } else {
                     dismiss();
-                    onActionListener.onHandleRateMeAction(RateMeAction.LOW_RATING, ratingBar.getRating());
+                    if (onActionListener != null) {
+                        onActionListener.onHandleRateMeAction(RateMeAction.LOW_RATING, ratingBar.getRating());
+                    }
                 }
                 RateMeDialogTimer.setOptOut(getActivity(), true);
             }
