@@ -1,26 +1,25 @@
-apply plugin: 'android'
+apply plugin: 'com.android.application'
 
 buildscript{
 	repositories{
 		mavenCentral()
 	}
 	dependencies{
-        classpath 'com.android.tools.build:gradle:1.0.0'
+        classpath 'com.android.tools.build:gradle:1.1.0'
 	}
 }
 
 repositories {
     mavenCentral()
-
 }
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion 22
+    buildToolsVersion "21.1.2"
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 19
+        targetSdkVersion 22
         versionName project.VERSION_NAME
         versionCode Integer.parseInt(project.VERSION_CODE)
     }
@@ -44,6 +43,5 @@ android {
 }
 
 dependencies {
-    // ChangeLog Library
     compile project(':LibraryRateMe')
 }
