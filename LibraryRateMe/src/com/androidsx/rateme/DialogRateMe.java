@@ -235,8 +235,8 @@ public class DialogRateMe extends DialogFragment {
 
     private void initializeUiFields() {
         // Main Dialog
-        mView = getActivity().getLayoutInflater().inflate(R.layout.rateme_dialog_message, null);
-        tView = getActivity().getLayoutInflater().inflate(R.layout.rateme_dialog_title, null);
+        mView = View.inflate(getActivity(), R.layout.rateme_dialog_message, null);
+        tView = View.inflate(getActivity(), R.layout.rateme_dialog_title, null);
         close = (Button) tView.findViewById(R.id.buttonClose);
         share = (Button) tView.findViewById(R.id.buttonShare);
         rateMe = (Button) mView.findViewById(R.id.buttonRateMe);
@@ -387,10 +387,6 @@ public class DialogRateMe extends DialogFragment {
 
         public Builder(Context ctx) {
             this.appPackageName = ctx.getApplicationContext().getPackageName();
-        }
-
-        public Builder(DialogFeedback dialogFeedback) {
-            return;
         }
 
         /**

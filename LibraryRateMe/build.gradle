@@ -27,9 +27,8 @@ android {
         }
     }
 
-    // It would be better to fix the issues
     lintOptions {
-        abortOnError false
+        abortOnError true
     }
 }
 // Used to push in maven

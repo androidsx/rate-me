@@ -112,8 +112,8 @@ public class DialogFeedback extends DialogFragment {
     }
     
     private void initializeUiFieldsDialogGoToMail() {
-        confirmDialogTitleView = getActivity().getLayoutInflater().inflate(R.layout.feedback_dialog_title, null);
-        confirmDialogView = getActivity().getLayoutInflater().inflate(R.layout.feedback_dialog_message, null);
+        confirmDialogTitleView = View.inflate(getActivity(), R.layout.feedback_dialog_title, null);
+        confirmDialogView = View.inflate(getActivity(), R.layout.feedback_dialog_message, null);
         confirmDialogTitleView.setBackgroundColor(getArguments().getInt(EXTRA_DIALOG_TITLE_COLOR));
         confirmDialogView.setBackgroundColor(getArguments().getInt(EXTRA_DIALOG_COLOR));
         if (getArguments().getInt(EXTRA_LOGO) > 0) {
