@@ -1,50 +1,44 @@
 package com.androidsx.rateme.demo1;
 
-import android.app.Activity;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import androidcourse.t4.t6.R;
 
 import com.androidsx.rateme.DialogRateMe;
 import com.androidsx.rateme.RateMeDialogTimer;
+import com.androidsx.rateme.demo.R;
 
-public class SampleProject extends Activity {
-    private Button buttonRateMe;
+public class SampleProject extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sample_project);
-        buttonRateMe = (Button) findViewById(R.id.buttonrateme);
-        buttonRateMe.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertMenu();
-            }
-        });
+    }
+
+    public void onPlainRateMeButtonClick(View view) {
+        showPlainRateMeDialog();
+    }
+
+    public void onCustomRateMeButtonClick(View view) {
+        showCustomRateMeDialog();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.rateme, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Take appropriate action for each action item click
-
         switch (item.getItemId()) {
-        case R.id.RateMe:
-            AlertMenu();
-
+        case R.id.RateMe: {
+            showPlainRateMeDialog();
+            return true;
+        }
         default:
             return super.onOptionsItemSelected(item);
         }
@@ -59,22 +53,31 @@ public class SampleProject extends Activity {
 
         RateMeDialogTimer.onStart(this);
         if (RateMeDialogTimer.shouldShowRateDialog(this, installDate, launchTimes)) {
-            AlertMenu();
+            showPlainRateMeDialog();
         }
 
     }
 
-    private void AlertMenu() {
+    private void showPlainRateMeDialog() {
         new DialogRateMe.Builder(this)
-        .setEmail(getString(R.string.email_address))
-        .setShowShareButton(true)
-        .setGoToMail(true)
-        .setTitleBackgroundColor(Color.GRAY)
-        .setDialogColor(Color.GRAY)
-        .setLineDividerColor(Color.WHITE)
-        .setRateButtonBackgroundColor(Color.BLACK)
-        .setRateButtonPressedBackgroundColor(Color.DKGRAY)
-        .build()
-        .show(getFragmentManager(), "dialog");
+                .setEmail("email@example.com")
+                .setGoToMail(true)
+                .build()
+                .show(getFragmentManager(), "plain-dialog");
+    }
+
+    private void showCustomRateMeDialog() {
+        new DialogRateMe.Builder(this)
+                .setEmail("email@example.com")
+                .setGoToMail(true)
+                .setLogoResourceId(R.drawable.ic_launcher)
+                .setTitleBackgroundColor(getResources().getColor(R.color.dialog_primary))
+                .setDialogColor(getResources().getColor(R.color.dialog_primary_light))
+                .setTextColor(getResources().getColor(R.color.dialog_text_foreground))
+                .setRateButtonBackgroundColor(getResources().getColor(R.color.dialog_primary))
+                .setRateButtonPressedBackgroundColor(getResources().getColor(R.color.dialog_primary_dark))
+                .setShowShareButton(true)
+                .build()
+                .show(getFragmentManager(), "custom-dialog");
     }
 }
