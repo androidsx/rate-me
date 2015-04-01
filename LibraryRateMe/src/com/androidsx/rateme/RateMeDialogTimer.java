@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.util.Log;
 
 public class RateMeDialogTimer {
-
     private static final String TAG = RateMeDialogTimer.class.getSimpleName();
     
     private static final String PREF_NAME = "RateThisApp";
@@ -30,7 +29,6 @@ public class RateMeDialogTimer {
     }
 
     public static void onStart(Context context, Bundle savedInstanceState) {
-        
         // Only use FIRST launch of the activity
         if (savedInstanceState != null) {
             return;
@@ -57,7 +55,7 @@ public class RateMeDialogTimer {
         editor.putInt(KEY_LAUNCH_TIMES, launchTimes);
         Log.d(TAG, "Launch times; " + launchTimes);
 
-        editor.commit();
+        editor.apply();
 
         mInstallDate = new Date(pref.getLong(KEY_INSTALL_DATE, 0));
         mLaunchTimes = pref.getInt(KEY_LAUNCH_TIMES, 0);
@@ -77,12 +75,13 @@ public class RateMeDialogTimer {
                 clearSharedPreferences(context);
                 return true;
             }
-            long threshold = installDays * 24 * 60 * 60 * 1000L; // msec
-            if (new Date().getTime() - mInstallDate.getTime() >= threshold) {
+            final long thresholdMillis = installDays * 24 * 60 * 60 * 1000L;
+            if (new Date().getTime() - mInstallDate.getTime() >= thresholdMillis) {
                 clearSharedPreferences(context);
                 return true;
+            } else {
+                return false;
             }
-            return false;
         }
     }
 
@@ -96,7 +95,7 @@ public class RateMeDialogTimer {
         Editor editor = pref.edit();
         editor.remove(KEY_INSTALL_DATE);
         editor.remove(KEY_LAUNCH_TIMES);
-        editor.commit();
+        editor.apply();
     }
 
     /**
@@ -109,12 +108,11 @@ public class RateMeDialogTimer {
         SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         Editor editor = pref.edit();
         editor.putBoolean(KEY_OPT_OUT, optOut);
-        editor.commit();
+        editor.apply();
     }
 
     public static boolean wasRated(Context context) {
         SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         return pref.getBoolean(KEY_OPT_OUT, false);
     }
-
 }

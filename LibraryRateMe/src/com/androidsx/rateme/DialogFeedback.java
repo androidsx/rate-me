@@ -45,8 +45,8 @@ public class DialogFeedback extends DialogFragment {
         }
     };
     
-        DialogFeedback dialogo = new DialogFeedback();
     public static DialogFeedback newInstance (String email, int titleBackgroundColor, int dialogColor, int headerTextColor, int textColor, int logoResId, int rateButtonTextColor, int rateButtonBackgroundColor, int lineDividerColor, float getRatingBar){
+        DialogFeedback feedbackDialog = new DialogFeedback();
         Bundle args = new Bundle();
         args.putString(EXTRA_EMAIL, email);
         args.putInt(EXTRA_DIALOG_TITLE_COLOR, titleBackgroundColor);
@@ -58,8 +58,8 @@ public class DialogFeedback extends DialogFragment {
         args.putInt(EXTRA_RATE_BUTTON_BG_COLOR, rateButtonBackgroundColor);
         args.putInt(EXTRA_TITLE_DIVIDER, lineDividerColor);
         args.putFloat(EXTRA_RATING_BAR, getRatingBar);
-        dialogo.setArguments(args);
-        return dialogo;
+        feedbackDialog.setArguments(args);
+        return feedbackDialog;
         
     }
     
@@ -108,16 +108,15 @@ public class DialogFeedback extends DialogFragment {
         return builder.setCustomTitle(confirmDialogTitleView).setView(confirmDialogView).create();
     }
     
-    private void initializeUiFieldsDialogGoToMail(){
+    private void initializeUiFieldsDialogGoToMail() {
         confirmDialogTitleView = getActivity().getLayoutInflater().inflate(R.layout.feedback_dialog_title, null);
         confirmDialogView = getActivity().getLayoutInflater().inflate(R.layout.feedback_dialog_message, null);
         confirmDialogTitleView.setBackgroundColor(getArguments().getInt(EXTRA_DIALOG_TITLE_COLOR));
         confirmDialogView.setBackgroundColor(getArguments().getInt(EXTRA_DIALOG_COLOR));
         if (getArguments().getInt(EXTRA_LOGO) > 0) {
             ((ImageView) confirmDialogView.findViewById(R.id.app_icon_dialog_mail)).setImageResource(getArguments().getInt(EXTRA_LOGO));
-        }
-        else {
-            ((ImageView) confirmDialogView.findViewById(R.id.app_icon_dialog_mail)).setVisibility(View.GONE);
+        } else {
+            confirmDialogView.findViewById(R.id.app_icon_dialog_mail).setVisibility(View.GONE);
         }
         ((TextView) confirmDialogTitleView.findViewById(R.id.confirmDialogTitle)).setTextColor(getArguments().getInt(EXTRA_HEADER_TEXT_COLOR));
         ((TextView) confirmDialogView.findViewById(R.id.mail_dialog_message)).setTextColor(getArguments().getInt(EXTRA_TEXT_COLOR));
@@ -131,10 +130,10 @@ public class DialogFeedback extends DialogFragment {
     
     private void goToMail() {
         final String subject = getResources().getString(R.string.rateme_subject_email, getResources().getString(R.string.app_name));
-        String packageNameGmail = "com.google.android.gm";
+        final String gmailPackageName = "com.google.android.gm";
         
         try {
-            if (isPackageInstalled(packageNameGmail)) {
+            if (isPackageInstalled(gmailPackageName)) {
                 Intent sendMailWithGmail = new Intent(Intent.ACTION_SEND);
                 sendMailWithGmail.setType("plain/text");
                 sendMailWithGmail.putExtra(Intent.EXTRA_EMAIL, new String[]{getArguments().getString(EXTRA_EMAIL)});
@@ -170,12 +169,11 @@ public class DialogFeedback extends DialogFragment {
     }
     
     private void sendGenericMail(String subject) {
-        Log.w(TAG, "Cannot send email with Gmail, use the generic chooser");
+        Log.w(TAG, "Cannot send the email with GMail. Will use the generic chooser");
         Intent sendGeneric = new Intent(Intent.ACTION_SEND);
         sendGeneric.setType("plain/text");
         sendGeneric.putExtra(Intent.EXTRA_EMAIL, new String[] { getArguments().getString(EXTRA_EMAIL) });
         sendGeneric.putExtra(Intent.EXTRA_SUBJECT, subject);
         startActivity(Intent.createChooser(sendGeneric, ""));
     } 
-
 }

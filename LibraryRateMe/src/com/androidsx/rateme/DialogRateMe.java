@@ -30,9 +30,9 @@ public class DialogRateMe extends DialogFragment {
     private static final String GOOGLE_PLAY_CONSTANT = "http://play.google.com/store/apps/details?id=";
 
     // Identify TitleDivider
-    private String RESOURCE_NAME = "titleDivider";
-    private String DEFAULT_TYPE_RESOURCE = "id";
-    private String DEFAULT_PACKAGE = "android";
+    private final static String RESOURCE_NAME = "titleDivider";
+    private final static String DEFAULT_TYPE_RESOURCE = "id";
+    private final static String DEFAULT_PACKAGE = "android";
 
     // Views
     private View mView;
@@ -120,7 +120,7 @@ public class DialogRateMe extends DialogFragment {
         ratingBar.setRating((float) defaultStarsSelected);
         configureButtons();
         
-        try{
+        try {
             close.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -133,13 +133,12 @@ public class DialogRateMe extends DialogFragment {
                     }
                 }
             });
-
         } catch (Exception e) {
             Log.d(TAG,"Error closing the dialog" + e);
             dismiss();
         }
         
-        try{
+        try {
             share.setVisibility(showShareButton ? View.VISIBLE : View.GONE);
             share.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -152,7 +151,7 @@ public class DialogRateMe extends DialogFragment {
 
                 }
             });
-        }catch (Exception e){
+        } catch (Exception e) {
             Log.d(TAG,"Error showing share button " + e);
             dismiss();
         }
@@ -248,7 +247,7 @@ public class DialogRateMe extends DialogFragment {
             ((ImageView) mView.findViewById(R.id.app_icon_dialog_rating)).setImageResource(logoResId);
         }
         else {
-            ((ImageView) mView.findViewById(R.id.app_icon_dialog_rating)).setVisibility(View.GONE);
+            mView.findViewById(R.id.app_icon_dialog_rating).setVisibility(View.GONE);
         }
         ((TextView) mView.findViewById(R.id.rating_dialog_message)).setTextColor(textColor);
 
@@ -313,12 +312,10 @@ public class DialogRateMe extends DialogFragment {
     }
 
     private void setIconsTitleColor(int colorClose, int colorShare) {
-        Drawable iconClose = getResources().getDrawable(R.drawable.ic_action_cancel);
-        Drawable iconShare = getResources().getDrawable(R.drawable.ic_action_share);
-        ColorFilter filterIconClose = new LightingColorFilter(colorClose, colorClose);
-        ColorFilter filterIconShare = new LightingColorFilter(colorShare, colorShare);
-        iconClose.setColorFilter(filterIconClose);
-        iconShare.setColorFilter(filterIconShare);
+        getResources().getDrawable(R.drawable.ic_action_cancel)
+                .setColorFilter(new LightingColorFilter(colorClose, colorClose));
+        getResources().getDrawable(R.drawable.ic_action_share)
+                .setColorFilter(new LightingColorFilter(colorShare, colorShare));
     }
 
     /**
@@ -354,7 +351,7 @@ public class DialogRateMe extends DialogFragment {
         DISMISSED_WITH_CROSS,
 
         /** Shared the link to the app through the button in the top-right corner. */
-        SHARED_APP;
+        SHARED_APP
     }
 
     public static class Builder {
@@ -398,7 +395,6 @@ public class DialogRateMe extends DialogFragment {
          * Set the company email when select {@code true} in {@link #setGoToMail(boolean)}
          * if you select {@code false}, no need to configure
          * @param email String variable is a email of company
-         * @return
          */
         public Builder setEmail(String email) {
             this.email = email;
@@ -520,5 +516,4 @@ public class DialogRateMe extends DialogFragment {
         }
         
     }
-
 }
