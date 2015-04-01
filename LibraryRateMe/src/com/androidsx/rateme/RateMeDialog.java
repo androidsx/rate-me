@@ -24,8 +24,8 @@ import com.androidsx.libraryrateme.R;
 /**
  * Rate Me dialog. Entry point into the library.
  */
-public class DialogRateMe extends DialogFragment {
-    private static final String TAG = DialogRateMe.class.getSimpleName();
+public class RateMeDialog extends DialogFragment {
+    private static final String TAG = RateMeDialog.class.getSimpleName();
 
     private static final String MARKET_CONSTANT = "market://details?id=";
     private static final String GOOGLE_PLAY_CONSTANT = "http://play.google.com/store/apps/details?id=";
@@ -65,11 +65,11 @@ public class DialogRateMe extends DialogFragment {
     private boolean showOKButtonByDefault;
     private RateMeOnActionListener onActionListener;
     
-    public DialogRateMe() {
+    public RateMeDialog() {
         super();
     }
 
-    private DialogRateMe(Builder builder) {
+    private RateMeDialog(Builder builder) {
         this.appPackageName = builder.appPackageName;
         this.goToMail = builder.goToMail;
         this.email = builder.email;
@@ -210,20 +210,6 @@ public class DialogRateMe extends DialogFragment {
     }
     
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        
-        try {
-            onActionListener = (RateMeOnActionListener) activity;
-        } catch (ClassCastException e) {
-            Log.w(TAG, "Expected the activity " + activity.getClass().getName() + " to implement "
-                    + RateMeOnActionListener.class.getSimpleName(), e);
-            // throw new ClassCastException("An activity hosting a DialogRateMe fragment must implement the necessary listener interface: " + RateMeOnActionListener.class.getName());
-        }
-        
-    }
-
-    @Override
     public void onStart() {
         super.onStart();
         final int titleDividerId = getResources().getIdentifier(RESOURCE_NAME, DEFAULT_TYPE_RESOURCE, DEFAULT_PACKAGE);
@@ -278,7 +264,7 @@ public class DialogRateMe extends DialogFragment {
             @Override
             public void onClick(View v) {
                 if (goToMail) {
-                    DialogFragment dialogMail = DialogFeedback.newInstance(email, titleBackgroundColor, dialogColor, titleTextColor, textColor, logoResId, rateButtonTextColor, rateButtonBackgroundColor, lineDividerColor, ratingBar.getRating() );
+                    DialogFragment dialogMail = FeedbackDialog.newInstance(email, titleBackgroundColor, dialogColor, titleTextColor, textColor, logoResId, rateButtonTextColor, rateButtonBackgroundColor, lineDividerColor, ratingBar.getRating());
                     dialogMail.show(getFragmentManager(), "goToMail");
                     dismiss();
                     Log.d(TAG, "No: open the feedback dialog");
@@ -381,7 +367,7 @@ public class DialogRateMe extends DialogFragment {
         private RateMeOnActionListener onActionListener = new RateMeOnActionListener() {
             @Override
             public void onHandleRateMeAction(RateMeAction action, float rating) {
-            Log.d(TAG, "Action " + action + " (rating: " + rating + ")");
+                Log.d(TAG, "Action " + action + " (rating: " + rating + ")");
             }
         };
 
@@ -502,16 +488,11 @@ public class DialogRateMe extends DialogFragment {
             return this;
         }
 
-        public RateMeOnActionListener getOnActionListener() {
-            return onActionListener;
-        }
-
-        public DialogRateMe build() {
+        public RateMeDialog build() {
             if (goToMail && email == null) {
                 throw new IllegalArgumentException("You Have to configure the email for the dialog goToMail");
             }
-            return new DialogRateMe(this);
+            return new RateMeDialog(this);
         }
-        
     }
 }

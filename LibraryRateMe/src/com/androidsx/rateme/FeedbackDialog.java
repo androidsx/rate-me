@@ -14,14 +14,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.androidsx.libraryrateme.R;
-import com.androidsx.rateme.DialogRateMe.RateMeAction;
-import com.androidsx.rateme.DialogRateMe.RateMeOnActionListener;
+import com.androidsx.rateme.RateMeDialog.RateMeAction;
+import com.androidsx.rateme.RateMeDialog.RateMeOnActionListener;
 
 /**
  * Dialog to ask the user for feedback after a low rating.
  */
-public class DialogFeedback extends DialogFragment {
-    private static final String TAG = DialogFeedback.class.getSimpleName();
+public class FeedbackDialog extends DialogFragment {
+    private static final String TAG = FeedbackDialog.class.getSimpleName();
     
     private static final String EXTRA_EMAIL = "email";
     private static final String EXTRA_DIALOG_TITLE_COLOR = "dialog-title-color";
@@ -48,8 +48,8 @@ public class DialogFeedback extends DialogFragment {
         }
     };
     
-    public static DialogFeedback newInstance (String email, int titleBackgroundColor, int dialogColor, int headerTextColor, int textColor, int logoResId, int rateButtonTextColor, int rateButtonBackgroundColor, int lineDividerColor, float getRatingBar){
-        DialogFeedback feedbackDialog = new DialogFeedback();
+    public static FeedbackDialog newInstance (String email, int titleBackgroundColor, int dialogColor, int headerTextColor, int textColor, int logoResId, int rateButtonTextColor, int rateButtonBackgroundColor, int lineDividerColor, float getRatingBar){
+        FeedbackDialog feedbackDialog = new FeedbackDialog();
         Bundle args = new Bundle();
         args.putString(EXTRA_EMAIL, email);
         args.putInt(EXTRA_DIALOG_TITLE_COLOR, titleBackgroundColor);
@@ -66,7 +66,7 @@ public class DialogFeedback extends DialogFragment {
         
     }
     
-    public DialogFeedback()
+    public FeedbackDialog()
     {
         super();
     }

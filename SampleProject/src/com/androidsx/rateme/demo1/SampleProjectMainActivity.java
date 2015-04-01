@@ -5,12 +5,13 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
-import com.androidsx.rateme.DialogRateMe;
+import com.androidsx.rateme.RateMeDialog;
 import com.androidsx.rateme.RateMeDialogTimer;
 import com.androidsx.rateme.demo.R;
 
-public class SampleProject extends ActionBarActivity {
+public class SampleProjectMainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +60,7 @@ public class SampleProject extends ActionBarActivity {
     }
 
     private void showPlainRateMeDialog() {
-        new DialogRateMe.Builder(this)
+        new RateMeDialog.Builder(this)
                 .setEmail("email@example.com")
                 .setGoToMail(true)
                 .build()
@@ -67,7 +68,7 @@ public class SampleProject extends ActionBarActivity {
     }
 
     private void showCustomRateMeDialog() {
-        new DialogRateMe.Builder(this)
+        new RateMeDialog.Builder(this)
                 .setEmail("email@example.com")
                 .setGoToMail(true)
                 .setLogoResourceId(R.drawable.ic_launcher)
@@ -77,6 +78,13 @@ public class SampleProject extends ActionBarActivity {
                 .setRateButtonBackgroundColor(getResources().getColor(R.color.dialog_primary))
                 .setRateButtonPressedBackgroundColor(getResources().getColor(R.color.dialog_primary_dark))
                 .setShowShareButton(true)
+                .setOnActionListener(new RateMeDialog.RateMeOnActionListener() {
+                    @Override
+                    public void onHandleRateMeAction(RateMeDialog.RateMeAction action, float rating) {
+                        Toast.makeText(SampleProjectMainActivity.this,
+                                "Rate Me action: " + action + " (rating: " + rating + ")", Toast.LENGTH_LONG).show();
+                    }
+                })
                 .build()
                 .show(getFragmentManager(), "custom-dialog");
     }
