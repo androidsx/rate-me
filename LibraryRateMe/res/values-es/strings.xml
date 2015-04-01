@@ -7,4 +7,5 @@
     <string name="rateme_no_thanks">Gracias por la puntuación!</string>
     <string name="rateme_message_confirm_dialog">Alguna sugerencia para mejorar nuestra App ?</string>
     <string name="rateme_subject_email">Sugerencias para %1$s</string>
+    <string name="rateme_icon_content_description">Icono</string>
 </resources>

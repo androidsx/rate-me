@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" 
-    android:padding="@dimen/padding">
+    android:orientation="vertical"
+    android:padding="@dimen/rateme_default_padding">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -15,44 +16,44 @@
             android:layout_width="@dimen/icon_size"
             android:layout_height="@dimen/icon_size"
             android:scaleType="centerInside"
-            android:layout_margin="@dimen/margin"
-            android:paddingBottom="@dimen/padding_bottom" />
+            android:layout_marginEnd="@dimen/rateme_horizontal_spacing"
+            android:layout_marginRight="@dimen/rateme_horizontal_spacing"
+            tools:background="#00FF00"
+            android:contentDescription="@string/rateme_icon_content_description" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/mail_dialog_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/mail_dialog_message"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/textStyle"
-                android:text="@string/rateme_message_confirm_dialog" />
-        </LinearLayout>
+            style="@style/textStyle"
+            android:text="@string/rateme_message_confirm_dialog" />
     </LinearLayout>
 
     <LinearLayout
+        style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="@dimen/margin_top" >
+        android:layout_marginTop="@dimen/margin_top"
+        android:orientation="horizontal" >
 
         <Button
             android:id="@+id/buttonCancel"
-            android:layout_width="wrap_content"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            style="@style/buttonGoToMail"
-            android:text="@android:string/cancel" >
-        </Button>
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/rateme_horizontal_spacing_small"
+            android:layout_marginRight="@dimen/rateme_horizontal_spacing_small"
+            android:text="@android:string/cancel" />
 
         <Button
             android:id="@+id/buttonYes"
-            android:layout_width="wrap_content"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            style="@style/buttonGoToMail"
-            android:text="@android:string/yes" >
-        </Button>
+            android:layout_weight="1"
+            android:layout_marginStart="@dimen/rateme_horizontal_spacing_small"
+            android:layout_marginLeft="@dimen/rateme_horizontal_spacing_small"
+            android:text="@android:string/ok" />
     </LinearLayout>
-
 </LinearLayout>

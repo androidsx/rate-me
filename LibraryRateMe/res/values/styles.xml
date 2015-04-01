@@ -11,17 +11,4 @@
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:textSize">@dimen/text_size</item>
     </style>
-
-    <style name="iconApp">
-        <item name="android:layout_width">@dimen/icon_size</item>
-        <item name="android:layout_height">@dimen/icon_size</item>
-        <item name="android:layout_margin">@dimen/margin</item>
-        <item name="android:scaleType">centerInside</item>
-    </style>
-    <style name="buttonGoToMail">
-        <item name="android:layout_weight">0.5</item>
-        <item name="android:layout_margin">@dimen/margin</item>
-
-    </style>
-
 </resources>

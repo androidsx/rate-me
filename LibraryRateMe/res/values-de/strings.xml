@@ -7,4 +7,5 @@
     <string name="rateme_no_thanks">Danke für deine Bewertung!</string>
     <string name="rateme_message_confirm_dialog">Würdest du uns dein Feedback mitteilen?</string>
     <string name="rateme_subject_email">Feedback für %1$s</string>
+    <string name="rateme_icon_content_description">Ikon</string>
 </resources>
