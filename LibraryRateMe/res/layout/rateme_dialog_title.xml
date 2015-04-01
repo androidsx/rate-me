@@ -10,7 +10,7 @@
         android:layout_height="@dimen/rateme_button_title_size"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:background="@drawable/ic_action_cancel" />
+        android:background="@android:drawable/ic_menu_close_clear_cancel" />
 
     <Button
         android:id="@+id/buttonShare"
@@ -20,7 +20,7 @@
         android:layout_marginRight="@dimen/rateme_horizontal_spacing"
         android:layout_toStartOf="@id/buttonClose"
         android:layout_toLeftOf="@id/buttonClose"
-        android:background="@drawable/ic_action_share" />
+        android:background="@android:drawable/ic_menu_share" />
 
     <TextView
         android:id="@+id/dialog_title"

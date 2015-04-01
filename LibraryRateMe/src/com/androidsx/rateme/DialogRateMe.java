@@ -314,9 +314,9 @@ public class DialogRateMe extends DialogFragment {
     }
 
     private void setIconsTitleColor(int colorClose, int colorShare) {
-        getResources().getDrawable(R.drawable.ic_action_cancel)
+        getResources().getDrawable(android.R.drawable.ic_menu_close_clear_cancel)
                 .setColorFilter(new LightingColorFilter(colorClose, colorClose));
-        getResources().getDrawable(R.drawable.ic_action_share)
+        getResources().getDrawable(android.R.drawable.ic_menu_share)
                 .setColorFilter(new LightingColorFilter(colorShare, colorShare));
     }
 
