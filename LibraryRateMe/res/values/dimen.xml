@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="rateme_default_padding">16dp</dimen>
-
-    <dimen name="text_size">20sp</dimen>
-    <dimen name="button_title_size">30dp</dimen>
-    <dimen name="icon_size">64dp</dimen>
-    <dimen name="margin">5dp</dimen>
-    <dimen name="padding">10dp</dimen>
-    <dimen name="padding_bottom">15dp</dimen>
-    <dimen name="margin_top">15dp</dimen>
-    <dimen name="margin_bottom">15dp</dimen>
-
+    <dimen name="rateme_small_padding">8dp</dimen>
     <dimen name="rateme_horizontal_spacing">16dp</dimen>
     <dimen name="rateme_horizontal_spacing_small">4dp</dimen>
+    <dimen name="rateme_dialog_title_height">12dp</dimen>
+    <dimen name="rateme_text_size">20sp</dimen>
+    <dimen name="rateme_icon_size">64dp</dimen>
+    <dimen name="rateme_button_title_size">28dp</dimen>
 </resources>

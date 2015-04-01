@@ -4,28 +4,31 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="@dimen/rateme_default_padding">
+    android:padding="@dimen/rateme_default_padding"
+    android:layout_margin="@dimen/rateme_default_padding"
+    tools:background="#77FFFFFF" >
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-		
+        android:orientation="horizontal"
+        tools:background="#FF0000" >
+
         <ImageView
             android:id="@+id/app_icon_dialog_mail"
-            android:layout_width="@dimen/icon_size"
-            android:layout_height="@dimen/icon_size"
+            android:layout_width="@dimen/rateme_icon_size"
+            android:layout_height="@dimen/rateme_icon_size"
             android:scaleType="centerInside"
-            android:layout_marginEnd="@dimen/rateme_horizontal_spacing"
-            android:layout_marginRight="@dimen/rateme_horizontal_spacing"
-            tools:background="#00FF00"
-            android:contentDescription="@string/rateme_icon_content_description" />
+            android:padding="@dimen/rateme_small_padding"
+            tools:background="#FFFF00"
+            android:contentDescription="@string/rateme_icon_content_description"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/mail_dialog_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/textStyle"
+            android:textSize="@dimen/rateme_text_size"
             android:text="@string/rateme_message_confirm_dialog" />
     </LinearLayout>
 
@@ -33,7 +36,7 @@
         style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_top"
+        android:layout_marginTop="@dimen/rateme_default_padding"
         android:orientation="horizontal" >
 
         <Button

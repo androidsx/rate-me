@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/confirmDialogTitle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp" >
-
-    <TextView
-        android:id="@+id/confirmDialogTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/textStyle"
-        android:text="@string/rateme_title" />
-
-</RelativeLayout>
+    android:padding="@dimen/rateme_dialog_title_height"
+    android:textSize="@dimen/rateme_text_size"
+    android:text="@string/rateme_title" />

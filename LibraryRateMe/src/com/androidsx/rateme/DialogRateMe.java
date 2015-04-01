@@ -7,10 +7,8 @@ import android.app.DialogFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
 import android.graphics.LightingColorFilter;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -247,11 +245,10 @@ public class DialogRateMe extends DialogFragment {
         stars = (LayerDrawable) ratingBar.getProgressDrawable();
         mView.setBackgroundColor(dialogColor);
         tView.setBackgroundColor(titleBackgroundColor);
-        ((TextView) tView.findViewById(R.id.dialog_tiitle)).setTextColor(titleTextColor);
+        ((TextView) tView.findViewById(R.id.dialog_title)).setTextColor(titleTextColor);
         if (logoResId > 0) {
             ((ImageView) mView.findViewById(R.id.app_icon_dialog_rating)).setImageResource(logoResId);
-        }
-        else {
+        } else {
             mView.findViewById(R.id.app_icon_dialog_rating).setVisibility(View.GONE);
         }
         ((TextView) mView.findViewById(R.id.rating_dialog_message)).setTextColor(textColor);
