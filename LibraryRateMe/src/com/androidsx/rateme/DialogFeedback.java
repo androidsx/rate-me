@@ -24,6 +24,7 @@ public class DialogFeedback extends DialogFragment {
     private static final String EXTRA_DIALOG_TITLE_COLOR = "dialog-title-color";
     private static final String EXTRA_DIALOG_COLOR = "dialog-color";
     private static final String EXTRA_TEXT_COLOR = "text-color";
+    private static final String EXTRA_HEADER_TEXT_COLOR = "header-text-color";
     private static final String EXTRA_LOGO = "icon";
     private static final String EXTRA_RATE_BUTTON_TEXT_COLOR = "button-text-color";
     private static final String EXTRA_RATE_BUTTON_BG_COLOR = "button-bg-color";
@@ -44,13 +45,14 @@ public class DialogFeedback extends DialogFragment {
         }
     };
     
-    public static DialogFeedback newInstance (String email, int titleBackgroundColor, int dialogColor, int textColor, int logoResId, int rateButtonTextColor, int rateButtonBackgroundColor, int lineDividerColor, float getRatingBar){
         DialogFeedback dialogo = new DialogFeedback();
+    public static DialogFeedback newInstance (String email, int titleBackgroundColor, int dialogColor, int headerTextColor, int textColor, int logoResId, int rateButtonTextColor, int rateButtonBackgroundColor, int lineDividerColor, float getRatingBar){
         Bundle args = new Bundle();
         args.putString(EXTRA_EMAIL, email);
         args.putInt(EXTRA_DIALOG_TITLE_COLOR, titleBackgroundColor);
         args.putInt(EXTRA_DIALOG_COLOR, dialogColor);
-        args.putInt(EXTRA_TEXT_COLOR, textColor);        
+        args.putInt(EXTRA_HEADER_TEXT_COLOR, headerTextColor);
+        args.putInt(EXTRA_TEXT_COLOR, textColor);
         args.putInt(EXTRA_LOGO, logoResId);
         args.putInt(EXTRA_RATE_BUTTON_TEXT_COLOR, rateButtonTextColor);
         args.putInt(EXTRA_RATE_BUTTON_BG_COLOR, rateButtonBackgroundColor);
@@ -117,7 +119,7 @@ public class DialogFeedback extends DialogFragment {
         else {
             ((ImageView) confirmDialogView.findViewById(R.id.app_icon_dialog_mail)).setVisibility(View.GONE);
         }
-        ((TextView) confirmDialogTitleView.findViewById(R.id.confirmDialogTitle)).setTextColor(getArguments().getInt(EXTRA_TEXT_COLOR));
+        ((TextView) confirmDialogTitleView.findViewById(R.id.confirmDialogTitle)).setTextColor(getArguments().getInt(EXTRA_HEADER_TEXT_COLOR));
         ((TextView) confirmDialogView.findViewById(R.id.mail_dialog_message)).setTextColor(getArguments().getInt(EXTRA_TEXT_COLOR));
         cancel = (Button) confirmDialogView.findViewById(R.id.buttonCancel);
         yes = (Button) confirmDialogView.findViewById(R.id.buttonYes);

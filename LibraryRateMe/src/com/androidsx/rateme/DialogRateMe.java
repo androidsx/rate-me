@@ -277,7 +277,7 @@ public class DialogRateMe extends DialogFragment {
             @Override
             public void onClick(View v) {
                 if (goToMail) {
-                    DialogFragment dialogMail = DialogFeedback.newInstance(email, titleBackgroundColor, dialogColor, textColor, logoResId, rateButtonTextColor, rateButtonBackgroundColor, lineDividerColor, ratingBar.getRating() );
+                    DialogFragment dialogMail = DialogFeedback.newInstance(email, titleBackgroundColor, dialogColor, titleTextColor, textColor, logoResId, rateButtonTextColor, rateButtonBackgroundColor, lineDividerColor, ratingBar.getRating() );
                     dialogMail.show(getFragmentManager(), "goToMail");
                     dismiss();
                     Log.d(TAG, "got to Mail for explain what is the problem");
