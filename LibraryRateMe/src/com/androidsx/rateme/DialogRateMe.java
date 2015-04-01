@@ -369,7 +369,7 @@ public class DialogRateMe extends DialogFragment {
         private int dialogColor = Color.DKGRAY;
         private int lineDividerColor = dialogColor;
         private int textColor = Color.WHITE;
-        private int logoResId = R.drawable.ic_launcher;
+        private int logoResId = 0;
         private int rateButtonBackgroundColor = Color.BLACK;
         private int rateButtonTextColor = Color.WHITE;
         private int rateButtonPressedBackgroundColor = Color.GRAY;
@@ -445,11 +445,11 @@ public class DialogRateMe extends DialogFragment {
             return this;
         }
 
-        /** Set a icon that will take the dialog. If not you set any icon, the icon that will
-         * put by default is {@code ic_launcher}
+        /**
+         * Sets an icon to be placed on the left-hand side of the dialog. No icon will show up
+         * otherwise.
          *
-         * @param logoResId App icon
-         * @return this builder
+         * Careful: before 3.0.0, there was a default icon.
          */
         public Builder setLogoResourceId(int logoResId) {
             this.logoResId = logoResId;
