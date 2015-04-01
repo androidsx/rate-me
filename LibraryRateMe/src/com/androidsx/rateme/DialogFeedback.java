@@ -17,6 +17,9 @@ import com.androidsx.libraryrateme.R;
 import com.androidsx.rateme.DialogRateMe.RateMeAction;
 import com.androidsx.rateme.DialogRateMe.RateMeOnActionListener;
 
+/**
+ * Dialog to ask the user for feedback after a low rating.
+ */
 public class DialogFeedback extends DialogFragment {
     private static final String TAG = DialogFeedback.class.getSimpleName();
     
@@ -85,13 +88,13 @@ public class DialogFeedback extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         initializeUiFieldsDialogGoToMail();
-        Log.d(TAG, "initialize correctly all the components");
+        Log.d(TAG, "All components were initialized successfully");
         
         cancel.setOnClickListener(new View.OnClickListener()  {
             public void onClick(View v) {
                 dismiss();
                 onActionListener.onHandleRateMeAction(RateMeAction.LOW_RATING_REFUSED_TO_GIVE_FEEDBACK, getArguments().getFloat(EXTRA_RATING_BAR));
-                Log.d(TAG, "Close dialog Mail");
+                Log.d(TAG, "Canceled the feedback dialog");
             }
         });  
         
@@ -100,7 +103,7 @@ public class DialogFeedback extends DialogFragment {
             public void onClick(View v) {
                 goToMail();
                 onActionListener.onHandleRateMeAction(RateMeAction.LOW_RATING_GAVE_FEEDBACK, getArguments().getFloat(EXTRA_RATING_BAR));
-                Log.d(TAG, "Go to mail");
+                Log.d(TAG, "Agreed to provide feedback");
                 dismiss();
             }
         });

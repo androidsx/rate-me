@@ -23,6 +23,9 @@ import android.widget.TextView;
 
 import com.androidsx.libraryrateme.R;
 
+/**
+ * Rate Me dialog. Entry point into the library.
+ */
 public class DialogRateMe extends DialogFragment {
     private static final String TAG = DialogRateMe.class.getSimpleName();
 
@@ -92,7 +95,7 @@ public class DialogRateMe extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         initializeUiFields();
-        Log.d(TAG, "initialize correctly all the components");
+        Log.d(TAG, "All components were initialized successfully");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
@@ -126,7 +129,7 @@ public class DialogRateMe extends DialogFragment {
                 public void onClick(View v) {
                     dismiss();
                     RateMeDialogTimer.clearSharedPreferences(getActivity());
-                    Log.d(TAG, "clear preferences");
+                    Log.d(TAG, "Cleared the shared preferences");
                     RateMeDialogTimer.setOptOut(getActivity(), true);
                     if (onActionListener != null) {
                         onActionListener.onHandleRateMeAction(RateMeAction.DISMISSED_WITH_CROSS, ratingBar.getRating());
@@ -134,7 +137,7 @@ public class DialogRateMe extends DialogFragment {
                 }
             });
         } catch (Exception e) {
-            Log.d(TAG,"Error closing the dialog" + e);
+            Log.w(TAG, "Error while closing the dialog", e);
             dismiss();
         }
         
@@ -144,7 +147,7 @@ public class DialogRateMe extends DialogFragment {
                 @Override
                 public void onClick(View v) {
                     startActivity(shareApp(appPackageName));
-                    Log.d(TAG, "share App");
+                    Log.d(TAG, "Share the application");
                     if (onActionListener != null) {
                         onActionListener.onHandleRateMeAction(RateMeAction.SHARED_APP, ratingBar.getRating());
                     }
@@ -215,6 +218,8 @@ public class DialogRateMe extends DialogFragment {
         try {
             onActionListener = (RateMeOnActionListener) activity;
         } catch (ClassCastException e) {
+            Log.w(TAG, "Expected the activity " + activity.getClass().getName() + " to implement "
+                    + RateMeOnActionListener.class.getSimpleName(), e);
             // throw new ClassCastException("An activity hosting a DialogRateMe fragment must implement the necessary listener interface: " + RateMeOnActionListener.class.getName());
         }
         
@@ -263,7 +268,7 @@ public class DialogRateMe extends DialogFragment {
             @Override
             public void onClick(View v) {
                 rateApp();
-                Log.d(TAG, "go to Google Play Store for Rate-Me");
+                Log.d(TAG, "Yes: open the Google Play Store");
                 RateMeDialogTimer.setOptOut(getActivity(), true);
                 if (onActionListener != null) {
                     onActionListener.onHandleRateMeAction(RateMeAction.HIGH_RATING_WENT_TO_GOOGLE_PLAY, ratingBar.getRating());
@@ -279,7 +284,7 @@ public class DialogRateMe extends DialogFragment {
                     DialogFragment dialogMail = DialogFeedback.newInstance(email, titleBackgroundColor, dialogColor, titleTextColor, textColor, logoResId, rateButtonTextColor, rateButtonBackgroundColor, lineDividerColor, ratingBar.getRating() );
                     dialogMail.show(getFragmentManager(), "goToMail");
                     dismiss();
-                    Log.d(TAG, "got to Mail for explain what is the problem");
+                    Log.d(TAG, "No: open the feedback dialog");
                 } else {
                     dismiss();
                     if (onActionListener != null) {

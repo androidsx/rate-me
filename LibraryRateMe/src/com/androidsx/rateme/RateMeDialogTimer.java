@@ -8,6 +8,9 @@ import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.util.Log;
 
+/**
+ * Timer to schedule the rate-me after a number of application launches.
+ */
 public class RateMeDialogTimer {
     private static final String TAG = RateMeDialogTimer.class.getSimpleName();
     
@@ -62,11 +65,6 @@ public class RateMeDialogTimer {
         mOptOut = pref.getBoolean(KEY_OPT_OUT, false);
     }
 
-    /**
-     * Check whether the rate dialog shoule be shown or not
-     * 
-     * @return
-     */
     public static boolean shouldShowRateDialog(final Context context, int installDays, int launchTimes) {
         if (mOptOut) {
             return false;
@@ -85,11 +83,6 @@ public class RateMeDialogTimer {
         }
     }
 
-    /**
-     * Clear data in shared preferences
-     * 
-     * @param context
-     */
     public static void clearSharedPreferences(Context context) {
         SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         Editor editor = pref.edit();
@@ -100,9 +93,6 @@ public class RateMeDialogTimer {
 
     /**
      * Set opt out flag. If it is true, the rate dialog will never shown unless app data is cleared.
-     * 
-     * @param context
-     * @param optOut
      */
     public static void setOptOut(final Context context, boolean optOut) {
         SharedPreferences pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
