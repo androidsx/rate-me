@@ -5,10 +5,10 @@ Rate Me is an Android library that shows dialog to suggest the user to rate the 
 
 With a little twist: if the rating is positive, we take the user to the Play Store directly. Otherwise, we ask him for feedback via email. (This is all configurable.)
 
-
+<p>
 <img src="https://github.com/androidsx/rate-me/blob/rename-library/readme-images/rate-me-dialog-in-helium.png" width="256" />
-
 <img src="https://github.com/androidsx/rate-me/blob/rename-library/readme-images/rate-me-dialog-in-pixable.png" width="256" />
+</p>
 
 How to integrate
 ================
