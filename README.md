@@ -5,9 +5,10 @@ Rate Me is an Android library that shows dialog to suggest the user to rate the 
 
 With a little twist: if the rating is positive, we take the user to the Play Store directly. Otherwise, we ask him for feedback via email. (This is all configurable.)
 
-[![Integration in Helium](readme-images/rate-me-dialog-in-helium.png)]()
 
-[![Integration in Helium](readme-images/rate-me-dialog-in-pixable.png)]()
+<img src="https://github.com/androidsx/rate-me/blob/rename-library/readme-images/rate-me-dialog-in-helium.png" width="256" />
+
+<img src="https://github.com/androidsx/rate-me/blob/rename-library/readme-images/rate-me-dialog-in-pixable.png" width="256" />
 
 How to integrate
 ================
@@ -51,4 +52,4 @@ if (RateMeDialogTimer.shouldShowRateDialog(this, 7, 3)) {
 License
 =======
 
-Licensed under the MIT License. See the [LICENSE.md] file for more details.
+Licensed under the MIT License. See the [LICENSE.md](LICENSE.md) file for more details.
