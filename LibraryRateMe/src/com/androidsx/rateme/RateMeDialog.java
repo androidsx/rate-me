@@ -232,10 +232,12 @@ public class RateMeDialog extends DialogFragment {
         mView.setBackgroundColor(dialogColor);
         tView.setBackgroundColor(titleBackgroundColor);
         ((TextView) tView.findViewById(R.id.dialog_title)).setTextColor(titleTextColor);
-        if (logoResId > 0) {
-            ((ImageView) mView.findViewById(R.id.app_icon_dialog_rating)).setImageResource(logoResId);
+        final View iconImage = mView.findViewById(R.id.app_icon_dialog_rating);
+        if (logoResId == 0) {
+            iconImage.setVisibility(View.GONE);
         } else {
-            mView.findViewById(R.id.app_icon_dialog_rating).setVisibility(View.GONE);
+            ((ImageView) iconImage).setImageResource(logoResId);
+            iconImage.setVisibility(View.VISIBLE);
         }
         ((TextView) mView.findViewById(R.id.rating_dialog_message)).setTextColor(textColor);
 
