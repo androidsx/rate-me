@@ -71,7 +71,7 @@ public class SampleProjectMainActivity extends ActionBarActivity {
         new RateMeDialog.Builder(this)
                 .setEmail("email@example.com")
                 .setGoToMail(true)
-                .setLogoResourceId(R.drawable.ic_launcher)
+                .setLogoResourceId(R.mipmap.ic_launcher)
                 .setTitleBackgroundColor(getResources().getColor(R.color.dialog_primary))
                 .setDialogColor(getResources().getColor(R.color.dialog_primary_light))
                 .setTextColor(getResources().getColor(R.color.dialog_text_foreground))
