@@ -359,6 +359,9 @@ public class RateMeDialog extends DialogFragment {
             }
         };
 
+        /**
+         * @param appPackageName package name of the application. Available in {@code Context.getPackageName()}.
+         */
         public Builder(String appPackageName) {
             this.appPackageName = appPackageName;
         }
