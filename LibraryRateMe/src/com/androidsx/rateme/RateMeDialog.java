@@ -1,6 +1,5 @@
 package com.androidsx.rateme;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -30,11 +29,6 @@ public class RateMeDialog extends DialogFragment {
     private static final String MARKET_CONSTANT = "market://details?id=";
     private static final String GOOGLE_PLAY_CONSTANT = "http://play.google.com/store/apps/details?id=";
 
-    // Identify TitleDivider
-    private final static String RESOURCE_NAME = "titleDivider";
-    private final static String DEFAULT_TYPE_RESOURCE = "id";
-    private final static String DEFAULT_PACKAGE = "android";
-
     // Views
     private View mView;
     private View tView;
@@ -53,7 +47,6 @@ public class RateMeDialog extends DialogFragment {
     private int titleTextColor;
     private int titleBackgroundColor;
     private int dialogColor;
-    private int lineDividerColor;
     private int textColor;
     private int logoResId;
     private int rateButtonBackgroundColor;
@@ -77,7 +70,6 @@ public class RateMeDialog extends DialogFragment {
         this.titleTextColor = builder.titleTextColor;
         this.titleBackgroundColor = builder.titleBackgroundColor;
         this.dialogColor = builder.dialogColor;
-        this.lineDividerColor = builder.lineDividerColor;
         this.textColor = builder.textColor;
         this.logoResId = builder.logoResId;
         this.rateButtonBackgroundColor = builder.rateButtonBackgroundColor;
@@ -165,7 +157,6 @@ public class RateMeDialog extends DialogFragment {
         super.onCreate(savedInstanceState);
         
         if (savedInstanceState != null) {
-            
             this.appPackageName = savedInstanceState.getString("appPackageName");
             this.goToMail = savedInstanceState.getBoolean("goToMail");
             this.email = savedInstanceState.getString("email");
@@ -173,7 +164,6 @@ public class RateMeDialog extends DialogFragment {
             this.titleTextColor = savedInstanceState.getInt("titleTextColor");
             this.titleBackgroundColor = savedInstanceState.getInt("titleBackgroundColor");
             this.dialogColor = savedInstanceState.getInt("dialogColor");
-            this.lineDividerColor = savedInstanceState.getInt("lineDividerColor");
             this.textColor = savedInstanceState.getInt("textColor");
             this.logoResId = savedInstanceState.getInt("logoResId");
             this.rateButtonBackgroundColor = savedInstanceState.getInt("rateButtonBackgroundColor");
@@ -197,7 +187,6 @@ public class RateMeDialog extends DialogFragment {
         outState.putInt("titleTextColor", titleTextColor);
         outState.putInt("titleBackgroundColor", titleBackgroundColor);
         outState.putInt("dialogColor", dialogColor);
-        outState.putInt("lineDividerColor", lineDividerColor);
         outState.putInt("textColor", textColor);
         outState.putInt("logoResId", logoResId);
         outState.putInt("rateButtonBackgroundColor", rateButtonBackgroundColor);
@@ -209,16 +198,6 @@ public class RateMeDialog extends DialogFragment {
         outState.putBoolean("showOKButtonByDefault", showOKButtonByDefault);
     }
     
-    @Override
-    public void onStart() {
-        super.onStart();
-        final int titleDividerId = getResources().getIdentifier(RESOURCE_NAME, DEFAULT_TYPE_RESOURCE, DEFAULT_PACKAGE);
-        final View titleDivider = getDialog().findViewById(titleDividerId);
-        if (titleDivider != null) {
-            titleDivider.setBackgroundColor(lineDividerColor);
-        }
-    }
-
     private void initializeUiFields() {
         // Main Dialog
         mView = View.inflate(getActivity(), R.layout.rateme_dialog_message, null);
@@ -266,7 +245,7 @@ public class RateMeDialog extends DialogFragment {
             @Override
             public void onClick(View v) {
                 if (goToMail) {
-                    DialogFragment dialogMail = FeedbackDialog.newInstance(email, titleBackgroundColor, dialogColor, titleTextColor, textColor, logoResId, rateButtonTextColor, rateButtonBackgroundColor, lineDividerColor, ratingBar.getRating());
+                    DialogFragment dialogMail = FeedbackDialog.newInstance(email, titleBackgroundColor, dialogColor, titleTextColor, textColor, logoResId, rateButtonTextColor, rateButtonBackgroundColor, ratingBar.getRating());
                     dialogMail.show(getFragmentManager(), "goToMail");
                     dismiss();
                     Log.d(TAG, "No: open the feedback dialog");
@@ -352,7 +331,6 @@ public class RateMeDialog extends DialogFragment {
         private int titleTextColor = Color.WHITE;
         private int titleBackgroundColor = Color.BLACK;
         private int dialogColor = Color.DKGRAY;
-        private int lineDividerColor = dialogColor;
         private int textColor = Color.WHITE;
         private int logoResId = 0;
         private int rateButtonBackgroundColor = Color.BLACK;
@@ -418,11 +396,6 @@ public class RateMeDialog extends DialogFragment {
 
         public Builder setDialogColor(int dialogColor) {
             this.dialogColor = dialogColor;
-            return this;
-        }
-
-        public Builder setLineDividerColor(int lineDividerColor) {
-            this.lineDividerColor = lineDividerColor;
             return this;
         }
 
