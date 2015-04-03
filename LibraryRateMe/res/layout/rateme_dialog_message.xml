@@ -16,12 +16,13 @@
 
         <ImageView
             android:id="@+id/app_icon_dialog_rating"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:maxWidth="@dimen/rateme_icon_size"
+            android:layout_width="@dimen/rateme_icon_size"
+            android:layout_height="wrap_content"
+            android:width="@dimen/rateme_icon_size"
             android:adjustViewBounds="true"
-            android:scaleType="centerInside"
-            android:padding="@dimen/rateme_small_padding"
+            android:scaleType="fitCenter"
+            android:layout_marginEnd="@dimen/rateme_horizontal_spacing"
+            android:layout_marginRight="@dimen/rateme_horizontal_spacing"
             tools:background="#FFFF00"
             android:contentDescription="@string/rateme_icon_content_description" />
 

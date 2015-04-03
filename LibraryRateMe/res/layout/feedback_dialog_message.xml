@@ -17,12 +17,14 @@
         <ImageView
             android:id="@+id/app_icon_dialog_mail"
             android:layout_width="@dimen/rateme_icon_size"
-            android:layout_height="@dimen/rateme_icon_size"
-            android:scaleType="centerInside"
-            android:padding="@dimen/rateme_small_padding"
+            android:layout_height="wrap_content"
+            android:width="@dimen/rateme_icon_size"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:layout_marginEnd="@dimen/rateme_horizontal_spacing"
+            android:layout_marginRight="@dimen/rateme_horizontal_spacing"
             tools:background="#FFFF00"
-            android:contentDescription="@string/rateme_icon_content_description"
-            android:visibility="gone"/>
+            android:contentDescription="@string/rateme_icon_content_description" />
 
         <TextView
             android:id="@+id/mail_dialog_message"

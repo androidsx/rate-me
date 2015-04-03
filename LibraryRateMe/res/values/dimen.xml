@@ -6,6 +6,6 @@
     <dimen name="rateme_horizontal_spacing_small">4dp</dimen>
     <dimen name="rateme_dialog_title_height">12dp</dimen>
     <dimen name="rateme_text_size">20sp</dimen>
-    <dimen name="rateme_icon_size">64dp</dimen>
+    <dimen name="rateme_icon_size">88dp</dimen>
     <dimen name="rateme_button_title_size">28dp</dimen>
 </resources>

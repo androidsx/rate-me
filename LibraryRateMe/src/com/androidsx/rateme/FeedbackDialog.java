@@ -116,10 +116,11 @@ public class FeedbackDialog extends DialogFragment {
         confirmDialogView = View.inflate(getActivity(), R.layout.feedback_dialog_message, null);
         confirmDialogTitleView.setBackgroundColor(getArguments().getInt(EXTRA_DIALOG_TITLE_COLOR));
         confirmDialogView.setBackgroundColor(getArguments().getInt(EXTRA_DIALOG_COLOR));
-        if (getArguments().getInt(EXTRA_LOGO) > 0) {
-            ((ImageView) confirmDialogView.findViewById(R.id.app_icon_dialog_mail)).setImageResource(getArguments().getInt(EXTRA_LOGO));
-        } else {
+        if (getArguments().getInt(EXTRA_LOGO) == 0) {
             confirmDialogView.findViewById(R.id.app_icon_dialog_mail).setVisibility(View.GONE);
+        } else {
+            ((ImageView) confirmDialogView.findViewById(R.id.app_icon_dialog_mail)).setImageResource(getArguments().getInt(EXTRA_LOGO));
+            confirmDialogView.findViewById(R.id.app_icon_dialog_mail).setVisibility(View.VISIBLE);
         }
         ((TextView) confirmDialogTitleView.findViewById(R.id.confirmDialogTitle)).setTextColor(getArguments().getInt(EXTRA_HEADER_TEXT_COLOR));
         ((TextView) confirmDialogView.findViewById(R.id.mail_dialog_message)).setTextColor(getArguments().getInt(EXTRA_TEXT_COLOR));
