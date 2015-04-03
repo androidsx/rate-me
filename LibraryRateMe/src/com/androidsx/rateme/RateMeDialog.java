@@ -3,7 +3,6 @@ package com.androidsx.rateme;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.LightingColorFilter;
@@ -21,7 +20,8 @@ import android.widget.TextView;
 import com.androidsx.libraryrateme.R;
 
 /**
- * Rate Me dialog. Entry point into the library.
+ * Rate Me dialog. Entry point into the library. Use the {@link com.androidsx.rateme.RateMeDialog.Builder} to
+ * construct your instance.
  */
 public class RateMeDialog extends DialogFragment {
     private static final String TAG = RateMeDialog.class.getSimpleName();
@@ -39,16 +39,16 @@ public class RateMeDialog extends DialogFragment {
     private Button noThanks;
     private Button share;
 
-    // configuration
+    // Configuration. It all comes from the builder. On, on resume, from the saved bundle
     private String appPackageName;
-    private boolean goToMail;
-    private String email;
+    private int headerBackgroundColor;
+    private int headerTextColor;
+    private int bodyBackgroundColor;
+    private int bodyTextColor;
+    private boolean feedbackByEmailEnabled;
+    private String feedbackEmail;
     private boolean showShareButton;
-    private int titleTextColor;
-    private int titleBackgroundColor;
-    private int dialogColor;
-    private int textColor;
-    private int logoResId;
+    private int appIconResId;
     private int rateButtonBackgroundColor;
     private int rateButtonTextColor;
     private int rateButtonPressedBackgroundColor;
@@ -57,29 +57,41 @@ public class RateMeDialog extends DialogFragment {
     private int iconShareColor;
     private boolean showOKButtonByDefault;
     private RateMeOnActionListener onActionListener;
-    
-    public RateMeDialog() {
-        super();
-    }
 
-    private RateMeDialog(Builder builder) {
-        this.appPackageName = builder.appPackageName;
-        this.goToMail = builder.goToMail;
-        this.email = builder.email;
-        this.showShareButton = builder.showShareButton;
-        this.titleTextColor = builder.titleTextColor;
-        this.titleBackgroundColor = builder.titleBackgroundColor;
-        this.dialogColor = builder.dialogColor;
-        this.textColor = builder.textColor;
-        this.logoResId = builder.logoResId;
-        this.rateButtonBackgroundColor = builder.rateButtonBackgroundColor;
-        this.rateButtonTextColor = builder.rateButtonTextColor;
-        this.rateButtonPressedBackgroundColor = builder.rateButtonPressedBackgroundColor;
-        this.defaultStarsSelected = builder.defaultStarsSelected;
-        this.iconCloseColor = builder.iconCloseColor;
-        this.iconShareColor = builder.iconShareColor;
-        this.showOKButtonByDefault = builder.showOKButtonByDefault;
-        this.onActionListener = builder.onActionListener;
+    public RateMeDialog(String appPackageName,
+                        int headerBackgroundColor,
+                        int headerTextColor,
+                        int bodyBackgroundColor,
+                        int bodyTextColor,
+                        boolean feedbackByEmailEnabled,
+                        String feedbackEmail,
+                        boolean showShareButton,
+                        int appIconResId,
+                        int rateButtonBackgroundColor,
+                        int rateButtonTextColor,
+                        int rateButtonPressedBackgroundColor,
+                        int defaultStarsSelected,
+                        int iconCloseColor,
+                        int iconShareColor,
+                        boolean showOKButtonByDefault,
+                        RateMeOnActionListener onActionListener) {
+        this.appPackageName = appPackageName;
+        this.headerBackgroundColor = headerBackgroundColor;
+        this.headerTextColor = headerTextColor;
+        this.bodyBackgroundColor = bodyBackgroundColor;
+        this.bodyTextColor = bodyTextColor;
+        this.feedbackByEmailEnabled = feedbackByEmailEnabled;
+        this.feedbackEmail = feedbackEmail;
+        this.showShareButton = showShareButton;
+        this.appIconResId = appIconResId;
+        this.rateButtonBackgroundColor = rateButtonBackgroundColor;
+        this.rateButtonTextColor = rateButtonTextColor;
+        this.rateButtonPressedBackgroundColor = rateButtonPressedBackgroundColor;
+        this.defaultStarsSelected = defaultStarsSelected;
+        this.iconCloseColor = iconCloseColor;
+        this.iconShareColor = iconShareColor;
+        this.showOKButtonByDefault = showOKButtonByDefault;
+        this.onActionListener = onActionListener;
     }
 
     @Override
@@ -158,14 +170,14 @@ public class RateMeDialog extends DialogFragment {
         
         if (savedInstanceState != null) {
             this.appPackageName = savedInstanceState.getString("appPackageName");
-            this.goToMail = savedInstanceState.getBoolean("goToMail");
-            this.email = savedInstanceState.getString("email");
+            this.headerBackgroundColor = savedInstanceState.getInt("headerBackgroundColor");
+            this.headerTextColor = savedInstanceState.getInt("headerTextColor");
+            this.bodyBackgroundColor = savedInstanceState.getInt("bodyBackgroundColor");
+            this.bodyTextColor = savedInstanceState.getInt("bodyTextColor");
+            this.feedbackByEmailEnabled = savedInstanceState.getBoolean("feedbackByEmailEnabled");
+            this.feedbackEmail = savedInstanceState.getString("feedbackEmail");
             this.showShareButton = savedInstanceState.getBoolean("showShareButton");
-            this.titleTextColor = savedInstanceState.getInt("titleTextColor");
-            this.titleBackgroundColor = savedInstanceState.getInt("titleBackgroundColor");
-            this.dialogColor = savedInstanceState.getInt("dialogColor");
-            this.textColor = savedInstanceState.getInt("textColor");
-            this.logoResId = savedInstanceState.getInt("logoResId");
+            this.appIconResId = savedInstanceState.getInt("appIconResId");
             this.rateButtonBackgroundColor = savedInstanceState.getInt("rateButtonBackgroundColor");
             this.rateButtonTextColor = savedInstanceState.getInt("rateButtonTextColor");
             this.rateButtonPressedBackgroundColor = savedInstanceState.getInt("rateButtonPressedBackgroundColor");
@@ -181,14 +193,14 @@ public class RateMeDialog extends DialogFragment {
         super.onSaveInstanceState(outState);
         
         outState.putString("appPackageName", appPackageName);
-        outState.putBoolean("goToMail", goToMail);
-        outState.putString("email", email);
+        outState.putInt("headerBackgroundColor", headerBackgroundColor);
+        outState.putInt("headerTextColor", headerTextColor);
+        outState.putInt("bodyBackgroundColor", bodyBackgroundColor);
+        outState.putInt("bodyTextColor", bodyTextColor);
+        outState.putBoolean("feedbackByEmailEnabled", feedbackByEmailEnabled);
+        outState.putString("feedbackEmail", feedbackEmail);
         outState.putBoolean("showShareButton", showShareButton);
-        outState.putInt("titleTextColor", titleTextColor);
-        outState.putInt("titleBackgroundColor", titleBackgroundColor);
-        outState.putInt("dialogColor", dialogColor);
-        outState.putInt("textColor", textColor);
-        outState.putInt("logoResId", logoResId);
+        outState.putInt("appIconResId", appIconResId);
         outState.putInt("rateButtonBackgroundColor", rateButtonBackgroundColor);
         outState.putInt("rateButtonTextColor", rateButtonTextColor);
         outState.putInt("rateButtonPressedBackgroundColor", rateButtonPressedBackgroundColor);
@@ -208,17 +220,17 @@ public class RateMeDialog extends DialogFragment {
         noThanks = (Button) mView.findViewById(R.id.buttonThanks);
         ratingBar = (RatingBar) mView.findViewById(R.id.ratingBar);
         stars = (LayerDrawable) ratingBar.getProgressDrawable();
-        mView.setBackgroundColor(dialogColor);
-        tView.setBackgroundColor(titleBackgroundColor);
-        ((TextView) tView.findViewById(R.id.dialog_title)).setTextColor(titleTextColor);
+        mView.setBackgroundColor(bodyBackgroundColor);
+        tView.setBackgroundColor(headerBackgroundColor);
+        ((TextView) tView.findViewById(R.id.dialog_title)).setTextColor(headerTextColor);
         final View iconImage = mView.findViewById(R.id.app_icon_dialog_rating);
-        if (logoResId == 0) {
+        if (appIconResId == 0) {
             iconImage.setVisibility(View.GONE);
         } else {
-            ((ImageView) iconImage).setImageResource(logoResId);
+            ((ImageView) iconImage).setImageResource(appIconResId);
             iconImage.setVisibility(View.VISIBLE);
         }
-        ((TextView) mView.findViewById(R.id.rating_dialog_message)).setTextColor(textColor);
+        ((TextView) mView.findViewById(R.id.rating_dialog_message)).setTextColor(bodyTextColor);
 
         rateMe.setBackgroundColor(rateButtonBackgroundColor);
         noThanks.setBackgroundColor(rateButtonBackgroundColor);
@@ -244,9 +256,9 @@ public class RateMeDialog extends DialogFragment {
         noThanks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (goToMail) {
-                    DialogFragment dialogMail = FeedbackDialog.newInstance(email, titleBackgroundColor, dialogColor, titleTextColor, textColor, logoResId, rateButtonTextColor, rateButtonBackgroundColor, ratingBar.getRating());
-                    dialogMail.show(getFragmentManager(), "goToMail");
+                if (feedbackByEmailEnabled) {
+                    DialogFragment dialogMail = FeedbackDialog.newInstance(feedbackEmail, headerBackgroundColor, bodyBackgroundColor, headerTextColor, bodyTextColor, appIconResId, rateButtonTextColor, rateButtonBackgroundColor, ratingBar.getRating());
+                    dialogMail.show(getFragmentManager(), "feedbackByEmailEnabled");
                     dismiss();
                     Log.d(TAG, "No: open the feedback dialog");
                 } else {
@@ -324,15 +336,15 @@ public class RateMeDialog extends DialogFragment {
     }
 
     public static class Builder {
-        private String appPackageName;
-        private boolean goToMail;
-        private String email;
+        private final String appPackageName;
+        private int headerBackgroundColor = Color.BLACK;
+        private int headerTextColor = Color.WHITE;
+        private int bodyBackgroundColor = Color.DKGRAY;
+        private int bodyTextColor = Color.WHITE;
+        private boolean feedbackByEmailEnabled = false;
+        private String feedbackEmail = null;
         private boolean showShareButton = false;
-        private int titleTextColor = Color.WHITE;
-        private int titleBackgroundColor = Color.BLACK;
-        private int dialogColor = Color.DKGRAY;
-        private int textColor = Color.WHITE;
-        private int logoResId = 0;
+        private int appIconResId = 0;
         private int rateButtonBackgroundColor = Color.BLACK;
         private int rateButtonTextColor = Color.WHITE;
         private int rateButtonPressedBackgroundColor = Color.GRAY;
@@ -340,10 +352,6 @@ public class RateMeDialog extends DialogFragment {
         private int iconCloseColor = Color.WHITE;
         private int iconShareColor = Color.WHITE;
         private boolean showOKButtonByDefault = true;
-
-        /**
-        * Default implementation for the action listener, that just logs every action.
-        */
         private RateMeOnActionListener onActionListener = new RateMeOnActionListener() {
             @Override
             public void onHandleRateMeAction(RateMeAction action, float rating) {
@@ -351,17 +359,37 @@ public class RateMeDialog extends DialogFragment {
             }
         };
 
-        public Builder(Context ctx) {
-            this.appPackageName = ctx.getApplicationContext().getPackageName();
+        public Builder(String appPackageName) {
+            this.appPackageName = appPackageName;
+        }
+
+        public Builder setHeaderBackgroundColor(int headerBackgroundColor) {
+            this.headerBackgroundColor = headerBackgroundColor;
+            return this;
+        }
+
+        public Builder setHeaderTextColor(int headerTextColor) {
+            this.headerTextColor = headerTextColor;
+            return this;
+        }
+
+        public Builder setBodyBackgroundColor(int bodyBackgroundColor) {
+            this.bodyBackgroundColor = bodyBackgroundColor;
+            return this;
+        }
+
+        public Builder setBodyTextColor(int bodyTextColor) {
+            this.bodyTextColor = bodyTextColor;
+            return this;
         }
 
         /**
-         * Set the company email when select {@code true} in {@link #setGoToMail(boolean)}
-         * if you select {@code false}, no need to configure
-         * @param email String variable is a email of company
+         * Enables a second dialog that opens if the rating is low, from which the user can send
+         * an e-mail to the provided e-mail address.
          */
-        public Builder setEmail(String email) {
-            this.email = email;
+        public Builder enableFeedbackByEmail(String email) {
+            this.feedbackByEmailEnabled = true;
+            this.feedbackEmail = email;
             return this;
         }
 
@@ -371,47 +399,13 @@ public class RateMeDialog extends DialogFragment {
         }
         
         /**
-         * Set if you want to display a new dialog when the user selects less than 4 star. On this
-         * dialog the user may send feedback for your App
-         * If you select {@code true} you must set the mail with {@link #setEmail(String)}, if not the App
-         * will closed by exception : IllegalArgumentException
-         *
-         * @param goToMail boolean variable to see new dialog for get feedback in your App
-         * @return this builder
-         */
-        public Builder setGoToMail(boolean goToMail) {
-            this.goToMail = goToMail;
-            return this;
-        }
-
-        public Builder setTitleTextColor(int titleTextColor) {
-            this.titleTextColor = titleTextColor;
-            return this;
-        }
-
-        public Builder setTitleBackgroundColor(int titleBackgroundColor) {
-            this.titleBackgroundColor = titleBackgroundColor;
-            return this;
-        }
-
-        public Builder setDialogColor(int dialogColor) {
-            this.dialogColor = dialogColor;
-            return this;
-        }
-
-        /**
          * Sets an icon to be placed on the left-hand side of the dialog. No icon will show up
          * otherwise.
          *
          * Careful: before 3.0.0, there was a default icon.
          */
-        public Builder setLogoResourceId(int logoResId) {
-            this.logoResId = logoResId;
-            return this;
-        }
-
-        public Builder setTextColor(int textColor) {
-            this.textColor = textColor;
+        public Builder showAppIcon(int appIconResId) {
+            this.appIconResId = appIconResId;
             return this;
         }
 
@@ -430,7 +424,7 @@ public class RateMeDialog extends DialogFragment {
             return this;
         }
 
-        public Builder setDefaultStartSelected(int numStars) {
+        public Builder setDefaultNumberOfStars(int numStars) {
             this.defaultStarsSelected = numStars;
             return this;
         }
@@ -454,9 +448,6 @@ public class RateMeDialog extends DialogFragment {
         * Sets a listener that will get notified after the action executes the final action in the
         * dialog, such as rating the app or deciding to leave some feedback. Typically you want to
         * track this to have some usage statistics.
-        *
-        * @param onActionListener listener for the final user action
-        * @return this builder
         */
         public Builder setOnActionListener(RateMeOnActionListener onActionListener) {
             this.onActionListener = onActionListener;
@@ -464,10 +455,23 @@ public class RateMeDialog extends DialogFragment {
         }
 
         public RateMeDialog build() {
-            if (goToMail && email == null) {
-                throw new IllegalArgumentException("You Have to configure the email for the dialog goToMail");
-            }
-            return new RateMeDialog(this);
+            return new RateMeDialog(appPackageName,
+                    headerBackgroundColor,
+                    headerTextColor,
+                    bodyBackgroundColor,
+                    bodyTextColor,
+                    feedbackByEmailEnabled,
+                    feedbackEmail,
+                    showShareButton,
+                    appIconResId,
+                    rateButtonBackgroundColor,
+                    rateButtonTextColor,
+                    rateButtonPressedBackgroundColor,
+                    defaultStarsSelected,
+                    iconCloseColor,
+                    iconShareColor,
+                    showOKButtonByDefault,
+                    onActionListener);
         }
     }
 }

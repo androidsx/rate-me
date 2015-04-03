@@ -60,24 +60,22 @@ public class SampleProjectMainActivity extends ActionBarActivity {
     }
 
     private void showPlainRateMeDialog() {
-        new RateMeDialog.Builder(this)
-                .setEmail("email@example.com")
-                .setGoToMail(true)
+        new RateMeDialog.Builder(getPackageName())
+                .enableFeedbackByEmail("email@example.com")
                 .build()
                 .show(getFragmentManager(), "plain-dialog");
     }
 
     private void showCustomRateMeDialog() {
-        new RateMeDialog.Builder(this)
-                .setEmail("email@example.com")
-                .setGoToMail(true)
-                .setLogoResourceId(R.mipmap.ic_launcher)
-                .setTitleBackgroundColor(getResources().getColor(R.color.dialog_primary))
-                .setDialogColor(getResources().getColor(R.color.dialog_primary_light))
-                .setTextColor(getResources().getColor(R.color.dialog_text_foreground))
+        new RateMeDialog.Builder(getPackageName())
+                .setHeaderBackgroundColor(getResources().getColor(R.color.dialog_primary))
+                .setBodyBackgroundColor(getResources().getColor(R.color.dialog_primary_light))
+                .setBodyTextColor(getResources().getColor(R.color.dialog_text_foreground))
+                .enableFeedbackByEmail("email@example.com")
+                .showAppIcon(R.mipmap.ic_launcher)
+                .setShowShareButton(true)
                 .setRateButtonBackgroundColor(getResources().getColor(R.color.dialog_primary))
                 .setRateButtonPressedBackgroundColor(getResources().getColor(R.color.dialog_primary_dark))
-                .setShowShareButton(true)
                 .setOnActionListener(new RateMeDialog.RateMeOnActionListener() {
                     @Override
                     public void onHandleRateMeAction(RateMeDialog.RateMeAction action, float rating) {
