@@ -29,6 +29,10 @@ public class RateMeDialog extends DialogFragment {
     private static final String MARKET_CONSTANT = "market://details?id=";
     private static final String GOOGLE_PLAY_CONSTANT = "http://play.google.com/store/apps/details?id=";
 
+    private final static String RESOURCE_NAME = "titleDivider";
+    private final static String DEFAULT_TYPE_RESOURCE = "id";
+    private final static String DEFAULT_PACKAGE = "android";
+
     // Views
     private View mView;
     private View tView;
@@ -49,6 +53,7 @@ public class RateMeDialog extends DialogFragment {
     private String feedbackEmail;
     private boolean showShareButton;
     private int appIconResId;
+    private int lineDividerColor;
     private int rateButtonBackgroundColor;
     private int rateButtonTextColor;
     private int rateButtonPressedBackgroundColor;
@@ -67,6 +72,7 @@ public class RateMeDialog extends DialogFragment {
                         String feedbackEmail,
                         boolean showShareButton,
                         int appIconResId,
+                        int lineDividerColor,
                         int rateButtonBackgroundColor,
                         int rateButtonTextColor,
                         int rateButtonPressedBackgroundColor,
@@ -84,6 +90,7 @@ public class RateMeDialog extends DialogFragment {
         this.feedbackEmail = feedbackEmail;
         this.showShareButton = showShareButton;
         this.appIconResId = appIconResId;
+        this.lineDividerColor = lineDividerColor;
         this.rateButtonBackgroundColor = rateButtonBackgroundColor;
         this.rateButtonTextColor = rateButtonTextColor;
         this.rateButtonPressedBackgroundColor = rateButtonPressedBackgroundColor;
@@ -178,6 +185,7 @@ public class RateMeDialog extends DialogFragment {
             this.feedbackEmail = savedInstanceState.getString("feedbackEmail");
             this.showShareButton = savedInstanceState.getBoolean("showShareButton");
             this.appIconResId = savedInstanceState.getInt("appIconResId");
+            this.lineDividerColor = savedInstanceState.getInt("lineDividerColor");
             this.rateButtonBackgroundColor = savedInstanceState.getInt("rateButtonBackgroundColor");
             this.rateButtonTextColor = savedInstanceState.getInt("rateButtonTextColor");
             this.rateButtonPressedBackgroundColor = savedInstanceState.getInt("rateButtonPressedBackgroundColor");
@@ -201,6 +209,7 @@ public class RateMeDialog extends DialogFragment {
         outState.putString("feedbackEmail", feedbackEmail);
         outState.putBoolean("showShareButton", showShareButton);
         outState.putInt("appIconResId", appIconResId);
+        outState.putInt("lineDividerColor", lineDividerColor);
         outState.putInt("rateButtonBackgroundColor", rateButtonBackgroundColor);
         outState.putInt("rateButtonTextColor", rateButtonTextColor);
         outState.putInt("rateButtonPressedBackgroundColor", rateButtonPressedBackgroundColor);
@@ -210,6 +219,16 @@ public class RateMeDialog extends DialogFragment {
         outState.putBoolean("showOKButtonByDefault", showOKButtonByDefault);
     }
     
+    @Override
+    public void onStart() {
+        super.onStart();
+        final int titleDividerId = getResources().getIdentifier(RESOURCE_NAME, DEFAULT_TYPE_RESOURCE, DEFAULT_PACKAGE);
+        final View titleDivider = getDialog().findViewById(titleDividerId);
+        if (titleDivider != null) {
+            titleDivider.setBackgroundColor(lineDividerColor);
+        }
+    }
+
     private void initializeUiFields() {
         // Main Dialog
         mView = View.inflate(getActivity(), R.layout.rateme_dialog_message, null);
@@ -257,7 +276,7 @@ public class RateMeDialog extends DialogFragment {
             @Override
             public void onClick(View v) {
                 if (feedbackByEmailEnabled) {
-                    DialogFragment dialogMail = FeedbackDialog.newInstance(feedbackEmail, headerBackgroundColor, bodyBackgroundColor, headerTextColor, bodyTextColor, appIconResId, rateButtonTextColor, rateButtonBackgroundColor, ratingBar.getRating());
+                    DialogFragment dialogMail = FeedbackDialog.newInstance(feedbackEmail, headerBackgroundColor, bodyBackgroundColor, headerTextColor, bodyTextColor, appIconResId, lineDividerColor, rateButtonTextColor, rateButtonBackgroundColor, ratingBar.getRating());
                     dialogMail.show(getFragmentManager(), "feedbackByEmailEnabled");
                     dismiss();
                     Log.d(TAG, "No: open the feedback dialog");
@@ -336,6 +355,7 @@ public class RateMeDialog extends DialogFragment {
     }
 
     public static class Builder {
+        private static final int LINE_DIVIDER_COLOR_UNSET = -1;
         private final String appPackageName;
         private int headerBackgroundColor = Color.BLACK;
         private int headerTextColor = Color.WHITE;
@@ -345,6 +365,7 @@ public class RateMeDialog extends DialogFragment {
         private String feedbackEmail = null;
         private boolean showShareButton = false;
         private int appIconResId = 0;
+        private int lineDividerColor = LINE_DIVIDER_COLOR_UNSET;
         private int rateButtonBackgroundColor = Color.BLACK;
         private int rateButtonTextColor = Color.WHITE;
         private int rateButtonPressedBackgroundColor = Color.GRAY;
@@ -398,6 +419,11 @@ public class RateMeDialog extends DialogFragment {
 
         public Builder setShowShareButton(boolean showShareButton) {
             this.showShareButton = showShareButton;
+            return this;
+        }
+
+        public Builder setLineDividerColor(int lineDividerColor) {
+            this.lineDividerColor = lineDividerColor;
             return this;
         }
         
@@ -458,6 +484,9 @@ public class RateMeDialog extends DialogFragment {
         }
 
         public RateMeDialog build() {
+            if (lineDividerColor == LINE_DIVIDER_COLOR_UNSET) {
+                lineDividerColor = headerBackgroundColor;
+            }
             return new RateMeDialog(appPackageName,
                     headerBackgroundColor,
                     headerTextColor,
@@ -467,6 +496,7 @@ public class RateMeDialog extends DialogFragment {
                     feedbackEmail,
                     showShareButton,
                     appIconResId,
+                    lineDividerColor,
                     rateButtonBackgroundColor,
                     rateButtonTextColor,
                     rateButtonPressedBackgroundColor,

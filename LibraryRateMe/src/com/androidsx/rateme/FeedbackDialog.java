@@ -31,6 +31,7 @@ public class FeedbackDialog extends DialogFragment {
     private static final String EXTRA_LOGO = "icon";
     private static final String EXTRA_RATE_BUTTON_TEXT_COLOR = "button-text-color";
     private static final String EXTRA_RATE_BUTTON_BG_COLOR = "button-bg-color";
+    private static final String EXTRA_TITLE_DIVIDER = "color-title-divider";
     private static final String EXTRA_RATING_BAR = "get-rating";
     
     // Views
@@ -47,7 +48,7 @@ public class FeedbackDialog extends DialogFragment {
         }
     };
     
-    public static FeedbackDialog newInstance (String email, int titleBackgroundColor, int dialogColor, int headerTextColor, int textColor, int logoResId, int rateButtonTextColor, int rateButtonBackgroundColor, float getRatingBar){
+    public static FeedbackDialog newInstance (String email, int titleBackgroundColor, int dialogColor, int headerTextColor, int textColor, int logoResId, int rateButtonTextColor, int rateButtonBackgroundColor, int lineDividerColor, float getRatingBar){
         FeedbackDialog feedbackDialog = new FeedbackDialog();
         Bundle args = new Bundle();
         args.putString(EXTRA_EMAIL, email);
@@ -58,6 +59,7 @@ public class FeedbackDialog extends DialogFragment {
         args.putInt(EXTRA_LOGO, logoResId);
         args.putInt(EXTRA_RATE_BUTTON_TEXT_COLOR, rateButtonTextColor);
         args.putInt(EXTRA_RATE_BUTTON_BG_COLOR, rateButtonBackgroundColor);
+        args.putInt(EXTRA_TITLE_DIVIDER, lineDividerColor);
         args.putFloat(EXTRA_RATING_BAR, getRatingBar);
         feedbackDialog.setArguments(args);
         return feedbackDialog;
@@ -150,6 +152,16 @@ public class FeedbackDialog extends DialogFragment {
         }
     }
     
+    @Override
+    public void onStart() {
+        super.onStart();
+        final int titleDividerId = getResources().getIdentifier("titleDivider", "id", "android");
+        final View titleDivider = getDialog().findViewById(titleDividerId);
+        if (titleDivider != null) {
+            titleDivider.setBackgroundColor(getArguments().getInt(EXTRA_TITLE_DIVIDER));
+        }
+    }
+
     private boolean isPackageInstalled(String packageName) {
         PackageManager pm = getActivity().getPackageManager();
         try {
