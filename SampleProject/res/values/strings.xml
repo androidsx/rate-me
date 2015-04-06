@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">Sample Rate Me</string>
-    <string name="email_address" translatable="false">sample-project@mycompany.com</string>
-    <string name="rateme">Rate Me</string>
 
+    <string name="plain_rate_me_button">Rate Me (simple)</string>
+    <string name="custom_rate_me_button">Rate Me (custom)</string>
 </resources>

@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="androidcourse.t4.t6" >
-
-    <uses-sdk
-        android:minSdkVersion="11"
-        android:targetSdkVersion="18" />
+    package="com.androidsx.rateme.demo" >
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.androidsx.rateme.demo1.SampleProject"
+            android:name="com.androidsx.rateme.demo1.SampleProjectMainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

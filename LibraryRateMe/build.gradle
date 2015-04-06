@@ -1,16 +1,16 @@
-apply plugin: 'android-library'
+apply plugin: 'com.android.library'
 
 repositories {
     mavenCentral()
 }
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion "20.0.0"
+    compileSdkVersion 22
+    buildToolsVersion "21.1.2"
 
     defaultConfig {
         minSdkVersion 11
-        targetSdkVersion 19
+        targetSdkVersion 22
         versionName project.VERSION_NAME
         versionCode Integer.parseInt(project.VERSION_CODE)
     }
@@ -27,9 +27,8 @@ android {
         }
     }
 
-    // It would be better to fix the issues
     lintOptions {
-        abortOnError false
+        abortOnError true
     }
 }
 // Used to push in maven
