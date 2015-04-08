@@ -1,12 +1,14 @@
 package com.androidsx.rateme.demo1;
 
 import android.os.Bundle;
+import android.os.Parcel;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.androidsx.rateme.OnRatingListener;
 import com.androidsx.rateme.RateMeDialog;
 import com.androidsx.rateme.RateMeDialogTimer;
 import com.androidsx.rateme.demo.R;
@@ -61,7 +63,6 @@ public class SampleProjectMainActivity extends ActionBarActivity {
 
     private void showPlainRateMeDialog() {
         new RateMeDialog.Builder(getPackageName())
-                .enableFeedbackByEmail("email@example.com")
                 .build()
                 .show(getFragmentManager(), "plain-dialog");
     }
@@ -76,11 +77,21 @@ public class SampleProjectMainActivity extends ActionBarActivity {
                 .setShowShareButton(true)
                 .setRateButtonBackgroundColor(getResources().getColor(R.color.dialog_primary))
                 .setRateButtonPressedBackgroundColor(getResources().getColor(R.color.dialog_primary_dark))
-                .setOnActionListener(new RateMeDialog.RateMeOnActionListener() {
+                .setOnRatingListener(new OnRatingListener() {
                     @Override
-                    public void onHandleRateMeAction(RateMeDialog.RateMeAction action, float rating) {
+                    public void onRating(RatingAction action, float rating) {
                         Toast.makeText(SampleProjectMainActivity.this,
                                 "Rate Me action: " + action + " (rating: " + rating + ")", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public int describeContents() {
+                        return 0;
+                    }
+
+                    @Override
+                    public void writeToParcel(Parcel dest, int flags) {
+                        // Nothing to write
                     }
                 })
                 .build()
