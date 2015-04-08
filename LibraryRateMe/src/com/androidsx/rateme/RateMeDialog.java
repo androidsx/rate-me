@@ -189,6 +189,7 @@ public class RateMeDialog extends DialogFragment {
             this.iconCloseColor = savedInstanceState.getInt("iconCloseColor");
             this.iconShareColor = savedInstanceState.getInt("iconShareColor");
             this.showOKButtonByDefault = savedInstanceState.getBoolean("showOKButtonByDefault");
+            this.onRatingListener = savedInstanceState.getParcelable("onRatingListener");
         }
     }
 
@@ -213,6 +214,7 @@ public class RateMeDialog extends DialogFragment {
         outState.putInt("iconCloseColor", iconCloseColor );
         outState.putInt("iconShareColor", iconShareColor);
         outState.putBoolean("showOKButtonByDefault", showOKButtonByDefault);
+        outState.putParcelable("onRatingListener", onRatingListener);
     }
     
     @Override
@@ -270,7 +272,17 @@ public class RateMeDialog extends DialogFragment {
             @Override
             public void onClick(View v) {
                 if (feedbackByEmailEnabled) {
-                    DialogFragment dialogMail = FeedbackDialog.newInstance(feedbackEmail, headerBackgroundColor, bodyBackgroundColor, headerTextColor, bodyTextColor, appIconResId, lineDividerColor, rateButtonTextColor, rateButtonBackgroundColor, ratingBar.getRating());
+                    DialogFragment dialogMail = FeedbackDialog.newInstance(feedbackEmail,
+                            headerBackgroundColor,
+                            bodyBackgroundColor,
+                            headerTextColor,
+                            bodyTextColor,
+                            appIconResId,
+                            lineDividerColor,
+                            rateButtonTextColor,
+                            rateButtonBackgroundColor,
+                            ratingBar.getRating(),
+                            onRatingListener);
                     dialogMail.show(getFragmentManager(), "feedbackByEmailEnabled");
                     dismiss();
                     Log.d(TAG, "No: open the feedback dialog");
