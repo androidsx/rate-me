@@ -1,12 +1,12 @@
 package com.androidsx.rateme;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Parcel;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -31,6 +31,7 @@ public class FeedbackDialog extends DialogFragment {
     private static final String EXTRA_RATE_BUTTON_BG_COLOR = "button-bg-color";
     private static final String EXTRA_TITLE_DIVIDER = "color-title-divider";
     private static final String EXTRA_RATING_BAR = "get-rating";
+    private static final String EXTRA_ON_ACTION_LISTENER = "on-action-listener";
     
     // Views
     private View confirmDialogTitleView;
@@ -63,6 +64,8 @@ public class FeedbackDialog extends DialogFragment {
         args.putInt(EXTRA_RATE_BUTTON_BG_COLOR, rateButtonBackgroundColor);
         args.putInt(EXTRA_TITLE_DIVIDER, lineDividerColor);
         args.putFloat(EXTRA_RATING_BAR, getRatingBar);
+        args.putParcelable(EXTRA_ON_ACTION_LISTENER, onRatingListener);
+
         feedbackDialog.setArguments(args);
         return feedbackDialog;
         
@@ -71,19 +74,6 @@ public class FeedbackDialog extends DialogFragment {
     public FeedbackDialog()
     {
         super();
-    }
-    
-    @Override
-    public void onAttach(Activity activity)
-    {
-        super.onAttach(activity);
-        
-        try {
-            onActionListener = (RateMeOnActionListener) activity;
-        } catch (ClassCastException e) {
-            // throw new ClassCastException("An activity hosting a DialogGoToMail fragment must implement the necessary listener interface: " + RateMeOnActionListener.class.getName());
-        }
-        
     }
     
     @Override
@@ -132,6 +122,7 @@ public class FeedbackDialog extends DialogFragment {
         yes.setTextColor(getArguments().getInt(EXTRA_RATE_BUTTON_TEXT_COLOR));
         cancel.setBackgroundColor(getArguments().getInt(EXTRA_RATE_BUTTON_BG_COLOR));
         yes.setBackgroundColor(getArguments().getInt(EXTRA_RATE_BUTTON_BG_COLOR));
+        onActionListener = getArguments().getParcelable(EXTRA_ON_ACTION_LISTENER);
     }
     
     private void goToMail() {
