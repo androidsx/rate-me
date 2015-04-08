@@ -14,8 +14,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.androidsx.libraryrateme.R;
-import com.androidsx.rateme.RateMeDialog.RateMeAction;
-import com.androidsx.rateme.RateMeDialog.RateMeOnActionListener;
 
 /**
  * Dialog to ask the user for feedback after a low rating.
@@ -39,16 +37,20 @@ public class FeedbackDialog extends DialogFragment {
     private View confirmDialogView;
     private Button cancel;
     private Button yes;
+
+    private OnRatingListener onActionListener;
     
-    private RateMeOnActionListener onActionListener = new RateMeOnActionListener() {  
-        @Override
-        public void onHandleRateMeAction(RateMeAction action, float rating)
-        {
-            Log.d(TAG, "Action " + action + " (rating: " + rating + ")");
-        }
-    };
-    
-    public static FeedbackDialog newInstance (String email, int titleBackgroundColor, int dialogColor, int headerTextColor, int textColor, int logoResId, int rateButtonTextColor, int rateButtonBackgroundColor, int lineDividerColor, float getRatingBar){
+    public static FeedbackDialog newInstance(String email,
+                                             int titleBackgroundColor,
+                                             int dialogColor,
+                                             int headerTextColor,
+                                             int textColor,
+                                             int logoResId,
+                                             int rateButtonTextColor,
+                                             int rateButtonBackgroundColor,
+                                             int lineDividerColor,
+                                             float getRatingBar,
+                                             OnRatingListener onRatingListener) {
         FeedbackDialog feedbackDialog = new FeedbackDialog();
         Bundle args = new Bundle();
         args.putString(EXTRA_EMAIL, email);
@@ -93,7 +95,7 @@ public class FeedbackDialog extends DialogFragment {
         cancel.setOnClickListener(new View.OnClickListener()  {
             public void onClick(View v) {
                 dismiss();
-                onActionListener.onHandleRateMeAction(RateMeAction.LOW_RATING_REFUSED_TO_GIVE_FEEDBACK, getArguments().getFloat(EXTRA_RATING_BAR));
+                onActionListener.onRating(OnRatingListener.RatingAction.LOW_RATING_REFUSED_TO_GIVE_FEEDBACK, getArguments().getFloat(EXTRA_RATING_BAR));
                 Log.d(TAG, "Canceled the feedback dialog");
             }
         });  
@@ -102,7 +104,7 @@ public class FeedbackDialog extends DialogFragment {
             @Override
             public void onClick(View v) {
                 goToMail();
-                onActionListener.onHandleRateMeAction(RateMeAction.LOW_RATING_GAVE_FEEDBACK, getArguments().getFloat(EXTRA_RATING_BAR));
+                onActionListener.onRating(OnRatingListener.RatingAction.LOW_RATING_GAVE_FEEDBACK, getArguments().getFloat(EXTRA_RATING_BAR));
                 Log.d(TAG, "Agreed to provide feedback");
                 dismiss();
             }
