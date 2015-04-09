@@ -71,11 +71,10 @@ public class FeedbackDialog extends DialogFragment {
         
     }
     
-    public FeedbackDialog()
-    {
-        super();
+    public FeedbackDialog() {
+        // Empty constructor, required for pause/resume
     }
-    
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
