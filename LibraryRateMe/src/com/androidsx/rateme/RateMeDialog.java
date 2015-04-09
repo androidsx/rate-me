@@ -63,6 +63,10 @@ public class RateMeDialog extends DialogFragment {
     private boolean showOKButtonByDefault;
     private RateMeOnActionListener onActionListener;
 
+    public RateMeDialog() {
+        // Empty constructor, required for pause/resume
+    }
+
     public RateMeDialog(String appPackageName,
                         int headerBackgroundColor,
                         int headerTextColor,
