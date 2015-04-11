@@ -6,7 +6,6 @@ import android.app.DialogFragment;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Parcel;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -47,9 +46,9 @@ public class FeedbackDialog extends DialogFragment {
                                              int headerTextColor,
                                              int textColor,
                                              int logoResId,
+                                             int lineDividerColor,
                                              int rateButtonTextColor,
                                              int rateButtonBackgroundColor,
-                                             int lineDividerColor,
                                              float getRatingBar,
                                              OnRatingListener onRatingListener) {
         FeedbackDialog feedbackDialog = new FeedbackDialog();
