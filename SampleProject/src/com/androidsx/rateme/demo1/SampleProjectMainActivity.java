@@ -62,13 +62,13 @@ public class SampleProjectMainActivity extends ActionBarActivity {
     }
 
     private void showPlainRateMeDialog() {
-        new RateMeDialog.Builder(getPackageName())
+        new RateMeDialog.Builder(getPackageName(), getString(R.string.app_name))
                 .build()
                 .show(getFragmentManager(), "plain-dialog");
     }
 
     private void showCustomRateMeDialog() {
-        new RateMeDialog.Builder(getPackageName())
+        new RateMeDialog.Builder(getPackageName(), getString(R.string.app_name))
                 .setHeaderBackgroundColor(getResources().getColor(R.color.dialog_primary))
                 .setBodyBackgroundColor(getResources().getColor(R.color.dialog_primary_light))
                 .setBodyTextColor(getResources().getColor(R.color.dialog_text_foreground))

@@ -21,6 +21,7 @@ public class FeedbackDialog extends DialogFragment {
     private static final String TAG = FeedbackDialog.class.getSimpleName();
     
     private static final String EXTRA_EMAIL = "email";
+    private static final String EXTRA_APP_NAME = "app-name";
     private static final String EXTRA_DIALOG_TITLE_COLOR = "dialog-title-color";
     private static final String EXTRA_DIALOG_COLOR = "dialog-color";
     private static final String EXTRA_TEXT_COLOR = "text-color";
@@ -41,6 +42,7 @@ public class FeedbackDialog extends DialogFragment {
     private OnRatingListener onActionListener;
     
     public static FeedbackDialog newInstance(String email,
+                                             String appName,
                                              int titleBackgroundColor,
                                              int dialogColor,
                                              int headerTextColor,
@@ -54,6 +56,7 @@ public class FeedbackDialog extends DialogFragment {
         FeedbackDialog feedbackDialog = new FeedbackDialog();
         Bundle args = new Bundle();
         args.putString(EXTRA_EMAIL, email);
+        args.putString(EXTRA_APP_NAME, appName);
         args.putInt(EXTRA_DIALOG_TITLE_COLOR, titleBackgroundColor);
         args.putInt(EXTRA_DIALOG_COLOR, dialogColor);
         args.putInt(EXTRA_HEADER_TEXT_COLOR, headerTextColor);
@@ -91,7 +94,7 @@ public class FeedbackDialog extends DialogFragment {
         yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToMail();
+                goToMail(getArguments().getString(EXTRA_APP_NAME));
                 onActionListener.onRating(OnRatingListener.RatingAction.LOW_RATING_GAVE_FEEDBACK, getArguments().getFloat(EXTRA_RATING_BAR));
                 Log.d(TAG, "Agreed to provide feedback");
                 dismiss();
@@ -123,7 +126,7 @@ public class FeedbackDialog extends DialogFragment {
         onActionListener = getArguments().getParcelable(EXTRA_ON_ACTION_LISTENER);
     }
     
-    private void goToMail() {
+    private void goToMail(String appName) {
         final String subject = getResources().getString(R.string.rateme__email_subject, appName);
         final String gmailPackageName = "com.google.android.gm";
         
