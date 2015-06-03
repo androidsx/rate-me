@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">diese App</string>
-
-    <string name="rateme">Bewerte unsere Anwendung im Play Store</string>
-    <string name="rateme_message">Wie würdest du diese Anwendung bewerten?</string>
-    <string name="rateme_title">Bewertung</string>
-    <string name="rateme_no_thanks">Danke für deine Bewertung!</string>
-    <string name="rateme_message_confirm_dialog">Würdest du uns dein Feedback mitteilen?</string>
-    <string name="rateme_subject_email">Feedback für %1$s</string>
-    <string name="rateme_icon_content_description">Ikon</string>
+    <string name="rateme__dialog_first_title">Bewertung</string>
+    <string name="rateme__dialog_first_message">Wie würdest du diese Anwendung bewerten?</string>
+    <string name="rateme__dialog_first_button_rate">Bewerte unsere Anwendung im Play Store</string>
+    <string name="rateme__dialog_first_thanks">Danke für deine Bewertung!</string>
+    <string name="rateme__dialog_feedback_message">Würdest du uns dein Feedback mitteilen?</string>
+    <string name="rateme__email_subject">Feedback für %1$s</string>
+    <string name="rateme__icon_content_description">Ikon</string>
 </resources>

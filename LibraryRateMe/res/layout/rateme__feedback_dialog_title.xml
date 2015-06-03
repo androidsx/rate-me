@@ -3,6 +3,6 @@
     android:id="@+id/confirmDialogTitle"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/rateme_dialog_title_height"
-    android:textSize="@dimen/rateme_text_size"
-    android:text="@string/rateme_title" />
+    android:padding="@dimen/rateme__dialog_title_height"
+    android:textSize="@dimen/rateme__text_size"
+    android:text="@string/rateme__dialog_first_title" />

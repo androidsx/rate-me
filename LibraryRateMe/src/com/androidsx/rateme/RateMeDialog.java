@@ -45,6 +45,7 @@ public class RateMeDialog extends DialogFragment {
 
     // Configuration. It all comes from the builder. On, on resume, from the saved bundle
     private String appPackageName;
+    private String appName;
     private int headerBackgroundColor;
     private int headerTextColor;
     private int bodyBackgroundColor;
@@ -68,6 +69,7 @@ public class RateMeDialog extends DialogFragment {
     }
 
     public RateMeDialog(String appPackageName,
+                        String appName,
                         int headerBackgroundColor,
                         int headerTextColor,
                         int bodyBackgroundColor,
@@ -86,6 +88,7 @@ public class RateMeDialog extends DialogFragment {
                         boolean showOKButtonByDefault,
                         OnRatingListener onRatingListener) {
         this.appPackageName = appPackageName;
+        this.appName = appName;
         this.headerBackgroundColor = headerBackgroundColor;
         this.headerTextColor = headerTextColor;
         this.bodyBackgroundColor = bodyBackgroundColor;
@@ -177,6 +180,7 @@ public class RateMeDialog extends DialogFragment {
         
         if (savedInstanceState != null) {
             this.appPackageName = savedInstanceState.getString("appPackageName");
+            this.appName = savedInstanceState.getString("appName");
             this.headerBackgroundColor = savedInstanceState.getInt("headerBackgroundColor");
             this.headerTextColor = savedInstanceState.getInt("headerTextColor");
             this.bodyBackgroundColor = savedInstanceState.getInt("bodyBackgroundColor");
@@ -202,6 +206,7 @@ public class RateMeDialog extends DialogFragment {
         super.onSaveInstanceState(outState);
         
         outState.putString("appPackageName", appPackageName);
+        outState.putString("appName", appName);
         outState.putInt("headerBackgroundColor", headerBackgroundColor);
         outState.putInt("headerTextColor", headerTextColor);
         outState.putInt("bodyBackgroundColor", bodyBackgroundColor);
@@ -233,8 +238,8 @@ public class RateMeDialog extends DialogFragment {
 
     private void initializeUiFields() {
         // Main Dialog
-        mView = View.inflate(getActivity(), R.layout.rateme_dialog_message, null);
-        tView = View.inflate(getActivity(), R.layout.rateme_dialog_title, null);
+        mView = View.inflate(getActivity(), R.layout.rateme__dialog_message, null);
+        tView = View.inflate(getActivity(), R.layout.rateme__dialog_title, null);
         close = (Button) tView.findViewById(R.id.buttonClose);
         share = (Button) tView.findViewById(R.id.buttonShare);
         rateMe = (Button) mView.findViewById(R.id.buttonRateMe);
@@ -277,6 +282,7 @@ public class RateMeDialog extends DialogFragment {
             public void onClick(View v) {
                 if (feedbackByEmailEnabled) {
                     DialogFragment dialogMail = FeedbackDialog.newInstance(feedbackEmail,
+                            appName,
                             headerBackgroundColor,
                             bodyBackgroundColor,
                             headerTextColor,
@@ -329,6 +335,7 @@ public class RateMeDialog extends DialogFragment {
     public static class Builder {
         private static final int LINE_DIVIDER_COLOR_UNSET = -1;
         private final String appPackageName;
+        private final String appName;
         private int headerBackgroundColor = Color.BLACK;
         private int headerTextColor = Color.WHITE;
         private int bodyBackgroundColor = Color.DKGRAY;
@@ -349,9 +356,11 @@ public class RateMeDialog extends DialogFragment {
 
         /**
          * @param appPackageName package name of the application. Available in {@code Context.getPackageName()}.
+         * @param appName name of the application. Typically {@code getResources().getString(R.string.app_name)}.
          */
-        public Builder(String appPackageName) {
+        public Builder(String appPackageName, String appName) {
             this.appPackageName = appPackageName;
+            this.appName = appName;
         }
 
         public Builder setHeaderBackgroundColor(int headerBackgroundColor) {
@@ -453,6 +462,7 @@ public class RateMeDialog extends DialogFragment {
                 lineDividerColor = headerBackgroundColor;
             }
             return new RateMeDialog(appPackageName,
+                    appName,
                     headerBackgroundColor,
                     headerTextColor,
                     bodyBackgroundColor,

@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--
-        This string is expected to be overriden by the app that implements the library. It
-        is used in the subject of the feedback e-mails.
-     -->
-    <string name="app_name">this app</string>
-
-    <string name="rateme">Rate our app in the Play Store</string>
-    <string name="rateme_message">How would you rate our app?</string>
-    <string name="rateme_title">Rate your experience</string>
-    <string name="rateme_no_thanks">Thanks for the rating!</string>
-    <string name="rateme_message_confirm_dialog">Would you mind sharing your feedback?</string>
-    <string name="rateme_subject_email">Feedback for %1$s</string>
-    <string name="rateme_icon_content_description">Icon</string>
+    <string name="rateme__dialog_first_title">Rate your experience</string>
+    <string name="rateme__dialog_first_message">How would you rate our app?</string>
+    <string name="rateme__dialog_first_button_rate">Rate our app in the Play Store</string>
+    <string name="rateme__dialog_first_thanks">Thanks for the rating!</string>
+    <string name="rateme__dialog_feedback_message">Would you mind sharing your feedback?</string>
+    <string name="rateme__email_subject">Feedback for %1$s</string>
+    <string name="rateme__icon_content_description">Icon</string>
 </resources>

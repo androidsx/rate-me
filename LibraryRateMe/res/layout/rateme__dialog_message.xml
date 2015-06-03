@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="@dimen/rateme_default_padding"
-    android:layout_margin="@dimen/rateme_default_padding"
+    android:padding="@dimen/rateme__default_padding"
+    android:layout_margin="@dimen/rateme__default_padding"
     tools:background="#77FFFFFF" >
 
     <LinearLayout
@@ -16,15 +16,15 @@
 
         <ImageView
             android:id="@+id/app_icon_dialog_rating"
-            android:layout_width="@dimen/rateme_icon_size"
+            android:layout_width="@dimen/rateme__icon_size"
             android:layout_height="wrap_content"
-            android:width="@dimen/rateme_icon_size"
+            android:width="@dimen/rateme__icon_size"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
-            android:layout_marginEnd="@dimen/rateme_horizontal_spacing"
-            android:layout_marginRight="@dimen/rateme_horizontal_spacing"
+            android:layout_marginEnd="@dimen/rateme__horizontal_spacing"
+            android:layout_marginRight="@dimen/rateme__horizontal_spacing"
             tools:background="#FFFF00"
-            android:contentDescription="@string/rateme_icon_content_description" />
+            android:contentDescription="@string/rateme__icon_content_description" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,17 +36,17 @@
                 android:id="@+id/rating_dialog_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/rateme_text_size"
-                android:text="@string/rateme_message" />
+                android:textSize="@dimen/rateme__text_size"
+                android:text="@string/rateme__dialog_first_message" />
 
             <RatingBar
                 android:id="@+id/ratingBar"
                 style="?android:attr/ratingBarStyleIndicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/rateme_default_padding"
-                android:layout_marginTop="@dimen/rateme_default_padding"
-                android:layout_marginRight="@dimen/rateme_small_padding"
+                android:layout_marginBottom="@dimen/rateme__default_padding"
+                android:layout_marginTop="@dimen/rateme__default_padding"
+                android:layout_marginRight="@dimen/rateme__small_padding"
                 android:isIndicator="false"
                 android:numStars="5"
                 android:rotationX="0.3"
@@ -69,15 +69,15 @@
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/rateme_text_size"
-            android:text="@string/rateme" />
+            android:textSize="@dimen/rateme__text_size"
+            android:text="@string/rateme__dialog_first_button_rate" />
 
         <Button
             android:id="@+id/buttonThanks"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/rateme_text_size"
-            android:text="@string/rateme_no_thanks" />
+            android:textSize="@dimen/rateme__text_size"
+            android:text="@string/rateme__dialog_first_thanks" />
     </LinearLayout>
 </LinearLayout>
