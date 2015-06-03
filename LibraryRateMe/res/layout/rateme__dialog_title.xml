@@ -2,22 +2,22 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/rateme_dialog_title_height" >
+    android:padding="@dimen/rateme__dialog_title_height" >
 
     <Button
         android:id="@+id/buttonClose"
-        android:layout_width="@dimen/rateme_button_title_size"
-        android:layout_height="@dimen/rateme_button_title_size"
+        android:layout_width="@dimen/rateme__button_title_size"
+        android:layout_height="@dimen/rateme__button_title_size"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:background="@android:drawable/ic_menu_close_clear_cancel" />
 
     <Button
         android:id="@+id/buttonShare"
-        android:layout_width="@dimen/rateme_button_title_size"
-        android:layout_height="@dimen/rateme_button_title_size"
-        android:layout_marginEnd="@dimen/rateme_horizontal_spacing"
-        android:layout_marginRight="@dimen/rateme_horizontal_spacing"
+        android:layout_width="@dimen/rateme__button_title_size"
+        android:layout_height="@dimen/rateme__button_title_size"
+        android:layout_marginEnd="@dimen/rateme__horizontal_spacing"
+        android:layout_marginRight="@dimen/rateme__horizontal_spacing"
         android:layout_toStartOf="@id/buttonClose"
         android:layout_toLeftOf="@id/buttonClose"
         android:background="@android:drawable/ic_menu_share" />
@@ -27,6 +27,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/buttonClose"
-        android:textSize="@dimen/rateme_text_size"
-        android:text="@string/rateme_title" />
+        android:textSize="@dimen/rateme__text_size"
+        android:text="@string/rateme__dialog_first_title" />
 </RelativeLayout>

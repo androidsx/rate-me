@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="@dimen/rateme_default_padding"
-    android:layout_margin="@dimen/rateme_default_padding"
+    android:padding="@dimen/rateme__default_padding"
+    android:layout_margin="@dimen/rateme__default_padding"
     tools:background="#77FFFFFF" >
 
     <LinearLayout
@@ -16,29 +16,29 @@
 
         <ImageView
             android:id="@+id/app_icon_dialog_mail"
-            android:layout_width="@dimen/rateme_icon_size"
+            android:layout_width="@dimen/rateme__icon_size"
             android:layout_height="wrap_content"
-            android:width="@dimen/rateme_icon_size"
+            android:width="@dimen/rateme__icon_size"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
-            android:layout_marginEnd="@dimen/rateme_horizontal_spacing"
-            android:layout_marginRight="@dimen/rateme_horizontal_spacing"
+            android:layout_marginEnd="@dimen/rateme__horizontal_spacing"
+            android:layout_marginRight="@dimen/rateme__horizontal_spacing"
             tools:background="#FFFF00"
-            android:contentDescription="@string/rateme_icon_content_description" />
+            android:contentDescription="@string/rateme__icon_content_description" />
 
         <TextView
             android:id="@+id/mail_dialog_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/rateme_text_size"
-            android:text="@string/rateme_message_confirm_dialog" />
+            android:textSize="@dimen/rateme__text_size"
+            android:text="@string/rateme__dialog_feedback_message" />
     </LinearLayout>
 
     <LinearLayout
         style="?android:attr/buttonBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/rateme_default_padding"
+        android:layout_marginTop="@dimen/rateme__default_padding"
         android:orientation="horizontal" >
 
         <Button
@@ -47,8 +47,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginEnd="@dimen/rateme_horizontal_spacing_small"
-            android:layout_marginRight="@dimen/rateme_horizontal_spacing_small"
+            android:layout_marginEnd="@dimen/rateme__horizontal_spacing_small"
+            android:layout_marginRight="@dimen/rateme__horizontal_spacing_small"
             android:text="@android:string/cancel" />
 
         <Button
@@ -57,8 +57,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginStart="@dimen/rateme_horizontal_spacing_small"
-            android:layout_marginLeft="@dimen/rateme_horizontal_spacing_small"
+            android:layout_marginStart="@dimen/rateme__horizontal_spacing_small"
+            android:layout_marginLeft="@dimen/rateme__horizontal_spacing_small"
             android:text="@android:string/ok" />
     </LinearLayout>
 </LinearLayout>

@@ -102,8 +102,8 @@ public class FeedbackDialog extends DialogFragment {
     }
     
     private void initializeUiFieldsDialogGoToMail() {
-        confirmDialogTitleView = View.inflate(getActivity(), R.layout.feedback_dialog_title, null);
-        confirmDialogView = View.inflate(getActivity(), R.layout.feedback_dialog_message, null);
+        confirmDialogTitleView = View.inflate(getActivity(), R.layout.rateme__feedback_dialog_title, null);
+        confirmDialogView = View.inflate(getActivity(), R.layout.rateme__feedback_dialog_message, null);
         confirmDialogTitleView.setBackgroundColor(getArguments().getInt(EXTRA_DIALOG_TITLE_COLOR));
         confirmDialogView.setBackgroundColor(getArguments().getInt(EXTRA_DIALOG_COLOR));
         if (getArguments().getInt(EXTRA_LOGO) == 0) {
@@ -124,7 +124,7 @@ public class FeedbackDialog extends DialogFragment {
     }
     
     private void goToMail() {
-        final String subject = getResources().getString(R.string.rateme_subject_email, getResources().getString(R.string.app_name));
+        final String subject = getResources().getString(R.string.rateme__email_subject, appName);
         final String gmailPackageName = "com.google.android.gm";
         
         try {
