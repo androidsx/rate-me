@@ -68,4 +68,14 @@ class DefaultOnRatingListener implements OnRatingListener {
     public void writeToParcel(Parcel dest, int flags) {
         // Nothing to write
     }
+    
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public DefaultOnRatingListener createFromParcel(Parcel in) {
+            return new DefaultOnRatingListener(in);
+        } 
+     
+        public DefaultOnRatingListener[] newArray(int size) {
+            return new DefaultOnRatingListener[size];
+        } 
+    };     
 }
