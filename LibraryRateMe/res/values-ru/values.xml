@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/Users/iPocho/GitHub/rate-me/LibraryRateMe/res/values/dimen.xml -->
+    <eat-comment/>
+    <dimen name="rateme__button_title_size">28dp</dimen>
+    <dimen name="rateme__default_padding">16dp</dimen>
+    <dimen name="rateme__dialog_title_height">12dp</dimen>
+    <dimen name="rateme__horizontal_spacing">16dp</dimen>
+    <dimen name="rateme__horizontal_spacing_small">4dp</dimen>
+    <dimen name="rateme__icon_size">88dp</dimen>
+    <dimen name="rateme__small_padding">8dp</dimen>
+    <dimen name="rateme__text_size">20sp</dimen>
+    <!-- From: file:/Users/iPocho/GitHub/rate-me/LibraryRateMe/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="rateme__dialog_feedback_message">Вы бы хотели написать нам о возникших проблемах? Это поможет улучшить приложение</string>
+    <string name="rateme__dialog_first_button_rate">Поставить оценку в Маркете</string>
+    <string name="rateme__dialog_first_message">Как Вы оцениваете приложение?</string>
+    <string name="rateme__dialog_first_thanks">Написать разработчикам</string>
+    <string name="rateme__dialog_first_title">Оцените приложение</string>
+    <string name="rateme__email_subject">Отзыв о приложении %1$s</string>
+    <string name="rateme__icon_content_description">Icon</string>
+</resources>
