@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="rateme__dialog_first_title">Avalie sua experiência</string>
+    <string name="rateme__dialog_first_message">Qual pontuação você nos dá?</string>
+    <string name="rateme__dialog_first_button_rate">Deixe uma avaliação na Play Store</string>
+    <string name="rateme__dialog_first_thanks">Obrigado pela pontuação!</string>
+    <string name="rateme__dialog_feedback_message">Alguma sugestão que gostaria de nos dar?</string>
+    <string name="rateme__email_subject">Sugestões para %1$s</string>
+    <string name="rateme__icon_content_description">Icon</string>
+</resources>
