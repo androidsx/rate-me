@@ -17,7 +17,7 @@ Add this dependency in your `build.gradle`:
 
 ```xml
 dependencies {
-    compile 'com.androidsx:rate-me:X.Y.'
+    compile 'com.androidsx:rate-me:4.0.3'
 }
 ```
 
