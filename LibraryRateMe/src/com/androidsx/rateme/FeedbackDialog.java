@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -128,22 +129,7 @@ public class FeedbackDialog extends DialogFragment {
     
     private void goToMail(String appName) {
         final String subject = getResources().getString(R.string.rateme__email_subject, appName);
-        final String gmailPackageName = "com.google.android.gm";
-        
-        try {
-            if (isPackageInstalled(gmailPackageName)) {
-                Intent sendMailWithGmail = new Intent(Intent.ACTION_SEND);
-                sendMailWithGmail.setType("plain/text");
-                sendMailWithGmail.putExtra(Intent.EXTRA_EMAIL, new String[]{getArguments().getString(EXTRA_EMAIL)});
-                sendMailWithGmail.putExtra(Intent.EXTRA_SUBJECT, subject);
-                sendMailWithGmail.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
-                startActivity(Intent.createChooser(sendMailWithGmail, ""));
-            } else {
-                sendGenericMail(subject);
-            }
-        } catch (android.content.ActivityNotFoundException ex) {
-            sendGenericMail(subject);
-        }
+        sendGenericMail(subject);
     }
     
     @Override
@@ -168,9 +154,9 @@ public class FeedbackDialog extends DialogFragment {
     
     private void sendGenericMail(String subject) {
         Log.w(TAG, "Cannot send the email with GMail. Will use the generic chooser");
-        Intent sendGeneric = new Intent(Intent.ACTION_SEND);
+        Intent sendGeneric = new Intent(Intent.ACTION_SENDTO);
         sendGeneric.setType("plain/text");
-        sendGeneric.putExtra(Intent.EXTRA_EMAIL, new String[] { getArguments().getString(EXTRA_EMAIL) });
+        sendGeneric.setData(Uri.parse("mailto:"+getArguments().getString(EXTRA_EMAIL)));
         sendGeneric.putExtra(Intent.EXTRA_SUBJECT, subject);
         startActivity(Intent.createChooser(sendGeneric, ""));
     } 
