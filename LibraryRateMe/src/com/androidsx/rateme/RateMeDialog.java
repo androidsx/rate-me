@@ -122,7 +122,7 @@ public class RateMeDialog extends DialogFragment {
 
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                if (rating >= 4.0) {
+                if (rating > 4.0) {
                     rateMe.setVisibility(View.VISIBLE);
                     noThanks.setVisibility(View.GONE);
                 } else if (rating > 0.0){
