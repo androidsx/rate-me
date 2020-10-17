@@ -1,17 +1,19 @@
 apply plugin: 'com.android.library'
 
 repositories {
-    mavenCentral()
+    google()
+    jcenter()
+    //mavenCentral()
 }
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion "22.0.1"
+    compileSdkVersion 30
+    buildToolsVersion "29.0.3"
     resourcePrefix "rateme__"
 
     defaultConfig {
-        minSdkVersion 11
-        targetSdkVersion 22
+        minSdkVersion 14
+        targetSdkVersion 30
         versionName project.VERSION_NAME
         versionCode Integer.parseInt(project.VERSION_CODE)
     }
@@ -32,5 +34,10 @@ android {
         abortOnError true
     }
 }
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+}
+
 // Used to push in maven
 apply from: '../maven_push.gradle'

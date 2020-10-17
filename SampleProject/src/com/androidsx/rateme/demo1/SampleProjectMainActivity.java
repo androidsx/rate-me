@@ -2,7 +2,7 @@ package com.androidsx.rateme.demo1;
 
 import android.os.Bundle;
 import android.os.Parcel;
-import android.support.v7.app.ActionBarActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,7 +13,7 @@ import com.androidsx.rateme.RateMeDialog;
 import com.androidsx.rateme.RateMeDialogTimer;
 import com.androidsx.rateme.demo.R;
 
-public class SampleProjectMainActivity extends ActionBarActivity {
+public class SampleProjectMainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,14 +37,11 @@ public class SampleProjectMainActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-        case R.id.RateMe: {
+        if (item.getItemId() == R.id.RateMe) {
             showPlainRateMeDialog();
             return true;
         }
-        default:
-            return super.onOptionsItemSelected(item);
-        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -64,7 +61,7 @@ public class SampleProjectMainActivity extends ActionBarActivity {
     private void showPlainRateMeDialog() {
         new RateMeDialog.Builder(getPackageName(), getString(R.string.app_name))
                 .build()
-                .show(getFragmentManager(), "plain-dialog");
+                .show(getSupportFragmentManager(), "plain-dialog");
     }
 
     private void showCustomRateMeDialog() {
@@ -95,6 +92,6 @@ public class SampleProjectMainActivity extends ActionBarActivity {
                     }
                 })
                 .build()
-                .show(getFragmentManager(), "custom-dialog");
+                .show(getSupportFragmentManager(), "custom-dialog");
     }
 }
