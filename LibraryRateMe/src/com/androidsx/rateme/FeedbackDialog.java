@@ -82,14 +82,14 @@ public class FeedbackDialog extends DialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
         initializeUiFieldsDialogGoToMail();
         Log.d(TAG, "All components were initialized successfully");
         
         cancel.setOnClickListener(new View.OnClickListener()  {
             public void onClick(View v) {
                 dismiss();
-                onActionListener.onRating(OnRatingListener.RatingAction.LOW_RATING_REFUSED_TO_GIVE_FEEDBACK, getArguments().getFloat(EXTRA_RATING_BAR));
+                onActionListener.onRating(OnRatingListener.RatingAction.LOW_RATING_REFUSED_TO_GIVE_FEEDBACK, requireArguments().getFloat(EXTRA_RATING_BAR));
                 Log.d(TAG, "Canceled the feedback dialog");
             }
         });  
@@ -97,8 +97,8 @@ public class FeedbackDialog extends DialogFragment {
         yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToMail(getArguments().getString(EXTRA_APP_NAME));
-                onActionListener.onRating(OnRatingListener.RatingAction.LOW_RATING_GAVE_FEEDBACK, getArguments().getFloat(EXTRA_RATING_BAR));
+                goToMail(requireArguments().getString(EXTRA_APP_NAME));
+                onActionListener.onRating(OnRatingListener.RatingAction.LOW_RATING_GAVE_FEEDBACK, requireArguments().getFloat(EXTRA_RATING_BAR));
                 Log.d(TAG, "Agreed to provide feedback");
                 dismiss();
             }
@@ -108,25 +108,25 @@ public class FeedbackDialog extends DialogFragment {
     }
     
     private void initializeUiFieldsDialogGoToMail() {
-        confirmDialogTitleView = View.inflate(getActivity(), R.layout.rateme__feedback_dialog_title, null);
-        confirmDialogView = View.inflate(getActivity(), R.layout.rateme__feedback_dialog_message, null);
-        confirmDialogTitleView.setBackgroundColor(getArguments().getInt(EXTRA_DIALOG_TITLE_COLOR));
-        confirmDialogView.setBackgroundColor(getArguments().getInt(EXTRA_DIALOG_COLOR));
-        if (getArguments().getInt(EXTRA_LOGO) == 0) {
+        confirmDialogTitleView = View.inflate(requireActivity(), R.layout.rateme__feedback_dialog_title, null);
+        confirmDialogView = View.inflate(requireActivity(), R.layout.rateme__feedback_dialog_message, null);
+        confirmDialogTitleView.setBackgroundColor(requireArguments().getInt(EXTRA_DIALOG_TITLE_COLOR));
+        confirmDialogView.setBackgroundColor(requireArguments().getInt(EXTRA_DIALOG_COLOR));
+        if (requireArguments().getInt(EXTRA_LOGO) == 0) {
             confirmDialogView.findViewById(R.id.app_icon_dialog_mail).setVisibility(View.GONE);
         } else {
-            ((ImageView) confirmDialogView.findViewById(R.id.app_icon_dialog_mail)).setImageResource(getArguments().getInt(EXTRA_LOGO));
+            ((ImageView) confirmDialogView.findViewById(R.id.app_icon_dialog_mail)).setImageResource(requireArguments().getInt(EXTRA_LOGO));
             confirmDialogView.findViewById(R.id.app_icon_dialog_mail).setVisibility(View.VISIBLE);
         }
-        ((TextView) confirmDialogTitleView.findViewById(R.id.confirmDialogTitle)).setTextColor(getArguments().getInt(EXTRA_HEADER_TEXT_COLOR));
-        ((TextView) confirmDialogView.findViewById(R.id.mail_dialog_message)).setTextColor(getArguments().getInt(EXTRA_TEXT_COLOR));
+        ((TextView) confirmDialogTitleView.findViewById(R.id.confirmDialogTitle)).setTextColor(requireArguments().getInt(EXTRA_HEADER_TEXT_COLOR));
+        ((TextView) confirmDialogView.findViewById(R.id.mail_dialog_message)).setTextColor(requireArguments().getInt(EXTRA_TEXT_COLOR));
         cancel = (Button) confirmDialogView.findViewById(R.id.buttonCancel);
         yes = (Button) confirmDialogView.findViewById(R.id.buttonYes);
-        cancel.setTextColor(getArguments().getInt(EXTRA_RATE_BUTTON_TEXT_COLOR));
-        yes.setTextColor(getArguments().getInt(EXTRA_RATE_BUTTON_TEXT_COLOR));
-        cancel.setBackgroundColor(getArguments().getInt(EXTRA_RATE_BUTTON_BG_COLOR));
-        yes.setBackgroundColor(getArguments().getInt(EXTRA_RATE_BUTTON_BG_COLOR));
-        onActionListener = getArguments().getParcelable(EXTRA_ON_ACTION_LISTENER);
+        cancel.setTextColor(requireArguments().getInt(EXTRA_RATE_BUTTON_TEXT_COLOR));
+        yes.setTextColor(requireArguments().getInt(EXTRA_RATE_BUTTON_TEXT_COLOR));
+        cancel.setBackgroundColor(requireArguments().getInt(EXTRA_RATE_BUTTON_BG_COLOR));
+        yes.setBackgroundColor(requireArguments().getInt(EXTRA_RATE_BUTTON_BG_COLOR));
+        onActionListener = requireArguments().getParcelable(EXTRA_ON_ACTION_LISTENER);
     }
     
     private void goToMail(String appName) {
@@ -137,10 +137,10 @@ public class FeedbackDialog extends DialogFragment {
             if (isPackageInstalled(gmailPackageName)) {
                 Intent sendMailWithGmail = new Intent(Intent.ACTION_SEND);
                 sendMailWithGmail.setType("plain/text");
-                sendMailWithGmail.putExtra(Intent.EXTRA_EMAIL, new String[]{getArguments().getString(EXTRA_EMAIL)});
+                sendMailWithGmail.putExtra(Intent.EXTRA_EMAIL, new String[]{requireArguments().getString(EXTRA_EMAIL)});
                 sendMailWithGmail.putExtra(Intent.EXTRA_SUBJECT, subject);
-                sendMailWithGmail.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
-                startActivity(Intent.createChooser(sendMailWithGmail, ""));
+                sendMailWithGmail.setPackage(gmailPackageName);
+                startActivity(sendMailWithGmail);
             } else {
                 sendGenericMail(subject);
             }
@@ -155,12 +155,12 @@ public class FeedbackDialog extends DialogFragment {
         final int titleDividerId = getResources().getIdentifier("titleDivider", "id", "android");
         final View titleDivider = getDialog().findViewById(titleDividerId);
         if (titleDivider != null) {
-            titleDivider.setBackgroundColor(getArguments().getInt(EXTRA_TITLE_DIVIDER));
+            titleDivider.setBackgroundColor(requireArguments().getInt(EXTRA_TITLE_DIVIDER));
         }
     }
 
     private boolean isPackageInstalled(String packageName) {
-        PackageManager pm = getActivity().getPackageManager();
+        PackageManager pm = requireContext().getPackageManager();
         try {
             pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
             return true;
@@ -173,7 +173,7 @@ public class FeedbackDialog extends DialogFragment {
         Log.w(TAG, "Cannot send the email with GMail. Will use the generic chooser");
         Intent sendGeneric = new Intent(Intent.ACTION_SEND);
         sendGeneric.setType("plain/text");
-        sendGeneric.putExtra(Intent.EXTRA_EMAIL, new String[] { getArguments().getString(EXTRA_EMAIL) });
+        sendGeneric.putExtra(Intent.EXTRA_EMAIL, new String[] { requireArguments().getString(EXTRA_EMAIL) });
         sendGeneric.putExtra(Intent.EXTRA_SUBJECT, subject);
         startActivity(Intent.createChooser(sendGeneric, ""));
     } 
