@@ -2,24 +2,26 @@ apply plugin: 'com.android.application'
 
 buildscript{
 	repositories{
-		mavenCentral()
+        google()
+        jcenter()
 	}
 	dependencies{
-        classpath 'com.android.tools.build:gradle:1.1.0'
+        classpath 'com.android.tools.build:gradle:4.0.2'
 	}
 }
 
 repositories {
-    mavenCentral()
+    google()
+    jcenter()
 }
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion "21.1.2"
+    compileSdkVersion 30
+    buildToolsVersion "29.0.3"
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 22
+        targetSdkVersion 30
         versionName project.VERSION_NAME
         versionCode Integer.parseInt(project.VERSION_CODE)
     }
@@ -43,6 +45,6 @@ android {
 }
 
 dependencies {
-    compile project(':LibraryRateMe')
-    compile 'com.android.support:appcompat-v7:22.2.0'
+    implementation project(':LibraryRateMe')
+    implementation 'androidx.appcompat:appcompat:1.2.0'
 }

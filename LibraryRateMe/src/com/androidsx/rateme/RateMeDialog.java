@@ -2,7 +2,10 @@ package com.androidsx.rateme;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.LightingColorFilter;
@@ -23,7 +26,7 @@ import com.androidsx.libraryrateme.R;
  * Rate Me dialog. Entry point into the library. Use the {@link com.androidsx.rateme.RateMeDialog.Builder} to
  * construct your instance.
  */
-public class RateMeDialog extends DialogFragment {
+public class  RateMeDialog extends DialogFragment {
     private static final String TAG = RateMeDialog.class.getSimpleName();
 
     private static final String MARKET_CONSTANT = "market://details?id=";
@@ -108,6 +111,7 @@ public class RateMeDialog extends DialogFragment {
         this.onRatingListener = onRatingListener;
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         initializeUiFields();
@@ -144,9 +148,9 @@ public class RateMeDialog extends DialogFragment {
                 @Override
                 public void onClick(View v) {
                     dismiss();
-                    RateMeDialogTimer.clearSharedPreferences(getActivity());
+                    RateMeDialogTimer.clearSharedPreferences(requireActivity());
                     Log.d(TAG, "Clear the shared preferences");
-                    RateMeDialogTimer.setOptOut(getActivity(), true);
+                    RateMeDialogTimer.setOptOut(requireActivity(), true);
                     onRatingListener.onRating(OnRatingListener.RatingAction.DISMISSED_WITH_CROSS, ratingBar.getRating());
                 }
             });
@@ -202,7 +206,7 @@ public class RateMeDialog extends DialogFragment {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         
         outState.putString("appPackageName", appPackageName);
@@ -271,7 +275,7 @@ public class RateMeDialog extends DialogFragment {
             public void onClick(View v) {
                 rateApp();
                 Log.d(TAG, "Yes: open the Google Play Store");
-                RateMeDialogTimer.setOptOut(getActivity(), true);
+                RateMeDialogTimer.setOptOut(requireActivity(), true);
                 onRatingListener.onRating(OnRatingListener.RatingAction.HIGH_RATING_WENT_TO_GOOGLE_PLAY, ratingBar.getRating());
                 dismiss();
             }
@@ -293,14 +297,14 @@ public class RateMeDialog extends DialogFragment {
                             rateButtonBackgroundColor,
                             ratingBar.getRating(),
                             onRatingListener);
-                    dialogMail.show(getFragmentManager(), "feedbackByEmailEnabled");
+                    dialogMail.show(requireFragmentManager(), "feedbackByEmailEnabled");
                     dismiss();
                     Log.d(TAG, "No: open the feedback dialog");
                 } else {
                     dismiss();
                     onRatingListener.onRating(OnRatingListener.RatingAction.LOW_RATING, ratingBar.getRating());
                 }
-                RateMeDialogTimer.setOptOut(getActivity(), true);
+                RateMeDialogTimer.setOptOut(requireActivity(), true);
             }
         });
     }
@@ -326,9 +330,9 @@ public class RateMeDialog extends DialogFragment {
     }
 
     private void setIconsTitleColor(int colorClose, int colorShare) {
-        getResources().getDrawable(android.R.drawable.ic_menu_close_clear_cancel)
+        ContextCompat.getDrawable(requireContext(), android.R.drawable.ic_menu_close_clear_cancel)
                 .setColorFilter(new LightingColorFilter(colorClose, colorClose));
-        getResources().getDrawable(android.R.drawable.ic_menu_share)
+        ContextCompat.getDrawable(requireContext(), android.R.drawable.ic_menu_share)
                 .setColorFilter(new LightingColorFilter(colorShare, colorShare));
     }
 
